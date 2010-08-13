@@ -1,0 +1,7 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m: In function '-[ContentionAppAppDelegate application:didFinishLaunchingWithOptions:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:32: error: 'NetworkData' undeclared (first use in this function)
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:32: error: (Each undeclared identifier is reported only once
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:32: error: for each function it appears in.)
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m: At top level:
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:57: warning: property 'porttable' requires method '-porttable' to be defined - use @synthesize, @dynamic or provide a method implementation
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:57: warning: property 'porttable' requires the method 'setPorttable:' to be defined - use @synthesize, @dynamic or provide a method implementation
