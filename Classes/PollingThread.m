@@ -9,12 +9,16 @@
 #import "PollingThread.h"
 #import "FlowObject.h"
 
-#define TIME_DELTA 2		/* in seconds */
+#define TIME_DELTA 5		/* in seconds */
 
 static struct timespec time_delay = {TIME_DELTA, 0};
 static tstamp_t processflowresults(char *buf, unsigned int len);
 static tstamp_t processlinkresults(char *buf, unsigned int len);
+static tstamp_t processleaseresults(char *buf, unsigned int len);
 static uint64_t string_to_mac(char *s);
+unsigned int action2index(char *action);
+char *index2action(unsigned int index);
+
 /*
  * function pointer which will be the callback from a poll.
  */
@@ -24,7 +28,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 -(void) poll;
 -(int) polllinktable;
 -(int) pollflowtable;
--(int) polldatabase;
+-(int) polldatabase:(tstamp_t*)last;
 +(void) postNotification:(FlowObject *)f;
 @end
 
@@ -35,6 +39,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	NSAutoreleasePool *apool = [[NSAutoreleasePool alloc] init];
 	lastflow = 0LL;
 	lastlink = 0LL;
+	lastlease = 0LL;
 	host = HWDB_SERVER_ADDR;
 	port = HWDB_SERVER_PORT;
 	
@@ -64,19 +69,22 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 		if (rpc){
 			gettimeofday(&expected, NULL);
 			expected.tv_usec = 0;
-			int count = 0;
+			//int count = 0;
 			for (;;){
 				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
 				
+				if (![self pollleasetable])
+							break;
 				
-				if (count++ % 2 == 0){
-					if (![self polllinktable])
-						break;
-				}
-				else{
-					if (![self pollflowtable])
-						break;	
-				}
+				//if (count++ % 2 == 0){
+			
+				//if (![self polllinktable])
+				//		break;
+				//}
+				//else{
+				//	if (![self pollflowtable])
+				//		break;	
+				//}
 				
 				[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
 				
@@ -88,7 +96,6 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	rpc_disconnect(rpc);
 	exit(0);
 }
-
 
 -(int) pollflowtable{
 	
@@ -108,10 +115,35 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	
 	callback = &processflowresults;
 	
-	int success = [self polldatabase];
+	int success = [self polldatabase:&lastflow];
 	
 	if (success && lastlink){
 		NSLog(@"SET LAST link to %s", timestamp_to_string(lastlink));
+		return 1;
+	}
+	
+	return success;
+}
+
+-(int) pollleasetable{
+	
+	expected.tv_sec += TIME_DELTA;
+	if (lastlease) {
+		char *s = timestamp_to_string(lastlease);
+		sprintf(query,
+				"SQL:select * from Leases [ range %d seconds] where timestamp > %s\n",
+				TIME_DELTA+1, s);
+		free(s);
+	} else{
+		sprintf(query,
+				"SQL:select * from Leases [ range %d seconds]\n",
+				TIME_DELTA * 1000);
+	}
+	
+	callback = &processleaseresults;
+	int success = [self polldatabase:&lastlease];
+	
+	if (success && lastlease){
 		return 1;
 	}
 	
@@ -137,7 +169,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	}
 	
 	callback = &processlinkresults;
-	int success = [self polldatabase];
+	int success = [self polldatabase:&lastlink];
 	
 	if (success && lastlink){
 		NSLog(@"SET LAST link to %s", timestamp_to_string(lastlink));
@@ -148,7 +180,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 }
 
 
--(int) polldatabase{
+-(int) polldatabase:(tstamp_t *) last{
 	qlen = strlen(query) + 1;
 	gettimeofday(&current, NULL);
 	if (current.tv_usec > 0) {
@@ -162,14 +194,89 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	if (! rpc_call(rpc, query, qlen, resp, sizeof(resp), &len)) {
 		fprintf(stderr, "rpc_call() failed\n");
 		NSLog(@"flows -- rpc call failed");
-		lastlink = 0LL;
+		*last = 0LL;
 		return 0;
 	}
 	resp[len] = '\0';
-	lastlink = callback(resp, len);
+	*last = callback(resp, len);
 	return 1;
 }
 
+
+
+
+void dhcp_free(DhcpResults *p) {
+	unsigned int i;
+	
+    if (p) {
+        for (i = 0; i < p->nleases && p->data[i]; i++)
+            free(p->data[i]);
+        free(p);
+    }
+}
+
+unsigned int action2index(char *action) {
+	if (strcmp(action, "add") == 0)
+		return 0;
+	else
+		if (strcmp(action, "del") == 0)
+			return 1;
+		else
+			if (strcmp(action, "old") == 0)
+				return 2;
+			else
+				return 3;
+}
+
+char *index2action(unsigned int index) {
+	if (index == 0)
+		return "add";
+	else
+		if (index == 1)
+			return "del";
+		else
+			if (index == 2)
+				return "old";
+			else
+				return "unknown";
+}
+
+DhcpResults *dhcp_convert(Rtab *results) {
+	DhcpResults *ans;
+	unsigned int i;
+	
+	if (! results || results->mtype != 0)
+		return NULL;
+	if (!(ans = (DhcpResults *)malloc(sizeof(DhcpResults))))
+		return NULL;
+	
+	ans->nleases = results->nrows;
+	ans->data    = (DhcpData **)calloc(ans->nleases, sizeof(DhcpData *));
+	
+	if (!ans->data){
+		free(ans);
+		return NULL;
+	}
+	
+	for (i = 0; i < ans->nleases; i++) {
+		char **columns;
+		DhcpData *p = (DhcpData *)malloc(sizeof(DhcpData));
+		
+		if (!p) {
+            dhcp_free(ans);
+			return NULL;
+		}
+		ans->data[i] = p;
+		columns = rtab_getrow(results, 0);
+		/* populate record */
+		p->tstamp = string_to_timestamp(columns[0]);
+		p->action = action2index(columns[1]);
+		p->mac_addr = string_to_mac(columns[2]);
+		inet_aton(columns[3], (struct in_addr *)&p->ip_addr);	
+		strcpy(p->hostname, columns[4]);
+	}
+	return ans;
+}
 
 
 LinkResults *link_mon_convert(Rtab *results) {
@@ -309,14 +416,46 @@ void mon_free(BinResults *p) {
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"pollComplete" object:nil];
 }
 
-
-static tstamp_t processlinkresults(char *buf, unsigned int len) {
-	
-	NSLog(@"processing link results len %d ", len);
+static tstamp_t processleaseresults(char *buf, unsigned int len) {
 	
 	Rtab *results;
     char stsmsg[RTAB_MSG_MAX_LENGTH];
-    LinkResults *p;
+    DhcpResults *p;
+    unsigned long i;
+    tstamp_t last = 0LL;
+	
+    results = rtab_unpack(buf, len);
+    if (results && ! rtab_status(buf, stsmsg)) {
+		// rtab_print(results);
+		p = dhcp_convert(results);
+		// do something with the data pointed to by p 
+		NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
+		for (i = 0; i < p->nleases; i++) {
+			DhcpData *f = p->data[i];
+			char *s = timestamp_to_string(f->tstamp);
+			char *a = strdup(inet_ntoa(*(struct in_addr *)&f->ip_addr));
+			NSLog(@"%s %s;%012llx;%s;%s\n", s, index2action(f->action), f->mac_addr, a, f->hostname);
+			free(s);
+			free(a);
+		}
+		if (i > 0) {
+			i--;
+			last = p->data[i]->tstamp;
+		}
+		dhcp_free(p);
+    }
+    rtab_free(results);
+	
+    return (last);
+}
+
+
+
+static tstamp_t processlinkresults(char *buf, unsigned int len) {
+	
+	Rtab *results;
+    char stsmsg[RTAB_MSG_MAX_LENGTH];
+	LinkResults *p;
     unsigned long i;
     tstamp_t last = 0LL;
 	
@@ -341,13 +480,11 @@ static tstamp_t processlinkresults(char *buf, unsigned int len) {
 		link_mon_free(p);
     }
     rtab_free(results);
-	NSLog(@"---------*** returning %s", timestamp_to_string(last));
+	
     return (last);
 }
 
 static tstamp_t processflowresults(char *buf, unsigned int len) {
-	
-	NSLog(@"processing flow results len %d ", len);
 	
     Rtab *results;
     char stsmsg[RTAB_MSG_MAX_LENGTH];
@@ -364,8 +501,6 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 		for (i = 0; i < p->nflows; i++) {
 			FlowData *f = p->data[i];
 			char *s = timestamp_to_string(f->tstamp);
-			NSLog(@"%s",s);
-			
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[[FlowObject alloc] initWithFlow:f] autorelease];
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:NO];
@@ -380,8 +515,6 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 		mon_free(p);
     }
     rtab_free(results);
-	NSLog(@"---------*** returning %s", timestamp_to_string(last));
-    
     return (last);
 }
 

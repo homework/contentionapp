@@ -61,10 +61,7 @@
 
 -(void) newNetworkData:(NSNotification *) n{
 	//[sorteddata removeAllObjects];
-	NSLog(@"new network data received!!");
 	
-
-
 	self.sorteddata = [[NetworkData getLatest] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	
 	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];

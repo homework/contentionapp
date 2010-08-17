@@ -21,6 +21,8 @@
 #include <netinet/ip.h>			/* defines in_addr */
 #include "FlowObject.h"
 #include "LinkObject.h"
+#include "LeaseObject.h"
+
 #include "DeviceViewController.h"
 
 @interface PollingThread : NSObject {
@@ -37,6 +39,7 @@
 	struct timeval expected, current;
 	tstamp_t lastflow;
 	tstamp_t lastlink;
+	tstamp_t lastlease;
 }
 
 
@@ -51,6 +54,10 @@ typedef struct link_results {
     LinkData **data;
 } LinkResults;
 
+typedef struct lease_results {
+    unsigned long nleases;
+    DhcpData **data;
+} DhcpResults;
 /*
  * convert Rtab results into LinkResults
  */
