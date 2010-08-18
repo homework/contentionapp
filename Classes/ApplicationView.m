@@ -78,7 +78,6 @@
 			current = current.modelLayer;
 			
 			if (![self containsLayer:current.name inarray:n]){
-				NSLog(@"deleting layer %@", current.name);
 				[current removeFromSuperlayer];
 				CALayer *title = (CALayer*) mytitlelayers[i];
 				[title removeFromSuperlayer];
@@ -110,19 +109,11 @@
 		
 		if (index == -1){
 			[self addNewLayer:node position:position];
-			NSLog(@"*new* node %@ pos %d", [node name], position); 
 			index = [self findLayerIndex:[node name]];
 			
-		}else{
-			NSLog(@"*old* node %@ pos %d", [node name], position); 	
 		}
 		
 		mylayers[index].position	  =  mytitlelayers[index].position = [self getCoordinates:position];
-		
-		
-		//NSLog(@"node=%@ pos=%d", [node name], position);
-		
-		//NSLog(@"node=%@ pos=%d x=%f y=%f", [node name], position, pps.x, pps.y);
 		
 		CGFloat factor = 1.0f;//[self getScale:[node value]];// 0.4f + ((random()/(CGFloat)RAND_MAX) * 0.6f);
 		

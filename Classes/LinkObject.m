@@ -11,4 +11,5 @@
 
 @implementation LinkObject
 
+
 @end

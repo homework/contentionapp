@@ -29,6 +29,7 @@
 	
 	[PortLookup initPorts];
 	[FlowAnalyser initTables];
+	[NameResolver initialize];
 	[NetworkData initialize];
 	PollingThread *aPollingThread = [[PollingThread alloc] init];
 	[self setPollingThread:aPollingThread];	

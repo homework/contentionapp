@@ -1,36 +1,59 @@
 //
-//  DeviceView.m
+//  ApplicationView.m
 //  ContentionApp
 //
-//  Created by Tom Lodge on 07/07/2010.
+//  Created by Tom Lodge on 27/07/2010.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
 #import "DeviceView.h"
 
+@interface DeviceView(private)
+
+-(int) findLayerIndex:(NSString *) layername;
+-(CGPoint) getCoordinates:(int) position;
+-(void) addNewLayer:(NodeTuple *) node position:(int) pos;
+-(void) createLayers;
+-(void) createTopLayer:(NodeTuple*)node position: (int) pos;
+-(void) createBottomLayer:(NodeTuple*)node position: (int) pos;
+@end
+
 
 @implementation DeviceView
-@synthesize devicea;
-@synthesize deviceb;
-@synthesize devicec;
-@synthesize deviceatitle;
-@synthesize devicebtitle;
-@synthesize devicectitle;
-@synthesize delegate;
 
-- (id)initWithFrame:(CGRect)frame {
+@synthesize delegate;
+@synthesize nodes;
+
+- (id)initWithFrame:(CGRect)frame nodes:(NSMutableArray *) n{
     if ((self = [super initWithFrame:frame])) {
-		NSLog(@"initing view with frame...");
 		[[self layer] setDelegate:self];
+		self.nodes = n;
+		
 		[self createLayers];
 		self.backgroundColor = [UIColor whiteColor];
-		
 		[[self layer] setNeedsDisplay];  
-		[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(animateLayers) userInfo:nil repeats:YES]; 
-    }
+		
+	}
     return self;
 }
 
+-(BOOL) containsLayer:(NSString*) name inarray:(NSMutableArray *)n{
+	NSEnumerator *enumerator = [n objectEnumerator];
+	NodeTuple* node;
+	int count = 0;
+	while ( node = [enumerator nextObject]  /*&& (count++ < DEVICES) */) {
+		if (count++ >= DEVICES)
+			break;
+		if ([name isEqualToString:[node name]])
+			return YES;
+	}
+	return NO;
+}
+
+-(float) getScale:(int) value{
+	//return 0.7f;
+	return MIN(1.0f, MAX (0.4f, ((float) value) / 50000)); 
+}
 
 /*
  // Only override drawRect: if you perform custom drawing.
@@ -39,230 +62,236 @@
  // Drawing code
  }
  */
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void) update:(NSMutableArray *)n{
 	
-	if ([self delegate] == nil)
-		return;
+	NSEnumerator *enumerator = [n objectEnumerator];
+    NodeTuple* node;
 	
-	// We only support single touches, so anyObject retrieves just that touch from touches
-	UITouch *touch = [touches anyObject];
-	CGPoint touchPoint = [touch locationInView:self];
+	for (int i = 0; i < DEVICES; i++){
+		if (mylayers[i] != NULL){
+			CALayer *current = (CALayer*) mylayers[i]; 
+			current = current.modelLayer;
+			
+			if (![self containsLayer:current.name inarray:n]){
+				[current removeFromSuperlayer];
+				CALayer *title = (CALayer*) mytitlelayers[i];
+				[title removeFromSuperlayer];
+				mylayers[i] = NULL;
+				mytitlelayers[i] = NULL;
+				
+			}
+		}
+	}
+	enumerator = [n objectEnumerator];
 	
-
-	CAShapeLayer *layer = [(CAShapeLayer *)self.layer.presentationLayer hitTest:touchPoint];
-	//[self setValue:layer forKey:@"touched"];
-	if (layer != nil){
-		//NSLog( [NSString stringWithFormat:@"great something was touched"]);
+	[CATransaction begin];
+	[CATransaction setValue:[NSNumber numberWithFloat:2.0f] forKey:kCATransactionAnimationDuration];
+	
+	
+	int position = 0;
+	
+	while ( node = [enumerator nextObject]) {
 		
-		layer = layer.modelLayer;
+		if (position >= DEVICES)
+			break;
 		
-		if (layer.name != nil){
-			NSLog([NSString stringWithFormat:@"layer is %@", layer.name]);
-			[[self delegate] touched:layer.name];
+		int index = [self findLayerIndex:[node name]];
+		
+		
+		if (index == -1){
+			[self addNewLayer:node position:position];
+			index = [self findLayerIndex:[node name]];
+			
 		}
 		
-		/*else{
-			for(CALayer *currentlayer in layer.sublayers)
-			{
-				NSLog([NSString stringWithFormat:@"layer is %@", currentlayer.name]);
-			}
-		}*/
+		mylayers[index].position	  =  mytitlelayers[index].position = [self getCoordinates:position];
 		
+		CGFloat factor = 1.0f;
 		
-		//layer.opacity = 0.5;
+		if (position < 3){
+			CATransform3D transform = CATransform3DMakeScale(factor, factor, 1.0f);
+			mylayers[index].transform = transform;
+			mytitlelayers[index].opacity = 1.0f;
+		}else{
+			CATransform3D transform = CATransform3DMakeScale(0.5f, 0.5f, 1.0f);
+			mylayers[index].transform = transform;	
+			mytitlelayers[index].opacity = 0.0f;
+		}
+		
+		position++;
+		
 	}
-	[super touchesBegan:touches withEvent:event];
+	
+	[CATransaction commit];
+}
+
+-(int) findLayerIndex:(NSString *) layername{
+	
+	for (int i = 0; i < DEVICES; i++){
+		
+		
+		CALayer *current = (CALayer*) mylayers[i]; 
+		if (current != NULL){
+			current = current.modelLayer;
+			
+			if (current.name != nil){
+				if ([current.name isEqualToString:layername])
+					return i;
+			}
+		}
+	}
+	return -1;
+}
+
+-(CGPoint) getCoordinates:(int) position{
+	int spacer = 80;
+	
+	if (position < 3){
+		return CGPointMake(250, (50 + (position)*100));
+	}else{
+		return CGPointMake(40 + (spacer) * (position-3),330);
+	}
 }
 
 
--(void) animateLayers{	
+
+-(void) addNewLayer:(NodeTuple *) node position:(int) pos{
 	
-	CGPoint p1 = devicea.position;
-	CGPoint p2 = deviceb.position;
-	CGPoint p3 = devicec.position;
-	
-	[CATransaction begin];
-    [CATransaction setValue:[NSNumber numberWithFloat:3.0f] forKey:kCATransactionAnimationDuration];
-    CGFloat factor = rand()/(CGFloat)RAND_MAX * 3.0f;
-    CATransform3D transform = CATransform3DMakeScale(factor, factor, 1.0f);
-    /*transform = CATransform3DRotate(transform, acos(-1.0f)*rand()/(CGFloat)RAND_MAX, 
-	 rand()/(CGFloat)RAND_MAX, rand()/(CGFloat)RAND_MAX, rand()/(CGFloat)RAND_MAX);*/
-    devicea.transform = transform;
-    devicea.position = p3;
-	deviceatitle.position = p3;
-	[CATransaction commit];
-	
-	
-	[CATransaction begin];
-    [CATransaction setValue:[NSNumber numberWithFloat:3.0f] forKey:kCATransactionAnimationDuration];
-	factor = rand()/(CGFloat)RAND_MAX * 3.0f;
-    //CATransform3D 
-	transform = CATransform3DMakeScale(factor, factor, 1.0f);
-    //transform = CATransform3DRotate(transform, acos(-1.0f)*rand()/(CGFloat)RAND_MAX, 
-	//rand()/(CGFloat)RAND_MAX, rand()/(CGFloat)RAND_MAX, rand()/(CGFloat)RAND_MAX);
-    deviceb.transform = transform;
-    deviceb.position = p1;
-	devicebtitle.position = p1;
-	[CATransaction commit];
-	
-	
-	[CATransaction begin];
-    [CATransaction setValue:[NSNumber numberWithFloat:3.0f] forKey:kCATransactionAnimationDuration];
-	factor = rand()/(CGFloat)RAND_MAX * 3.0f;
-    //CATransform3D 
-	transform = CATransform3DMakeScale(factor, factor, 1.0f);
-    //transform = CATransform3DRotate(transform, acos(-1.0f)*rand()/(CGFloat)RAND_MAX, 
-	//rand()/(CGFloat)RAND_MAX, rand()/(CGFloat)RAND_MAX, rand()/(CGFloat)RAND_MAX);
-    devicec.transform = transform;
-    devicec.position = p2;
-	devicectitle.position = p2;
-	[CATransaction commit];
-	/*NSLog(@"in here...");
-	 CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position"];
-	 // Configure animation
-	 anim.fromValue      = [NSValue valueWithPoint:devicea.position];
-	 anim.toValue        = [NSValue valueWithPoint:deviceb.position];
-	 anim.timingFunction = [CAMediaTimingFunction
-	 functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-	 anim.fillMode  = kCAFillModeForwards;
-	 anim.duration		= 2.0;
-	 anim.removedOnCompletion = NO;
-	 [devicea addAnimation:anim forKey:@"position"];  */
-	
+	if (pos < 3){
+		[self createTopLayer:node position: pos];
+	}else{
+		[self createBottomLayer:node position: pos];
+	}
 }
+
 
 -(void) createLayers{
 	
-	//[self layer].name = @"root layer";
 	/*
-	 * Generate the lines and titles with fonts.
+	 *initialize the layer array
 	 */
 	
-	self.deviceatitle = [CAShapeLayer layer];
-	CGMutablePathRef path5 = CGPathCreateMutable();
-	CGPathAddRect(path5, NULL, CGRectMake(0,0, -230,-2));
-	self.deviceatitle.path = path5;
-	self.deviceatitle.fillColor = [UIColor greenColor].CGColor;
-	//self.deviceatitle.fillRule = kCAFillRuleNonZero;
-	self.deviceatitle.position = CGPointMake(250,70);
-	[[self layer] addSublayer: self.deviceatitle];
+	NSEnumerator *enumerator = [nodes objectEnumerator];
+    NodeTuple* node;
+	int count = 0;
+    
+	while ( (node = [enumerator nextObject])) {
+		if (count >= DEVICES)
+			break;
+		
+		if (count < 3){
+			
+			[self createTopLayer:node position: count];
+		}else{
+			[self createBottomLayer:node position: count];
+		}
+		count +=1;
+	}
+}
+
+-(void) createTopLayer:(NodeTuple*)node position: (int) pos{
+	
+	// Create the lines and font layer
+	
+	CAShapeLayer *titlelayer = [CAShapeLayer layer];
+	CGMutablePathRef path = CGPathCreateMutable();
+	CGPathAddRect(path, NULL, CGRectMake(-30,0, -200,-1));
+	titlelayer.path = path;
+	titlelayer.fillColor = [UIColor darkGrayColor].CGColor;
+	titlelayer.position = [self getCoordinates:pos];//CGPointMake(250, (50 + (pos-1)*100));
+	
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 200, 20)];
+	label.text = [node name];
+	label.textColor = [UIColor blackColor];
+	label.backgroundColor = [UIColor clearColor];
+	label.layer.position = CGPointMake(-130,-15);
+	[titlelayer addSublayer: label.layer];
+	[[self layer] addSublayer: titlelayer];
+	
+	
+	//Create the circles and images layers
+	
+	CAShapeLayer* appLayer = [CAShapeLayer layer];
+	path = CGPathCreateMutable();
+	CGPathAddArc(path, NULL, 0, 0, 20, 0, 2 * M_PI, true);
+	appLayer.path = path;
+	appLayer.fillColor = [UIColor darkGrayColor].CGColor;// [UIColor colorWithRed:(float) arc4random() / ARC4RANDOM_MAX green:(float) arc4random() / ARC4RANDOM_MAX blue:(float) arc4random() / ARC4RANDOM_MAX alpha:1].CGColor; 
+	appLayer.fillRule = kCAFillRuleNonZero;
+	appLayer.position = [self getCoordinates:pos];//CGPointMake(250,50 + (pos-1)*100);
+	[[self layer] addSublayer: appLayer];
+	UIImage* image = [UIImage imageNamed: [node image]]; 
+	
+	if (image == nil){
+		image = [UIImage imageNamed: @"unknown.png"];
+	}
+	
+	CGFloat	nativeWidth = CGImageGetWidth(image.CGImage);
+	CGFloat nativeHeight = CGImageGetHeight(image.CGImage);
+	CGRect  startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);
+	CALayer *imageLayer = [CALayer layer];
+	imageLayer.contents = (id)image.CGImage;
+	imageLayer.frame = startFrame;
+	imageLayer.position = CGPointMake(0,0);
+	[appLayer addSublayer:imageLayer];
+	
+	appLayer.name =[node name];
+	
+	/*
+	 * stuff new layer in empty slot
+	 */ 
+	
+	
+	for (int i = 0; i < DEVICES; i++){
+		if (mylayers[i] == NULL){
+			mylayers[i] = appLayer;
+			mytitlelayers[i] = titlelayer;
+			break;
+		}
+	}
+}
+
+-(void) createBottomLayer:(NodeTuple*)node position: (int) pos{
+	
+	CAShapeLayer *titlelayer = [CAShapeLayer layer];
+	CGMutablePathRef path = CGPathCreateMutable();
+	CGPathAddRect(path, NULL, CGRectMake(-30,0, -200,-1));
+	titlelayer.path = path;
+	titlelayer.fillColor = [UIColor darkGrayColor].CGColor;
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 20)];
-	label.text = @"Tom's Mac Air";
-	//label.font = [UIFont  boldSystemFontOfSize:30];
+	label.text = [node name];
 	label.textColor = [UIColor blackColor];
 	label.backgroundColor = [UIColor clearColor];
 	label.layer.position = CGPointMake(-160,-15);
-	[[self deviceatitle] addSublayer: label.layer];
-
+	[titlelayer addSublayer: label.layer];
 	
-	self.devicebtitle = [CAShapeLayer layer];
-	CGMutablePathRef path6 = CGPathCreateMutable();
-	CGPathAddRect(path6, NULL, CGRectMake(0,0, -230,-2));
-	self.devicebtitle.path = path6;
-	self.devicebtitle.fillColor = [UIColor redColor].CGColor;
-	//self.deviceatitle.fillRule = kCAFillRuleNonZero;
-	self.devicebtitle.position = CGPointMake(250,170);
-	[[self layer] addSublayer: self.devicebtitle];
-	UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 20)];
-	label2.text = @"Katie's Laptop";
-	//label.font = [UIFont  boldSystemFontOfSize:30];
-	label2.textColor = [UIColor blackColor];
-	label2.backgroundColor = [UIColor clearColor];
-	label2.layer.position = CGPointMake(-160,-15);
-	[[self devicebtitle] addSublayer: label2.layer];
+	titlelayer.position = [self getCoordinates:pos];
+	titlelayer.opacity = 0.0f;
+	[[self layer] addSublayer: titlelayer];
 	
-	self.devicectitle = [CAShapeLayer layer];
-	CGMutablePathRef path7 = CGPathCreateMutable();
-	CGPathAddRect(path7, NULL, CGRectMake(0,0, -230,-2));
-	self.devicectitle.path = path7;
-	self.devicectitle.fillColor = [UIColor blueColor].CGColor;
-	//self.deviceatitle.fillRule = kCAFillRuleNonZero;
-	self.devicectitle.position = CGPointMake(250,270);
-	[[self layer] addSublayer: self.devicectitle];
+	UIImage*    image = [UIImage imageNamed: [node image]];
 	
-	UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 150, 20)];
-	label3.text = @"Katie's iPhone";
-	//label.font = [UIFont  boldSystemFontOfSize:30];
-	label3.textColor = [UIColor blackColor];
-	label3.backgroundColor = [UIColor clearColor];
-	label3.layer.position = CGPointMake(-160,-15);
-	[[self devicectitle] addSublayer: label3.layer];
-	//NSMutableArray* layers = [NSArray arrayWithObjects:self.devicea,self.deviceb,self.devicec,nil];
+	if (image == nil){
+		image = [UIImage imageNamed: @"unknown.png"];
+	}
+	CGFloat nativeWidth = CGImageGetWidth(image.CGImage);
+	CGFloat nativeHeight = CGImageGetHeight(image.CGImage);
+	CGRect startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);
+	CALayer *imageLayer = [CALayer layer];
+	imageLayer.contents = (id)image.CGImage;
+	imageLayer.frame = startFrame;
+	imageLayer.position = [self getCoordinates:pos];// CGPointMake(40 + (spacer) * (pos-4),330);
+	imageLayer.name = [node name];
+	[self.layer addSublayer:imageLayer];
+	imageLayer.transform = CATransform3DMakeScale( 0.5f, 0.5f, 1.0f );
 	
-	
-		
-	//for (int i=0; i < 3; i++){
-	
-	//CAShapeLayer *l = (CAShapeLayer*) [layers objectAtIndex:i];
-	
-	/*
-	 * Generate the main circles + images
-	 */
-	self.devicea = [CAShapeLayer layer];
-	CGMutablePathRef path = CGPathCreateMutable();
-	CGPathAddArc(path, NULL, 0, 0, 20, 0, 2 * M_PI, true);
-	self.devicea.path = path;
-	self.devicea.fillColor = [UIColor greenColor].CGColor;// [UIColor colorWithRed:(float) arc4random() / ARC4RANDOM_MAX green:(float) arc4random() / ARC4RANDOM_MAX blue:(float) arc4random() / ARC4RANDOM_MAX alpha:1].CGColor; 
-	self.devicea.fillRule = kCAFillRuleNonZero;
-	self.devicea.position = CGPointMake(250,80);
-	[[self layer] addSublayer: self.devicea];
-	
-	
-	UIImage*    image1 = [UIImage imageNamed:@"laptop.png"];
-	CGFloat nativeWidth = CGImageGetWidth(image1.CGImage);
-	CGFloat nativeHeight = CGImageGetHeight(image1.CGImage);
-	CGRect      startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);
-	CALayer *imageLayer1 = [CALayer layer];
-	imageLayer1.contents = (id)image1.CGImage;
-	imageLayer1.frame = startFrame;
-	imageLayer1.position = CGPointMake(0,0);
-	imageLayer1.name = @"Tom's Mac air";
-	[self.devicea addSublayer:imageLayer1];
-	
-	self.deviceb = [CAShapeLayer layer];
-	CGMutablePathRef path2 = CGPathCreateMutable();
-	CGPathAddArc(path2, NULL, 0, 0, 20, 0, 2 * M_PI, true);
-	self.deviceb.path = path2;
-	self.deviceb.fillColor = [UIColor redColor].CGColor;// [UIColor colorWithRed:(float) arc4random() / ARC4RANDOM_MAX green:(float) arc4random() / ARC4RANDOM_MAX blue:(float) arc4random() / ARC4RANDOM_MAX alpha:1].CGColor; 
-	self.deviceb.fillRule = kCAFillRuleNonZero;
-	self.deviceb.position = CGPointMake(250,180);
-	[[self layer] addSublayer: self.deviceb];
-	UIImage*    image2 = [UIImage imageNamed:@"iphone.png"];
-	 nativeWidth = CGImageGetWidth(image2.CGImage);
-	 nativeHeight = CGImageGetHeight(image2.CGImage);
-	      startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);
-	CALayer *imageLayer2 = [CALayer layer];
-	imageLayer2.contents = (id)image2.CGImage;
-	imageLayer2.frame = startFrame;
-	imageLayer2.position = CGPointMake(0,0);
-	imageLayer2.name = @"Katie's Laptop";
-	[self.deviceb addSublayer:imageLayer2];
-	
-	
-	
-	self.devicec = [CAShapeLayer layer];
-	CGMutablePathRef path3 = CGPathCreateMutable();
-	CGPathAddArc(path3, NULL, 0, 0, 20, 0, 2 * M_PI, true);
-	self.devicec.path = path3;
-	self.devicec.fillColor = [UIColor blueColor].CGColor;// [UIColor colorWithRed:(float) arc4random() / ARC4RANDOM_MAX green:(float) arc4random() / ARC4RANDOM_MAX blue:(float) arc4random() / ARC4RANDOM_MAX alpha:1].CGColor; 
-	self.devicec.fillRule = kCAFillRuleNonZero;
-	self.devicec.position = CGPointMake(250,280);
-	[[self layer] addSublayer: self.devicec];
-	UIImage*    image3 = [UIImage imageNamed:@"pc.png"];
-	 nativeWidth = CGImageGetWidth(image3.CGImage);
-	 nativeHeight = CGImageGetHeight(image3.CGImage);
-	      startFrame = CGRectMake(0.0, 0.0, nativeWidth, nativeHeight);
-	CALayer *imageLayer3 = [CALayer layer];
-	imageLayer3.contents = (id)image3.CGImage;
-	imageLayer3.frame = startFrame;
-	imageLayer3.position = CGPointMake(0,0);
-	imageLayer3.name =@"Katie's iphone";
-
-	[self.devicec addSublayer:imageLayer3];
-	
+	for (int i = 0; i < DEVICES; i++){
+		if (mylayers[i] == NULL){
+			mylayers[i] = imageLayer;
+			mytitlelayers[i] = titlelayer;
+			break;
+		}
+	}
 }
-
 
 -(void) createLayer: (float) x  ypos:(float) y radius:(float) r{
 }
@@ -272,46 +301,40 @@
 	
 }
 
-/*	NSLog(@"great - got to draw layer......");
- int radius = ([self frame].size.width/2) - 20;
- float originx = [self frame].size.width/2;
- float originy = [self frame].size.height;
- 
- 
- CGContextSetLineWidth(ctx,1);
- CGContextSetRGBFillColor(ctx, 1,0,0,1);
- 
- CGContextBeginPath(ctx);
- float lastpoint = M_PI;
- int total = 100;
- CGContextMoveToPoint(ctx, originx, originy);
- CGContextAddLineToPoint(ctx, originx - radius , originy);
- 
- for (int i = 0; i < 10; i++){
- float multiplier = ((float) 10 / total);
- float topoint = lastpoint + (multiplier *  M_PI);
- CGContextMoveToPoint(ctx, originx, originy);
- CGContextAddArc(ctx,originx,originy, radius,  lastpoint, topoint, false);
- CGContextClosePath(ctx);
- UIColor *color = [UIColor redColor];
- //UIColor *clr = [colours objectAtIndex:i];
- 
- CGFloat *clr = CGColorGetComponents(color.CGColor);
- //NSLog(@"color = %@", [colours objectAtIndex:i]);
- CGContextSetRGBFillColor(ctx, clr[0], clr[1], clr[2], 1);
- 
- //CGContextSetRGBFillColor(context, (float) arc4random() / ARC4RANDOM_MAX, 
- // (float) arc4random() / ARC4RANDOM_MAX,
- // (float) arc4random() / ARC4RANDOM_MAX, 1);*/
-
-//CGContextFillPath(ctx);
-//lastpoint = topoint;
-//}
-
-
-//CGContextRestoreGState(ctx);
-//NSLog(@"am here layer!!!");	
-//}*/
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+	
+	UITouch *touch = [touches anyObject];
+	CGPoint thePoint = [touch locationInView:self];
+	int position = thePoint.y / (360 / 4);
+	position += (position >= 3) ? (thePoint.x / (310/4)) : 0;
+	NSLog(@"y = %f x = %f position = %d", thePoint.y, thePoint.x, position);
+}
+						
+						/*
+	NSLog(@"TOUCHED!!!");
+	UITouch *touch = [touches anyObject];
+	CGPoint thePoint = [touch locationInView:self];
+	thePoint = [self.layer convertPoint:thePoint toLayer:self.layer];
+	CALayer *theLayer = [self.layer hitTest:thePoint];
+	
+	NSLog(@"%@ was touched", [theLayer name]);
+	for (int i = 0; i < DEVICES; i++){
+		if (mylayers[i] != NULL){
+			if ( [mylayers[i] containsPoint:point]){
+				NSLog(@"touched %@", [mylayers[i] name]);
+			}
+		}
+		if (mytitlelayers[i] != NULL){
+			if ( [mytitlelayers[i] containsPoint:point]){
+				NSLog(@"touched %@", [mytitlelayers[i] name]);
+			}
+		}
+	}
+	
+	CALayer *layer = [(CALayer *)self.layer.presentationLayer hitTest:point];
+	layer = layer.modelLayer; 
+	layer.opacity = 0.5;
+}*/
 
 - (void)dealloc {
     [super dealloc];

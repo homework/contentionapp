@@ -13,25 +13,36 @@
 
 @implementation DeviceViewController
 
+@synthesize sorteddata;
+@synthesize deviceView;
 
 #pragma mark -
 #pragma mark View lifecycle
 
 
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+	
+	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
+	
+	
+	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
 	CGRect frame = CGRectMake(0.0,0.0, 320, 460);
-	DeviceView *aView = [[DeviceView alloc] initWithFrame:frame];
-	aView.backgroundColor = [UIColor whiteColor];
-	aView.delegate = self;
-	[self.view addSubview:aView];
+	self.deviceView = [[DeviceView alloc] initWithFrame:frame nodes:[self sorteddata]];
+	[self.view addSubview:self.deviceView];
 	
-	[aView release];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
+	
+	/*
+	 * Timer For testing
+	 */
+	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
 }
+
 
 -(void) touched:(NSString *)device{
 	DeviceSubViewController *applicationdetail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil];
@@ -41,26 +52,36 @@
 	[applicationdetail release];
 }
 
-/*
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+
+-(void) printTable{
+	
+	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	
+	NodeTuple* node;
+	
+	while ( (node = [enumerator nextObject])) {
+		//Window *w = [self.bytehistory objectForKey:[node name]];
+		[node print];
+		//: w.lastpoll currentpoll:POLLNUMBER];
+		//[w print:[node name]];
+	}
 }
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+
+-(void) newNetworkData:(NSNotification *) n{
+	//[sorteddata removeAllObjects];
+	
+	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
+	
+	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	NodeTuple* node;
+	
+	while ( (node = [enumerator nextObject])) {
+		[node print];
+	}
+	
+	[self.deviceView update:self.sorteddata];
 }
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
-}
-*/
+
 
 /*
  // Override to allow orientations other than the default portrait orientation.

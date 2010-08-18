@@ -18,7 +18,20 @@ typedef struct dhcp_data {
 } DhcpData;
 
 @interface LeaseObject : NSObject {
-
+	NSString *action;
+	NSString *macaddr;
+	NSString *ipaddr;
+	NSString *name;
+	tstamp_t tstamp;
 }
 
+
+@property(nonatomic,assign) NSString *action; 
+@property(nonatomic,assign) NSString *macaddr;
+@property(nonatomic,assign) NSString *ipaddr;
+@property(nonatomic, assign)NSString *name;
+
+unsigned int action2index(char *action);
+char *index2action(unsigned int index);
+-(id) initWithLease: (DhcpData *) leaseData;
 @end

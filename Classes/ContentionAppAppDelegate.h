@@ -11,7 +11,9 @@
 #import "PollingThread.h"
 #import "PortLookup.h"
 #import "FlowAnalyser.h"
+#import "NameResolver.h"
 #import  "NetworkData.h"
+
 @interface ContentionAppAppDelegate : NSObject <UIApplicationDelegate> {
     
     UIWindow *window;

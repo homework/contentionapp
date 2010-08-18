@@ -7,7 +7,7 @@
 //
 
 #import "PollingThread.h"
-#import "FlowObject.h"
+
 
 #define TIME_DELTA 5		/* in seconds */
 
@@ -16,8 +16,7 @@ static tstamp_t processflowresults(char *buf, unsigned int len);
 static tstamp_t processlinkresults(char *buf, unsigned int len);
 static tstamp_t processleaseresults(char *buf, unsigned int len);
 static uint64_t string_to_mac(char *s);
-unsigned int action2index(char *action);
-char *index2action(unsigned int index);
+
 
 /*
  * function pointer which will be the callback from a poll.
@@ -69,22 +68,18 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 		if (rpc){
 			gettimeofday(&expected, NULL);
 			expected.tv_usec = 0;
-			//int count = 0;
+			
 			for (;;){
 				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
 				
 				if (![self pollleasetable])
-							break;
+					break;
 				
-				//if (count++ % 2 == 0){
-			
-				//if (![self polllinktable])
-				//		break;
-				//}
-				//else{
-				//	if (![self pollflowtable])
-				//		break;	
-				//}
+				/*if (![self polllinktable])
+					break;*/
+					
+				if (![self pollflowtable])
+					break;	
 				
 				[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
 				
@@ -117,8 +112,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	
 	int success = [self polldatabase:&lastflow];
 	
-	if (success && lastlink){
-		NSLog(@"SET LAST link to %s", timestamp_to_string(lastlink));
+	if (success && lastflow){
 		return 1;
 	}
 	
@@ -130,11 +124,15 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	expected.tv_sec += TIME_DELTA;
 	if (lastlease) {
 		char *s = timestamp_to_string(lastlease);
+		//NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
+		//	  TIME_DELTA+1, s);
 		sprintf(query,
-				"SQL:select * from Leases [ range %d seconds] where timestamp > %s\n",
+				"SQL:select * from Leases [ range %d seconds] where timestamp > %s",
 				TIME_DELTA+1, s);
 		free(s);
 	} else{
+		//NSLog(@"query is SQL:select * from Leases [ range %d seconds]\n",
+		//	  TIME_DELTA * 1000);
 		sprintf(query,
 				"SQL:select * from Leases [ range %d seconds]\n",
 				TIME_DELTA * 1000);
@@ -155,14 +153,11 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	expected.tv_sec += TIME_DELTA;
 	if (lastlink) {
 		char *s = timestamp_to_string(lastlink);
-		NSLog(@"last link is %s", timestamp_to_string(lastlink));
-		NSLog(@"SQL:select * from Links [ range %d seconds] where timestamp > %s", TIME_DELTA+1,s);
 		sprintf(query,
 				"SQL:select * from Links [ range %d seconds] where timestamp > %s\n",
 				TIME_DELTA+1, s);
 		free(s);
 	} else{
-		NSLog(@"SQL:select * from Links [ range %d seconds]", TIME_DELTA);
 		sprintf(query,
 				"SQL:select * from Links [ range %d seconds]\n",
 				TIME_DELTA);
@@ -172,7 +167,6 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	int success = [self polldatabase:&lastlink];
 	
 	if (success && lastlink){
-		NSLog(@"SET LAST link to %s", timestamp_to_string(lastlink));
 		return 1;
 	}
 	
@@ -215,31 +209,6 @@ void dhcp_free(DhcpResults *p) {
     }
 }
 
-unsigned int action2index(char *action) {
-	if (strcmp(action, "add") == 0)
-		return 0;
-	else
-		if (strcmp(action, "del") == 0)
-			return 1;
-		else
-			if (strcmp(action, "old") == 0)
-				return 2;
-			else
-				return 3;
-}
-
-char *index2action(unsigned int index) {
-	if (index == 0)
-		return "add";
-	else
-		if (index == 1)
-			return "del";
-		else
-			if (index == 2)
-				return "old";
-			else
-				return "unknown";
-}
 
 DhcpResults *dhcp_convert(Rtab *results) {
 	DhcpResults *ans;
@@ -267,7 +236,7 @@ DhcpResults *dhcp_convert(Rtab *results) {
 			return NULL;
 		}
 		ans->data[i] = p;
-		columns = rtab_getrow(results, 0);
+		columns = rtab_getrow(results, i);
 		/* populate record */
 		p->tstamp = string_to_timestamp(columns[0]);
 		p->action = action2index(columns[1]);
@@ -303,9 +272,6 @@ LinkResults *link_mon_convert(Rtab *results) {
 		ans->data[i] = p;
 		columns = rtab_getrow(results, i);
 		p->tstamp = string_to_timestamp(columns[0]);
-		// mac; rss; retries; packets; bytes.
-		//p->mac = malloc(strlen(columns[1]+1));
-		//strcpy(p->mac, columns[1]);
 		p->mac = string_to_mac(columns[1]);
 		p->rss = atof(columns[2]);
 		p->retries = atoi(columns[3]);
@@ -404,8 +370,12 @@ void mon_free(BinResults *p) {
     }
 }
 
++(void) postLeaseObject:(LeaseObject *)l{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"newLeaseDataReceived" object:l];	
+}
+
 +(void) postFlowObject:(FlowObject *)f{
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"newDataReceived" object:f];// userInfo:[dict retain] ];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowDataReceived" object:f];
 }
 
 +(void) newPoll:(NSObject *) o{
@@ -431,10 +401,16 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 		// do something with the data pointed to by p 
 		NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
 		for (i = 0; i < p->nleases; i++) {
-			DhcpData *f = p->data[i];
-			char *s = timestamp_to_string(f->tstamp);
-			char *a = strdup(inet_ntoa(*(struct in_addr *)&f->ip_addr));
-			NSLog(@"%s %s;%012llx;%s;%s\n", s, index2action(f->action), f->mac_addr, a, f->hostname);
+			DhcpData *l = p->data[i];
+			char *s = timestamp_to_string(l->tstamp);
+			char *a = strdup(inet_ntoa(*(struct in_addr *)&l->ip_addr));
+			
+			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+			LeaseObject *lobj = [[[LeaseObject alloc] initWithLease:l] autorelease];
+			[PollingThread performSelectorOnMainThread:@selector(postLeaseObject:) withObject:lobj waitUntilDone:NO];
+			[autoreleasepool release];	
+
+		//	NSLog(@"--> %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
 			free(s);
 			free(a);
 		}

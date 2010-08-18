@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	self.sorteddata = (NSMutableArray*)[[NetworkData getLatest] sortedArrayUsingSelector:@selector(sortByValue:)] ;
+	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	
 	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -38,7 +38,7 @@
 	self.appView = [[ApplicationView alloc] initWithFrame:frame nodes:[self sorteddata]];
 	[self.view addSubview:self.appView];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newNetworkData" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
 	
 	/*
 	 * Timer For testing
@@ -62,14 +62,14 @@
 -(void) newNetworkData:(NSNotification *) n{
 	//[sorteddata removeAllObjects];
 	
-	self.sorteddata = [[NetworkData getLatest] sortedArrayUsingSelector:@selector(sortByValue:)] ;
+	self.sorteddata = [[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	
-	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	NodeTuple* node;
+	//NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	//NodeTuple* node;
 	
-	while ( (node = [enumerator nextObject])) {
-		[node print];
-	}
+	//while ( (node = [enumerator nextObject])) {
+	//	[node print];
+	//}
 	
 	[self.appView update:self.sorteddata];
 }

@@ -8,24 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "NodeTuple.h"
 #import "TouchResponse.h"
+
+#define DEVICES  7
+
 
 @interface DeviceView : UIView {
 	
-	CAShapeLayer *devicea;
-	CAShapeLayer *deviceb;
-	CAShapeLayer *devicec;
-	CAShapeLayer *deviceatitle;
-	CAShapeLayer *devicebtitle;
-	CAShapeLayer *devicectitle;
 	UIViewController <TouchResponse> *delegate;
+	NSMutableArray *nodes;
+	CALayer * mylayers[DEVICES+1];
+	CALayer * mytitlelayers[DEVICES+1];
 }
 
-@property(nonatomic, retain) CAShapeLayer *devicea;
-@property(nonatomic, retain) CAShapeLayer *deviceb;
-@property(nonatomic, retain) CAShapeLayer *devicec;
-@property(nonatomic, retain) CAShapeLayer *deviceatitle;
-@property(nonatomic, retain) CAShapeLayer *devicebtitle;
-@property(nonatomic, retain) CAShapeLayer *devicectitle;
 @property(nonatomic, retain) UIViewController <TouchResponse> *delegate;
+@property(nonatomic, retain) NSMutableArray *nodes;
+
+- (id)initWithFrame:(CGRect)frame nodes:(NSMutableArray *) nodes;
+- (void) update:(NSMutableArray *) nodes;
+- (CGPoint) getCoordinates:(int) position;
+
 @end

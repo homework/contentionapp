@@ -12,12 +12,14 @@
 #import "Window.h"
 #import "FlowRecord.h"
 #import "FlowAnalyser.h"
+#import "NameResolver.h"
 
 @interface NetworkData : NSObject {
 
 }
 
 +(void)	initialize;
-+(NSMutableArray *)getLatest;
++(NSMutableArray *)getLatestApplicationData;
++(NSMutableArray *)getLatestNodeData;
 
 @end
