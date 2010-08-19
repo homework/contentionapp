@@ -14,11 +14,11 @@
 @synthesize window;
 @synthesize lastpoll;
 
--(id) initWithSize:(int)size{
+-(id) initWithSize:(int)size pollcount:(int) pc{
 	
 	if (self = [super init]) {
 		CAPACITY = size;
-		lastpoll = 0;
+		lastpoll = pc;
 		[self setWindow:[[NSMutableArray alloc] initWithCapacity:CAPACITY]]; 
 		 
 		for (int i = 0; i < CAPACITY; i++){

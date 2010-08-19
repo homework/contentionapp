@@ -1,7 +1,7 @@
 TContentionApp
 v7
 r0
-t303844801.958996
+t303932587.823382
 cCheck dependencies
 cCpResource build/Debug-iphoneos/ContentionApp.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/ResourceRules.plist
 cProcessInfoPlistFile /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/Info.plist ContentionApp-Info.plist
@@ -45,7 +45,7 @@ cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-n
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/FlowObject.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowObject.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/MyNavigationViewController.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../MyNavigationViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceSubView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceSubView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceSubViewController.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../DeviceSubViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
@@ -61,9 +61,10 @@ cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-n
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LeaseObject.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/LeaseObject.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LeaseRecord.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/LeaseRecord.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 cLd /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp normal armv6
 cGenerateDSYMFile /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app.dSYM /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp
-cProcessProductPackaging "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/164AF9F5-5771-41C3-97A4-DD3BC025A8B4.mobileprovision" /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision
+cProcessProductPackaging "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/F2698CE9-D3E4-4396-BCDC-49751A5539AF.mobileprovision" /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision
 cTouch /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
 cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent
 cCodeSign /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
@@ -364,11 +365,11 @@ t1280229800
 s6278
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m
-c000000004C6C0FFC0000000000000CA9
-t1282150396
-s3241
+c000000004C6D1AE80000000000000CE9
+t1282218728
+s3305
 i"DeviceViewController.h"
-i"DeviceView.h"
+i"DevicesView.h"
 i"DeviceSubViewController.h"
 i"ContentionAppAppDelegate.h"
 
@@ -457,8 +458,8 @@ i"NameResolver.h"
 i"NetworkData.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m
-c000000004C6BAA860000000000000574
-t1282124422
+c000000004C6D20AE0000000000000574
+t1282220206
 s1396
 i"ContentionAppAppDelegate.h"
 i"DeviceViewController.h"
@@ -476,29 +477,41 @@ s569
 i"DeviceSubView.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.h
-c000000004C6BB3ED00000000000002DB
-t1282126829
-s731
+c000000004C6D13F400000000000001BD
+t1282216948
+s445
+
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m
+c000000004C6D6C63000000000000071B
+t1282239587
+s1819
+i"PlacardView.h"
+
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceViewController.h
+c000000004C6D19BA0000000000000204
+t1282218426
+s516
+i<UIKit/UIKit.h>
+i"TouchResponse.h"
+i"NodeTuple.h"
+i"DevicesView.h"
+i"NetworkData.h"
+
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.h
+c000000004C6D0FFE0000000000000317
+t1282215934
+s791
 i<UIKit/UIKit.h>
 i<QuartzCore/QuartzCore.h>
 i"NodeTuple.h"
 i"TouchResponse.h"
-
-N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m
-c000000004C6C15DF00000000000022F8
-t1282151903
-s8952
 i"DeviceView.h"
 
-N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceViewController.h
-c000000004C6BB1FC00000000000001FF
-t1282126332
-s511
-i<UIKit/UIKit.h>
-i"TouchResponse.h"
-i"NodeTuple.h"
-i"DeviceView.h"
-i"NetworkData.h"
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m
+c000000004C6D6D12000000000000307B
+t1282239762
+s12411
+i"DevicesView.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowAnalyser.h
 c000000004C6406E00000000000000216
@@ -601,9 +614,9 @@ i"LeaseRecord.h"
 i"LeaseObject.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m
-c000000004C6C04A000000000000005C2
-t1282147488
-s1474
+c000000004C6D0785000000000000060A
+t1282213765
+s1546
 i"NameResolver.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.h
@@ -619,9 +632,9 @@ i"FlowAnalyser.h"
 i"NameResolver.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m
-c000000004C6BB03C0000000000002137
-t1282125884
-s8503
+c000000004C6D291C000000000000231E
+t1282222364
+s8990
 i"NetworkData.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NodeTuple.h
@@ -635,6 +648,17 @@ c000000004C6B9E05000000000000053B
 t1282121221
 s1339
 i"NodeTuple.h"
+
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.h
+c000000004A4BE4D20000000000000B6E
+t1246487762
+s2926
+
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.m
+c000000004C6CF3D10000000000001578
+t1282208721
+s5496
+i"PlacardView.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.h
 c000000004C691C90000000000000069F
@@ -659,9 +683,9 @@ i"LeaseObject.h"
 i"DeviceViewController.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m
-c000000004C6C16100000000000002E5F
-t1282151952
-s11871
+c000000004C6D1E500000000000002ED6
+t1282219600
+s11990
 i"PollingThread.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PortLookup.h
@@ -696,15 +720,15 @@ s242
 i<UIKit/UIKit.h>
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.h
-c000000004C63C35D000000000000020A
-t1281606493
-s522
+c000000004C6D27E6000000000000021D
+t1282222054
+s541
 i<Foundation/Foundation.h>
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m
-c000000004C63F4350000000000000747
-t1281618997
-s1863
+c000000004C6D28BA000000000000075B
+t1282222266
+s1883
 i"Window.h"
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/ContentionApp_Prefix.pch
@@ -755,17 +779,17 @@ t1282128479
 s53176
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationViewController.o
-t1282152001
+t1282222248
 s41148
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionApp.LinkFileList
-c000000004C6BC6880000000000001224
-t1282131592
-s4644
+c000000004C6CFE3800000000000012B5
+t1282211384
+s4789
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionAppAppDelegate.o
-t1282131945
-s49788
+t1282222247
+s49972
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceSubView.o
 t1281695382
@@ -776,12 +800,16 @@ t1281695382
 s29720
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o
-t1282151906
-s56572
+t1282239591
+s22100
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceViewController.o
-t1282150744
-s47976
+t1282222248
+s48308
+
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesView.o
+t1282239787
+s59536
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/FlowAnalyser.o
 t1281702209
@@ -816,20 +844,24 @@ t1281695382
 s32432
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o
-t1282147496
-s11920
+t1282213766
+s11548
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkData.o
-t1282131945
-s28468
+t1282222369
+s29776
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NodeTuple.o
 t1282121226
 s15816
 
+N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PlacardView.o
+t1282208723
+s21588
+
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o
-t1282152001
-s56552
+t1282222248
+s56972
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PortLookup.o
 t1281695383
@@ -840,8 +872,8 @@ t1280229012
 s42084
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/Window.o
-t1281695383
-s14644
+t1282222282
+s14696
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/crecord.o
 t1281695380
@@ -888,11 +920,11 @@ t1281695381
 s3336
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
-t1282152001
+t1282239787
 s1054
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app.dSYM
-t1282152001
+t1282239787
 s102
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ApplicationViewController.nib
@@ -900,8 +932,8 @@ t1281695378
 s1106
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp
-t1282152001
-s147744
+t1282239787
+s148708
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/DeviceSubView.nib
 t1281695378
@@ -964,8 +996,8 @@ t2
 s0
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision
-t1281950588
-s7186
+t1282208618
+s7220
 
 N/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ftp.png
 t1281695379
@@ -1498,15 +1530,15 @@ s909
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies303844800#303844800#0(0"0(0#1#0"4300911832#0"0#
+lSLF07#2@18"Check dependencies303932587#303932587#0(0"0(0#1#0"4300911832#0"0#
 
 CCodeSign /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
-s303844801.744331
-e303844801.958864
+s303932587.569629
+e303932587.823330
 r1
 xCodeSign
 x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
-lSLF07#2@47"CodeSign build/Debug-iphoneos/ContentionApp.app303844801#303844801#0(0"0(0#0#87"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app4300911832#734"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv IGNORE_CODESIGN_ALLOCATE_RADAR_7181968 /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/codesign -f -s "iPhone Developer: Tom Lodge (C4DACQ32K3)" --resource-rules=/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ResourceRules.plist --entitlements /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app0#
+lSLF07#2@47"CodeSign build/Debug-iphoneos/ContentionApp.app303932587#303932587#0(0"0(0#0#87"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app4300911832#734"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv IGNORE_CODESIGN_ALLOCATE_RADAR_7181968 /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/codesign -f -s "iPhone Developer: Tom Lodge (C4DACQ32K3)" --resource-rules=/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ResourceRules.plist --entitlements /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationTuple.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationTuple.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 s303813828.273038
@@ -1535,8 +1567,8 @@ xcom.apple.compilers.gcc.4_2
 lSLF07#2@82"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationView.m303821279#303821279#0(0"0(0#0#74"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationView.m4300911832#1988"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationView.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationView.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationViewController.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303844800.238252
-e303844801.560786
+s303915048.014971
+e303915048.235840
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationViewController.o
@@ -1547,11 +1579,11 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController newNetworkData:]':
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:65: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type
-lSLF07#2@95"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m303844800#303844801#0(411"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController newNetworkData:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:65: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type1(22@160"Incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type303844800#149#262#0(6@87"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m303844798#65#0#65#0#0"0(0#0#87"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m4300911832#2011"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationViewController.o0#
+lSLF07#2@95"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m303915048#303915048#0(411"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController newNetworkData:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:65: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type1(22@160"Incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type303915048#149#262#0(6@87"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m303844798#65#0#65#0#0"0(0#0#87"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m4300911832#2011"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationViewController.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionAppAppDelegate.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303824744.889598
-e303824745.038083
+s303915047.842381
+e303915047.980673
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionAppAppDelegate.o
@@ -1562,7 +1594,7 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:58: warning: property 'porttable' requires method '-porttable' to be defined - use @synthesize, @dynamic or provide a method implementation
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:58: warning: property 'porttable' requires the method 'setPorttable:' to be defined - use @synthesize, @dynamic or provide a method implementation
-lSLF07#2@91"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m303824744#303824745#0(455"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:58: warning: property 'porttable' requires method '-porttable' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:58: warning: property 'porttable' requires the method 'setPorttable:' to be defined - use @synthesize, @dynamic or provide a method implementation2(22@126"Property 'porttable' requires method '-porttable' to be defined - use @synthesize, @dynamic or provide a method implementation303824744#0#224#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m303817222#58#0#58#0#0"0(22@133"Property 'porttable' requires the method 'setPorttable:' to be defined - use @synthesize, @dynamic or provide a method implementation303824744#224#231#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m303817222#58#0#58#0#0"0(0#0#83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m4300911832#2006"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionAppAppDelegate.o0#
+lSLF07#2@91"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m303915047#303915047#0(455"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:58: warning: property 'porttable' requires method '-porttable' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m:58: warning: property 'porttable' requires the method 'setPorttable:' to be defined - use @synthesize, @dynamic or provide a method implementation2(22@126"Property 'porttable' requires method '-porttable' to be defined - use @synthesize, @dynamic or provide a method implementation303915047#0#224#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m303913006#58#0#58#0#0"0(22@133"Property 'porttable' requires the method 'setPorttable:' to be defined - use @synthesize, @dynamic or provide a method implementation303915047#224#231#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m303913006#58#0#58#0#0"0(0#0#83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m4300911832#2006"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContentionAppAppDelegate.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionAppAppDelegate.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceSubView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceSubView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 s303388182.402055
@@ -1591,8 +1623,8 @@ xcom.apple.compilers.gcc.4_2
 lSLF07#2@93"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../DeviceSubViewController.m303388182#303388182#0(0"0(0#0#85"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../DeviceSubViewController.m4300911832#2007"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../DeviceSubViewController.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceSubViewController.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303844706.229330
-e303844706.454530
+s303932391.454491
+e303932391.598569
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o
@@ -1601,11 +1633,16 @@ xnormal
 xarmv6
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m303844706#303844706#0(0"0(0#0#69"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m4300911832#1978"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o0#
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m: In function '-[DeviceView initWithValues:position:]':
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m:26: warning: local declaration of 'position' hides instance variable
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m: At top level:
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m:73: warning: property 'position' requires method '-position' to be defined - use @synthesize, @dynamic or provide a method implementation
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m:73: warning: property 'position' requires the method 'setPosition:' to be defined - use @synthesize, @dynamic or provide a method implementation
+lSLF07#2@77"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m303932391#303932391#0(772"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m: In function '-[DeviceView initWithValues:position:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m:26: warning: local declaration of 'position' hides instance variable/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m: At top level:/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m:73: warning: property 'position' requires method '-position' to be defined - use @synthesize, @dynamic or provide a method implementation/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m:73: warning: property 'position' requires the method 'setPosition:' to be defined - use @synthesize, @dynamic or provide a method implementation4(22@55"Local declaration of 'position' hides instance variable303932391#125#139#0(6@69"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m303932387#26#0#26#0#0"0(23@13"At top level:303932391#264#85#0(6@69"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m303932387#0#0#0#0#0"0(22@124"Property 'position' requires method '-position' to be defined - use @synthesize, @dynamic or provide a method implementation303932391#349#208#0(6@69"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m303932387#73#0#73#0#0"0(22@131"Property 'position' requires the method 'setPosition:' to be defined - use @synthesize, @dynamic or provide a method implementation303932391#557#215#0(6@69"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m303932387#73#0#73#0#0"0(0#0#69"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m4300911832#1978"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DeviceView.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceViewController.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303843543.091634
-e303843544.699984
+s303915047.844524
+e303915048.013964
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceViewController.o
@@ -1616,7 +1653,38 @@ xobjective-c
 xcom.apple.compilers.gcc.4_2
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m: In function '-[DeviceViewController newNetworkData:]':
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m:73: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type
-lSLF07#2@98"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m303843543#303843544#0(412"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m: In function '-[DeviceViewController newNetworkData:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m:73: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type1(22@160"Incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type303843544#147#265#0(6@90"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m303843196#73#0#73#0#0"0(0#0#90"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m4300911832#2009"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceViewController.o0#
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m:75: warning: unused variable 'enumerator'
+lSLF07#2@98"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m303915047#303915048#0(545"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m: In function '-[DeviceViewController newNetworkData:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m:73: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m:75: warning: unused variable 'enumerator'2(22@160"Incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type303915047#147#265#0(6@90"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m303911528#73#0#73#0#0"0(22@28"Unused variable 'enumerator'303915047#412#133#0(6@90"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m303911528#75#0#75#0#19"unused variable '*'0(0#0#90"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m4300911832#2009"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/DeviceViewController.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceViewController.o0#
+
+CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s303932587.154068
+e303932587.410330
+r1
+xCompileC
+xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesView.o
+x/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView initWithFrame:nodes:]':
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: 'DevicesView' may not respond to '-createViews'
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: (Messages without a matching method signature
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: will be assumed to return 'id' and accept
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: '...' as arguments.)
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView update:]':
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:118: warning: 'DevicesView' may not respond to '-findViewIndex:'
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:118: warning: initialization makes integer from pointer without a cast
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:122: warning: 'DevicesView' may not respond to '-addNewView:position:'
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:123: warning: 'DevicesView' may not respond to '-findViewIndex:'
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:123: warning: assignment makes integer from pointer without a cast
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView addNewView:position:]':
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:278: warning: 'DevicesView' may not respond to '-createTopView:position:'
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView createViews]':
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:304: warning: 'DevicesView' may not respond to '-createTopView:position:'
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView touchesBegan:withEvent:]':
+o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:477: warning: unused variable 'touch'
+lSLF07#2@78"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932587#303932587#0(2182"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView initWithFrame:nodes:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: 'DevicesView' may not respond to '-createViews'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: (Messages without a matching method signature/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: will be assumed to return 'id' and accept/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:36: warning: '...' as arguments.)/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView update:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:118: warning: 'DevicesView' may not respond to '-findViewIndex:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:118: warning: initialization makes integer from pointer without a cast/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:122: warning: 'DevicesView' may not respond to '-addNewView:position:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:123: warning: 'DevicesView' may not respond to '-findViewIndex:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:123: warning: assignment makes integer from pointer without a cast/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView addNewView:position:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:278: warning: 'DevicesView' may not respond to '-createTopView:position:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView createViews]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:304: warning: 'DevicesView' may not respond to '-createTopView:position:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m: In function '-[DevicesView touchesBegan:withEvent:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m:477: warning: unused variable 'touch'10(22@47"'DevicesView' may not respond to '-createViews'303932587#123#132#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#36#0#36#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)303932587#255#130#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#36#0#36#0#0"0(22@50"'DevicesView' may not respond to '-findViewIndex:'303932587#726#136#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#118#0#118#0#26"'*' may not respond to '*'0(22@56"Initialization makes integer from pointer without a cast303932587#862#142#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#118#0#118#0#0"0(22@56"'DevicesView' may not respond to '-addNewView:position:'303932587#1004#142#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#122#0#122#0#26"'*' may not respond to '*'0(22@50"'DevicesView' may not respond to '-findViewIndex:'303932587#1146#136#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#123#0#123#0#26"'*' may not respond to '*'0(22@52"Assignment makes integer from pointer without a cast303932587#1282#138#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#123#0#123#0#0"0(22@59"'DevicesView' may not respond to '-createTopView:position:'303932587#1543#145#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#278#0#278#0#26"'*' may not respond to '*'0(22@59"'DevicesView' may not respond to '-createTopView:position:'303932587#1802#145#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#304#0#304#0#26"'*' may not respond to '*'0(22@23"Unused variable 'touch'303932587#2073#109#0(6@70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m303932562#477#0#477#0#19"unused variable '*'0(0#0#70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m4300911832#1980"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/DevicesView.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesView.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/FlowAnalyser.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/FlowAnalyser.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 s303317199.015300
@@ -1750,8 +1818,8 @@ xcom.apple.compilers.gcc.4_2
 lSLF07#2@96"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../MyNavigationViewController.m303388182#303388182#0(0"0(0#0#88"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../MyNavigationViewController.m4300911832#2013"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../MyNavigationViewController.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/MyNavigationViewController.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303840296.339186
-e303840296.475318
+s303906566.698830
+e303906566.835516
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o
@@ -1760,11 +1828,11 @@ xnormal
 xarmv6
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@79"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m303840296#303840296#0(0"0(0#0#71"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m4300911832#1982"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o0#
+lSLF07#2@79"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m303906566#303906566#0(0"0(0#0#71"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m4300911832#1982"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NameResolver.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkData.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303824745.292606
-e303824745.535452
+s303915169.021972
+e303915169.250819
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkData.o
@@ -1773,7 +1841,7 @@ xnormal
 xarmv6
 xobjective-c
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@78"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m303824745#303824745#0(0"0(0#0#70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m4300911832#1980"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkData.o0#
+lSLF07#2@78"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m303915169#303915169#0(0"0(0#0#70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m4300911832#1980"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NetworkData.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkData.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NodeTuple.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NodeTuple.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 s303814025.610444
@@ -1787,6 +1855,19 @@ xarmv6
 xobjective-c
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@76"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NodeTuple.m303814025#303814026#0(0"0(0#0#68"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NodeTuple.m4300911832#1976"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/NodeTuple.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NodeTuple.o0#
+
+CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PlacardView.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
+s303901523.467280
+e303901523.560711
+r1
+xCompileC
+xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PlacardView.o
+x/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.m
+xnormal
+xarmv6
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@78"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.m303901523#303901523#0(0"0(0#0#70"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.m4300911832#1980"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PlacardView.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PlacardView.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 s303301991.120150
@@ -1810,8 +1891,8 @@ o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThre
 lSLF07#2@91"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m303301991#303301991#0(1079"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m: In function '-[PollingThread startpolling:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m:56: warning: 'DeviceViewController' may not respond to '-islive:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m:56: warning: (Messages without a matching method signature/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m:56: warning: will be assumed to return 'id' and accept/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m:56: warning: '...' as arguments.)/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m:66: warning: 'PollingThread' may not respond to '-pollsynth'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m: In function '-[PollingThread polllinks]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m:130: warning: unused variable 'last_seen'4(22@52"'DeviceViewController' may not respond to '-islive:'303301991#131#150#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m302544883#56#0#56#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)303301991#281#143#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m302544883#56#0#56#0#0"0(22@47"'PollingThread' may not respond to '-pollsynth'303301991#681#145#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m302544883#66#0#66#0#26"'*' may not respond to '*'0(22@27"Unused variable 'last_seen'303301991#953#126#0(6@83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m302544883#130#0#130#0#19"unused variable '*'0(0#0#83"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m4300911832#1995"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PollingThread.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303844800.189175
-e303844801.579871
+s303915047.981765
+e303915048.382634
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o
@@ -1825,7 +1906,7 @@ o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: wa
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: (Messages without a matching method signature
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: will be assumed to return 'id' and accept
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: '...' as arguments.)
-lSLF07#2@80"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m303844800#303844801#0(617"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m: In function '-[PollingThread poll]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: 'PollingThread' may not respond to '-pollleasetable'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: (Messages without a matching method signature/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: will be assumed to return 'id' and accept/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: '...' as arguments.)2(22@52"'PollingThread' may not respond to '-pollleasetable'303844800#111#139#0(6@72"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m303844752#75#0#75#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)303844800#250#132#0(6@72"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m303844752#75#0#75#0#0"0(0#0#72"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m4300911832#1984"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o0#
+lSLF07#2@80"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m303915047#303915048#0(617"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m: In function '-[PollingThread poll]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: 'PollingThread' may not respond to '-pollleasetable'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: (Messages without a matching method signature/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: will be assumed to return 'id' and accept/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m:75: warning: '...' as arguments.)2(22@52"'PollingThread' may not respond to '-pollleasetable'303915048#111#139#0(6@72"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m303912400#75#0#75#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)303915048#250#132#0(6@72"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m303912400#75#0#75#0#0"0(0#0#72"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m4300911832#1984"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PollingThread.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PollingThread.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PortLookup.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../Classes/PortLookup.m normal armv6 objective-c com.apple.compilers.gcc.4_2
 s303315709.576279
@@ -1888,8 +1969,8 @@ CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-n
 r0
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/Window.o /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s303388182.934658
-e303388183.099413
+s303915082.356275
+e303915082.512546
 r1
 xCompileC
 xbuild/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/Window.o
@@ -1905,7 +1986,7 @@ o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: 
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: '...' as arguments.)
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window totalBytes:]':
 o/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:65: warning: 'Window' may not respond to '-emptyOldSlots:'
-lSLF07#2@73"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303388182#303388183#0(812"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window addBytes:pollcount:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: 'Window' may not respond to '-emptyOldSlots:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: (Messages without a matching method signature/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: will be assumed to return 'id' and accept/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: '...' as arguments.)/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window totalBytes:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:65: warning: 'Window' may not respond to '-emptyOldSlots:'3(22@45"'Window' may not respond to '-emptyOldSlots:'303388182#112#125#0(6@65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303311797#44#0#44#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)303388182#237#125#0(6@65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303311797#44#0#44#0#0"0(22@45"'Window' may not respond to '-emptyOldSlots:'303388183#687#125#0(6@65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303311797#65#0#65#0#26"'*' may not respond to '*'0(0#0#65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m4300911832#1970"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/Window.o0#
+lSLF07#2@73"Compile /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303915082#303915082#0(812"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window addBytes:pollcount:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: 'Window' may not respond to '-emptyOldSlots:'/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: (Messages without a matching method signature/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: will be assumed to return 'id' and accept/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: '...' as arguments.)/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window totalBytes:]':/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:65: warning: 'Window' may not respond to '-emptyOldSlots:'3(22@45"'Window' may not respond to '-emptyOldSlots:'303915082#112#125#0(6@65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303915066#44#0#44#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)303915082#237#125#0(6@65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303915066#44#0#44#0#0"0(22@45"'Window' may not respond to '-emptyOldSlots:'303915082#687#125#0(6@65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m303915066#65#0#65#0#26"'*' may not respond to '*'0(0#0#65"/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m4300911832#1970"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.1.3 -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-generated-files.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-own-target-headers.hmap -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-all-target-headers.hmap -iquote /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp-project-headers.hmap -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/include -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources/armv6 -I/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/DerivedSources -include /var/folders/9t/9tAWA3i9EJKIk6x4yDSF-U+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/ContentionApp_Prefix-gghrggidkexdhbcgapzfyvfbxpdm/ContentionApp_Prefix.pch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/Window.o0#
 
 CCompileC build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/crecord.o /Users/tlodge/iphone/ContentionApp/ContentionApp/crecord.c normal armv6 c com.apple.compilers.gcc.4_2
 s303388180.777483
@@ -2372,23 +2453,23 @@ xudp_port.txt
 lSLF07#2@17"Copy udp_port.txt303388179#303388179#0(0"0(0#0#61"/Users/tlodge/iphone/ContentionApp/ContentionApp/udp_port.txt4300911832#478"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -resolve-src-symlinks /Users/tlodge/iphone/ContentionApp/ContentionApp/udp_port.txt /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app0#
 
 CGenerateDSYMFile /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app.dSYM /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp
-s303844801.647952
-e303844801.737236
+s303932587.469510
+e303932587.565422
 r1
 xGenerateDSYMFile
 x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app.dSYM
 x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp
-lSLF07#2@113"GenerateDSYMFile build/Debug-iphoneos/ContentionApp.app.dSYM build/Debug-iphoneos/ContentionApp.app/ContentionApp303844801#303844801#0(0"0(0#0#101"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp4300911832#410"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app.dSYM0#
+lSLF07#2@113"GenerateDSYMFile build/Debug-iphoneos/ContentionApp.app.dSYM build/Debug-iphoneos/ContentionApp.app/ContentionApp303932587#303932587#0(0"0(0#0#101"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp4300911832#410"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app.dSYM0#
 
 CLd /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp normal armv6
-s303844801.579994
-e303844801.647818
+s303932587.410434
+e303932587.469374
 r1
 xLd
 x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp
 xnormal
 xarmv6
-lSLF07#2@106"Link /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp303844801#303844801#0(0"0(0#0#0"4300911832#930"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv IPHONEOS_DEPLOYMENT_TARGET 3.1.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -L/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -filelist /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionApp.LinkFileList -dead_strip -miphoneos-version-min=3.1.3 -framework Foundation -framework UIKit -framework CoreGraphics -framework QuartzCore -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp0#
+lSLF07#2@106"Link /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp303932587#303932587#0(0"0(0#0#0"4300911832#930"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv IPHONEOS_DEPLOYMENT_TARGET 3.1.3    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6 -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk -L/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -F/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos -filelist /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContentionApp.LinkFileList -dead_strip -miphoneos-version-min=3.1.3 -framework Foundation -framework UIKit -framework CoreGraphics -framework QuartzCore -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/ContentionApp0#
 
 CProcessInfoPlistFile /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/Info.plist ContentionApp-Info.plist
 s303388174.183769
@@ -2470,7 +2551,13 @@ x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/Contentio
 lSLF07#2@199"ProcessProductPackaging "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/DDE13C2B-FD86-478A-9FE5-16F4C494E3D2.mobileprovision" build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision303388183#303388183#0(0"0(0#0#112"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision4300911832#450"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/DDE13C2B-FD86-478A-9FE5-16F4C494E3D2.mobileprovision" -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision0#
 
 CProcessProductPackaging "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/F2698CE9-D3E4-4396-BCDC-49751A5539AF.mobileprovision" /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision
-r0
+s303901418.023450
+e303901418.027234
+r1
+xProcessProductPackaging
+x/Users/tlodge/Library/MobileDevice/Provisioning Profiles/F2698CE9-D3E4-4396-BCDC-49751A5539AF.mobileprovision
+x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision
+lSLF07#2@199"ProcessProductPackaging "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/F2698CE9-D3E4-4396-BCDC-49751A5539AF.mobileprovision" build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision303901418#303901418#0(0"0(0#0#112"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision4300911832#450"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/tlodge/Library/MobileDevice/Provisioning Profiles/F2698CE9-D3E4-4396-BCDC-49751A5539AF.mobileprovision" -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app/embedded.mobileprovision0#
 
 CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.1.3.sdk/Entitlements.plist /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent
 s303388183.495630
@@ -2491,10 +2578,10 @@ x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debu
 lSLF07#2@193"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk/Entitlements.plist build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent301828424#301828424#0(0"0(0#0#129"/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent4300911832#470"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.2.sdk/Entitlements.plist -entitlements -format xml -o /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/ContentionApp.xcent0#
 
 CTouch /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
-s303844801.739331
-e303844801.744113
+s303932587.565670
+e303932587.569400
 r1
 xTouch
 x/Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app
-lSLF07#2@93"Touch /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app303844801#303844801#0(0"0(0#0#0"4300911832#290"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app0#
+lSLF07#2@93"Touch /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app303932587#303932587#0(0"0(0#0#0"4300911832#290"    cd /Users/tlodge/iphone/ContentionApp/ContentionApp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/tlodge/iphone/ContentionApp/ContentionApp/build/Debug-iphoneos/ContentionApp.app0#
 

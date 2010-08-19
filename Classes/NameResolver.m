@@ -13,7 +13,7 @@
 
 @end
 
-
+int count;
 NSMutableDictionary *lookuptable;
 
 @implementation NameResolver
@@ -25,7 +25,8 @@ NSMutableDictionary *lookuptable;
 }
 
 +(NSString *) lookup:(NSString *)ip_src destination:(NSString *)ip_dst{
-	LeaseRecord *record = [lookuptable objectForKey:ip_src];
+	return [NSString stringWithFormat:@"device%d", count++];
+	/*LeaseRecord *record = [lookuptable objectForKey:ip_src];
 	if (record != NULL){
 		if ( ![record.name isEqualToString:@" "]){
 			return record.name;
@@ -40,7 +41,7 @@ NSMutableDictionary *lookuptable;
 		}
 		return ip_dst;
 	}
-	return @"unknown";
+	return @"unknown";*/
 }
 
 +(void) newLease:(NSNotification *) n{

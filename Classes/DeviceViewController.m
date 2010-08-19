@@ -7,14 +7,14 @@
 //
 
 #import "DeviceViewController.h"
-#import "DeviceView.h"
+#import "DevicesView.h"
 #import "DeviceSubViewController.h"
 #import "ContentionAppAppDelegate.h"
 
 @implementation DeviceViewController
 
 @synthesize sorteddata;
-@synthesize deviceView;
+@synthesize devicesView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -24,7 +24,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+	NSLog(@"VVVVVIEW DID LOAD!!");
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	
 	
@@ -32,8 +32,8 @@
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
 	CGRect frame = CGRectMake(0.0,0.0, 320, 460);
-	self.deviceView = [[DeviceView alloc] initWithFrame:frame nodes:[self sorteddata]];
-	[self.view addSubview:self.deviceView];
+	self.devicesView = [[DevicesView alloc] initWithFrame:frame nodes:[self sorteddata]];
+	[self.view addSubview:self.devicesView];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
 	
@@ -69,17 +69,17 @@
 
 -(void) newNetworkData:(NSNotification *) n{
 	//[sorteddata removeAllObjects];
-	
+	NSLog(@"new FLOW data");
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	
 	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	NodeTuple* node;
+	/*NodeTuple* node;
 	
 	while ( (node = [enumerator nextObject])) {
 		[node print];
-	}
+	}*/
 	
-	[self.deviceView update:self.sorteddata];
+	[self.devicesView update:self.sorteddata];
 }
 
 

@@ -1,32 +1,17 @@
-//
-//  DeviceView.h
-//  ContentionApp
-//
-//  Created by Tom Lodge on 07/07/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
-
-#import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
-#import "NodeTuple.h"
-#import "TouchResponse.h"
-
-#define DEVICES  7
-
 
 @interface DeviceView : UIView {
-	
-	UIViewController <TouchResponse> *delegate;
-	NSMutableArray *nodes;
-	CALayer * mylayers[DEVICES+1];
-	CALayer * mytitlelayers[DEVICES+1];
+	UIImage *deviceImage;
+	NSString *name;
+	UILabel *namelabel;
+	int position;
 }
 
-@property(nonatomic, retain) UIViewController <TouchResponse> *delegate;
-@property(nonatomic, retain) NSMutableArray *nodes;
+@property (nonatomic, retain) UIImage *deviceImage;
+@property (nonatomic, retain) UILabel *namelabel;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, assign) int position;
+// Initializer for this object
 
-- (id)initWithFrame:(CGRect)frame nodes:(NSMutableArray *) nodes;
-- (void) update:(NSMutableArray *) nodes;
-- (CGPoint) getCoordinates:(int) position;
-
+-(id) initWithValues:(NSString *)name position:(int)position;
+-(void) updateMyPosition:(int) position;
 @end

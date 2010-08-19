@@ -72,14 +72,18 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 			for (;;){
 				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
 				
-				if (![self pollleasetable])
+				if (![self pollleasetable]){
+					NSLog(@"polllease table hmmm breaking.......");
 					break;
+				}
 				
 				/*if (![self polllinktable])
 					break;*/
 					
-				if (![self pollflowtable])
+				if (![self pollflowtable]){
+					NSLog(@"pollflow table hmmm breaking.......");
 					break;	
+				}
 				
 				[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
 				

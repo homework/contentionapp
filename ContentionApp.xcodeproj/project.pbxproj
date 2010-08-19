@@ -16,7 +16,7 @@
 		28C286E10D94DF7D0034E888 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* DeviceViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		A303FF1E1212EC8C0055D7D8 /* Window.m in Sources */ = {isa = PBXBuildFile; fileRef = A303FF1D1212EC8C0055D7D8 /* Window.m */; };
-		A327F57011E482D800FC8A35 /* DeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = A327F56F11E482D800FC8A35 /* DeviceView.m */; };
+		A327F57011E482D800FC8A35 /* DevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = A327F56F11E482D800FC8A35 /* DevicesView.m */; };
 		A327F5DB11E49B8D00FC8A35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */; };
 		A33F2CA112017AEC00B78F50 /* NodeTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = A33F2CA012017AEC00B78F50 /* NodeTuple.m */; };
 		A33F2EDD1206D69000B78F50 /* skype.png in Resources */ = {isa = PBXBuildFile; fileRef = A33F2ED81206D69000B78F50 /* skype.png */; };
@@ -65,6 +65,7 @@
 		A3CD3E3012153D4C00890E30 /* NetworkData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD3E2F12153D4C00890E30 /* NetworkData.m */; };
 		A3CD3F4B12156C6600890E30 /* LinkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD3F4A12156C6600890E30 /* LinkObject.m */; };
 		A3CD405012194DCC00890E30 /* LeaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD404F12194DCC00890E30 /* LeaseObject.m */; };
+		A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,8 +84,8 @@
 		8D1107310486CEB800E47090 /* ContentionApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ContentionApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A303FF1C1212EC8C0055D7D8 /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		A303FF1D1212EC8C0055D7D8 /* Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Window.m; sourceTree = "<group>"; };
-		A327F56E11E482D800FC8A35 /* DeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceView.h; sourceTree = "<group>"; };
-		A327F56F11E482D800FC8A35 /* DeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceView.m; sourceTree = "<group>"; };
+		A327F56E11E482D800FC8A35 /* DevicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesView.h; sourceTree = "<group>"; };
+		A327F56F11E482D800FC8A35 /* DevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesView.m; sourceTree = "<group>"; };
 		A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A33F2C9F12017AEC00B78F50 /* NodeTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTuple.h; sourceTree = "<group>"; };
 		A33F2CA012017AEC00B78F50 /* NodeTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTuple.m; sourceTree = "<group>"; };
@@ -165,6 +166,8 @@
 		A3CD3F4A12156C6600890E30 /* LinkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkObject.m; sourceTree = "<group>"; };
 		A3CD404E12194DCC00890E30 /* LeaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaseObject.h; sourceTree = "<group>"; };
 		A3CD404F12194DCC00890E30 /* LeaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaseObject.m; sourceTree = "<group>"; };
+		A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceView.h; sourceTree = "<group>"; };
+		A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -335,10 +338,12 @@
 		A34E39A211D4B4FB005819E1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */,
+				A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */,
 				A39B8E4A11FEF70800A7DAA6 /* ApplicationView.h */,
 				A39B8E4B11FEF70800A7DAA6 /* ApplicationView.m */,
-				A327F56E11E482D800FC8A35 /* DeviceView.h */,
-				A327F56F11E482D800FC8A35 /* DeviceView.m */,
+				A327F56E11E482D800FC8A35 /* DevicesView.h */,
+				A327F56F11E482D800FC8A35 /* DevicesView.m */,
 				A39B8E2711FEEFB500A7DAA6 /* DeviceSubView.h */,
 				A39B8E2811FEEFB500A7DAA6 /* DeviceSubView.m */,
 			);
@@ -480,7 +485,7 @@
 				A34E39E411D4B55A005819E1 /* PollingThread.m in Sources */,
 				A34E39EA11D4B58F005819E1 /* FlowObject.m in Sources */,
 				A34E3A4E11D4BC66005819E1 /* MyNavigationViewController.m in Sources */,
-				A327F57011E482D800FC8A35 /* DeviceView.m in Sources */,
+				A327F57011E482D800FC8A35 /* DevicesView.m in Sources */,
 				A39B8E2911FEEFB500A7DAA6 /* DeviceSubView.m in Sources */,
 				A39B8E3011FEF04400A7DAA6 /* DeviceSubViewController.m in Sources */,
 				A39B8E4C11FEF70800A7DAA6 /* ApplicationView.m in Sources */,
@@ -496,6 +501,7 @@
 				A3CD405012194DCC00890E30 /* LeaseObject.m in Sources */,
 				A37C7708121BDFD2005CD178 /* NameResolver.m in Sources */,
 				A37C775D121BFB1D005CD178 /* LeaseRecord.m in Sources */,
+				A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,7 +18,7 @@
 @property(nonatomic, retain) NSMutableArray* window;
 @property(nonatomic, readonly) int lastpoll;
 
--(id) initWithSize:(int)size;
+-(id) initWithSize:(int)size pollcount:(int) pc;
 -(void) addBytes:(int) value pollcount:(int) pc;
 -(int) totalBytes:(int) pollcount;
 -(void) print:(NSString*)application;

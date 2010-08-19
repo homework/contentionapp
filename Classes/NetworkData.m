@@ -28,9 +28,11 @@ static NSMutableDictionary *nodedata;
 static NSMutableDictionary *applicationdata;
 static NSMutableDictionary *applicationbytehistory;
 static NSMutableDictionary *nodebytehistory;
+static BOOL init = FALSE;
 
 +(void) initialize{
-	
+	if (!init){
+	NSLog(@"initilaiing network data object!!");
 	POLLNUMBER		= 0;
 	applicationdata			= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	applicationbytehistory	= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
@@ -40,6 +42,8 @@ static NSMutableDictionary *nodebytehistory;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPollToStart:) name:@"newPoll" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
+		init = TRUE;
+	}
 }
 
 +(NSMutableArray *) getLatestApplicationData{
@@ -52,10 +56,13 @@ static NSMutableDictionary *nodebytehistory;
 
 
 +(void) pollComplete: (NSNotification *) n{
-	
+	NSLog(@"POLLCOMPLETE");
 	POLLNUMBER += 1;
 	[self removeZeroByteData:applicationdata history: applicationbytehistory];
+	
+	NSLog(@"before removing 0 bytes data - device data size is %d", [nodedata count]);
 	[self removeZeroByteData:nodedata history: nodebytehistory];
+	NSLog(@"after device data size is %d", [nodedata count]);
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
 	//[self printTable];
 	//[self.appView update:self.sorteddata];
@@ -65,6 +72,7 @@ static NSMutableDictionary *nodebytehistory;
 
 
 +(void) newPollToStart: (NSNotification *) n{
+NSLog(@"NEW POLL TO START ");
 }
 
 +(void) newFlow: (NSNotification *) f{
@@ -91,7 +99,7 @@ static NSMutableDictionary *nodebytehistory;
 	}
 	
 	if (w == NULL){
-		w = [[[Window alloc]initWithSize:SLIDINGHISTORY] autorelease];
+		w = [[[Window alloc]initWithSize:SLIDINGHISTORY pollcount:POLLNUMBER] autorelease];
 		[w addBytes:[fobj bytes] pollcount:POLLNUMBER];
 		[applicationbytehistory setObject:w forKey:application];
 	}else{
@@ -113,12 +121,14 @@ static NSMutableDictionary *nodebytehistory;
 	}
 	
 	if (w == NULL){
-		w = [[[Window alloc]initWithSize:SLIDINGHISTORY] autorelease];
+		w = [[[Window alloc]initWithSize:SLIDINGHISTORY pollcount:POLLNUMBER] autorelease];
 		[w addBytes:[fobj bytes] pollcount:POLLNUMBER];
 		[nodebytehistory setObject:w forKey:nodename];
+		NSLog(@"creating new node with %d bytes for node %@", [fobj bytes], nodename);
 	}else{
 		w = [nodebytehistory objectForKey:nodename];
 		[w addBytes:[fobj bytes] pollcount:POLLNUMBER];
+		NSLog(@"adding %d bytes for node %@", [fobj bytes], nodename);
 	}		
 }
 
