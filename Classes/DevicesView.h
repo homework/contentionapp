@@ -11,6 +11,8 @@
 #import "NodeTuple.h"
 #import "TouchResponse.h"
 #import "DeviceView.h"
+#import "DevicesTextInputView.h"
+#import "ContainerView.h"
 
 #define DEVICES  7
 
@@ -31,5 +33,6 @@
 - (id)initWithFrame:(CGRect)frame nodes:(NSMutableArray *) nodes;
 - (void) update:(NSMutableArray *) nodes;
 - (CGPoint) getCoordinates:(int) position;
+-(void) respondToLabelTouch:(DeviceView*) view;
 
 @end

@@ -1,3 +1,5 @@
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface DeviceView : UIView {
 	UIImage *deviceImage;
@@ -12,6 +14,7 @@
 @property (nonatomic, assign) int position;
 // Initializer for this object
 
--(id) initWithValues:(NSString *)name position:(int)position;
+-(id) initWithValues:(NSString *)name position:(int)position frame:(CGRect) frame imageindent:(float) i ;
 -(void) updateMyPosition:(int) position;
+
 @end

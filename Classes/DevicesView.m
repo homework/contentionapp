@@ -18,6 +18,8 @@
 -(void) createBottomLayer:(NodeTuple*)node position: (int) pos;
 @end
 
+const static float	IMAGEINDENT = 200;
+const static float	VIEWHEIGHT  = 85;
 
 @implementation DevicesView
 
@@ -33,6 +35,7 @@
 		[self createLayers];
 		self.backgroundColor = [UIColor whiteColor];
 		[[self layer] setNeedsDisplay];  */
+		
 		[self createViews];
 	}
     return self;
@@ -110,15 +113,13 @@
 	while ( node = [enumerator nextObject]) {
 		
 
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:2.0];
-		[UIView setAnimationDelegate:self];
+		
 		if (position >= DEVICES)
 			break;
 		int index = [self findViewIndex:[node name]];
 		
 		if (index == -1){
-			NSLog(@"Adding new view");
+	
 			[self addNewView:node position:position];
 			index = [self findViewIndex:[node name]];
 		}
@@ -126,17 +127,26 @@
 	    if (index == -1){
 			NSLog(@"INDEX IS -1");
 		}
-		myviews[index].center = [self getCoordinates:position];
+		
+		CGPoint newPosition = [self getCoordinates:position];
+		//CGRect frame = CGRectMake(newPosition.x, newPosition.y, self.bounds.size.width, 85); 
+		
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:2.0];
+		[UIView setAnimationDelegate:self];
+		myviews[index].superview.center = newPosition;
 		[myviews[index] updateMyPosition:position];
 		
 		CGAffineTransform transform;
 		if (position < 3){
-			 transform = CGAffineTransformMakeScale(1.0, 1.0);
-			myviews[index].namelabel.layer.opacity  = 1.0;
+			transform = CGAffineTransformMakeScale(1.0, 1.0);
+			//CALayer * layer = myviews[index].namelabel.layer;
+			//layer.opacity = 1.0;
+			//myviews[index].namelabel.layer.opacity  = 1.0;
 		}
 		else{
 			transform = CGAffineTransformMakeScale(0.5, 0.5);
-			myviews[index].namelabel.layer.opacity  = 0.0;
+			//myviews[index].namelabel.layer.opacity  = 0.0;
 		}
 		myviews[index].transform = transform;
 		[UIView commitAnimations];
@@ -265,11 +275,11 @@
 
 -(CGPoint) getCoordinates:(int) position{
 	int spacer = 80;
-	
+	int INDENT = 15;
 	if (position < 3){
-		return CGPointMake(180, (80 + (position)*100));
+		return CGPointMake(self.bounds.size.width/2,  (10 + (position)*100) + VIEWHEIGHT/2);
 	}else{
-		return CGPointMake(40 + (spacer) * (position-3),330);
+		return CGPointMake( (INDENT + (self.bounds.size.width/4 + (spacer * (position-3)))- (IMAGEINDENT/2)), 330);
 	}
 }
 
@@ -312,9 +322,15 @@
 
 -(void) createTopView:(NodeTuple*)node position: (int) pos{
 	
-	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node name] position:pos] retain];
-	pview.center = [self getCoordinates:pos];
-	[self addSubview:pview];
+	CGRect frame = CGRectMake(0.0, 0.0, self.bounds.size.width, VIEWHEIGHT); 
+	ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
+	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node name] position:pos frame:frame imageindent:IMAGEINDENT] retain];
+	[pview setBackgroundColor:[UIColor clearColor]];
+	[container setBackgroundColor:[UIColor clearColor]];
+	container.center = [self getCoordinates:pos];
+	[container addSubview:pview];
+	
+	[self addSubview:container];
 	
 	BOOL space = false;
 	
@@ -471,21 +487,45 @@
 	
 }
 
--(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+-(void) respondToLabelTouch:(NSString *) viewname{
+	int index = [self findViewIndex: viewname];
+	NSLog(@"found view at index %d", index); 
+	CGPoint position = CGPointMake(myviews[index].center.x, myviews[index].center.y); 
+
 	
-	// We only support single touches, so anyObject retrieves just that touch from touches
+	CGRect frame = CGRectMake(0.0, 0.0, self.bounds.size.width, VIEWHEIGHT); 
+	DevicesTextInputView *pview = [[[DevicesTextInputView alloc] initWithValues:viewname frame:frame] retain];
+	[pview setBackgroundColor:[UIColor greenColor]];
+	pview.center = position;
+	
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:myviews[index].superview cache:YES];
+    [UIView setAnimationDuration:0.75];
+	UIView *container = myviews[index].superview;
+	/*etc etc*/
+	[myviews[index] removeFromSuperview];
+	[myviews[index] release];
+	[container addSubview:pview];
+	 myviews[index] = pview;
+	//[self addSubview:pview];
+	[UIView commitAnimations];
+	
+}
+
+-(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+	NSLog(@"OK TOP LAYER TOUCHED");
+}	
+/*	// We only support single touches, so anyObject retrieves just that touch from touches
 	UITouch *touch = [touches anyObject];
 	
-	
+	NSLog(@"DEVICES VIEW TOUCHED!!!!");
 	
 	/*UITouch *touch = [touches anyObject];
 	CGPoint thePoint = [touch locationInView:self];
 	int position = thePoint.y / (360 / 4);
 	position += (position >= 3) ? (thePoint.x / (310/4)) : 0;
-	NSLog(@"y = %f x = %f position = %d", thePoint.y, thePoint.x, position);*/
-}
-						
-						/*
+	NSLog(@"y = %f x = %f position = %d", thePoint.y, thePoint.x, position);
+ 
 	NSLog(@"TOUCHED!!!");
 	UITouch *touch = [touches anyObject];
 	CGPoint thePoint = [touch locationInView:self];

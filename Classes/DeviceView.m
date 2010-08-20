@@ -8,16 +8,22 @@
 @synthesize name;
 @synthesize namelabel;
 
--(id) initWithValues:(NSString *) nodename position:(int) position{
+CGRect imagebounds;
+CGRect labelbounds;
+int imageindent;
+
+-(id) initWithValues:(NSString *) nodename position:(int) position frame:(CGRect) frame imageindent:(float) i{
 	UIImage *image = [UIImage imageNamed:@"skype.png"];
-	CGRect frame = CGRectMake(0, 0, 320, 200);
 	
+	imageindent = i;
+		//[image drawInRect:CGRectMake(0.0, i, image.size.width, image.size.height)];
 	if (self = [self initWithFrame:frame]){
-		self.opaque = NO;
+		
 		deviceImage = image;
 		self.name = nodename;
 		//namelabel = [ [UILabel alloc ] initWithFrame:CGRectMake((self.bounds.size.width / 2) - 200,0.0, 150.0, 43.0) ];
-		namelabel = [ [UILabel alloc ] initWithFrame:CGRectMake(0.0,0.0, 150.0, 43.0) ];
+		labelbounds = CGRectMake(0.0,43.0/2, 150.0, 43.0);
+		namelabel = [ [UILabel alloc ] initWithFrame:labelbounds];
 		namelabel.textAlignment =  UITextAlignmentCenter;
 		namelabel.textColor = [UIColor whiteColor];
 		namelabel.backgroundColor = [UIColor blackColor];
@@ -32,29 +38,40 @@
 	
 }
 
+
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-		UITouch *touch = [touches anyObject];
+	UITouch *touch = [touches anyObject];
 	
 	// Only move the placard view if the touch was in the placard view
 	CGPoint thePoint = [touch locationInView:self];
-	CGRect labbounds = self.namelabel.bounds;
+	NSLog(@"LOWEst VIEW TOUCHED");
+	NSLog(@"the point x = %f, y = %f", thePoint.x, thePoint.y);
 	
-	if (CGRectContainsPoint (labbounds,thePoint)){
+	if (CGRectContainsPoint (CGRectMake(0.0,43.0/2, 150.0, 43.0),thePoint)){
 		NSLog(@"label touched");
-
+		[super.superview.superview respondToLabelTouch:name];
+	}else if (CGRectContainsPoint (CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height),thePoint)){	
+		NSLog(@"image touched");
 	}else{
 		NSLog(@"something else touched");
 	}
+	
+	//[super touchesBegan:touches withEvent:event];
 }
+
 -(void) updateMyPosition:(int)p{
 	position = p;
-	/*
-	if (p >= 3){
-		//namelabel.hidden = YES;
+	
+	
+	if (p < 3){
+		namelabel.layer.opacity  = 1.0f;
 		position = p;
 	}else{
-		//namelabel.hidden = NO;
-	}*/
+		namelabel.layer.opacity  = 0.0f;
+		//namelabel.opaque = NO;
+		//namelabel.layer.opacity  0.0;
+
+	}
 }
 
 - (void)dealloc {
@@ -66,7 +83,8 @@
 - (void)drawRect:(CGRect)rect {
 	
 	// Draw the placard at 0, 0
-	[deviceImage drawAtPoint:(CGPointMake(200, 0.0))];
+	[deviceImage drawAtPoint:(CGPointMake(imageindent, 0.0))];
+	imagebounds = CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height);
 	//[name drawRect:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2, 10,100)];
 }
 

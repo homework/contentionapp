@@ -18,6 +18,10 @@
 		A303FF1E1212EC8C0055D7D8 /* Window.m in Sources */ = {isa = PBXBuildFile; fileRef = A303FF1D1212EC8C0055D7D8 /* Window.m */; };
 		A327F57011E482D800FC8A35 /* DevicesView.m in Sources */ = {isa = PBXBuildFile; fileRef = A327F56F11E482D800FC8A35 /* DevicesView.m */; };
 		A327F5DB11E49B8D00FC8A35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */; };
+		A32B7330121E952B008097BF /* DeviceInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = A32B732E121E952B008097BF /* DeviceInputController.m */; };
+		A32B7331121E952B008097BF /* DeviceInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A32B732F121E952B008097BF /* DeviceInputView.xib */; };
+		A32B7351121E97C7008097BF /* DevicesTextInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = A32B7350121E97C7008097BF /* DevicesTextInputView.m */; };
+		A32B7490121EDEAB008097BF /* ContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A32B748F121EDEAB008097BF /* ContainerView.m */; };
 		A33F2CA112017AEC00B78F50 /* NodeTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = A33F2CA012017AEC00B78F50 /* NodeTuple.m */; };
 		A33F2EDD1206D69000B78F50 /* skype.png in Resources */ = {isa = PBXBuildFile; fileRef = A33F2ED81206D69000B78F50 /* skype.png */; };
 		A33F2EDE1206D69000B78F50 /* telnet.png in Resources */ = {isa = PBXBuildFile; fileRef = A33F2ED91206D69000B78F50 /* telnet.png */; };
@@ -87,6 +91,13 @@
 		A327F56E11E482D800FC8A35 /* DevicesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesView.h; sourceTree = "<group>"; };
 		A327F56F11E482D800FC8A35 /* DevicesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesView.m; sourceTree = "<group>"; };
 		A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A32B732D121E952B008097BF /* DeviceInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInputController.h; sourceTree = "<group>"; };
+		A32B732E121E952B008097BF /* DeviceInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInputController.m; sourceTree = "<group>"; };
+		A32B732F121E952B008097BF /* DeviceInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInputView.xib; sourceTree = "<group>"; };
+		A32B734F121E97C7008097BF /* DevicesTextInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicesTextInputView.h; sourceTree = "<group>"; };
+		A32B7350121E97C7008097BF /* DevicesTextInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicesTextInputView.m; sourceTree = "<group>"; };
+		A32B748E121EDEAB008097BF /* ContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerView.h; sourceTree = "<group>"; };
+		A32B748F121EDEAB008097BF /* ContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerView.m; sourceTree = "<group>"; };
 		A33F2C9F12017AEC00B78F50 /* NodeTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTuple.h; sourceTree = "<group>"; };
 		A33F2CA012017AEC00B78F50 /* NodeTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTuple.m; sourceTree = "<group>"; };
 		A33F2ECC1206D67F00B78F50 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
@@ -250,6 +261,7 @@
 				A33F2ECF1206D67F00B78F50 /* media.png */,
 				A39B8EAC120039BD00A7DAA6 /* devices */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
+				A32B732F121E952B008097BF /* DeviceInputView.xib */,
 				A39B8E5811FEF92800A7DAA6 /* ApplicationViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				A39B8E2F11FEF04400A7DAA6 /* DeviceSubView.xib */,
@@ -267,6 +279,19 @@
 				A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A32B7335121E960D008097BF /* DeviceControllers */ = {
+			isa = PBXGroup;
+			children = (
+				28C286DF0D94DF7D0034E888 /* DeviceViewController.h */,
+				28C286E00D94DF7D0034E888 /* DeviceViewController.m */,
+				A32B732D121E952B008097BF /* DeviceInputController.h */,
+				A32B732E121E952B008097BF /* DeviceInputController.m */,
+				A39B8E2D11FEF04400A7DAA6 /* DeviceSubViewController.h */,
+				A39B8E2E11FEF04400A7DAA6 /* DeviceSubViewController.m */,
+			);
+			name = DeviceControllers;
 			sourceTree = "<group>";
 		};
 		A33F2C9712017A8700B78F50 /* Data */ = {
@@ -322,14 +347,11 @@
 		A34E39A111D4B4BD005819E1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				28C286DF0D94DF7D0034E888 /* DeviceViewController.h */,
-				28C286E00D94DF7D0034E888 /* DeviceViewController.m */,
+				A32B7335121E960D008097BF /* DeviceControllers */,
 				A39B8E5611FEF92800A7DAA6 /* ApplicationViewController.h */,
 				A39B8E5711FEF92800A7DAA6 /* ApplicationViewController.m */,
 				A34E3A4C11D4BC66005819E1 /* MyNavigationViewController.h */,
 				A34E3A4D11D4BC66005819E1 /* MyNavigationViewController.m */,
-				A39B8E2D11FEF04400A7DAA6 /* DeviceSubViewController.h */,
-				A39B8E2E11FEF04400A7DAA6 /* DeviceSubViewController.m */,
 			);
 			name = Controllers;
 			path = ..;
@@ -338,6 +360,8 @@
 		A34E39A211D4B4FB005819E1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A32B734F121E97C7008097BF /* DevicesTextInputView.h */,
+				A32B7350121E97C7008097BF /* DevicesTextInputView.m */,
 				A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */,
 				A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */,
 				A39B8E4A11FEF70800A7DAA6 /* ApplicationView.h */,
@@ -346,6 +370,8 @@
 				A327F56F11E482D800FC8A35 /* DevicesView.m */,
 				A39B8E2711FEEFB500A7DAA6 /* DeviceSubView.h */,
 				A39B8E2811FEEFB500A7DAA6 /* DeviceSubView.m */,
+				A32B748E121EDEAB008097BF /* ContainerView.h */,
+				A32B748F121EDEAB008097BF /* ContainerView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -459,6 +485,7 @@
 				A3B18CAE1209A2590021242B /* hwdb.png in Resources */,
 				A3B18CC71209A9690021242B /* email.png in Resources */,
 				A3B18CCB1209ABB70021242B /* websecure.png in Resources */,
+				A32B7331121E952B008097BF /* DeviceInputView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +529,9 @@
 				A37C7708121BDFD2005CD178 /* NameResolver.m in Sources */,
 				A37C775D121BFB1D005CD178 /* LeaseRecord.m in Sources */,
 				A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */,
+				A32B7330121E952B008097BF /* DeviceInputController.m in Sources */,
+				A32B7351121E97C7008097BF /* DevicesTextInputView.m in Sources */,
+				A32B7490121EDEAB008097BF /* ContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
