@@ -228,7 +228,7 @@
 	appLayer.fillRule = kCAFillRuleNonZero;
 	appLayer.position = [self getCoordinates:pos];//CGPointMake(250,50 + (pos-1)*100);
 	[[self layer] addSublayer: appLayer];
-	UIImage* image = [UIImage imageNamed: [node image]]; 
+	UIImage* image = [UIImage imageNamed: [ApplicationImageLookup  getApplicationImage:[node name]]]; 
 	
 	if (image == nil){
 		image = [UIImage imageNamed: @"unknown.png"];
@@ -280,7 +280,8 @@
 	titlelayer.opacity = 0.0f;
 	[[self layer] addSublayer: titlelayer];
 	
-	UIImage*    image = [UIImage imageNamed: [node image]];
+	UIImage* image = [UIImage imageNamed: [ApplicationImageLookup  getApplicationImage:[node name]]]; 
+
 	
 	if (image == nil){
 		image = [UIImage imageNamed: @"unknown.png"];

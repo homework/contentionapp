@@ -35,7 +35,6 @@ static NSMutableDictionary *meanvalues;
 			t.second += b;
 		}
 		meanpacket = (float) t.second / t.first;
-		//NSLog(@"%@ mean packet len %f",key, meanpacket);
 	}
 	
 }

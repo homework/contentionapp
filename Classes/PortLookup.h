@@ -15,6 +15,7 @@
 }
 
 +(NSString *)lookup:(int) port protocol:(int) proto;
++(NSString *) getApplicationImage:(NSString *) program;
 + (void)initPorts;
 /*
 +(NSString*) lookup:(int)port proto:(int)proto;

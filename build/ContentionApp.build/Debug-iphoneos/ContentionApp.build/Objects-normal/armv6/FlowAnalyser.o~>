@@ -1,0 +1,5 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowAnalyser.m: In function '+[FlowAnalyser addFlow:dport:protocol:packets:bytes:pollcount:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowAnalyser.m:24: warning: 'FlowAnalyser' may not respond to '+getKey:dport:protocol:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowAnalyser.m:24: warning: (Messages without a matching method signature
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowAnalyser.m:24: warning: will be assumed to return 'id' and accept
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/FlowAnalyser.m:24: warning: '...' as arguments.)

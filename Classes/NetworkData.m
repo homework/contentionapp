@@ -32,16 +32,16 @@ static BOOL init = FALSE;
 
 +(void) initialize{
 	if (!init){
-	NSLog(@"initilaiing network data object!!");
-	POLLNUMBER		= 0;
-	applicationdata			= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	applicationbytehistory	= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	nodedata				= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	nodebytehistory			= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPollToStart:) name:@"newPoll" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
+		
+		POLLNUMBER		= 0;
+		applicationdata			= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		applicationbytehistory	= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		nodedata				= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		nodebytehistory			= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPollToStart:) name:@"newPoll" object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
 		init = TRUE;
 	}
 }
@@ -56,13 +56,9 @@ static BOOL init = FALSE;
 
 
 +(void) pollComplete: (NSNotification *) n{
-	NSLog(@"POLLCOMPLETE");
 	POLLNUMBER += 1;
 	[self removeZeroByteData:applicationdata history: applicationbytehistory];
-	
-	NSLog(@"before removing 0 bytes data - device data size is %d", [nodedata count]);
 	[self removeZeroByteData:nodedata history: nodebytehistory];
-	NSLog(@"after device data size is %d", [nodedata count]);
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
 	//[self printTable];
 	//[self.appView update:self.sorteddata];
@@ -72,7 +68,7 @@ static BOOL init = FALSE;
 
 
 +(void) newPollToStart: (NSNotification *) n{
-NSLog(@"NEW POLL TO START ");
+	
 }
 
 +(void) newFlow: (NSNotification *) f{
@@ -80,7 +76,7 @@ NSLog(@"NEW POLL TO START ");
 	//[fobj print];
 	
     [FlowAnalyser addFlow:[fobj sport] dport:[fobj dport] protocol:[fobj proto] packets:[fobj packets] bytes:[fobj bytes] pollcount:POLLNUMBER];
-
+	
 	[self updateApplicationData:fobj];
 	[self updateNodeData:fobj];
 }
@@ -124,11 +120,9 @@ NSLog(@"NEW POLL TO START ");
 		w = [[[Window alloc]initWithSize:SLIDINGHISTORY pollcount:POLLNUMBER] autorelease];
 		[w addBytes:[fobj bytes] pollcount:POLLNUMBER];
 		[nodebytehistory setObject:w forKey:nodename];
-		NSLog(@"creating new node with %d bytes for node %@", [fobj bytes], nodename);
 	}else{
 		w = [nodebytehistory objectForKey:nodename];
 		[w addBytes:[fobj bytes] pollcount:POLLNUMBER];
-		NSLog(@"adding %d bytes for node %@", [fobj bytes], nodename);
 	}		
 }
 
@@ -137,42 +131,42 @@ NSLog(@"NEW POLL TO START ");
 	if ( (POLLNUMBER % 4) == 0){
 		
 		applicationdata = [NSMutableArray arrayWithObjects:
-						 [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:113 sport:49312 dport:987]  retain],
-						 nil];
+						   [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:113 sport:49312 dport:987]  retain],
+						   nil];
 		
 		
 	}else if ( (POLLNUMBER % 4) == 1){
 		applicationdata = [NSMutableArray arrayWithObjects:
-						 [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:1276 sport:49312 dport:987]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
-						 nil];
+						   [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:1276 sport:49312 dport:987]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
+						   nil];
 		
 	}else if ( (POLLNUMBER % 4) == 2){
 		applicationdata = [NSMutableArray arrayWithObjects:
-						 [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"web" name:@"http-alt" image:@"web.png" value:3509 sport:64054 dport:8080]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:1903 sport:49312 dport:987]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"rockwell-csp2" name:@"rockwell-csp2" image:@"unknown.png" value:228 sport:49689 dport:2223]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"websecure" name:@"https" image:@"websecure.png" value:134 sport:63899 dport:443]  retain],
-						 nil];
+						   [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"web" name:@"http-alt" image:@"web.png" value:3509 sport:64054 dport:8080]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:1903 sport:49312 dport:987]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"rockwell-csp2" name:@"rockwell-csp2" image:@"unknown.png" value:228 sport:49689 dport:2223]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"websecure" name:@"https" image:@"websecure.png" value:134 sport:63899 dport:443]  retain],
+						   nil];
 		
 	}else if ( (POLLNUMBER % 4) == 3){
 		applicationdata = [NSMutableArray arrayWithObjects:
-						 [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"web" name:@"http-alt" image:@"web.png" value:3509 sport:64054 dport:8080]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:1903 sport:49312 dport:987]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"websecure" name:@"https" image:@"websecure.png" value:453 sport:63899 dport:443]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"rockwell-csp2" name:@"rockwell-csp2" image:@"unknown.png" value:228 sport:49689 dport:2223]  retain],
-						 [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
-						 nil];
+						   [[[NodeTuple alloc] initWithValues:@"squid-http" name:@"squid-http" image:@"unknown.png" value:6013 sport:3128 dport:61667]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"web" name:@"http-alt" image:@"web.png" value:3509 sport:64054 dport:8080]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"hwdb" name:@"hwdb" image:@"unknown.png" value:1903 sport:49312 dport:987]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"mdns" name:@"mdns" image:@"unknown.png" value:260 sport:5353 dport:5353]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"websecure" name:@"https" image:@"websecure.png" value:453 sport:63899 dport:443]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"rockwell-csp2" name:@"rockwell-csp2" image:@"unknown.png" value:228 sport:49689 dport:2223]  retain],
+						   [[[NodeTuple alloc] initWithValues:@"domain" name:@"domain" image:@"unknown.png" value:164 sport:58001 dport:53]  retain],
+						   nil];
 	}
 	
 	/*NSEnumerator *enumerator = [self.testdata objectEnumerator];

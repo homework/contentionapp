@@ -21,7 +21,7 @@
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	NSLog(@"am touched");
+	//NSLog(@"am touched");
 }
 /*
 // Only override drawRect: if you perform custom drawing.

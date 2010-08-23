@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TouchResponse.h"
 #import "NodeTuple.h"
+#import "ApplicationImageLookup.h"
 
 #define DEVICES  7
 

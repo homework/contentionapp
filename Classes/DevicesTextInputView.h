@@ -11,10 +11,16 @@
 
 @interface DevicesTextInputView : UIView {
 	NSString* name;
+	UIImage *deviceImage;
+	int index;
 }
 
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) UIImage *deviceImage;
+@property (nonatomic, assign) int index;
 
--(id) initWithValues:(NSString *) nodename frame:(CGRect) frame;
+
+
+-(id) initWithValues:(NSString *) nodename position:(int) position image:(NSString *) image imageindent:(float) i frame:(CGRect) frame;
 -(void) updateMyPosition:(int)p;
 @end

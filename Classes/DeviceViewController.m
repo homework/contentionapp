@@ -24,12 +24,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	NSLog(@"VVVVVIEW DID LOAD!!");
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	
-	
 	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
 	CGRect frame = CGRectMake(0.0,0.0, 320, 460);
 	self.devicesView = [[DevicesView alloc] initWithFrame:frame nodes:[self sorteddata]];
@@ -69,10 +66,11 @@
 
 -(void) newNetworkData:(NSNotification *) n{
 	//[sorteddata removeAllObjects];
-	NSLog(@"new FLOW data");
+
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	
-	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	
+	//NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
 	/*NodeTuple* node;
 	
 	while ( (node = [enumerator nextObject])) {
