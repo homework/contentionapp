@@ -7,17 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "TouchResponse.h"
-#import "NodeTuple.h"
-#import "DevicesView.h"
 #import "NetworkData.h"
+#import "ViewManager.h"
+#import "DeviceSubViewController.h"
+
 
 @interface DeviceViewController : UIViewController <TouchResponse>{
 	NSMutableArray *sorteddata;
-	DevicesView *devicesView;
+	ViewManager *vm;
 }
 
 @property(nonatomic,retain) NSMutableArray* sorteddata;
-@property(nonatomic,retain) DevicesView* devicesView;
+@property(nonatomic,retain) ViewManager* vm;
+
 
 @end

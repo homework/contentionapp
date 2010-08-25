@@ -27,6 +27,7 @@
 @property(nonatomic,assign) unsigned short dport;
 
 -(NSComparisonResult) sortByValue:(NodeTuple *) node;
+-(id) initWithValues:(NSString *)i name:(NSString *)n value:(int)v;
 -(id) initWithValues:(NSString*) i name:(NSString*) n image:(NSString*) img value:(int) v;
 -(id) initWithValues:(NSString *)i name:(NSString *)n image:(NSString *) img value:(int)v sport:(int)sp dport:(int) dp;
 -(void) print;

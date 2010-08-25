@@ -14,8 +14,8 @@
 #import "FlowAnalyser.h"
 #import "NameResolver.h"
 
-@interface NetworkData : NSObject {
-	
+@interface NetworkDataOLD : NSObject {
+
 }
 
 +(void)	initialize;

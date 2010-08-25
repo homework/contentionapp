@@ -22,7 +22,6 @@
 #include "FlowObject.h"
 #include "LinkObject.h"
 #include "LeaseObject.h"
-
 #include "DeviceViewController.h"
 
 @interface PollingThread : NSObject {

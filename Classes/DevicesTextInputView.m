@@ -48,7 +48,7 @@ CGRect imagebounds;
 }
 
 
--(void) updateMyPosition:(int)p {
+-(void) update:(int)p bandwidth:(float) bandwidth{
 	self.index = p;
 	NSLog(@"gridlines set position to %d", p);
 	[self setNeedsDisplay];

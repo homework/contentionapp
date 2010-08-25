@@ -22,5 +22,5 @@
 
 
 -(id) initWithValues:(NSString *) nodename position:(int) position image:(NSString *) image imageindent:(float) i frame:(CGRect) frame;
--(void) updateMyPosition:(int)p;
+-(void) update:(int)p bandwidth:(float)bandwidth;
 @end

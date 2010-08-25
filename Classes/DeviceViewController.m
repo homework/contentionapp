@@ -7,31 +7,38 @@
 //
 
 #import "DeviceViewController.h"
-#import "DevicesView.h"
-#import "DeviceSubViewController.h"
 #import "ContentionAppAppDelegate.h"
+
+@interface DeviceViewController (private)
+-(void) newNetworkData:(NSNotification *) n;
+@end
 
 @implementation DeviceViewController
 
 @synthesize sorteddata;
-@synthesize devicesView;
+@synthesize vm;
+
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
 
+-(NSString*) getName{
+	return @"DEVICE VIEW CONTROLLER";
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
-	self.navigationItem.title = @"Devices";
-	CGRect frame = CGRectMake(0.0,0.0, 320, 460);
-	self.devicesView = [[DevicesView alloc] initWithFrame:frame nodes:[self sorteddata]];
-	[self.view addSubview:self.devicesView];
 	
+	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
+	ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata touchdelegate:self name:@"device view controller"] retain];
+	[self setVm:tmpvm];
+	[tmpvm release];
+	
+	self.navigationItem.rightBarButtonItem = self.editButtonItem;
+	self.navigationItem.title = @"Devices";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
 	
 	/*
@@ -41,43 +48,25 @@
 }
 
 
--(void) touched:(NSString *)device{
-	DeviceSubViewController *applicationdetail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil];
-	applicationdetail.title = [NSString stringWithFormat:@"%@", device];
-	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-	[delegate.navigationControllerDevices pushViewController:applicationdetail animated: YES];
-	[applicationdetail release];
-}
 
 
--(void) printTable{
-	
-	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	
-	NodeTuple* node;
-	
-	while ( (node = [enumerator nextObject])) {
-		//Window *w = [self.bytehistory objectForKey:[node name]];
-		[node print];
-		//: w.lastpoll currentpoll:POLLNUMBER];
-		//[w print:[node name]];
+
+-(void) touched: (int) tag viewname:(NSString *) name position: (int) index{
+	NSLog(@"DEVICE VIEW AM TOUCHED>>>>-------------------------------------");
+	if (tag == IMAGE){
+		DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:name];
+		detail.title = [NSString stringWithFormat:@"%@", name];
+		ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+		[delegate.navigationControllerDevices pushViewController:detail animated: YES];
+		[detail release];
 	}
+	
 }
+
 
 -(void) newNetworkData:(NSNotification *) n{
-	//[sorteddata removeAllObjects];
-
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	
-	
-	//NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	/*NodeTuple* node;
-	
-	while ( (node = [enumerator nextObject])) {
-		[node print];
-	}*/
-	
-	[self.devicesView update:self.sorteddata];
+	[self.vm update:sorteddata];
 }
 
 

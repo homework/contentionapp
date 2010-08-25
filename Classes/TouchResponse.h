@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 
 
+static const int    IMAGE		= 0;
+static const int    LABEL		= 1;
+static const int    BANDWIDTH	= 2;
+static const int    OTHER		= 3;
+
 @protocol TouchResponse
-	
--(void) touched:(NSString *) device;
+
+-(void) touched: (int) tag viewname:(NSString *) view position: (int) index;
+-(NSString *) getName;
 
 @end

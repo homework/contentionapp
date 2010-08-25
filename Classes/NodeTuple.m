@@ -19,6 +19,15 @@
 @synthesize sport;
 @synthesize dport;
 
+-(id) initWithValues:(NSString *)i name:(NSString *)n value:(int)v{
+	if (self = [super init]) {
+		[self setIdentifier:i];	
+		[self setName:n];
+		[self setValue:v];
+	}
+	return self;
+}
+
 -(id) initWithValues:(NSString *)i name:(NSString *)n image:(NSString *) img value:(int)v{
 	
 	if (self = [super init]) {

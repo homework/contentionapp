@@ -71,15 +71,18 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 			
 			for (;;){
 				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
-				
+				NSLog(@"polling lease table...");
 				if (![self pollleasetable]){
 					NSLog(@"polllease table hmmm breaking.......");
 					break;
 				}
+				NSLog(@"done polling lease table...");
+
 				
 				/*if (![self polllinktable])
 					break;*/
 					
+				NSLog(@"polling flow table...");
 				if (![self pollflowtable]){
 					NSLog(@"pollflow table hmmm breaking.......");
 					break;	
@@ -391,7 +394,7 @@ void mon_free(BinResults *p) {
 }
 
 static tstamp_t processleaseresults(char *buf, unsigned int len) {
-	
+	NSLog(@"processing lease results");
 	Rtab *results;
     char stsmsg[RTAB_MSG_MAX_LENGTH];
     DhcpResults *p;
