@@ -12,7 +12,10 @@
 @implementation ApplicationImageLookup
 
 
+
 +(NSString *) getImage:(NSString *) application{
+	
+
 	if (application == NULL){
 		return @"unknown.png";
 	}

@@ -1,0 +1,3 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationImageLookup.m:69: warning: incomplete implementation of class 'ApplicationImageLookup'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationImageLookup.m:69: warning: method definition for '+initialize' not found
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ApplicationImageLookup.m:69: warning: method definition for '+getType:' not found

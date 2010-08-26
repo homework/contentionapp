@@ -13,6 +13,7 @@
 #import "ViewManager.h"
 #import "DeviceSubViewController.h"
 #import "DeviceImageLookup.h"
+#import "CustomImagePicker.h"
 
 @interface DeviceViewController : UIViewController <TouchResponse>{
 	NSMutableArray *sorteddata;

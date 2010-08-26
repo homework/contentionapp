@@ -15,5 +15,4 @@
 
 +(NSString *) getType:(NSString *) program;
 
-
 @end

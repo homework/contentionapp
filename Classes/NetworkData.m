@@ -129,16 +129,7 @@ static NetworkTable *apptable;
 }
 
 
-+(void) recalculateMaxNodeBandwidth:(NSString*)nodename{
-	[devicetable recalculateMaxBandwitdh:nodename];
-	
-}
 
-+(void) recalculateMaxAppBandwidth:(NSString*)appname{
-	[apptable recalculateMaxBandwitdh:appname];
-	
-	
-}
 
 +(void) dealloc{
 	[devicetable release];

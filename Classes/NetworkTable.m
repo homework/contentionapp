@@ -12,11 +12,11 @@
 @interface NetworkTable()
 
 
-+ (void)removeZeroByteData:(NSMutableDictionary *)data;
-+(void) recalculateMaxNodeBandwidth:(NSString*)nodename application:(NSString*)app;
-+ (void)recalculateMaxAppBandwidth:(NSString*)application node:(NSString*)node;
-+(int) getBandwidth:(NSString *) name data:(NSMutableDictionary*)d;
-+(NSMutableArray *) getAllData:(NSMutableDictionary *) data;
+
+-(void) recalculateMaxBandwidth:(NSString*)node;
+-(void) recalculateMaxNodeBandwidth:(NSString*)nodename application:(NSString*)app;
+-(void)recalculateMaxAppBandwidth:(NSString*)application node:(NSString*)node;
+-(int) getBandwidth:(NSString *) name data:(NSMutableDictionary*)d;
 
 @end
 

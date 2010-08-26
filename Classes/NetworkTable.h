@@ -21,4 +21,11 @@
 -(id) init;
 -(float) getNodeBandwidthProportion:(NSString *) fornode  subnode:(NSString *) subnode;
 -(float) getBandwidthProportion:(NSString *) node;
+-(NSMutableArray *) getLatestDataForNode:(NSString *)node;
+-(float) getNodeBandwidthProportion:(NSString *) fornode  subnode:(NSString *) subnode;
+-(float) getBandwidthProportion:(NSString *) node;
+-(void) updateData: (NSString*) topnode subnode:(NSString*) subnode bytes:(int) bytes;
+-(void) removeZeroByteData;
+-(NSMutableArray *) getAllData;
+
 @end

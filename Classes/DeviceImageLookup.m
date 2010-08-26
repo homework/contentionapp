@@ -11,33 +11,34 @@
 
 @implementation DeviceImageLookup
 
+
+static NSMutableDictionary *lookuptable;
+static BOOL init = false;
+
++(void) initialize{
+	if (!init){
+		lookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		init = TRUE;
+	}
+}
+
 +(NSString *) getImage:(NSString *) program{
 	
-	//NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(program like[cd] %@)
-							  
-	if (program == NULL){
-		return @"unknown.png";
+	NSString *imagename;
+	
+	if ( (imagename = [lookuptable objectForKey:program]) == NULL){
+		return [self getDefault:program];
 	}
 	
-	if ([program isEqualToString:@"hwdb"])
-		return @"hwdb.png";
-	
-	if ([program isEqualToString:@"macromedia-fcs"])
-		return @"iplayer.png";
-	
-	if ([program hasPrefix:@"https"])
-		return @"websecure.png";
-	
-	if ([program hasPrefix:@"http"])
-		return @"web.png";
-	
-	if ([program isEqualToString:@"ssh"])
-		return @"telnet.png";
-	
-	if ([program hasPrefix:@"imap"])
-		return @"email.png";
-	
+	return imagename;							  
+}
+
++(NSString *) getDefault:(NSString *) program{
 	return @"unknown.png";	
+}
+
++(void) update:(NSString *) image forNode:(NSString *) app{
+	[lookuptable setObject:image forKey:app];
 }
 
 @end

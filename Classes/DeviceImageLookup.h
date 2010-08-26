@@ -10,9 +10,13 @@
 
 
 
+
+
 @interface DeviceImageLookup : NSObject{
 	
 }
 
++(void)	initialize;
++(void) update:(NSString *) image forNode:(NSString *) app;
 
 @end

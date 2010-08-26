@@ -26,6 +26,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[DeviceImageLookup initialize];
 	
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self] retain];
@@ -53,13 +54,25 @@
 
 
 -(void) touched: (int) tag viewname:(NSString *) name position: (int) index{
-	NSLog(@"DEVICE VIEW AM TOUCHED>>>>-------------------------------------");
+	
+	
 	if (tag == IMAGE){
-		DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:name];
-		detail.title = [NSString stringWithFormat:@"%@", name];
-		ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-		[delegate.navigationControllerDevices pushViewController:detail animated: YES];
-		[detail release];
+		if (self.editing){
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil name:name];			
+			picker.title = [NSString stringWithFormat:@"select img: %@", name];
+			
+			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+			
+			[delegate.navigationControllerDevices pushViewController:picker animated: YES];
+			[picker release];
+			
+		}else{
+			DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:name];
+			detail.title = [NSString stringWithFormat:@"%@", name];
+			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+			[delegate.navigationControllerDevices pushViewController:detail animated: YES];
+			[detail release];
+		}
 	}
 	
 }
