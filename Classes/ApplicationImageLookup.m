@@ -12,54 +12,54 @@
 @implementation ApplicationImageLookup
 
 
-+(NSString *) getApplicationImage:(NSString *) program{
-	if (program == NULL){
++(NSString *) getImage:(NSString *) application{
+	if (application == NULL){
 		return @"unknown.png";
 	}
 	
 	
-	if ([program isEqualToString:@"hwdb"])
+	if ([application isEqualToString:@"hwdb"])
 		return @"hwdb.png";
 	
-	if ([program isEqualToString:@"macromedia-fcs"])
+	if ([application isEqualToString:@"macromedia-fcs"])
 		return @"iplayer.png";
 	
-	if ([program hasPrefix:@"https"])
+	if ([application hasPrefix:@"https"])
 		return @"websecure.png";
 	
-	if ([program hasPrefix:@"http"])
+	if ([application hasPrefix:@"http"])
 		return @"web.png";
 	
-	if ([program isEqualToString:@"ssh"])
+	if ([application isEqualToString:@"ssh"])
 		return @"telnet.png";
 	
-	if ([program hasPrefix:@"imap"])
+	if ([application hasPrefix:@"imap"])
 		return @"email.png";
 	
 	return @"unknown.png";	
 }
 
 
-+(NSString *) getApplicationType:(NSString *) program{
-	if (program == NULL){
++(NSString *) getApplicationType:(NSString *) application{
+	if (application == NULL){
 		return @"unknown";
 	}
-	if ([program isEqualToString:@"macromedia-fcs"])
+	if ([application isEqualToString:@"macromedia-fcs"])
 		return @"iplayer";
 	
-	if ([program hasPrefix:@"https"])
+	if ([application hasPrefix:@"https"])
 		return @"websecure";
 	
-	if ([program hasPrefix:@"http"])
+	if ([application hasPrefix:@"http"])
 		return @"web";
 	
-	if ([program isEqualToString:@"ssh"])
+	if ([application isEqualToString:@"ssh"])
 		return @"telnet";
 	
-	if ([program hasPrefix:@"imap"])
+	if ([application hasPrefix:@"imap"])
 		return @"email";
 	
-	return program;	
+	return application;	
 }
 
 

@@ -11,14 +11,13 @@
 
 @implementation DeviceImageLookup
 
-+(NSString *) getdeviceImage:(NSString *) program{
++(NSString *) getImage:(NSString *) program{
 	
 	//NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(program like[cd] %@)
 							  
 	if (program == NULL){
 		return @"unknown.png";
 	}
-	
 	
 	if ([program isEqualToString:@"hwdb"])
 		return @"hwdb.png";

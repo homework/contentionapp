@@ -23,24 +23,24 @@
 @implementation ViewManager
 
 @synthesize view;
-@synthesize MAXBANDWIDTH;
-@synthesize touchDelegate;
-@synthesize name;
+@synthesize viewController;
+
 
 const static float	IMAGEINDENT = 215;
 const static float	VIEWHEIGHT  = 85;
 
--(id) initWithView:(UIView *) v data:(NSMutableArray*) data touchdelegate:(UIViewController<TouchResponse>*) d name:(NSString*)name{
+
+-(id) initWithView:(UIView *) v data:(NSMutableArray*) data viewcontroller:(UIViewController<TouchResponse>*) vc{
 	if(self == [super init]){
-		[self setTouchDelegate:d];
-		[self setName:name];
+		[self setViewController:vc];
 		[self setView:v];
 		[self createViews:data];
-		self.MAXBANDWIDTH = 1000;
 	}
 	
 	return self;
 }
+
+
 
 -(BOOL) containsView:(NSString*) name data:(NSMutableArray*)data{
 	NSEnumerator *enumerator = [data objectEnumerator];
@@ -102,7 +102,7 @@ const static float	VIEWHEIGHT  = 85;
 		
 		
 		
-		[myviews[index] update:position bandwidth:[NetworkData getDeviceBandwidthProportion:[node name]]];
+		[myviews[index] update:position bandwidth:[viewController getBandwidthProportion:[node name]]];
 		
 		CGAffineTransform transform;
 		if (position < 3){
@@ -147,12 +147,13 @@ const static float	VIEWHEIGHT  = 85;
 
 -(void) addNewView:(NodeTuple *) node position:(int) pos{
 	
+	NSString* myImage = [self.viewController getImage:[node name]];
 	CGRect frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, VIEWHEIGHT); 
 	ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
-	float bandwidth = [NetworkData getDeviceBandwidthProportion:[node name]];
-	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node name] position:pos bandwidth:bandwidth frame:frame imageindent:IMAGEINDENT] retain];
+	float bandwidth = [viewController getBandwidthProportion:[node name]];
+	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node name] position:pos bandwidth:bandwidth frame:frame image:myImage imageindent:IMAGEINDENT] retain];
 	[pview setBackgroundColor:[UIColor clearColor]];
-	[pview setTouchDelegate:[self touchDelegate]];
+	[pview setTouchDelegate:[self viewController]];
 	[container setBackgroundColor:[UIColor clearColor]];
 	container.center = [self getCoordinates:pos];
 	[container addSubview:pview];

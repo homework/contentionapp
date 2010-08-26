@@ -9,20 +9,17 @@
 #import "NetworkData.h"
 
 @interface NetworkData()
-
++ (void)updateApplicationData:(FlowObject *) fobj;
++ (void)updateNodeData:(FlowObject *) fobj;
 + (void)pollComplete: (NSNotification *) n;
 + (void)newPollToStart: (NSNotification *) n;
 + (void)newFlow: (NSNotification *) f;
-+ (void)updateApplicationData:(FlowObject *) fobj;
-+ (void)updateNodeData:(FlowObject *) fobj;
-+ (void)removeZeroByteData:(NSMutableDictionary *)data;
-+(void) recalculateMaxNodeBandwidth:(NSString*)nodename application:(NSString*)app;
-+ (void)recalculateMaxAppBandwidth:(NSString*)application node:(NSString*)node;
+
 @end
 
 @implementation NetworkData
 
-static int SHISTORY = 5;
+
 static int POLLNUMBER;
 
 
@@ -32,101 +29,69 @@ static int POLLNUMBER;
  */
 
 
-static NSMutableDictionary *nodedata;
-static NSMutableDictionary *applicationdata;
 static BOOL init = FALSE;
-static int MAXNODEBYTES = 1000;
+static NetworkTable *devicetable;
+static NetworkTable *apptable;
 
 +(void) initialize{
 	if (!init){
-		NSLog(@"initialising network data object");
 		POLLNUMBER		= 0;
-		applicationdata			= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-		nodedata				= [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		
+		devicetable = [[[NetworkTable alloc] init] retain];
+		apptable = [[[NetworkTable alloc] init] retain];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPollToStart:) name:@"newPoll" object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
 		init = TRUE;
-		NSLog(@"finished initialising network data object");
 	}
 }
 
 
 +(NSMutableArray *) getLatestApplicationData{	
-	return [self getAllData:applicationdata];
+	return [apptable getAllData];
+	
 }
 
 +(NSMutableArray *) getLatestNodeData{	
-	return [self getAllData:nodedata];
+	return [devicetable getAllData];
 }
 
-+(NSMutableArray *) getAllData:(NSMutableDictionary *) data{
-	NSMutableDictionary *results = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	
-	for (id key1 in data) {
-		NSDictionary *dictionary = [data objectForKey:key1];
-		Window* w;
-		for (id key2 in dictionary){
-			w = [dictionary objectForKey:key2];
-			NodeTuple* n = [results objectForKey:key1];
-			if (n == NULL){
-				n = [[[NodeTuple alloc] initWithValues:key1 name:key1 value:[w totalBytes:POLLNUMBER]] retain];
-				[results setObject:n forKey:key1];
-			}else{
-				[n setValue:[n value] +  [w totalBytes:POLLNUMBER]];
-			}
-		}
-	}
-	/*
-	NSLog(@"returning...");
-	for(NodeTuple * n in [results allValues]){
-		NSLog(@"%@ %d", [n name], [n value]);
-	}*/
-	return  [results allValues];
-}
+
+
 
 +(NSMutableArray *) getLatestApplicationDataForNode:(NSString *)node{
-	NSMutableArray *array = [[NSMutableArray array] retain];
-	NSDictionary *dictionary = [nodedata objectForKey:node];
-	Window * w;
-	if (dictionary != NULL){
-		for (id key in dictionary) {
-			w = [dictionary objectForKey:key];
-			NodeTuple* n = [[[NodeTuple alloc] initWithValues:key name:key value:[w totalBytes:POLLNUMBER]] retain];
-			[array addObject:n];
-		}
-	}
-	return array;
+	
+	return [devicetable getLatestDataForNode:node];
 }
 
 +(NSMutableArray *) getLatestNodeDataForApplication:(NSString *)app{
-	NSMutableArray *array = [[NSMutableArray array] autorelease];
-	NSDictionary *dictionary = [nodedata objectForKey:app];
-	Window * w;
-	if (dictionary != NULL){
-		for (id key in nodedata) {
-			w = [dictionary objectForKey:key];
-			NodeTuple* n = [[[NodeTuple alloc] initWithValues:key name:key value:[w totalBytes:POLLNUMBER]] retain];
-			[array addObject:n];
-		}
-	}
-	return array;
+	return [apptable getLatestDataForNode:app];
+
+}
+
++(float) getDeviceAppBandwidthProportion:(NSString *) node  application:(NSString *) a{
+	return [devicetable getNodeBandwidthProportion:node subnode:a];
+}
+
+
+
+
++(float) getApplicationBandwidthProportion:(NSString *) app{
+	return [apptable getBandwidthProportion:app];
 }
 
 +(float) getDeviceBandwidthProportion:(NSString *) node{
-	return 0.5;
-	/*Window*	   w = [nodebytehistory objectForKey:node];
-	 int bytes	= [w totalBytes:POLLNUMBER]; 
-	 NSLog(@"getting dev bandwidth proportion for device %@, bytes = %d and MAXNODEBYTES = %d and bandwitdh = %f",
-	 node, bytes, MAXNODEBYTES, (float) bytes/MAXNODEBYTES);
-	 
-	 return (float) bytes / MAXNODEBYTES;*/
+	return [devicetable getBandwidthProportion:node];
 }
+		
+
 
 +(void) pollComplete: (NSNotification *) n{
 	POLLNUMBER += 1;
-	[self removeZeroByteData:applicationdata];
-	[self removeZeroByteData:nodedata];
+	[apptable setPOLLNUMBER:POLLNUMBER];
+	[devicetable setPOLLNUMBER:POLLNUMBER];
+	[apptable removeZeroByteData];
+	[devicetable removeZeroByteData];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
 }
 
@@ -145,118 +110,39 @@ static int MAXNODEBYTES = 1000;
 
 
 
+
 +(void) updateApplicationData:(FlowObject *) fobj{
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
-	NSString *nodename = [NameResolver lookup:[fobj ip_src] destination:[fobj ip_dst]]; 
-	NSMutableDictionary *devicetowindow = [applicationdata objectForKey:application];
+	NSString *device  = [NameResolver lookup:[fobj ip_src] destination:[fobj ip_dst]]; 
 	
-	if (devicetowindow == NULL){
-		devicetowindow = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-		[applicationdata setObject:devicetowindow forKey:application];
-	}
-	
-	Window *w = [devicetowindow objectForKey:nodename];
-	
-	if (w == NULL){
-		w = [[[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER] retain];
-		[devicetowindow setObject:w forKey:nodename];
-	}
-	
-	[w addBytes:[fobj bytes] pollcount:POLLNUMBER];	
-	
+	[apptable updateData:application subnode:device bytes:[fobj bytes]];
 }
 
 
 +(void) updateNodeData:(FlowObject *) fobj{
+	
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
-	NSString *nodename = [NameResolver lookup:[fobj ip_src] destination:[fobj ip_dst]]; 
-	NSMutableDictionary *applicationtowindow = [nodedata objectForKey:nodename];
+	NSString *device  = [NameResolver lookup:[fobj ip_src] destination:[fobj ip_dst]]; 
 	
-	if (applicationtowindow == NULL){
-		applicationtowindow = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-		[nodedata setObject:applicationtowindow forKey:nodename];
-	}
+	[devicetable updateData:device subnode:application bytes:[fobj bytes]];
 	
-	Window *w = [applicationtowindow objectForKey:application];
-	
-	if (w == NULL){
-		w = [[[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER] retain];
-		[applicationtowindow setObject:w forKey:application];
-	}	
-	
-									
-	[w addBytes:[fobj bytes] pollcount:POLLNUMBER];	
-	
-	//[w print:nodename];
-	
-	[self recalculateMaxNodeBandwidth: nodename application:application];
-}
-
-+(void) recalculateMaxNodeBandwidth:(NSString*)nodename application:(NSString*)app{
-	//MAXNODEBYTES = MAX([w totalBytes:POLLNUMBER], MAXNODEBYTES);
-	//NSLog(@"current bytes for %@ is %d and MAXNODEBYTES is %d so bandwitdh is %f", [n name], [w totalBytes:POLLNUMBER], MAXNODEBYTES, (float)[w totalBytes:POLLNUMBER]/MAXNODEBYTES);
-}
-
-+(void) recalculateMaxAppBandwidth:(NSString*)appname node:(NSString*)nodename{
-	//MAXNODEBYTES = MAX([w totalBytes:POLLNUMBER], MAXNODEBYTES);
-	//NSLog(@"current bytes for %@ is %d and MAXNODEBYTES is %d so bandwitdh is %f", [n name], [w totalBytes:POLLNUMBER], MAXNODEBYTES, (float)[w totalBytes:POLLNUMBER]/MAXNODEBYTES);
 }
 
 
-+(void) removeZeroByteData:(NSMutableDictionary *)data{
++(void) recalculateMaxNodeBandwidth:(NSString*)nodename{
+	[devicetable recalculateMaxBandwitdh:nodename];
 	
-	
-	NSMutableDictionary *todelete = [NSMutableDictionary dictionaryWithCapacity:10];
-	
-	//NSEnumerator *enumerator = [data objectEnumerator];
-	NSMutableDictionary *dictionary;
-	Window *w;
-	int totalbytes;
-	
-	NSLog(@"deleting zero byte entries..");
-	/*
-	 *search out all entries that have windows of size 0;
-	 */
-	if (data != NULL){
-		for (id key1 in data) {
-			dictionary = [data objectForKey:key1];
-			if (dictionary != NULL){
-				
-				for (id key2 in dictionary) {
-					w = [dictionary objectForKey:key2];
-					if (w != NULL){
-						totalbytes =  [w totalBytes:POLLNUMBER];
-						if ( totalbytes <= 0){
-							NSLog(@"adding %@ %@ to delete!", key1, key2);
-							[todelete setObject:key2 forKey:key1]; //mark for delete - can't modify within enumeration
-						}
-					}
-				}
-			}
-		}
-	}
-	/*
-	NSMutableArray *keysToRemove = [NSMutableArray array];
-	for (id theKey in aDictionary) {
-		[keysToRemove addObject:theKey];
-	}
-	[aDictionary removeObjectsForKeys:keysToRemove];
-	*/
-	
-	for (id key1 in todelete){
-		NSString* key2 = [todelete objectForKey:key1];
-		dictionary = [data objectForKey:key1];
-		[dictionary removeObjectForKey:key2];
-		if ([dictionary count] == 0){
-			[data removeObjectForKey:key1];
-		}
-	}
 }
 
++(void) recalculateMaxAppBandwidth:(NSString*)appname{
+	[apptable recalculateMaxBandwitdh:appname];
+	
+	
+}
 
 +(void) dealloc{
-	[applicationdata release];
-	[nodedata release];
+	[devicetable release];
+	[apptable release];
 	[super dealloc];
 }
 @end

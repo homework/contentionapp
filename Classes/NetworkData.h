@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "FlowObject.h"
+#import "NetworkTable.h"
+
 #import "NodeTuple.h"
 #import "Window.h"
 #import "FlowRecord.h"
@@ -15,12 +17,12 @@
 #import "NameResolver.h"
 
 @interface NetworkData : NSObject {
-	
+
 }
 
 +(void)	initialize;
 +(NSMutableArray *)getLatestApplicationData;
 +(NSMutableArray *)getLatestNodeData;
 +(float) getDeviceBandwidthProportion:(NSString *) node;
-
++(float) getDeviceAppBandwidthProportion:(NSString *) node  application:(NSString *) a;
 @end

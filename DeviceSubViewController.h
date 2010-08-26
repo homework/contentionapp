@@ -10,6 +10,7 @@
 #import "TouchResponse.h"
 #import "NetworkData.h"
 #import "ViewManager.h"
+#import "ApplicationImageLookup.h"
 
 @interface DeviceSubViewController : UIViewController<TouchResponse> {
 	NSMutableArray *sorteddata;

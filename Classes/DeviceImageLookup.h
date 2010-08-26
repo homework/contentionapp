@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-@interface DeviceImageLookup : NSObject {
 
+@interface DeviceImageLookup : NSObject{
+	
 }
+
 
 @end

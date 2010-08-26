@@ -13,7 +13,7 @@
 
 }
 
-+(NSString *) getApplicationType:(NSString *) program;
-+(NSString *) getApplicationImage:(NSString *) program;
++(NSString *) getType:(NSString *) program;
+
 
 @end

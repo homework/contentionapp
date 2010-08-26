@@ -73,6 +73,7 @@
 		A3CD3F4B12156C6600890E30 /* LinkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD3F4A12156C6600890E30 /* LinkObject.m */; };
 		A3CD405012194DCC00890E30 /* LeaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD404F12194DCC00890E30 /* LeaseObject.m */; };
 		A3CD4E08122565EC001420F0 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD4E07122565EC001420F0 /* ViewManager.m */; };
+		A3CD4FEB1226AE2E001420F0 /* NetworkTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */; };
 		A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +189,8 @@
 		A3CD404F12194DCC00890E30 /* LeaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaseObject.m; sourceTree = "<group>"; };
 		A3CD4E06122565EC001420F0 /* ViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewManager.h; sourceTree = "<group>"; };
 		A3CD4E07122565EC001420F0 /* ViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewManager.m; sourceTree = "<group>"; };
+		A3CD4FE91226AE2E001420F0 /* NetworkTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTable.h; sourceTree = "<group>"; };
+		A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTable.m; sourceTree = "<group>"; };
 		A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceView.h; sourceTree = "<group>"; };
 		A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -326,6 +329,8 @@
 				A3CD3E2F12153D4C00890E30 /* NetworkDataOLD.m */,
 				A3032E05122422F200B6FC3F /* NetworkData.h */,
 				A3032E06122422F200B6FC3F /* NetworkData.m */,
+				A3CD4FE91226AE2E001420F0 /* NetworkTable.h */,
+				A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */,
 				A37C775B121BFB1D005CD178 /* LeaseRecord.h */,
 				A37C775C121BFB1D005CD178 /* LeaseRecord.m */,
 			);
@@ -562,6 +567,7 @@
 				A3032C281223C31900B6FC3F /* drawing.m in Sources */,
 				A3032E07122422F200B6FC3F /* NetworkData.m in Sources */,
 				A3CD4E08122565EC001420F0 /* ViewManager.m in Sources */,
+				A3CD4FEB1226AE2E001420F0 /* NetworkTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

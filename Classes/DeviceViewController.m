@@ -23,17 +23,12 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-
--(NSString*) getName{
-	return @"DEVICE VIEW CONTROLLER";
-}
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata touchdelegate:self name:@"device view controller"] retain];
+	ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self] retain];
 	[self setVm:tmpvm];
 	[tmpvm release];
 	
@@ -48,7 +43,13 @@
 }
 
 
+-(NSString *) getImage:(NSString *) s{
+	return [DeviceImageLookup getImage:s];
+}
 
+-(float) getBandwidthProportion:(NSString *) n{
+	return [NetworkData getDeviceBandwidthProportion:n];
+}
 
 
 -(void) touched: (int) tag viewname:(NSString *) name position: (int) index{

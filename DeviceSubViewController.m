@@ -17,16 +17,13 @@
 @synthesize node;
 
 
--(NSString*) getName{
-	return @"DEVICE SUB VIEW CONTROLLER";
-}
-
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil nodename:(NSString*) n {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		[self setNode:n];
 		self.sorteddata = (NSMutableArray*)[[NetworkData getLatestApplicationDataForNode:node] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-		ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata touchdelegate:self name:@"device view SUB controller"] retain];
+		ApplicationImageLookup *lookup = [[ApplicationImageLookup alloc] retain];
+		ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self ] retain];
 		
 		[self setVm:tmpvm];
 		[tmpvm release];
@@ -37,6 +34,10 @@
     return self;
 }
 
+-(float) getBandwidthProportion:(NSString *) a{
+	return [NetworkData getDeviceAppBandwidthProportion:self.node application:a];
+	
+}
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -49,6 +50,11 @@
 	 */
 	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
 	
+}
+
+
+-(NSString *) getImage:(NSString *) s{
+	return [ApplicationImageLookup getImage:s];
 }
 
 -(void) touched: (int) tag viewname:(NSString *) name position: (int) index{

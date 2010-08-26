@@ -15,8 +15,8 @@ CGRect imagebounds;
 CGRect labelbounds;
 float imageindent;
 
--(id) initWithValues:(NSString *) nodename position:(int) pos bandwidth: (float) b frame:(CGRect) frame imageindent:(float) i {
-	UIImage *image = [UIImage imageNamed:@"iphone.png"];
+-(id) initWithValues:(NSString *) nodename position:(int) pos bandwidth: (float) b frame:(CGRect) frame image:(NSString*) img imageindent:(float) i {
+	UIImage *image = [UIImage imageNamed:img];
 	
 	imageindent = i;
 		//[image drawInRect:CGRectMake(0.0, i, image.size.width, image.size.height)];
@@ -46,19 +46,15 @@ float imageindent;
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 	
-	NSLog(@"name is %@", [self.touchDelegate getName]);
 	UITouch *touch = [touches anyObject];
 	
 	CGPoint thePoint = [touch locationInView:self];
 	
 	if (CGRectContainsPoint (labelbounds,thePoint)){
-		NSLog(@"LABEL View has been touched..");
 		[self.touchDelegate touched:LABEL viewname:name position:index];
 	}else if (CGRectContainsPoint (CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height),thePoint)){	
-		NSLog(@"IMAGE View has been touched..");
 		[self.touchDelegate touched:IMAGE viewname:name position:index];
 	}else{
-		NSLog(@"OTHER has been touched..");
 		[self.touchDelegate touched:OTHER viewname:name position:index];
 	}
 }

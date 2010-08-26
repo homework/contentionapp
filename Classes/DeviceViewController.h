@@ -12,7 +12,7 @@
 #import "NetworkData.h"
 #import "ViewManager.h"
 #import "DeviceSubViewController.h"
-
+#import "DeviceImageLookup.h"
 
 @interface DeviceViewController : UIViewController <TouchResponse>{
 	NSMutableArray *sorteddata;

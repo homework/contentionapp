@@ -9,27 +9,26 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "DeviceView.h"
-#import "NetworkData.h"
 #import "ContainerView.h"
 #import "NodeTuple.h"
 #import "ContainerView.h"
 
 #define DEVICES  7
 
+static const int APPLICATION = 0;
+static const int DEVICE = 1;
+
 @interface ViewManager : NSObject {
 	UIView *view;
-	UIViewController<TouchResponse> *touchDelegate;
+	UIViewController<TouchResponse> *viewController;
 	DeviceView * myviews[DEVICES+1];
-	int MAXBANDWIDTH;
-	NSString * name;
 }
 
 @property (nonatomic,retain) UIView* view;
-@property (nonatomic,retain) NSString* name;
-@property (nonatomic,retain) UIViewController<TouchResponse>* touchDelegate;
-@property (nonatomic,assign) int MAXBANDWIDTH;
+@property (nonatomic,retain) UIViewController<TouchResponse>* viewController;
 
--(id) initWithView:(UIView *) view data:(NSMutableArray*)data touchdelegate:(UIViewController<TouchResponse> *)touchDelegate name:(NSString*)name;
+
+-(id) initWithView:(UIView *) view data:(NSMutableArray*)data viewcontroller:(UIViewController<TouchResponse> *)vc ;
 -(void) update:(NSMutableArray *)data;
 
 @end

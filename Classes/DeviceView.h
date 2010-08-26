@@ -22,7 +22,7 @@
 @property (nonatomic, assign) int index;
 // Initializer for this object
 
--(id) initWithValues:(NSString *)name position:(int)position bandwidth:(float) bandwidth frame:(CGRect) frame imageindent:(float) i ;
+-(id) initWithValues:(NSString *)name position:(int)position bandwidth:(float) bandwidth frame:(CGRect) frame image:(NSString*)i  imageindent:(float) i ;
 -(void) update:(int) index bandwidth:(float) bandwidth;
 
 @end
