@@ -1,8 +1,8 @@
 //
-//  ApplicationViewController.h
+//  ApplicationSubViewController.h
 //  ContentionApp
 //
-//  Created by Tom Lodge on 27/07/2010.
+//  Created by Tom Lodge on 31/08/2010.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,18 +10,18 @@
 #import "TouchResponse.h"
 #import "NetworkData.h"
 #import "ViewManager.h"
-#import "ApplicationSubViewController.h"
-#import "ApplicationImageLookup.h"
-#import "CustomImagePicker.h"
-#import "DeviceNameAlert.h"
+#import "DeviceImageLookup.h"
 
-@interface ApplicationViewController : UIViewController {
+@interface ApplicationSubViewController : UIViewController {
 	NSMutableArray *sorteddata;
 	ViewManager *vm;
+	NSString *node;	
 }
 
 @property(nonatomic,retain) NSMutableArray* sorteddata;
 @property(nonatomic,retain) ViewManager* vm;
+@property(nonatomic,retain) NSString* node;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil nodename:(NSString*) n;
 
 @end

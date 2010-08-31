@@ -64,7 +64,7 @@ static NetworkTable *apptable;
 	return [devicetable getLatestDataForNode:node];
 }
 
-+(NSMutableArray *) getLatestNodeDataForApplication:(NSString *)app{
++(NSMutableArray *) getLatestDeviceDataForApplication:(NSString *)app{
 	return [apptable getLatestDataForNode:app];
 
 }
@@ -73,8 +73,9 @@ static NetworkTable *apptable;
 	return [devicetable getNodeBandwidthProportion:node subnode:a];
 }
 
-
-
++(float) getAppDeviceBandwidthProportion:(NSString *) application  device:(NSString *) n{
+	return [apptable getNodeBandwidthProportion:application subnode:n];
+}
 
 +(float) getApplicationBandwidthProportion:(NSString *) app{
 	return [apptable getBandwidthProportion:app];
@@ -113,18 +114,26 @@ static NetworkTable *apptable;
 
 +(void) updateApplicationData:(FlowObject *) fobj{
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
-	NSString *device  = [NameResolver lookup:[fobj ip_src] destination:[fobj ip_dst]]; 
 	
-	[apptable updateData:application subnode:device bytes:[fobj bytes]];
+	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src] destination:[fobj ip_dst]]; 
+	
+	if (deviceid != NULL){
+		[apptable updateData:application subnode:deviceid bytes:[fobj bytes]];
+	}
+	
+	
 }
 
 
 +(void) updateNodeData:(FlowObject *) fobj{
 	
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
-	NSString *device  = [NameResolver lookup:[fobj ip_src] destination:[fobj ip_dst]]; 
 	
-	[devicetable updateData:device subnode:application bytes:[fobj bytes]];
+	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src] destination:[fobj ip_dst]]; 
+	
+	if (deviceid != NULL){
+		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
+	}
 	
 }
 

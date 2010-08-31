@@ -48,7 +48,7 @@ int SHISTORY = 5;
 			w = [dictionary objectForKey:key2];
 			NodeTuple* n = [results objectForKey:key1];
 			if (n == NULL){
-				n = [[[NodeTuple alloc] initWithValues:key1 name:key1 value:[w totalBytes:POLLNUMBER]] retain];
+				n = [[[NodeTuple alloc] initWithValues:key1 name:[NameResolver lookup:key1] value:[w totalBytes:POLLNUMBER]] retain];
 				[results setObject:n forKey:key1];
 			}else{
 				[n setValue:[n value] +  [w totalBytes:POLLNUMBER]];
@@ -81,7 +81,7 @@ int SHISTORY = 5;
 	if (dictionary != NULL){
 		Window *w = [dictionary objectForKey:subnode];
 		if (w != NULL){
-			NSLog(@"bytes for %@ are %i", subnode, [w totalBytes:POLLNUMBER]);
+			//NSLog(@"bytes for %@ are %i", subnode, [w totalBytes:POLLNUMBER]);
 			return (float) [w totalBytes:POLLNUMBER] / MAXBYTES;
 		}
 	}

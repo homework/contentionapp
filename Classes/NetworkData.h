@@ -23,6 +23,11 @@
 +(void)	initialize;
 +(NSMutableArray *)getLatestApplicationData;
 +(NSMutableArray *)getLatestNodeData;
+
+
 +(float) getDeviceBandwidthProportion:(NSString *) node;
 +(float) getDeviceAppBandwidthProportion:(NSString *) node  application:(NSString *) a;
+
++(float) getApplicationBandwidthProportion:(NSString *) app;
++(float) getAppDeviceBandwidthProportion:(NSString *) application  device:(NSString *) n;
 @end

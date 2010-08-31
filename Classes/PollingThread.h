@@ -36,9 +36,7 @@
 	unsigned short port;
 	int i, j;
 	struct timeval expected, current;
-	tstamp_t lastflow;
-	tstamp_t lastlink;
-	tstamp_t lastlease;
+	
 }
 
 

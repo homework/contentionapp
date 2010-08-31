@@ -21,15 +21,12 @@
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/PortLookup.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/Window.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/FlowAnalyser.o
-/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LongTuple.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/FlowRecord.o
-/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkDataOLD.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LinkObject.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LeaseObject.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LeaseRecord.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o
-/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceInputController.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesTextInputView.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContainerView.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationImageLookup.o
@@ -40,3 +37,6 @@
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ViewManager.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NetworkTable.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/CustomImagePicker.o
+/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceNameAlert.o
+/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LongTuple.o
+/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationSubViewController.o

@@ -49,7 +49,7 @@ const static float	VIEWHEIGHT  = 85;
 	while ( node = [enumerator nextObject]) {
 		if (count++ >= DEVICES)
 			break;
-		if ([name isEqualToString:[node name]])
+		if ([name isEqualToString:[node identifier]])
 			return YES;
 	}
 	return NO;
@@ -66,7 +66,7 @@ const static float	VIEWHEIGHT  = 85;
 		if (myviews[i] != NULL){
 			DeviceView *current = (DeviceView*) myviews[i]; 
 			
-			if (![self containsView:current.name data:data]){
+			if (![self containsView:current.identifier data:data]){
 				UIView *container = [current superview];
 				[current removeFromSuperview];
 				[container removeFromSuperview];
@@ -81,12 +81,12 @@ const static float	VIEWHEIGHT  = 85;
 		
 		if (position >= DEVICES)
 			break;
-		int index = [self findViewIndex:[node name]];
+		int index = [self findViewIndex:[node identifier]];
 		
 		if (index == -1){
 			
 			[self addNewView:node position:position];
-			index = [self findViewIndex:[node name]];
+			index = [self findViewIndex:[node identifier]];
 		}
 		
 	    if (index == -1){
@@ -99,10 +99,8 @@ const static float	VIEWHEIGHT  = 85;
 		[UIView setAnimationDuration:2.0];
 		[UIView setAnimationDelegate:self];
 		myviews[index].superview.center = newPosition;
-		
-		
-		
-		[myviews[index] update:position bandwidth:[viewController getBandwidthProportion:[node name]]];
+	
+		[myviews[index] update:position bandwidth:[viewController getBandwidthProportion:[node identifier]]];
 		
 		CGAffineTransform transform;
 		if (position < 3){
@@ -118,14 +116,22 @@ const static float	VIEWHEIGHT  = 85;
 	}
 }
 
--(int) findViewIndex:(NSString *) viewname{
+-(DeviceView*) viewForName:(NSString *) identifier{
+	int index = [self findViewIndex:identifier];
+	if (index != -1){
+		return myviews[index];
+	}
+	return NULL;
+}
+
+-(int) findViewIndex:(NSString *) identifier{
 	for (int i = 0; i < DEVICES; i++){
 		
 		
 		DeviceView *current = (DeviceView *) myviews[i]; 
 		if (current != NULL){
-			if (current.name != nil){
-				if ([current.name isEqualToString:viewname])
+			if (current.identifier != nil){
+				if ([current.identifier isEqualToString:identifier])
 					return i;
 				
 			}
@@ -147,11 +153,11 @@ const static float	VIEWHEIGHT  = 85;
 
 -(void) addNewView:(NodeTuple *) node position:(int) pos{
 	
-	NSString* myImage = [self.viewController getImage:[node name]];
+	NSString* myImage = [self.viewController getImage:[node identifier]];
 	CGRect frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, VIEWHEIGHT); 
 	ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
-	float bandwidth = [viewController getBandwidthProportion:[node name]];
-	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node name] position:pos bandwidth:bandwidth frame:frame image:myImage imageindent:IMAGEINDENT] retain];
+	float bandwidth = [viewController getBandwidthProportion:[node identifier]];
+	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node identifier] name:[node name] position:pos bandwidth:bandwidth frame:frame image:myImage imageindent:IMAGEINDENT] retain];
 	[pview setBackgroundColor:[UIColor clearColor]];
 	[pview setTouchDelegate:[self viewController]];
 	[container setBackgroundColor:[UIColor clearColor]];

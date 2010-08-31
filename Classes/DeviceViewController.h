@@ -14,8 +14,9 @@
 #import "DeviceSubViewController.h"
 #import "DeviceImageLookup.h"
 #import "CustomImagePicker.h"
+#import "DeviceNameAlert.h"
 
-@interface DeviceViewController : UIViewController <TouchResponse>{
+@interface DeviceViewController : UIViewController <TouchResponse, UIAlertViewDelegate>{
 	NSMutableArray *sorteddata;
 	ViewManager *vm;
 }

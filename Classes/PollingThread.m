@@ -31,6 +31,11 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 +(void) postNotification:(FlowObject *)f;
 @end
 
+
+static tstamp_t lastflow;
+static tstamp_t lastlink;
+static tstamp_t lastlease;
+
 @implementation PollingThread
 @synthesize delegate;
 
@@ -71,20 +76,14 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 			
 			for (;;){
 				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
-				NSLog(@"polling lease table...");
 				if (![self pollleasetable]){
-					NSLog(@"polllease table hmmm breaking.......");
 					break;
 				}
-				NSLog(@"done polling lease table...");
-
-				
+								
 				/*if (![self polllinktable])
 					break;*/
 					
-				NSLog(@"polling flow table...");
 				if (![self pollflowtable]){
-					NSLog(@"pollflow table hmmm breaking.......");
 					break;	
 				}
 				
@@ -131,15 +130,15 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	expected.tv_sec += TIME_DELTA;
 	if (lastlease) {
 		char *s = timestamp_to_string(lastlease);
-		//NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
-		//	  TIME_DELTA+1, s);
+		NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
+			  TIME_DELTA+1, s);
 		sprintf(query,
 				"SQL:select * from Leases [ range %d seconds] where timestamp > %s",
 				TIME_DELTA+1, s);
 		free(s);
 	} else{
-		//NSLog(@"query is SQL:select * from Leases [ range %d seconds]\n",
-		//	  TIME_DELTA * 1000);
+		NSLog(@"query is SQL:select * from Leases [ range %d seconds]\n",
+			  TIME_DELTA * 1000);
 		sprintf(query,
 				"SQL:select * from Leases [ range %d seconds]\n",
 				TIME_DELTA * 1000);
@@ -194,7 +193,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 	nanosleep(&time_delay, NULL);
 	if (! rpc_call(rpc, query, qlen, resp, sizeof(resp), &len)) {
 		fprintf(stderr, "rpc_call() failed\n");
-		NSLog(@"flows -- rpc call failed");
+		NSLog(@"----------------------------------------flows -- rpc call failed");
 		*last = 0LL;
 		return 0;
 	}
@@ -394,12 +393,12 @@ void mon_free(BinResults *p) {
 }
 
 static tstamp_t processleaseresults(char *buf, unsigned int len) {
-	NSLog(@"processing lease results");
+	
 	Rtab *results;
     char stsmsg[RTAB_MSG_MAX_LENGTH];
     DhcpResults *p;
     unsigned long i;
-    tstamp_t last = 0LL;
+    tstamp_t last = lastlease;
 	
     results = rtab_unpack(buf, len);
     if (results && ! rtab_status(buf, stsmsg)) {
@@ -417,7 +416,7 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 			[PollingThread performSelectorOnMainThread:@selector(postLeaseObject:) withObject:lobj waitUntilDone:NO];
 			[autoreleasepool release];	
 
-		//	NSLog(@"--> %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
+			NSLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
 			free(s);
 			free(a);
 		}

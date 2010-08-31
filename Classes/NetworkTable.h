@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Window.h"
 #import "NodeTuple.h"
+#import "NameResolver.h"
 
 @interface NetworkTable : NSObject {
 	NSMutableDictionary *data;

@@ -10,12 +10,13 @@
 @synthesize index;
 @synthesize bandwidthbar;
 @synthesize touchDelegate;
+@synthesize identifier;
 
 CGRect imagebounds;
 CGRect labelbounds;
 float imageindent;
 
--(id) initWithValues:(NSString *) nodename position:(int) pos bandwidth: (float) b frame:(CGRect) frame image:(NSString*) img imageindent:(float) i {
+-(id) initWithValues:(NSString*) identity name:(NSString *) nodename position:(int) pos bandwidth: (float) b frame:(CGRect) frame image:(NSString*) img imageindent:(float) i {
 	UIImage *image = [UIImage imageNamed:img];
 	
 	imageindent = i;
@@ -24,6 +25,7 @@ float imageindent;
 		
 		deviceImage = image;
 		self.name = nodename;
+		self.identifier = identity;
 		//namelabel = [ [UILabel alloc ] initWithFrame:CGRectMake((self.bounds.size.width / 2) - 200,0.0, 150.0, 43.0) ];
 		labelbounds = CGRectMake(15.0, 0.0, 200.0, 20);
 		namelabel = [[UILabel alloc ] initWithFrame:labelbounds];
@@ -51,13 +53,26 @@ float imageindent;
 	CGPoint thePoint = [touch locationInView:self];
 	
 	if (CGRectContainsPoint (labelbounds,thePoint)){
-		[self.touchDelegate touched:LABEL viewname:name position:index];
+		[self.touchDelegate touched:LABEL viewname:identifier position:index];
 	}else if (CGRectContainsPoint (CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height),thePoint)){	
-		[self.touchDelegate touched:IMAGE viewname:name position:index];
+		[self.touchDelegate touched:IMAGE viewname:identifier position:index];
 	}else{
-		[self.touchDelegate touched:OTHER viewname:name position:index];
+		[self.touchDelegate touched:OTHER viewname:identifier position:index];
 	}
 }
+
+-(void) updateName:(NSString *) n{
+	[self setName:n];
+	namelabel.text = n;
+	[self setNeedsDisplay];
+
+}
+
+-(void) updateImage:(NSString *)image{
+	deviceImage = [UIImage imageNamed:image];
+	[self setNeedsDisplay];
+}
+
 
 -(void) update:(int)p bandwidth:(float) bandwidth{
 	self.index = p;

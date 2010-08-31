@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DeviceImageLookup.h"
+#import "DeviceView.h"
 
 @interface CustomImagePicker : UIViewController {
-	NSString *name;
+	DeviceView *deviceView;
 }
 
-@property(nonatomic,retain) NSString *name;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil name:(NSString *)name;
+@property(nonatomic,retain) DeviceView *deviceView;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil name:(DeviceView *)view;
 
 @end

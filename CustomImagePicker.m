@@ -7,16 +7,16 @@
 //
 
 #import "CustomImagePicker.h"
-
+#import "ContentionAppAppDelegate.h"
 
 @implementation CustomImagePicker
 
-@synthesize name;
+@synthesize deviceView;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil name:(NSString *)name {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil view:(DeviceView*) v {
  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-	 [self setName:name];
+	 [self setDeviceView:v];
  }
  return self;
  }
@@ -32,7 +32,7 @@ static  NSArray* _thumbs;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	
-	_thumbs = [[NSArray arrayWithObjects: @"laptop.png", @"iphone.png", @"pc.png", nil] retain];
+	_thumbs = [[NSArray arrayWithObjects: @"mac.png", @"phone.png", @"router.png", @"laptop.png", @"iphone.png", @"sound.png", nil] retain];
 
 	
 	UIScrollView *view = [[UIScrollView alloc] 
@@ -73,7 +73,12 @@ static  NSArray* _thumbs;
 	NSString *selectedImage = [_thumbs objectAtIndex:button.tag];
 	
 	//NSLog(@"selected image %@ for %@", selectedImage, name);
-	[DeviceImageLookup update:selectedImage forNode:name];
+	[DeviceImageLookup update:selectedImage forNode:[deviceView identifier]];
+	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	[delegate.navigationControllerDevices popViewControllerAnimated:YES];
+	if (deviceView != NULL){
+		[deviceView updateImage:selectedImage];
+	}
 }
 /*
  // Override to allow orientations other than the default portrait orientation.

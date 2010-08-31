@@ -56,10 +56,38 @@
 -(void) touched: (int) tag viewname:(NSString *) name position: (int) index{
 	
 	
+	if (tag == LABEL){
+		if (self.editing){
+			DeviceView *deviceview = [self.vm viewForName:name];
+			
+			
+			
+			DeviceNameAlert *alert = [[DeviceNameAlert alloc] 
+								  initWithTitle: @"Device Name" 
+								  message:@"Specify the  Device Name"
+								  delegate:self
+								  cancelButtonTitle:@"Cancel"
+								  otherButtonTitles:@"OK", nil];
+			[alert addTextFieldWithValue:[deviceview name] label:@"Device Name"];
+			[alert setDeviceView:deviceview];
+			//[alert addTextFieldWithValue:@"http://" label:@"Enter URL"];
+			
+			// Name field
+			UITextField *tf = [alert textFieldAtIndex:0];
+			tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+			tf.keyboardType = UIKeyboardTypeAlphabet;
+			tf.keyboardAppearance = UIKeyboardAppearanceAlert;
+			tf.autocapitalizationType = UITextAutocapitalizationTypeWords;
+			tf.autocorrectionType = UITextAutocorrectionTypeNo;
+			[alert show];
+			
+		}
+	}
+	
 	if (tag == IMAGE){
 		if (self.editing){
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil name:name];			
-			picker.title = [NSString stringWithFormat:@"select img: %@", name];
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:name]];			
+			picker.title = @"select an image";
 			
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			
@@ -77,10 +105,40 @@
 	
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	DeviceView *deviceView = ((DeviceNameAlert *) alertView).deviceView;
+	
+	if (deviceView != NULL){
+		NSString* newname = [[alertView textFieldAtIndex:0] text];
+		[NameResolver update:[deviceView identifier] newname:newname];
+		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
+	}
+	[NameResolver printmactable];
+	
+}
+
+
 
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
+	
+	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	
+	/*
+	NodeTuple* node;
+	
+	while ( (node = [enumerator nextObject])) {
+		//Window *w = [self.bytehistory objectForKey:[node name]];
+		//[node print];
+		//: w.lastpoll currentpoll:POLLNUMBER];
+		//[w print:[node name]];
+	}*/
+	
+	for (NodeTuple * node in self.sorteddata){
+		NSLog(@"identity = %@ name is %@", [node identifier], [node name]);
+		
+	}
 }
 
 
