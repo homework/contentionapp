@@ -53,12 +53,12 @@
 }
 
 
--(void) touched: (int) tag viewname:(NSString *) name position: (int) index{
+-(void) touched: (int) tag viewname:(NSString *) identifier position: (int) index{
 	
 	
 	if (tag == LABEL){
 		if (self.editing){
-			DeviceView *deviceview = [self.vm viewForName:name];
+			DeviceView *deviceview = [self.vm viewForName:identifier];
 			
 			
 			
@@ -86,7 +86,10 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:name]];			
+			NSArray * _thumbs = [[NSArray arrayWithObjects: @"mac.png", @"phone.png", @"router.png", @"laptop.png", @"iphone.png", @"sound.png", nil] retain];
+			
+			
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:_thumbs parent:self];			
 			picker.title = @"select an image";
 			
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -95,8 +98,8 @@
 			[picker release];
 			
 		}else{
-			DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:name];
-			detail.title = [NSString stringWithFormat:@"%@", name];
+			DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:identifier];
+			detail.title = [NSString stringWithFormat:@"%@", [NameResolver friendlynamefrommac:identifier]];
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerDevices pushViewController:detail animated: YES];
 			[detail release];
@@ -118,6 +121,11 @@
 }
 
 
+-(void) updateImage:(NSString*) image forNode:(NSString*)identifier{
+	[DeviceImageLookup update:image forNode:identifier];
+	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	[delegate.navigationControllerDevices popViewControllerAnimated:YES];
+}
 
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;

@@ -67,15 +67,19 @@ const static float	VIEWHEIGHT  = 85;
 			DeviceView *current = (DeviceView*) myviews[i]; 
 			
 			if (![self containsView:current.identifier data:data]){
-				UIView *container = [current superview];
+				//UIView *container = current;//[current superview];
+				//[current removeFromSuperview];
 				[current removeFromSuperview];
-				[container removeFromSuperview];
 				myviews[i] = NULL;
 			}
 		}
 	}
 	
 	int position = 0;
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:2.0];
+	[UIView setAnimationDelegate:self];
 	
 	while ( node = [enumerator nextObject]) {
 		
@@ -95,10 +99,8 @@ const static float	VIEWHEIGHT  = 85;
 		
 		CGPoint newPosition = [self getCoordinates:position];
 		
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:2.0];
-		[UIView setAnimationDelegate:self];
-		myviews[index].superview.center = newPosition;
+		
+		myviews[index].center = newPosition;//superview.center = newPosition;
 	
 		[myviews[index] update:position bandwidth:[viewController getBandwidthProportion:[node identifier]]];
 		
@@ -110,11 +112,13 @@ const static float	VIEWHEIGHT  = 85;
 			transform = CGAffineTransformMakeScale(0.5, 0.5);
 		}
 		myviews[index].transform = transform;
-		[UIView commitAnimations];
+		
 		position++;
 		
 	}
+	[UIView commitAnimations];
 }
+
 
 -(DeviceView*) viewForName:(NSString *) identifier{
 	int index = [self findViewIndex:identifier];
@@ -142,7 +146,7 @@ const static float	VIEWHEIGHT  = 85;
 
 -(CGPoint) getCoordinates:(int) position{
 	int spacer = 80;
-	int INDENT = 15;
+	int INDENT =55;
 	if (position < 3){
 		return CGPointMake(self.view.bounds.size.width/2,  (10 + (position)*100) + VIEWHEIGHT/2);
 	}else{
@@ -155,14 +159,15 @@ const static float	VIEWHEIGHT  = 85;
 	
 	NSString* myImage = [self.viewController getImage:[node identifier]];
 	CGRect frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, VIEWHEIGHT); 
-	ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
+	//ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
 	float bandwidth = [viewController getBandwidthProportion:[node identifier]];
 	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node identifier] name:[node name] position:pos bandwidth:bandwidth frame:frame image:myImage imageindent:IMAGEINDENT] retain];
+	
 	[pview setBackgroundColor:[UIColor clearColor]];
 	[pview setTouchDelegate:[self viewController]];
-	[container setBackgroundColor:[UIColor clearColor]];
-	container.center = [self getCoordinates:pos];
-	[container addSubview:pview];
+	//[container setBackgroundColor:[UIColor clearColor]];
+	pview.center = [self getCoordinates:pos];
+	//[container addSubview:pview];
 	
 	if (pos >=3){
 		
@@ -174,7 +179,7 @@ const static float	VIEWHEIGHT  = 85;
 		[UIView commitAnimations];
 	}
 	
-	[self.view addSubview:container];
+	[self.view addSubview:pview];//container];
 	
 	BOOL space = false;
 	

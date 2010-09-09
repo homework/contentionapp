@@ -46,16 +46,6 @@ static tstamp_t lastlease;
 	lastlease = 0LL;
 	host = HWDB_SERVER_ADDR;
 	port = HWDB_SERVER_PORT;
-	
-	
-	NSLog(@"init rpc system");
-	
-	
-	if (!rpc_init(0)) {
-        fprintf(stderr, "Failure to initialize rpc system\n");
-    }
-	
-	NSLog(@"attempting to connect to %s, %d", HWDB_SERVER_ADDR, HWDB_SERVER_PORT);
 	[self poll];
 	[apool release];
 }
@@ -66,17 +56,33 @@ static tstamp_t lastlease;
 }
 
 -(void) poll{
+	BOOL suspended = FALSE;
 	
+	NSLog(@"init rpc system");
+	
+	if (!rpc_init(0)) {
+		fprintf(stderr, "Failure to initialize rpc system\n");
+		exit(1);
+	}
+	BOOL connect = TRUE;
 	for(;;){
-		rpc = rpc_connect(host, port, "HWDB", 1l);
-		
+				
+		if (connect){
+			NSLog(@"connecting....");
+			rpc = rpc_connect(host, port, "HWDB", 1l);
+		}else{
+			NSLog(@"no longer connecting..");
+		}
 		if (rpc){
-			gettimeofday(&expected, NULL);
-			expected.tv_usec = 0;
-			
-			for (;;){
+			NSLog(@"ah ha - rpc!!!!");
+		   for (;;){
+				gettimeofday(&expected, NULL);
+				expected.tv_usec = 0;
+				
 				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
+				
 				if (![self pollleasetable]){
+					NSLog(@"link..disconnected rpc!");
 					break;
 				}
 								
@@ -84,16 +90,34 @@ static tstamp_t lastlease;
 					break;*/
 					
 				if (![self pollflowtable]){
-					break;	
+					NSLog(@"flow..disconnected rpc!");
+					break;
 				}
 				
 				[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
 				
 			}
 		}
-		
+		connect = FALSE;
+		if (rpc)
+			rpc_disconnect(rpc);
 		nanosleep(&time_delay, NULL);
-	}
+		/*
+		NSLog(@"reinit rpc, cannot connect failure, disconnecting");
+				
+		NSLog(@"sleeping...");
+		
+		NSLog(@"reconnecting...");
+		
+		
+		if (!rpc_init(0)) {
+			fprintf(stderr, "Failure to initialize rpc system\n");
+			exit(1);
+		}
+		
+		//NSLog(@"connection failure");
+		//*/
+		}
 	rpc_disconnect(rpc);
 	exit(0);
 }
@@ -131,17 +155,22 @@ static tstamp_t lastlease;
 	if (lastlease) {
 		char *s = timestamp_to_string(lastlease);
 		NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
-			  TIME_DELTA+1, s);
+			  TIME_DELTA*2, s);
 		sprintf(query,
 				"SQL:select * from Leases [ range %d seconds] where timestamp > %s",
-				TIME_DELTA+1, s);
+				TIME_DELTA*2, s);
 		free(s);
 	} else{
-		NSLog(@"query is SQL:select * from Leases [ range %d seconds]\n",
-			  TIME_DELTA * 1000);
+		NSLog(@"query is SQL:select * from Leases\n");
+		
 		sprintf(query,
+				"SQL:select * from Leases\n");
+		
+	
+		
+		/*sprintf(query,
 				"SQL:select * from Leases [ range %d seconds]\n",
-				TIME_DELTA * 1000);
+				TIME_DELTA * 10000);*/
 	}
 	
 	callback = &processleaseresults;
@@ -398,10 +427,12 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
     char stsmsg[RTAB_MSG_MAX_LENGTH];
     DhcpResults *p;
     unsigned long i;
-    tstamp_t last = lastlease;
+	
+    tstamp_t last = lastlease;//timestamp_now(); 
 	
     results = rtab_unpack(buf, len);
-    if (results && ! rtab_status(buf, stsmsg)) {
+    
+	if (results && ! rtab_status(buf, stsmsg)) {
 		// rtab_print(results);
 		p = dhcp_convert(results);
 		// do something with the data pointed to by p 
@@ -485,6 +516,7 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			char *s = timestamp_to_string(f->tstamp);
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[[FlowObject alloc] initWithFlow:f] autorelease];
+			//[fobj print];
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:NO];
 			[autoreleasepool release];		
 			

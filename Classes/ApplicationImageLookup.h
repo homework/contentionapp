@@ -13,6 +13,8 @@
 
 }
 
-+(NSString *) getType:(NSString *) program;
+
++(void)	initialize;
++(void) update:(NSString *) image forNode:(NSString *) app;
 
 @end

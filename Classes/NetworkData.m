@@ -36,7 +36,6 @@ static NetworkTable *apptable;
 +(void) initialize{
 	if (!init){
 		POLLNUMBER		= 0;
-		
 		devicetable = [[[NetworkTable alloc] init] retain];
 		apptable = [[[NetworkTable alloc] init] retain];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
@@ -110,18 +109,20 @@ static NetworkTable *apptable;
 }
 
 
-
-
 +(void) updateApplicationData:(FlowObject *) fobj{
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
 	
-	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src] destination:[fobj ip_dst]]; 
+	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]]; 
 	
 	if (deviceid != NULL){
 		[apptable updateData:application subnode:deviceid bytes:[fobj bytes]];
 	}
 	
+	deviceid = [NameResolver getidentifier:[fobj ip_dst]];
 	
+	if (deviceid != NULL){
+		[apptable updateData:application subnode:deviceid bytes:[fobj bytes]];
+	}
 }
 
 
@@ -129,12 +130,17 @@ static NetworkTable *apptable;
 	
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
 	
-	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src] destination:[fobj ip_dst]]; 
+	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]];// destination:[fobj ip_dst]]; 
 	
 	if (deviceid != NULL){
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
 	}
 	
+	deviceid  = [NameResolver getidentifier:[fobj ip_dst]];
+	
+	if (deviceid != NULL){
+		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
+	}
 }
 
 

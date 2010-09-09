@@ -82,11 +82,12 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:name]];			
+			NSArray * _thumbs = [[NSArray arrayWithObjects: @"web.png", @"music.png", @"skype.png", @"telnet.png", @"chat.png", @"windowsmedia.png", @"iplayer.png", @"media.png", @"hwdb.png", nil] retain];
+			
+
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:name] imagelist:_thumbs parent:self];			
 			picker.title = @"select an image";
-			
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-			
 			[delegate.navigationControllerApplications pushViewController:picker animated: YES];
 			[picker release];
 			
@@ -99,6 +100,18 @@
 		}
 	}
 	
+}
+
+
+-(void) updateImage:(NSString*) image forNode:(NSString*)identifier{
+	[ApplicationImageLookup update:image forNode:identifier];
+	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	[delegate.navigationControllerApplications popViewControllerAnimated:YES];
+}
+
+-(void) pop{
+	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	[delegate.navigationControllerApplications popViewControllerAnimated:YES];
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {

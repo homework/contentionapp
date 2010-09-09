@@ -12,6 +12,7 @@
 	PDColoredProgressView *bandwidthbar;
 	int index;
 	UIViewController<TouchResponse>* touchDelegate;
+	CGRect bigframe;
 }
 
 @property (nonatomic, retain) UIImage *deviceImage;
@@ -20,6 +21,7 @@
 @property (nonatomic, retain) NSString *identifier;
 @property (nonatomic, retain) PDColoredProgressView* bandwidthbar;
 @property (nonatomic, retain) UIViewController<TouchResponse>* touchDelegate;
+@property (nonatomic, assign) CGRect bigframe;
 @property (nonatomic, assign) int index;
 // Initializer for this object
 

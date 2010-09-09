@@ -15,6 +15,7 @@
 #import "DeviceImageLookup.h"
 #import "CustomImagePicker.h"
 #import "DeviceNameAlert.h"
+#import "NameResolver.h"
 
 @interface DeviceViewController : UIViewController <TouchResponse, UIAlertViewDelegate>{
 	NSMutableArray *sorteddata;

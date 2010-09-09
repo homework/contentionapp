@@ -15,10 +15,11 @@
 }
 
 +(void)			initialize;
-+(NSString *)	lookup:(NSString *) ip_src destination:(NSString *) ip_dst;
-+(NSString *)	getidentifier:(NSString *) ip_src destination:(NSString *) ip_dst;
-+(NSString *)   lookup:(NSString *) ip_addr;
++(NSString *)   friendlynamefrommac:(NSString *) macaddr;
++(NSString *)	friendlynamefromip:(NSString *) ip_addr;
++(NSString *)	getidentifier:(NSString *) ip_addr;
 +(BOOL) isInternal:(NSString *) ipaddr;
 +(void) update:(NSString *)oldname newname:(NSString*) newname;
 +(void) printmactable;
++(void) printiptable;
 @end

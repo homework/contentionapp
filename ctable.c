@@ -155,7 +155,7 @@ void ctable_purge(void) {
     pthread_mutex_destroy(&mutex);
     for (i = 0; i < CTABLE_SIZE; i++) {
         for (p = ctable[i]; p != NULL; p = next) {
-            next = p->next;
+				next = p->next;
 	    crecord_destroy(p);
 	}
     }

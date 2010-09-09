@@ -10,47 +10,37 @@
 
 @interface NameResolver (PrivateMethods)
 +(void) newLease:(NSNotification *) n;
-
++(void) writeMacTable;
 @end
 
 int count;
 NSMutableDictionary *iplookuptable;
 NSMutableDictionary *maclookuptable;
-NSMutableDictionary *noleasetable;
 
 NSString* netmask  = @"192.168.9";
 
 @implementation NameResolver
 
 +(void) initialize{
-	iplookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	noleasetable   = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
+	NSFileManager *fileManager = [NSFileManager defaultManager];
 	
-	//userdefinednames = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];
-	
-}
-
-+(NSString *) lookup:(NSString *) macaddr{
-	
-	NSString * resolvedname = NULL;
-	
-	//NSString* macaddr = [iplookuptable objectForKey:ip_addr];
-
-	resolvedname = NULL;
-	
-	if (macaddr != NULL){
-		resolvedname = [maclookuptable objectForKey:macaddr];
+	if ([fileManager fileExistsAtPath:path]){
+		maclookuptable = [[[NSMutableDictionary alloc] initWithContentsOfFile:path] retain];
+	}else{
+		maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	}
+
+	[fileManager release];
 	
-	/*else{ //check if it's in the nolease table
-		resolvedname = [noleasetable objectForKey:ip_addr];	
-	}*/
+	iplookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
 	
-	//NSLog(@"returning %@",  (resolvedname == NULL) ? ip_addr:resolvedname);
-	return (resolvedname == NULL) ? macaddr:resolvedname;
 }
+
+
 
 
 +(BOOL) isInternal:(NSString *) ipaddr{
@@ -67,92 +57,54 @@ NSString* netmask  = @"192.168.9";
  * exists for the IP address..
  */
 
-+(NSString *) getidentifier:(NSString *)ip_src destination:(NSString *)ip_dst{
-	NSString * ipaddr = NULL;
-	
-	
-	if([ip_src length] > 9){ 
-		if ([[ip_src substringToIndex:9] isEqualToString:netmask]){
-			ipaddr =  ip_src;
-		}
-	}
-	
-	if (ipaddr == NULL){
-		if([ip_dst length] > 9){ 
-			if ([[ip_dst substringToIndex:9] isEqualToString:netmask]){
-				ipaddr =  ip_dst;
-			}
-		}
-	}
-	
-	if (ipaddr == NULL){
-		return NULL;
-	}
-	
-	NSString* macaddr =  [iplookuptable objectForKey:ipaddr];
 
-	return macaddr;
++(NSString *) getidentifier:(NSString *)ip_addr{
+	
+	if (ip_addr == NULL)
+		return NULL;
+	
+	if([ip_addr length] <= 9)
+		return NULL;
+	
+	if (![self isInternal:ip_addr])
+		return NULL;
+	
+	return [iplookuptable objectForKey:ip_addr];
 }
 
-+(NSString *) lookup:(NSString *)ip_src destination:(NSString *)ip_dst{
++(NSString *) friendlynamefrommac:(NSString *) macaddr{
 	
-	//THIS NEEDS TO BE DONE IN A siNGLE stagE - IE llokup ipsrc
-	//thenn llokup ipdest!!
+	NSString * resolvedname = NULL;
 	
-	/*
-	 * First check if we have an ipaddr for this 
-	 */
+	resolvedname = NULL;
 	
-	//find the local address of the two;
-	
-	NSString * ipaddr = NULL;
-	
-	
-	if([ip_src length] > 9){ 
-		if ([[ip_src substringToIndex:9] isEqualToString:netmask]){
-			ipaddr =  ip_src;
-		}
+	if (macaddr != NULL){
+		resolvedname = [maclookuptable objectForKey:macaddr];
 	}
 	
-	if (ipaddr == NULL){
-		if([ip_dst length] > 9){ 
-			if ([[ip_dst substringToIndex:9] isEqualToString:netmask]){
-				ipaddr =  ip_dst;
-			}
-		}
-	}
+	return (resolvedname == NULL) ? macaddr:resolvedname;
+}
+
++(NSString *) friendlynamefromip:(NSString *) ip_addr{
 	
-	if (ipaddr == NULL){ //not found
+	if([ip_addr length] <= 9)
 		return NULL;
-	}
 	
-	NSString* macaddr = [iplookuptable objectForKey:ipaddr];
+	if (![self isInternal:ip_addr])
+		return NULL;
+	
+	NSString* macaddr = [iplookuptable objectForKey:ip_addr];
 	
 	if (macaddr != NULL){
 		return [maclookuptable objectForKey:macaddr];
 	}
-	else{
-		return NULL;
-	}
-	//return [self lookup:ipaddr];
+	
+	return NULL;
 }
 
 +(void) update:(NSString *)macaddr newname:(NSString*) newname{
-	/*NSString *thekey = NULL;
-	
-	for (id key in maclookuptable){
-		NSString *name = [maclookuptable objectForKey:key];
-		if ([name isEqualToString:oldname]){
-			thekey = key;
-			break;
-		}
-	}
-	if(thekey != NULL){*/
-	
-		[maclookuptable setObject:newname forKey:macaddr];
-	/*}else{
-		[noleasetable setObject:newname forKey:oldname];
-	}*/
+	[maclookuptable setObject:newname forKey:macaddr];
+	[self writeMacTable];
 }
 
 +(void)printmactable{
@@ -163,22 +115,37 @@ NSString* netmask  = @"192.168.9";
 	}
 }
 
++(void)printiptable{
+	NSLog(@"IP TABLE AS FOLLOWS");
+	for (id key in iplookuptable){
+		NSString *name = [iplookuptable objectForKey:key];
+		NSLog(@"%@    %@", key, name);
+	}
+}
++(void) pollComplete:(NSNotification *) n{
+	[self printmactable];
+	[self printiptable];
+}
+
 +(void) newLease:(NSNotification *) n{
 	
 	LeaseObject  *lobj = (LeaseObject *) [n object];
 	
-	NSLog(@"new lease, setting IP table %@ %@", [lobj ipaddr], [lobj macaddr]);
 	[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
-	
-	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
+		NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
 	if (humanname == NULL){
-		humanname = [noleasetable objectForKey:[lobj ipaddr]];
-		if (humanname == NULL)
-			humanname = [[lobj name] isEqualToString:@" "] ? [lobj ipaddr] : [lobj name]; 
+		humanname = [[lobj name] isEqualToString:@" "] ? [lobj ipaddr] : [lobj name]; 
 		NSLog(@"new lease, setting MAC table %@ %@", [lobj macaddr], humanname);
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
+		[self writeMacTable];
 	}
+}
+
++(void) writeMacTable{
+	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
+	[maclookuptable writeToFile:path atomically:YES];
 }
 
 -(void) dealloc{

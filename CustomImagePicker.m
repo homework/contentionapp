@@ -12,11 +12,16 @@
 @implementation CustomImagePicker
 
 @synthesize deviceView;
+@synthesize parent;
+
+static  NSArray* _thumbs;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil view:(DeviceView*) v {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil view:(DeviceView*) v imagelist:(NSArray*)images parent:(UIViewController *)p{
  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 	 [self setDeviceView:v];
+	 _thumbs = images ;
+	 [self setParent: p];
  }
  return self;
  }
@@ -28,12 +33,9 @@
  }
  */
 
-static  NSArray* _thumbs;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
 	
-	_thumbs = [[NSArray arrayWithObjects: @"mac.png", @"phone.png", @"router.png", @"laptop.png", @"iphone.png", @"sound.png", nil] retain];
-
 	
 	UIScrollView *view = [[UIScrollView alloc] 
 						  initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -44,7 +46,7 @@ static  NSArray* _thumbs;
 		
 		UIImage *thumb = [UIImage imageNamed:[_thumbs objectAtIndex:i]];
 		UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-		button.frame = CGRectMake(column*100+24, row*80+10, 84, 84);
+		button.frame = CGRectMake(column*100+24, row*90+10, 84, 84);
 		[button setImage:thumb forState:UIControlStateNormal];
 		[button addTarget:self action:@selector(buttonClicked:) 
 		 forControlEvents:UIControlEventTouchUpInside];
@@ -59,26 +61,21 @@ static  NSArray* _thumbs;
 		}
 	}
 	
-	[view setContentSize:CGSizeMake(320, (row+1) * 80 + 10)];	
+	[view setContentSize:CGSizeMake(320, (row+1) * 90 + 10)];	
 	self.view = view;
 	[view release];	
 	[super viewDidLoad];
 }
 
 - (IBAction)buttonClicked:(id)sender {
-	
-	//NSLog(@"great button clicked:::");
 	UIButton *button = (UIButton *)sender;
-	//NSLog(@"button tag is %i", button.tag);
 	NSString *selectedImage = [_thumbs objectAtIndex:button.tag];
 	
-	//NSLog(@"selected image %@ for %@", selectedImage, name);
-	[DeviceImageLookup update:selectedImage forNode:[deviceView identifier]];
-	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-	[delegate.navigationControllerDevices popViewControllerAnimated:YES];
 	if (deviceView != NULL){
 		[deviceView updateImage:selectedImage];
 	}
+	
+	[parent updateImage:selectedImage forNode:[deviceView identifier]];
 }
 /*
  // Override to allow orientations other than the default portrait orientation.
