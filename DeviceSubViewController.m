@@ -58,7 +58,7 @@
 }
 
 -(void) touched: (int) tag viewname:(NSString *) name position: (int) index{
-	NSLog(@"SUBVIEW AM TOUCHED>>>>-------------------------------------");
+	
 }
 
 

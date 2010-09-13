@@ -529,8 +529,7 @@ static int common_init(unsigned short port) {
 	my_sock = socket(AF_INET, SOCK_DGRAM, 0);
 	int result = bind(my_sock, (struct sockaddr *)&my_addr, sizeof(my_addr));
 	
-	printf("RESULT OF BIND IS %d %d\n", result, my_sock);
-    if (my_sock < 0 || result < 0)
+	if (my_sock < 0 || result < 0)
         return 0;
 	
     getsockname(my_sock, (struct sockaddr *)&my_addr, &len);
@@ -648,9 +647,11 @@ RpcConnection rpc_connect(char *host, unsigned short port,
     ctable_lock();
     subport = ctable_newSubport();
     nep = rpc_socket(host, port, subport);
+	
     len += strlen(svcName);			/* room for svcName */
+	
     buf = (ConnectPayload *)mem_alloc(len);
-    cp_complete((ControlPayload *)buf, nep->subport, CONNECT, seqno, 1, 1);
+	cp_complete((ControlPayload *)buf, nep->subport, CONNECT, seqno, 1, 1);
     strcpy(buf->sname, svcName);
     cr = crecord_create(nep, seqno);
     crecord_setPayload(cr, buf, len, ATTEMPTS, TICKS);

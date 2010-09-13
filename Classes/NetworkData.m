@@ -112,6 +112,10 @@ static NetworkTable *apptable;
 +(void) updateApplicationData:(FlowObject *) fobj{
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
 	
+	//FlowAnalyser can filter out flows we don't want to show.
+	if (application == NULL)
+		return;
+	
 	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]]; 
 	
 	if (deviceid != NULL){
@@ -123,12 +127,16 @@ static NetworkTable *apptable;
 	if (deviceid != NULL){
 		[apptable updateData:application subnode:deviceid bytes:[fobj bytes]];
 	}
+	
 }
 
 
 +(void) updateNodeData:(FlowObject *) fobj{
 	
 	NSString *application = [FlowAnalyser guessApplication:[fobj sport] dport:[fobj dport] protocol:[fobj proto]];
+	
+	if (application == NULL)
+		return;
 	
 	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]];// destination:[fobj ip_dst]]; 
 	

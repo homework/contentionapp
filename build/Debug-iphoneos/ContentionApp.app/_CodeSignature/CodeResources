@@ -28,6 +28,10 @@
 		<data>
 		J/EtsN9VNdPtM4Kf+65u1rKD+nM=
 		</data>
+		<key>blackberry.png</key>
+		<data>
+		L6JItXI8ZWjZb93sM6sbis9akww=
+		</data>
 		<key>chat.png</key>
 		<data>
 		9oIVBSf4sM0K5OWudlDmAsO+Hek=
@@ -44,9 +48,21 @@
 		<data>
 		2FCaRQKJwFBUtppLlB5GdibADeY=
 		</data>
+		<key>game.png</key>
+		<data>
+		eSImmoq7H5fkQqAROP8AsKhk3GI=
+		</data>
 		<key>hwdb.png</key>
 		<data>
 		xAGzcI8le4+nsYZmWH396sFO9Lg=
+		</data>
+		<key>internet.png</key>
+		<data>
+		lNEs+jqt0m92VImJ0bo1a0Ivejk=
+		</data>
+		<key>ipad.png</key>
+		<data>
+		g2sg4l3bTywNmWEGgL6HstcM9Fw=
 		</data>
 		<key>iphone.png</key>
 		<data>
@@ -64,6 +80,10 @@
 		<data>
 		JYY9SaoBxDhdRFo3J0yMPIJ3jFc=
 		</data>
+		<key>macmini.png</key>
+		<data>
+		bGH0Dii/grMYvCapt9kANOeel8w=
+		</data>
 		<key>media.png</key>
 		<data>
 		J8VXxF0jzdrXIUcvlcbPu0AjcLg=
@@ -72,6 +92,10 @@
 		<data>
 		/cJM6325C+dn7jZJHSQu/0HTQ9c=
 		</data>
+		<key>network.png</key>
+		<data>
+		XmhD9Px5dkgB0mqKepvBD/wLroc=
+		</data>
 		<key>pc.png</key>
 		<data>
 		Gpcud6CrGIo7/P1vducxIXAz0Bw=
@@ -79,6 +103,18 @@
 		<key>phone.png</key>
 		<data>
 		8b+9TzugNAmk7UQnjjDAcWw5Qso=
+		</data>
+		<key>printer.png</key>
+		<data>
+		JIrpRA8cH6O2MgUMK5BixAMCKYI=
+		</data>
+		<key>printserver.png</key>
+		<data>
+		WFvwvBUZ/42R79L3j1m+A6w7rmE=
+		</data>
+		<key>psp.png</key>
+		<data>
+		9qfPzcEnZ7qNXXGEANvZkcuwoXU=
 		</data>
 		<key>router.png</key>
 		<data>
@@ -116,9 +152,17 @@
 		<data>
 		xtAqf1BxIRuQjOhqs5531Gu9S+o=
 		</data>
+		<key>wii.png</key>
+		<data>
+		1EY/aaLZalwGvQ7/xL4R+95aMt4=
+		</data>
 		<key>windowsmedia.png</key>
 		<data>
 		P/JeebXkXiBamxSOJyxvEun81Yw=
+		</data>
+		<key>wireless.png</key>
+		<data>
+		0fXKynatRkk3J9ZMpVWw62mA7No=
 		</data>
 	</dict>
 	<key>rules</key>

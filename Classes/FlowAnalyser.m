@@ -47,8 +47,12 @@ static NSMutableDictionary *meanvalues;
 
 +(NSString*) guessApplication:(unsigned short)sport dport:(unsigned short)dp protocol:(int) proto{
 	
-	NSString *first    = [PortLookup lookup:sport protocol:proto];
-	NSString *second	= [PortLookup lookup:dp protocol:proto];
+	//filter out 0/0
+	if (dp <= 0 && sport <=0)
+		return NULL;
+	
+	NSString *first    = [PortLookup lookup:MIN(sport,dp) protocol:proto];
+	NSString *second	= [PortLookup lookup:MAX(sport, dp) protocol:proto];
 	NSString *application;
 	
 	if (first == NULL && second == NULL){
@@ -68,9 +72,7 @@ static NSMutableDictionary *meanvalues;
 			application = [NSString stringWithFormat:@"%@ or %@",first, second];
 	}
 	if (application == NULL){
-		int minport = MIN(sport,dp);
-		int maxport = MAX(sport,dp);
-		application = [NSString stringWithFormat:@"%d/%d", minport, maxport];
+		application = [NSString stringWithFormat:@"%d/%d", MIN(sport,dp), MAX(sport,dp)];
 	}
 	else 
 		application = [application stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

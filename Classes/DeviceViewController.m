@@ -36,6 +36,8 @@
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connected:) name:@"connected" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"disconnected" object:nil];
 	
 	/*
 	 * Timer For testing
@@ -43,6 +45,14 @@
 	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
 }
 
+
+-(void) connected:(NSNotification *) n{
+	[self.vm connected];
+}
+
+-(void) disconnected:(NSNotification *) n{
+	[self.vm disconnected];
+}
 
 -(NSString *) getImage:(NSString *) s{
 	return [DeviceImageLookup getImage:s];
@@ -86,7 +96,21 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			NSArray * _thumbs = [[NSArray arrayWithObjects: @"mac.png", @"phone.png", @"router.png", @"laptop.png", @"iphone.png", @"sound.png", nil] retain];
+			NSArray * _thumbs = [[NSArray arrayWithObjects: @"mac.png", 
+															@"phone.png", 
+															@"router.png",
+															@"laptop.png", 
+															@"iphone.png", 
+															@"sound.png",
+															@"blackberry.png",
+															@"game.png",
+															@"wii.png",
+															@"ipad.png",
+															@"printer.png",
+															@"printserver.png",
+															@"psp.png",
+															@"macmini.png",
+															nil] retain];
 			
 			
 			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:_thumbs parent:self];			
@@ -119,6 +143,8 @@
 	[NameResolver printmactable];
 	
 }
+
+
 
 
 -(void) updateImage:(NSString*) image forNode:(NSString*)identifier{

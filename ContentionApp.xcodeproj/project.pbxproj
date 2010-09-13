@@ -60,6 +60,17 @@
 		A39B8E3111FEF04400A7DAA6 /* DeviceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39B8E2F11FEF04400A7DAA6 /* DeviceSubView.xib */; };
 		A39B8E4C11FEF70800A7DAA6 /* ApplicationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B8E4B11FEF70800A7DAA6 /* ApplicationView.m */; };
 		A39B8E5911FEF92800A7DAA6 /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B8E5711FEF92800A7DAA6 /* ApplicationViewController.m */; };
+		A3A902B5123E821600070C67 /* blackberry.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AA123E821600070C67 /* blackberry.png */; };
+		A3A902B6123E821600070C67 /* game.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AB123E821600070C67 /* game.png */; };
+		A3A902B7123E821600070C67 /* internet.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AC123E821600070C67 /* internet.png */; };
+		A3A902B8123E821600070C67 /* ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AD123E821600070C67 /* ipad.png */; };
+		A3A902B9123E821600070C67 /* macmini.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AE123E821600070C67 /* macmini.png */; };
+		A3A902BA123E821600070C67 /* network.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AF123E821600070C67 /* network.png */; };
+		A3A902BB123E821600070C67 /* printer.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B0123E821600070C67 /* printer.png */; };
+		A3A902BC123E821600070C67 /* printserver.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B1123E821600070C67 /* printserver.png */; };
+		A3A902BD123E821600070C67 /* psp.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B2123E821600070C67 /* psp.png */; };
+		A3A902BE123E821600070C67 /* wii.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B3123E821600070C67 /* wii.png */; };
+		A3A902BF123E821600070C67 /* wireless.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B4123E821600070C67 /* wireless.png */; };
 		A3B18B3C1208643C0021242B /* PortLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B18B3B1208643C0021242B /* PortLookup.m */; };
 		A3B18B56120869D00021242B /* udp_port.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3B18B54120869D00021242B /* udp_port.txt */; };
 		A3B18B57120869D00021242B /* tcp_port.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3B18B55120869D00021242B /* tcp_port.txt */; };
@@ -173,6 +184,17 @@
 		A39B8E4B11FEF70800A7DAA6 /* ApplicationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationView.m; sourceTree = "<group>"; };
 		A39B8E5611FEF92800A7DAA6 /* ApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewController.h; sourceTree = "<group>"; };
 		A39B8E5711FEF92800A7DAA6 /* ApplicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationViewController.m; sourceTree = "<group>"; };
+		A3A902AA123E821600070C67 /* blackberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackberry.png; sourceTree = "<group>"; };
+		A3A902AB123E821600070C67 /* game.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = game.png; sourceTree = "<group>"; };
+		A3A902AC123E821600070C67 /* internet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internet.png; sourceTree = "<group>"; };
+		A3A902AD123E821600070C67 /* ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad.png; sourceTree = "<group>"; };
+		A3A902AE123E821600070C67 /* macmini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = macmini.png; sourceTree = "<group>"; };
+		A3A902AF123E821600070C67 /* network.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = network.png; sourceTree = "<group>"; };
+		A3A902B0123E821600070C67 /* printer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printer.png; sourceTree = "<group>"; };
+		A3A902B1123E821600070C67 /* printserver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = printserver.png; sourceTree = "<group>"; };
+		A3A902B2123E821600070C67 /* psp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = psp.png; sourceTree = "<group>"; };
+		A3A902B3123E821600070C67 /* wii.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wii.png; sourceTree = "<group>"; };
+		A3A902B4123E821600070C67 /* wireless.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireless.png; sourceTree = "<group>"; };
 		A3B18B3A1208643C0021242B /* PortLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortLookup.h; sourceTree = "<group>"; };
 		A3B18B3B1208643C0021242B /* PortLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortLookup.m; sourceTree = "<group>"; };
 		A3B18B54120869D00021242B /* udp_port.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = udp_port.txt; sourceTree = "<group>"; };
@@ -267,10 +289,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3A902AC123E821600070C67 /* internet.png */,
+				A3A902AF123E821600070C67 /* network.png */,
+				A3A902B4123E821600070C67 /* wireless.png */,
 				A3CD517F1227D7E9001420F0 /* sound.png */,
-				A3CD51771227D6C8001420F0 /* mac.png */,
 				A3CD51781227D6C8001420F0 /* phone.png */,
-				A3CD51791227D6C8001420F0 /* router.png */,
 				A3B18CCA1209ABB70021242B /* websecure.png */,
 				A3B18CC61209A9690021242B /* email.png */,
 				A3B18CAD1209A2590021242B /* hwdb.png */,
@@ -460,6 +483,16 @@
 		A39B8EAC120039BD00A7DAA6 /* devices */ = {
 			isa = PBXGroup;
 			children = (
+				A3A902AA123E821600070C67 /* blackberry.png */,
+				A3A902AB123E821600070C67 /* game.png */,
+				A3A902AD123E821600070C67 /* ipad.png */,
+				A3A902AE123E821600070C67 /* macmini.png */,
+				A3A902B0123E821600070C67 /* printer.png */,
+				A3A902B1123E821600070C67 /* printserver.png */,
+				A3A902B2123E821600070C67 /* psp.png */,
+				A3A902B3123E821600070C67 /* wii.png */,
+				A3CD51771227D6C8001420F0 /* mac.png */,
+				A3CD51791227D6C8001420F0 /* router.png */,
 				A382F7C511FDA0C7006AC7D3 /* laptop.png */,
 				A382F7F311FDA865006AC7D3 /* iphone.png */,
 				A382F7F111FDA85B006AC7D3 /* pc.png */,
@@ -542,6 +575,17 @@
 				A3CD517B1227D6C8001420F0 /* phone.png in Resources */,
 				A3CD517C1227D6C8001420F0 /* router.png in Resources */,
 				A3CD51801227D7E9001420F0 /* sound.png in Resources */,
+				A3A902B5123E821600070C67 /* blackberry.png in Resources */,
+				A3A902B6123E821600070C67 /* game.png in Resources */,
+				A3A902B7123E821600070C67 /* internet.png in Resources */,
+				A3A902B8123E821600070C67 /* ipad.png in Resources */,
+				A3A902B9123E821600070C67 /* macmini.png in Resources */,
+				A3A902BA123E821600070C67 /* network.png in Resources */,
+				A3A902BB123E821600070C67 /* printer.png in Resources */,
+				A3A902BC123E821600070C67 /* printserver.png in Resources */,
+				A3A902BD123E821600070C67 /* psp.png in Resources */,
+				A3A902BE123E821600070C67 /* wii.png in Resources */,
+				A3A902BF123E821600070C67 /* wireless.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -36,6 +36,8 @@
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Applications";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connected:) name:@"connected" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"disconnected" object:nil];
 	
 	/*
 	 * Timer For testing
@@ -126,8 +128,15 @@
 	
 }
 
+-(void) connected:(NSNotification *) n{
+	[self.vm connected];
+}
 
+-(void) disconnected:(NSNotification *) n{
+	[self.vm disconnected];
+}
 
+	
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
