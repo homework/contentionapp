@@ -89,7 +89,7 @@ float imageindent;
 	
 	if (p < 3){
 		//self.backgroundColor = [UIColor clearColor];
-		self.bounds = CGRectMake(0.0, 0.0, 320, 85);	
+		//self.bounds = CGRectMake(0.0, 0.0, 320, 85);	
 		bandwidth = MAX(bandwidth, 0.1); //so that we see something for low bandwidths
 		[self.bandwidthbar setProgress:bandwidth];
 		if (bandwidth > 0.8){
@@ -105,7 +105,7 @@ float imageindent;
 		self.bandwidthbar.layer.opacity = 1.0f;
 		namelabel.layer.opacity  = 1.0f;
 	}else{
-		self.bounds= CGRectMake(0.0, 0.0, 100, 85);
+		
 		namelabel.layer.opacity  = 0.0f;
 		self.bandwidthbar.layer.opacity = 0.0f;
 		//self.backgroundColor = [UIColor greenColor];

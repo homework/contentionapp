@@ -93,6 +93,7 @@ static NetworkTable *apptable;
 	[apptable removeZeroByteData];
 	[devicetable removeZeroByteData];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
+	[devicetable print:@"001ff3bcb257"];
 }
 
 
@@ -106,6 +107,7 @@ static NetworkTable *apptable;
 	[FlowAnalyser addFlow:[fobj sport] dport:[fobj dport] protocol:[fobj proto] packets:[fobj packets] bytes:[fobj bytes] pollcount:POLLNUMBER];
 	[self updateApplicationData:fobj];
 	[self updateNodeData:fobj];
+	
 }
 
 
@@ -141,14 +143,22 @@ static NetworkTable *apptable;
 	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]];// destination:[fobj ip_dst]]; 
 	
 	if (deviceid != NULL){
+		if ([deviceid isEqualToString:@"001ff3bcb257"])
+			NSLog(@"new flow %@ %@ %d", deviceid, application, [fobj bytes]);
+		
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
+		
 	}
 	
 	deviceid  = [NameResolver getidentifier:[fobj ip_dst]];
 	
 	if (deviceid != NULL){
+		if ([deviceid isEqualToString:@"001ff3bcb257"])
+			NSLog(@"new flow %@ %@ %d", deviceid, application, [fobj bytes]);
+		
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
 	}
+	
 }
 
 

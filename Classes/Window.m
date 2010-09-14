@@ -19,7 +19,9 @@
 	if (self = [super init]) {
 		CAPACITY = size;
 		lastpoll = pc;
-		[self setWindow:[[NSMutableArray alloc] initWithCapacity:CAPACITY]]; 
+		NSMutableArray *tmp = [[NSMutableArray alloc] initWithCapacity:CAPACITY];
+		[self setWindow: tmp];
+		[tmp release];
 		 
 		for (int i = 0; i < CAPACITY; i++){
 			[window addObject: [NSNumber numberWithInt:0]];	

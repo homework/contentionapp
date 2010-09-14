@@ -24,6 +24,4 @@
 
 @property(nonatomic,retain) NSMutableArray* sorteddata;
 @property(nonatomic,retain) ViewManager* vm;
-
-
 @end

@@ -14,9 +14,6 @@
 
 
 -(void) recalculateMaxBandwidth:(NSString*)node;
--(void) recalculateMaxNodeBandwidth:(NSString*)nodename application:(NSString*)app;
--(void)recalculateMaxAppBandwidth:(NSString*)application node:(NSString*)node;
--(int) getBandwidth:(NSString *) name data:(NSMutableDictionary*)d;
 
 @end
 
@@ -30,16 +27,27 @@ int SHISTORY = 5;
 
 -(id) init{
 	if (self = [super init]) {
-		NSMutableDictionary *tmp = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithCapacity:10];// retain];
 		[self setPOLLNUMBER: 0];
 		[self setData:tmp];
-		[tmp release];
+		//[tmp release];
 	}
 	return self;
 }
 
+
+-(void) print:(NSString *) node{
+	NSLog(@"windows for device %@", node);
+	NSDictionary *dictionary = [data objectForKey:node];
+	Window* w;
+	for (id key in dictionary){
+		w = [dictionary objectForKey:key];
+		[w print:key];
+	}
+}
+
 -(NSMutableArray *) getAllData{
-	NSMutableDictionary *results = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithCapacity:10];// retain];
 	
 	for (id key1 in data) {
 		NSDictionary *dictionary = [data objectForKey:key1];
@@ -48,25 +56,28 @@ int SHISTORY = 5;
 			w = [dictionary objectForKey:key2];
 			NodeTuple* n = [results objectForKey:key1];
 			if (n == NULL){
-				n = [[[NodeTuple alloc] initWithValues:key1 name:[NameResolver friendlynamefrommac:key1] value:[w totalBytes:POLLNUMBER]] retain];
+				n = [[NodeTuple alloc] initWithValues:key1 name:[NameResolver friendlynamefrommac:key1] value:[w totalBytes:POLLNUMBER]];
 				[results setObject:n forKey:key1];
+				[n release];
 			}else{
 				[n setValue:[n value] +  [w totalBytes:POLLNUMBER]];
 			}
+			
 		}
 	}
 	return  [results allValues];
 }
 
 -(NSMutableArray *) getLatestDataForNode:(NSString *)node{
-	NSMutableArray *array = [[NSMutableArray array] retain];
+	NSMutableArray *array = [NSMutableArray array];// retain];
 	NSDictionary *dictionary = [data objectForKey:node];
 	Window * w;
 	if (dictionary != NULL){
 		for (id key in dictionary) {
 			w = [dictionary objectForKey:key];
-			NodeTuple* n = [[[NodeTuple alloc] initWithValues:key name:[NameResolver friendlynamefrommac:key] value:[w totalBytes:POLLNUMBER]] retain];
+			NodeTuple* n = [[NodeTuple alloc] initWithValues:key name:[NameResolver friendlynamefrommac:key] value:[w totalBytes:POLLNUMBER]];// retain];
 			[array addObject:n];
+			[n release];
 		}
 	}
 	return array;
@@ -108,18 +119,22 @@ int SHISTORY = 5;
 	NSMutableDictionary *dictionary = [data objectForKey:topnode];
 	
 	if (dictionary == NULL){
-		dictionary = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+		dictionary = [NSMutableDictionary dictionaryWithCapacity:10];// retain];
 		[data setObject:dictionary forKey:topnode];
+		
 	}
 	
 	Window *w = [dictionary objectForKey:subnode];
 	
 	if (w == NULL){
-		w = [[[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER] retain];
+		//w = [[[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER] retain];
+		w = [[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER];
 		[dictionary setObject:w forKey:subnode];
+		[w release];//hmmmm??/ really?
 	}
 	
-	[w addBytes:bytes pollcount:POLLNUMBER];	
+	[w addBytes:bytes pollcount:POLLNUMBER];
+	
 	[self recalculateMaxBandwidth: topnode];
 	
 }
@@ -133,7 +148,12 @@ int SHISTORY = 5;
 		Window *w = [dictionary objectForKey:key];
 		bandwidth += [w totalBytes:POLLNUMBER];
 	}
+	int oldmax = MAXBYTES;
 	MAXBYTES = MAX(bandwidth, MAXBYTES);
+	
+	if (oldmax != MAXBYTES && [node isEqualToString:@"001ff3bcb257"]){
+		NSLog(@"MAXIMUM BYTES SET TO %d for node %@", MAXBYTES, node);
+	}
 	//NSLog(@"current bytes for %@ is %d and MAXNODEBYTES is %d so bandwitdh is %f", [n name], [w totalBytes:POLLNUMBER], MAXNODEBYTES, (float)[w totalBytes:POLLNUMBER]/MAXNODEBYTES);
 }
 
@@ -183,5 +203,8 @@ int SHISTORY = 5;
 	}
 }
 
-
+-(void) dealloc{
+	[data release];
+	[super dealloc];
+}
 @end

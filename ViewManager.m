@@ -112,13 +112,20 @@ const static float	VIEWHEIGHT  = 85;
 	
 		[myviews[index] update:position bandwidth:[viewController getBandwidthProportion:[node identifier]]];
 		
+		CGRect bounds;
+		
 		CGAffineTransform transform;
 		if (position < 3){
 			transform = CGAffineTransformMakeScale(1.0, 1.0);
+			bounds = CGRectMake(0.0, 0.0, 320, 85);
+
 		}
 		else{
 			transform = CGAffineTransformMakeScale(0.5, 0.5);
+			bounds= CGRectMake(0.0, 0.0, 100, 85);
 		}
+				
+		myviews[index].bounds = bounds; //squashes before transforms - doesn't look nice.
 		myviews[index].transform = transform;
 		
 		position++;
@@ -166,7 +173,11 @@ const static float	VIEWHEIGHT  = 85;
 -(void) addNewView:(NodeTuple *) node position:(int) pos{
 	
 	NSString* myImage = [self.viewController getImage:[node identifier]];
-	CGRect frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, VIEWHEIGHT); 
+	CGRect frame; 
+	if (pos < 3)
+		frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, VIEWHEIGHT);
+	else
+		frame = CGRectMake(0.0, self.view.bounds.size.height, 100, 85);
 	//ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
 	float bandwidth = [viewController getBandwidthProportion:[node identifier]];
 	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node identifier] name:[node name] position:pos bandwidth:bandwidth frame:frame image:myImage imageindent:IMAGEINDENT] retain];
@@ -184,7 +195,11 @@ const static float	VIEWHEIGHT  = 85;
 		[UIView setAnimationDelegate:self];
 		CGAffineTransform transform = CGAffineTransformMakeScale(0.5, 0.5);
 		pview.transform = transform;
+		
+		pview.bounds= CGRectMake(0.0, 0.0, 100, 85);
 		[UIView commitAnimations];
+		
+
 	}
 	
 	[self.view addSubview:pview];//container];

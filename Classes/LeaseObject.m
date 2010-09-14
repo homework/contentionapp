@@ -57,4 +57,12 @@ char *index2action(unsigned int index) {
 	NSLog(@"%@ %@ %@ %@", action, ipaddr,macaddr,name);
 }
 
+-(void) dealloc{
+	[action release];
+	[ipaddr release];
+	[macaddr release];
+	[name release];
+	[super dealloc];
+}
+
 @end

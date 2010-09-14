@@ -289,27 +289,11 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A3A902AC123E821600070C67 /* internet.png */,
-				A3A902AF123E821600070C67 /* network.png */,
-				A3A902B4123E821600070C67 /* wireless.png */,
-				A3CD517F1227D7E9001420F0 /* sound.png */,
-				A3CD51781227D6C8001420F0 /* phone.png */,
-				A3B18CCA1209ABB70021242B /* websecure.png */,
-				A3B18CC61209A9690021242B /* email.png */,
-				A3B18CAD1209A2590021242B /* hwdb.png */,
+				A3D10FCA123FC6540099DED8 /* applications */,
+				A39B8EAC120039BD00A7DAA6 /* devices */,
 				A3B18B54120869D00021242B /* udp_port.txt */,
 				A3B18B55120869D00021242B /* tcp_port.txt */,
-				A33F2ED81206D69000B78F50 /* skype.png */,
-				A33F2ED91206D69000B78F50 /* telnet.png */,
 				A33F2EDA1206D69000B78F50 /* unknown.png */,
-				A33F2EDB1206D69000B78F50 /* web.png */,
-				A33F2EE21206D6D400B78F50 /* music.png */,
-				A33F2EDC1206D69000B78F50 /* windowsmedia.png */,
-				A33F2ECC1206D67F00B78F50 /* chat.png */,
-				A33F2ECD1206D67F00B78F50 /* ftp.png */,
-				A33F2ECE1206D67F00B78F50 /* iplayer.png */,
-				A33F2ECF1206D67F00B78F50 /* media.png */,
-				A39B8EAC120039BD00A7DAA6 /* devices */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				A32B732F121E952B008097BF /* DeviceInputView.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -483,6 +467,8 @@
 		A39B8EAC120039BD00A7DAA6 /* devices */ = {
 			isa = PBXGroup;
 			children = (
+				A3CD517F1227D7E9001420F0 /* sound.png */,
+				A3CD51781227D6C8001420F0 /* phone.png */,
 				A3A902AA123E821600070C67 /* blackberry.png */,
 				A3A902AB123E821600070C67 /* game.png */,
 				A3A902AD123E821600070C67 /* ipad.png */,
@@ -498,6 +484,28 @@
 				A382F7F111FDA85B006AC7D3 /* pc.png */,
 			);
 			name = devices;
+			sourceTree = "<group>";
+		};
+		A3D10FCA123FC6540099DED8 /* applications */ = {
+			isa = PBXGroup;
+			children = (
+				A3A902AC123E821600070C67 /* internet.png */,
+				A3A902AF123E821600070C67 /* network.png */,
+				A33F2ECD1206D67F00B78F50 /* ftp.png */,
+				A33F2ECC1206D67F00B78F50 /* chat.png */,
+				A33F2ECE1206D67F00B78F50 /* iplayer.png */,
+				A33F2ECF1206D67F00B78F50 /* media.png */,
+				A33F2EDC1206D69000B78F50 /* windowsmedia.png */,
+				A33F2EE21206D6D400B78F50 /* music.png */,
+				A33F2ED91206D69000B78F50 /* telnet.png */,
+				A33F2ED81206D69000B78F50 /* skype.png */,
+				A3B18CCA1209ABB70021242B /* websecure.png */,
+				A3A902B4123E821600070C67 /* wireless.png */,
+				A3B18CC61209A9690021242B /* email.png */,
+				A3B18CAD1209A2590021242B /* hwdb.png */,
+				A33F2EDB1206D69000B78F50 /* web.png */,
+			);
+			name = applications;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

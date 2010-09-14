@@ -74,7 +74,7 @@ static tstamp_t lastlease;
 		[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
 		
 		if (rpc){
-			NSLog(@"success\n");
+			
 			[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
 			
 			
@@ -128,11 +128,16 @@ static tstamp_t lastlease;
 	
 	if (lastflow) {
 		char *s = timestamp_to_string(lastflow);
+		NSLog(@"flow query is SQL:select * from Flows [ range %d seconds] where timestamp > %s",
+			  TIME_DELTA+1, s);
 		sprintf(query,
 				"SQL:select * from Flows [ range %d seconds] where timestamp > %s\n",
 				TIME_DELTA+1, s);
 		free(s);
 	} else{
+		NSLog(@"flow query is SQL:select * from Flows [ range %d seconds]",
+			  TIME_DELTA);
+		
 		sprintf(query,
 				"SQL:select * from Flows [ range %d seconds]\n",
 				TIME_DELTA);
@@ -145,6 +150,7 @@ static tstamp_t lastlease;
 	if (success && lastflow){
 		return 1;
 	}
+	
 	
 	return success;
 }
@@ -219,9 +225,12 @@ static tstamp_t lastlease;
 void dhcp_free(DhcpResults *p) {
 	unsigned int i;
 	
+	
     if (p) {
-        for (i = 0; i < p->nleases && p->data[i]; i++)
+        for (i = 0; i < p->nleases && p->data[i]; i++){
             free(p->data[i]);
+			
+		}
         free(p);
     }
 }
@@ -427,18 +436,19 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 		// rtab_print(results);
 		p = dhcp_convert(results);
 		// do something with the data pointed to by p 
-		NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
+		//NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
 		for (i = 0; i < p->nleases; i++) {
 			DhcpData *l = p->data[i];
 			char *s = timestamp_to_string(l->tstamp);
 			char *a = strdup(inet_ntoa(*(struct in_addr *)&l->ip_addr));
 			
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
-			LeaseObject *lobj = [[[LeaseObject alloc] initWithLease:l] autorelease];
+			LeaseObject *lobj = [[LeaseObject alloc] initWithLease:l]; 
 			[PollingThread performSelectorOnMainThread:@selector(postLeaseObject:) withObject:lobj waitUntilDone:NO];
+			[lobj release];
 			[autoreleasepool release];	
 			
-			NSLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
+			//NSLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
 			free(s);
 			free(a);
 		}
@@ -506,8 +516,9 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			FlowData *f = p->data[i];
 			char *s = timestamp_to_string(f->tstamp);
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
-			FlowObject *fobj = [[[FlowObject alloc] initWithFlow:f] autorelease];
+			FlowObject *fobj = [[FlowObject alloc] initWithFlow:f];
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:NO];
+			[fobj release];
 			[autoreleasepool release];		
 			
 			free(s);

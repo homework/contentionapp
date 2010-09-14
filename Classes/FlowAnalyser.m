@@ -79,4 +79,8 @@ static NSMutableDictionary *meanvalues;
 	
 	return application;
 }
+-(void) dealloc{
+	[meanvalues release];
+	[super dealloc];
+}
 @end

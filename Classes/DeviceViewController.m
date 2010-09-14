@@ -29,7 +29,7 @@
 	[DeviceImageLookup initialize];
 	
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self] retain];
+	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
 	[self setVm:tmpvm];
 	[tmpvm release];
 	
@@ -169,11 +169,7 @@
 		//[w print:[node name]];
 	}*/
 	
-	for (NodeTuple * node in self.sorteddata){
-		NSLog(@"identity = %@ name is %@", [node identifier], [node name]);
-		
 	}
-}
 
 
 /*

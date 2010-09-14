@@ -18,10 +18,14 @@ NSMutableDictionary *iplookuptable;
 NSMutableDictionary *maclookuptable;
 
 NSString* netmask  = @"192.168.9";
+static BOOL init = FALSE;
 
 @implementation NameResolver
 
 +(void) initialize{
+	if (init)
+		return;
+	
 	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -31,12 +35,13 @@ NSString* netmask  = @"192.168.9";
 	}else{
 		maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	}
-
+	
 	[fileManager release];
 	
 	iplookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
+	init = TRUE;
 	
 }
 
@@ -44,9 +49,9 @@ NSString* netmask  = @"192.168.9";
 
 
 +(BOOL) isInternal:(NSString *) ipaddr{
-		if([ipaddr length] <= 9){
-			return  FALSE;
-		}
+	if([ipaddr length] <= 9){
+		return  FALSE;
+	}
 	return  ([[ipaddr substringToIndex:9] isEqualToString:netmask]);
 }
 
@@ -123,8 +128,8 @@ NSString* netmask  = @"192.168.9";
 	}
 }
 +(void) pollComplete:(NSNotification *) n{
-	[self printmactable];
-	[self printiptable];
+	//[self printmactable];
+	//[self printiptable];
 }
 
 +(void) newLease:(NSNotification *) n{
@@ -132,11 +137,11 @@ NSString* netmask  = @"192.168.9";
 	LeaseObject  *lobj = (LeaseObject *) [n object];
 	
 	[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
-		NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
+	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
 	if (humanname == NULL){
 		humanname = [[lobj name] isEqualToString:@" "] ? [lobj ipaddr] : [lobj name]; 
-		NSLog(@"new lease, setting MAC table %@ %@", [lobj macaddr], humanname);
+		//NSLog(@"new lease, setting MAC table %@ %@", [lobj macaddr], humanname);
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
 	}

@@ -57,6 +57,7 @@ static BOOL init = false;
 	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"deviceimagetable.txt"];
 	[lookuptable writeToFile:path atomically:YES];
+	
 }
 
 -(void) dealloc{

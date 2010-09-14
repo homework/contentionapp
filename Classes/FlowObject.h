@@ -43,8 +43,8 @@ typedef struct flow_data {
 @property(nonatomic,assign) unsigned short sport;
 @property(nonatomic,assign) unsigned short dport;
 
-@property(nonatomic,assign) NSString *ip_src; //WHY NOT RETAIN??
-@property(nonatomic,assign) NSString *ip_dst; //WHY NOT RETAIN??
+@property(nonatomic,retain) NSString *ip_src; //WHY NOT RETAIN??
+@property(nonatomic,retain) NSString *ip_dst; //WHY NOT RETAIN??
 
 -(id) initWithFlow: (FlowData *) flowData;
 -(id) initSynthetic: (NSString *) from to:(NSString *) to;

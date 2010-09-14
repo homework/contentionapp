@@ -50,6 +50,8 @@
 - (void)dealloc {
 	[navigationControllerDevices release];
 	[navigationControllerApplications release];
+	[tabBarController release];
+	[pollingThread release];
 	[window release];
 	[super dealloc];
 }

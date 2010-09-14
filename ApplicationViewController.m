@@ -29,7 +29,7 @@
 	[DeviceImageLookup initialize];
 	
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self] retain];
+	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
 	[self setVm:tmpvm];
 	[tmpvm release];
 	
@@ -84,7 +84,24 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			NSArray * _thumbs = [[NSArray arrayWithObjects: @"web.png", @"music.png", @"skype.png", @"telnet.png", @"chat.png", @"windowsmedia.png", @"iplayer.png", @"media.png", @"hwdb.png", nil] retain];
+			
+		/*TODO:fix this */
+			NSArray * _thumbs = [[NSArray arrayWithObjects: @"web.png",
+															@"websecure.png",
+															@"music.png",
+															@"skype.png", 
+															@"telnet.png", 
+															@"chat.png",
+															@"windowsmedia.png", 
+															@"iplayer.png",
+															@"media.png", 
+															@"hwdb.png",
+															@"internet.png",
+															@"ftp.png",
+															@"wireless.png",
+															@"network.png",
+															@"email.png",
+															nil] retain];
 			
 
 			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:name] imagelist:_thumbs parent:self];			
@@ -153,10 +170,7 @@
 	 //[w print:[node name]];
 	 }*/
 	
-	for (NodeTuple * node in self.sorteddata){
-		NSLog(@"identity = %@ name is %@", [node identifier], [node name]);
-		
-	}
+	
 }
 
 

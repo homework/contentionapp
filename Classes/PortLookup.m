@@ -15,8 +15,15 @@
 static int  number = 1;
 static NSString* udplookup[50000];
 static NSString* tcplookup[50000];
+static BOOL init = FALSE;
 
 +(void) initPorts{
+	
+	if (init)
+		return;
+	
+	init = TRUE;
+	
 	for (int i = 0; i < 50000; i++){
 		udplookup[i] = NULL;
 		tcplookup[i] = NULL;
@@ -28,7 +35,7 @@ static NSString* tcplookup[50000];
     lines = [[NSString stringWithContentsOfFile:filePath] componentsSeparatedByString:@"\n"];
     
     NSEnumerator *nse = [lines objectEnumerator];
-    
+   	
     while(tmp = [nse nextObject]) {
 		NSString *portnumber = nil;
 		NSString *protocol = nil;
@@ -42,6 +49,7 @@ static NSString* tcplookup[50000];
     lines = [[NSString stringWithContentsOfFile:filePath] componentsSeparatedByString:@"\n"];
     nse = [lines objectEnumerator];
     
+	
     while(tmp = [nse nextObject]) {
 		NSString *portnumber = nil;
 		NSString *protocol = nil;
@@ -49,7 +57,7 @@ static NSString* tcplookup[50000];
         [scanner scanUpToString:@"\t" intoString:&portnumber];
 		[scanner scanUpToString:@"\n" intoString:&protocol];
 		tcplookup[[portnumber intValue]] = [[NSString stringWithFormat:@"%@", protocol] retain];
-    }
+	}
 	
 }
 
@@ -68,54 +76,14 @@ static NSString* tcplookup[50000];
 	return NULL;
 }
 
-
-
-
-/*
-+(void) initialize {
-	
-	[self loadPortNumbers:@"udp_port" array:udplookup];
-	[self loadPortNumbers:@"tcp_port" array:tcplookup];
-}
-
-+(void) loadPortNumbers:(NSString *) name array:(NSString *[]) array{
-	
-	//prefill array will nulls
-	
-	for (int i = 0; i < 50000; i++){
-		array[i] = NULL;
++(void) dealloc{
+	for (int i =0; i < 50000; i++){
+		if (udplookup[i] != NULL)
+			[udplookup[i] release];
+		if (tcplookup[i] != NULL)
+			[tcplookup[i] release];
 	}
-	
-	NSString *tmp;
-    NSArray *lines;
-	NSString *filePath = [[NSBundle mainBundle] pathForResource:name ofType:@"txt"];
-    lines = [[NSString stringWithContentsOfFile:filePath] componentsSeparatedByString:@"\n"];
-    
-    NSEnumerator *nse = [lines objectEnumerator];
-    
-    while(tmp = [nse nextObject]) {
-		NSString *portnumber = nil;
-		NSString *protocol = nil;
-        NSScanner *scanner = [NSScanner scannerWithString:tmp];
-        [scanner scanUpToString:@"\t" intoString:&portnumber];
-		[scanner scanUpToString:@"\n" intoString:&protocol];
-		array[[portnumber intValue]] = [[NSString stringWithFormat:@"%@", protocol] retain];
-    }
+	[super dealloc];
 	
 }
-
-+(NSString *) lookup:(int) port protocol:(int) proto{
-	if (port > -1 && port < 50000){
-		if (proto == 6) // TCP
-		{
-			return tcplookup[port];
-		}	
-		else if (proto == 17){
-			return udplookup[port];
-		}	
-	}
-	return NULL;
-}
-*/
-
 @end

@@ -74,6 +74,7 @@
 -(void) dealloc{
 	[identifier release];
 	[name release];
+	[image release];
 	[super dealloc];
 }
 @end
