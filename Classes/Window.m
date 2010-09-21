@@ -58,11 +58,6 @@
 	}
 }
 
--(void) merge:(Window *) w{
-
-	
-}
-
 -(int) totalBytes:(int)pc{
 	
 	

@@ -10,7 +10,6 @@
 #include "config.h"
 #include "util.h"
 #include "rtab.h"
-#include "srpc.h"
 #include "timestamp.h"
 #include <string.h>
 #include <stdio.h>
@@ -24,20 +23,18 @@
 #include "LinkObject.h"
 #include "LeaseObject.h"
 #include "DeviceViewController.h"
+#include "RPCSend.h"
 
 @interface PollingThread : NSObject {
 	DeviceViewController *delegate;
 	//RpcSocket rps;
-	RpcConnection rpc;
 	char query[SOCK_RECV_BUF_LEN];
 	char resp[SOCK_RECV_BUF_LEN];
 	int qlen;
 	unsigned len;
-	char *host;
-	unsigned short port;
+	
 	int i, j;
 	struct timeval expected, current;
-	
 }
 
 
@@ -76,6 +73,7 @@ BinResults *mon_convert(Rtab *results);
  */
 void mon_free(BinResults *p);
 
+-(id) init;
 -(void) startpolling:(id)anObject;
 -(void) setDelegate:(DeviceViewController *) vc;
 @property(nonatomic, assign) DeviceViewController* delegate;

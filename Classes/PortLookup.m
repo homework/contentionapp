@@ -22,6 +22,8 @@ static BOOL init = FALSE;
 	if (init)
 		return;
 	
+	
+	NSLog(@"_______________INITING PORTS__________________________");
 	init = TRUE;
 	
 	for (int i = 0; i < 50000; i++){

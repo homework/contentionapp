@@ -27,7 +27,6 @@
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/NameResolver.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LeaseRecord.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceView.o
-/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DevicesTextInputView.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ContainerView.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationImageLookup.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceImageLookup.o
@@ -40,3 +39,5 @@
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/DeviceNameAlert.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/LongTuple.o
 /Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/ApplicationSubViewController.o
+/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/RPCSend.o
+/Users/tlodge/iphone/ContentionApp/ContentionApp/build/ContentionApp.build/Debug-iphoneos/ContentionApp.build/Objects-normal/armv6/UserEventLogger.o

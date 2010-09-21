@@ -55,12 +55,13 @@
 }
 
 
--(void) touched: (int) tag viewname:(NSString *) name position: (int) index{
+-(void) touched: (int) tag viewname:(NSString *) identifier position: (int) index{
 	
+	//[RPCSend sendquery];
 	
 	if (tag == LABEL){
 		if (self.editing){
-			DeviceView *deviceview = [self.vm viewForName:name];
+			DeviceView *deviceview = [self.vm viewForName:identifier];
 
 			DeviceNameAlert *alert = [[DeviceNameAlert alloc] 
 									  initWithTitle: @"Application Name" 
@@ -85,7 +86,7 @@
 	if (tag == IMAGE){
 		if (self.editing){
 			
-		/*TODO:fix this */
+		
 			NSArray * _thumbs = [[NSArray arrayWithObjects: @"web.png",
 															@"websecure.png",
 															@"music.png",
@@ -101,24 +102,26 @@
 															@"wireless.png",
 															@"network.png",
 															@"email.png",
+															@"unknown.png",
 															nil] retain];
 			
 
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:name] imagelist:_thumbs parent:self];			
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:_thumbs parent:self];			
 			picker.title = @"select an image";
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerApplications pushViewController:picker animated: YES];
 			[picker release];
 			
 		}else{
-			ApplicationSubViewController *detail = [[ApplicationSubViewController alloc] initWithNibName:nil bundle:nil nodename:name];
-			detail.title = [NSString stringWithFormat:@"%@", name];
+			ApplicationSubViewController *detail = [[ApplicationSubViewController alloc] initWithNibName:nil bundle:nil nodename:identifier];
+			detail.title = [NSString stringWithFormat:@"%@", identifier];
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerApplications pushViewController:detail animated: YES];
 			[detail release];
+			[UserEventLogger logdrilldown:identifier position:index screen:@"application"];
+			
 		}
 	}
-	
 }
 
 
@@ -126,6 +129,7 @@
 	[ApplicationImageLookup update:image forNode:identifier];
 	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	[delegate.navigationControllerApplications popViewControllerAnimated:YES];
+	[UserEventLogger logimagechange:identifier  newimage:image screen:@"application"];
 }
 
 -(void) pop{
@@ -140,6 +144,7 @@
 		NSString* newname = [[alertView textFieldAtIndex:0] text];
 		[NameResolver update:[deviceView identifier] newname:newname];
 		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
+		[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"application"];
 	}
 	//[NameResolver printmactable];
 	

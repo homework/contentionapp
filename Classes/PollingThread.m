@@ -41,13 +41,18 @@ static tstamp_t lastlease;
 @implementation PollingThread
 @synthesize delegate;
 
+-(id) init{
+	if (self = [super init]) {
+		[RPCSend initrpc];
+		lastflow = 0LL;
+		lastlink = 0LL;
+		lastlease = 0LL;
+	}
+	return self;
+}
+
 -(void) startpolling: (id) anObject{
 	NSAutoreleasePool *apool = [[NSAutoreleasePool alloc] init];
-	lastflow = 0LL;
-	lastlink = 0LL;
-	lastlease = 0LL;
-	host = HWDB_SERVER_ADDR;
-	port = HWDB_SERVER_PORT;
 	[self poll];
 	[apool release];
 }
@@ -59,23 +64,16 @@ static tstamp_t lastlease;
 
 -(void) poll{
 	
-	
-	if (!rpc_init(0)) {
-		fprintf(stderr, "Failure to initialize rpc system\n");
-		exit(1);
-	}
-	
-	
-	
+		
 	for(;;){	
-		NSLog(@"Connecting....\n");
-		rpc = rpc_connect(host, port, "HWDB", 1l);
+		//NSLog(@"Connecting....\n");
+		//[RPCSend initrpc];
+
+		//[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
 		
-		[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
-		
-		if (rpc){
+		//if ([RPCSend isConnected]){
 			
-			[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
+		//	[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
 			
 			
 			gettimeofday(&expected, NULL);
@@ -92,6 +90,7 @@ static tstamp_t lastlease;
 				if (![self pollflowtable]){
 					break;
 				}
+				
 				expected.tv_sec += TIME_DELTA;
 				gettimeofday(&current, NULL);
 				
@@ -108,19 +107,20 @@ static tstamp_t lastlease;
 				nanosleep(&time_delay, NULL);
 			}
 			
-		}
+		//}
 		
-		if (rpc){
+		/*if (rpc){
 			rpc_disconnect(rpc);
 		}
-		rpc_reinit(0);
-		[PollingThread performSelectorOnMainThread:@selector(disconnected:) withObject:nil waitUntilDone:NO];
+		rpc_reinit(0);*/
+		
+		//[PollingThread performSelectorOnMainThread:@selector(disconnected:) withObject:nil waitUntilDone:NO];
 		time_delay.tv_sec += TIME_DELTA;
 		time_delay.tv_nsec = 0;
 		nanosleep(&time_delay, NULL);
 		
 	}
-	rpc_disconnect(rpc);
+	//rpc_disconnect(rpc);
 	exit(0);
 }
 
@@ -211,7 +211,8 @@ static tstamp_t lastlease;
 -(int) polldatabase:(tstamp_t *) last{
 	qlen = strlen(query) + 1;
 	
-	if (! rpc_call(rpc, query, qlen, resp, sizeof(resp), &len)) {
+	//if (! rpc_call(rpc, query, qlen, resp, sizeof(resp), &len)) {
+	if (![RPCSend send: query qlen:qlen resp:resp rsize:sizeof(resp) len:&len]) {	
 		fprintf(stderr, "rpc_call() failed\n");
 		NSLog(@"----------------------------------------flows -- rpc call failed");
 		*last = 0LL;
@@ -436,7 +437,7 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 		// rtab_print(results);
 		p = dhcp_convert(results);
 		// do something with the data pointed to by p 
-		//NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
+		NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
 		for (i = 0; i < p->nleases; i++) {
 			DhcpData *l = p->data[i];
 			char *s = timestamp_to_string(l->tstamp);

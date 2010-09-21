@@ -66,6 +66,7 @@
 -(void) touched: (int) tag viewname:(NSString *) identifier position: (int) index{
 	
 	
+	
 	if (tag == LABEL){
 		if (self.editing){
 			DeviceView *deviceview = [self.vm viewForName:identifier];
@@ -80,7 +81,6 @@
 								  otherButtonTitles:@"OK", nil];
 			[alert addTextFieldWithValue:[deviceview name] label:@"Device Name"];
 			[alert setDeviceView:deviceview];
-			//[alert addTextFieldWithValue:@"http://" label:@"Enter URL"];
 			
 			// Name field
 			UITextField *tf = [alert textFieldAtIndex:0];
@@ -96,7 +96,7 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			NSArray * _thumbs = [[NSArray arrayWithObjects: @"mac.png", 
+			 _thumbs = [[NSArray arrayWithObjects: @"mac.png", 
 															@"phone.png", 
 															@"router.png",
 															@"laptop.png", 
@@ -110,10 +110,12 @@
 															@"printserver.png",
 															@"psp.png",
 															@"macmini.png",
+															@"unknown.png",
 															nil] retain];
 			
 			
 			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:_thumbs parent:self];			
+			
 			picker.title = @"select an image";
 			
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -127,6 +129,8 @@
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerDevices pushViewController:detail animated: YES];
 			[detail release];
+			[UserEventLogger logdrilldown:identifier position:index screen:@"device"];
+			
 		}
 	}
 	
@@ -139,9 +143,9 @@
 		NSString* newname = [[alertView textFieldAtIndex:0] text];
 		[NameResolver update:[deviceView identifier] newname:newname];
 		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
+		[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"device"];
 	}
-	[NameResolver printmactable];
-	
+	//[NameResolver printmactable];
 }
 
 
@@ -151,7 +155,10 @@
 	[DeviceImageLookup update:image forNode:identifier];
 	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	[delegate.navigationControllerDevices popViewControllerAnimated:YES];
+	[UserEventLogger logimagechange:identifier  newimage:image screen:@"device"];
+	
 }
+
 
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;

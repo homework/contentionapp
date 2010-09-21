@@ -16,12 +16,15 @@
 #import "CustomImagePicker.h"
 #import "DeviceNameAlert.h"
 #import "NameResolver.h"
+#import "UserEventLogger.h"
 
 @interface DeviceViewController : UIViewController <TouchResponse, UIAlertViewDelegate>{
 	NSMutableArray *sorteddata;
 	ViewManager *vm;
+	NSArray *_thumbs;
 }
 
 @property(nonatomic,retain) NSMutableArray* sorteddata;
 @property(nonatomic,retain) ViewManager* vm;
+
 @end

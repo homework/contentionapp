@@ -27,10 +27,9 @@ int SHISTORY = 5;
 
 -(id) init{
 	if (self = [super init]) {
-		NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithCapacity:10];// retain];
+		NSMutableDictionary *tmp = [NSMutableDictionary dictionaryWithCapacity:10];
 		[self setPOLLNUMBER: 0];
 		[self setData:tmp];
-		//[tmp release];
 	}
 	return self;
 }
@@ -92,7 +91,6 @@ int SHISTORY = 5;
 	if (dictionary != NULL){
 		Window *w = [dictionary objectForKey:subnode];
 		if (w != NULL){
-			//NSLog(@"bytes for %@ are %i", subnode, [w totalBytes:POLLNUMBER]);
 			return (float) [w totalBytes:POLLNUMBER] / MAXBYTES;
 		}
 	}
@@ -127,10 +125,9 @@ int SHISTORY = 5;
 	Window *w = [dictionary objectForKey:subnode];
 	
 	if (w == NULL){
-		//w = [[[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER] retain];
 		w = [[Window alloc]initWithSize:SHISTORY pollcount:POLLNUMBER];
 		[dictionary setObject:w forKey:subnode];
-		[w release];//hmmmm??/ really?
+		[w release];
 	}
 	
 	[w addBytes:bytes pollcount:POLLNUMBER];
@@ -150,11 +147,6 @@ int SHISTORY = 5;
 	}
 	int oldmax = MAXBYTES;
 	MAXBYTES = MAX(bandwidth, MAXBYTES);
-	
-	if (oldmax != MAXBYTES && [node isEqualToString:@"001ff3bcb257"]){
-		NSLog(@"MAXIMUM BYTES SET TO %d for node %@", MAXBYTES, node);
-	}
-	//NSLog(@"current bytes for %@ is %d and MAXNODEBYTES is %d so bandwitdh is %f", [n name], [w totalBytes:POLLNUMBER], MAXNODEBYTES, (float)[w totalBytes:POLLNUMBER]/MAXNODEBYTES);
 }
 
 -(void) removeZeroByteData{

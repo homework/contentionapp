@@ -689,6 +689,7 @@ int rpc_call(RpcConnection rpc, void *query, unsigned qlen,
     ctable_lock();
     if (! (cr = ctable_lookup(ep))) {
 	ctable_unlock();
+		printf("Cannot get endpoint...\n");
 	return result;
     }
     if (cr->state == ST_IDLE) {

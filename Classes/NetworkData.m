@@ -39,7 +39,6 @@ static NetworkTable *apptable;
 		devicetable = [[[NetworkTable alloc] init] retain];
 		apptable = [[[NetworkTable alloc] init] retain];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPollToStart:) name:@"newPoll" object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
 		init = TRUE;
 	}
@@ -55,9 +54,6 @@ static NetworkTable *apptable;
 	return [devicetable getAllData];
 }
 
-
-
-
 +(NSMutableArray *) getLatestApplicationDataForNode:(NSString *)node{
 	
 	return [devicetable getLatestDataForNode:node];
@@ -65,7 +61,6 @@ static NetworkTable *apptable;
 
 +(NSMutableArray *) getLatestDeviceDataForApplication:(NSString *)app{
 	return [apptable getLatestDataForNode:app];
-
 }
 
 +(float) getDeviceAppBandwidthProportion:(NSString *) node  application:(NSString *) a{
@@ -93,13 +88,7 @@ static NetworkTable *apptable;
 	[apptable removeZeroByteData];
 	[devicetable removeZeroByteData];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
-	[devicetable print:@"001ff3bcb257"];
-}
-
-
-
-
-+(void) newPollToStart: (NSNotification *) n{
+	//[devicetable print:];
 }
 
 +(void) newFlow: (NSNotification *) f{
@@ -142,22 +131,13 @@ static NetworkTable *apptable;
 	
 	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]];// destination:[fobj ip_dst]]; 
 	
-	if (deviceid != NULL){
-		if ([deviceid isEqualToString:@"001ff3bcb257"])
-			NSLog(@"new flow %@ %@ %d", deviceid, application, [fobj bytes]);
-		
+	if (deviceid != NULL)
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
-		
-	}
 	
 	deviceid  = [NameResolver getidentifier:[fobj ip_dst]];
 	
-	if (deviceid != NULL){
-		if ([deviceid isEqualToString:@"001ff3bcb257"])
-			NSLog(@"new flow %@ %@ %d", deviceid, application, [fobj bytes]);
-		
+	if (deviceid != NULL)
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
-	}
 	
 }
 
