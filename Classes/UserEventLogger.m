@@ -14,7 +14,7 @@
 
 +(void) log:(NSString *)type logdata:(NSString *)logdata{
 	
-	NSString* query = [[NSString stringWithFormat:@"SQL:insert into UserEventLog values ('%@', '%@', '%@')\n",
+	NSString* query = [NSString stringWithFormat:@"SQL:insert into UserEvents values (\"%@\", \"%@\", \"%@\")\n",
 						@"ContentionApp", type, logdata];
 	
 	[RPCSend sendquery:query];
@@ -24,7 +24,7 @@
  * Creates a userEvent entry of the form AppName, LogType, Screen;NodeId;NewImage
  */
 +(void) logimagechange:(NSString*)identifier newimage:(NSString*)image screen:(NSString*)screen{
-	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, identifier,newimage];
+	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, identifier,image];
 	[self log:@"imageUpdate" logdata:logdata];
 }
 					   
@@ -32,8 +32,8 @@
  * Creates a userEvent entry of the form AppName, LogType, Screen;NodeId;NewName
  */
 
-+(void) lognamechange:(NSString*)identifier newname:(NSString*)image screen:(NSString*)screen{
-	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, identifier,newimage];
++(void) lognamechange:(NSString*)identifier newname:(NSString*)name screen:(NSString*)screen{
+	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, identifier,name];
 	[self log:@"nameUpdate" logdata:logdata];
 }
 

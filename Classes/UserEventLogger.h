@@ -15,7 +15,7 @@
 
 +(void) log: (NSString *)event subevent:(NSString *) subevent;
 +(void) logimagechange:(NSString*)identifier newimage:(NSString*)image screen:(NSString*)screen;
-+(void) lognamechange:(NSString*)identifier newname:(NSString*)image screen:(NSString*)screen;
++(void) lognamechange:(NSString*)identifier newname:(NSString*)name screen:(NSString*)screen;
 +(void) logdrilldown:(NSString*)identifier position:(int)index screen:(NSString*)screen;
 
 @end

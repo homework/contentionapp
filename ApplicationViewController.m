@@ -132,10 +132,11 @@
 	[UserEventLogger logimagechange:identifier  newimage:image screen:@"application"];
 }
 
+/*
 -(void) pop{
 	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	[delegate.navigationControllerApplications popViewControllerAnimated:YES];
-}
+}*/
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
 	DeviceView *deviceView = ((DeviceNameAlert *) alertView).deviceView;
