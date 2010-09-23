@@ -26,6 +26,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	NSLog(@"device view loaded");
+
 	[DeviceImageLookup initialize];
 	
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
@@ -43,6 +45,11 @@
 	 * Timer For testing
 	 */
 	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+	[super viewDidAppear:animated];
+	[UserEventLogger logscreenchange:@"devices"];
 }
 
 

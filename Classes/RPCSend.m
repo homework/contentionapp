@@ -58,9 +58,8 @@ static unsigned length;
 	if (!connected)
 		if (![self connect])
 			return FALSE;
-	NSLog(@"query is %s", query);
+	
 	if (rpc){
-		NSLog(@"rpc is ok..qlen %d, resp size %d", qlen, rs);
 		@synchronized(rpc){
 			if (rpc_call(rpc, query, qlen, resp, rs, len)){
 				return TRUE;

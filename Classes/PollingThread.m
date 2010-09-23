@@ -43,7 +43,7 @@ static tstamp_t lastlease;
 
 -(id) init{
 	if (self = [super init]) {
-		[RPCSend initrpc];
+		
 		lastflow = 0LL;
 		lastlink = 0LL;
 		lastlease = 0LL;
@@ -63,7 +63,7 @@ static tstamp_t lastlease;
 }
 
 -(void) poll{
-	
+
 		
 	for(;;){	
 		//NSLog(@"Connecting....\n");
@@ -228,10 +228,9 @@ void dhcp_free(DhcpResults *p) {
 	
 	
     if (p) {
-        for (i = 0; i < p->nleases && p->data[i]; i++){
+        for (i = 0; i < p->nleases && p->data[i]; i++)
             free(p->data[i]);
-			
-		}
+		free(p->data);	
         free(p);
     }
 }
@@ -327,6 +326,7 @@ void link_mon_free(LinkResults *p) {
     if (p) {
         for (i = 0; i < p->nlinks && p->data[i]; i++)
             free(p->data[i]);
+		free(p->data);
         free(p);
     }
 }
@@ -348,13 +348,16 @@ BinResults *mon_convert(Rtab *results) {
     BinResults *ans;
     unsigned int i;
 	
-    if (! results || results->mtype != 0)
-        return NULL;
-    if (!(ans = (BinResults *)malloc(sizeof(BinResults))))
-        return NULL;
+    if (! results || results->mtype != 0){
+		return NULL;
+	}
+    if (!(ans = (BinResults *)malloc(sizeof(BinResults)))){
+		return NULL;
+	}
     ans->nflows = results->nrows;
     ans->data = (FlowData **)calloc(ans->nflows, sizeof(FlowData *));
-    if (! ans->data) {
+   
+	if (! ans->data) {
         free(ans);
 		return NULL;
     }
@@ -380,10 +383,11 @@ BinResults *mon_convert(Rtab *results) {
 		p->dport = atoi(columns[5]) & 0xffff;
 		p->packets = atol(columns[6]);
 		p->bytes = atol(columns[7]);
-		/*NSLog(@" %u  %s[%d]->%s:[%d]    %lu:%lu\n",  p->proto,
-		 columns[2], p->sport, columns[4],p->dport, p->packets,
-		 p->bytes);	*/
+		//NSLog(@" %u  %s[%d]->%s:[%d]    %lu:%lu\n",  p->proto,
+		// columns[2], p->sport, columns[4],p->dport, p->packets,
+		// p->bytes);	
 	}
+	
     return ans;
 }
 
@@ -393,6 +397,7 @@ void mon_free(BinResults *p) {
     if (p) {
         for (i = 0; i < p->nflows && p->data[i]; i++)
             free(p->data[i]);
+		free(p->data);
         free(p);
     }
 }

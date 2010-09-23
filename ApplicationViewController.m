@@ -25,7 +25,10 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	
+	
     [super viewDidLoad];
+	
 	[DeviceImageLookup initialize];
 	
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
@@ -44,6 +47,13 @@
 	 */
 	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
 }
+
+
+- (void)viewDidAppear:(BOOL)animated{
+	[super viewDidAppear:animated];
+	[UserEventLogger logscreenchange:@"applications"];
+}
+	
 
 
 -(NSString *) getImage:(NSString *) s{
@@ -163,20 +173,7 @@
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
-	
 	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	
-	/*
-	 NodeTuple* node;
-	 
-	 while ( (node = [enumerator nextObject])) {
-	 //Window *w = [self.bytehistory objectForKey:[node name]];
-	 //[node print];
-	 //: w.lastpoll currentpoll:POLLNUMBER];
-	 //[w print:[node name]];
-	 }*/
-	
-	
 }
 
 

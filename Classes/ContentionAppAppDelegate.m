@@ -23,7 +23,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     // Override point for customization after app launch
-    
+	[RPCSend initrpc];
+	[UserEventLogger logstartup];
+	
 	[window addSubview:[tabBarController view]];
     [window makeKeyAndVisible];
 	
@@ -35,12 +37,14 @@
 	[self setPollingThread:aPollingThread];	
 	[aPollingThread release];
 	[NSThread detachNewThreadSelector:@selector(startpolling:) toTarget:pollingThread withObject:nil];
+	
 	return YES;
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	// Save data if appropriate
+	[UserEventLogger logshutdown];
 }
 
 

@@ -18,6 +18,7 @@
 @property(nonatomic,retain) DeviceView *deviceView;
 @property(nonatomic, assign) UIViewController *parent;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil name:(DeviceView *)view;
+			
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil view:(DeviceView*) v imagelist:(NSArray*)images parent:(UIViewController *)p;
 
 @end
