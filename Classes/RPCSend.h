@@ -14,6 +14,7 @@
 	
 }
 
++(void) initrpc;
 +(BOOL) send: (void *) query qlen:(unsigned) qlen resp: (void*) resp rsize:(unsigned) rs len:(unsigned *) len;
 +(BOOL) sendquery:(NSString *)q;
 

@@ -15,8 +15,8 @@ static const int    BANDWIDTH	= 2;
 static const int    OTHER		= 3;
 
 @protocol TouchResponse
-
--(void) touched: (int) tag viewname:(NSString *) view position: (int) index;
+-(void) touched: (int) tag viewname:(NSString *) identifier position: (int) index;
+//-(void) touched: (int) tag viewname:(NSString *) view position: (int) index;
 -(NSString *) getImage:(NSString *) s;
 -(float) getBandwidthProportion:(NSString *) node;
 

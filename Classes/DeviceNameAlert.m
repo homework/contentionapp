@@ -13,11 +13,6 @@
 
 @synthesize deviceView;
 
-- (id)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]) {
-	}
-	return self;
-}
 
 -(void) dealloc{
 	[deviceView release];

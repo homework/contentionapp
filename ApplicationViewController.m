@@ -95,36 +95,15 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			
-		
-			NSArray * _thumbs = [[NSArray arrayWithObjects: @"web.png",
-															@"websecure.png",
-															@"music.png",
-															@"skype.png", 
-															@"telnet.png", 
-															@"chat.png",
-															@"windowsmedia.png", 
-															@"iplayer.png",
-															@"media.png", 
-															@"hwdb.png",
-															@"internet.png",
-															@"ftp.png",
-															@"wireless.png",
-															@"network.png",
-															@"email.png",
-															@"unknown.png",
-															nil] retain];
-			
-
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:_thumbs parent:self];			
-			picker.title = @"select an image";
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:[ImageList getList:@"applications"] parent:self];			
+			picker.title = picker.title = [NSString stringWithFormat:@"%@ image", identifier];
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerApplications pushViewController:picker animated: YES];
 			[picker release];
 			
 		}else{
 			ApplicationSubViewController *detail = [[ApplicationSubViewController alloc] initWithNibName:nil bundle:nil nodename:identifier];
-			detail.title = [NSString stringWithFormat:@"%@", identifier];
+			//detail.title = [NSString stringWithFormat:@"%@", identifier];
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerApplications pushViewController:detail animated: YES];
 			[detail release];
@@ -173,7 +152,7 @@
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
-	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	
 }
 
 

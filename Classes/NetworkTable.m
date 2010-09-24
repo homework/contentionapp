@@ -145,7 +145,6 @@ int SHISTORY = 5;
 		Window *w = [dictionary objectForKey:key];
 		bandwidth += [w totalBytes:POLLNUMBER];
 	}
-	int oldmax = MAXBYTES;
 	MAXBYTES = MAX(bandwidth, MAXBYTES);
 }
 

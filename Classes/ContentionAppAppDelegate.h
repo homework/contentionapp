@@ -21,7 +21,6 @@
 	PollingThread *pollingThread;
     MyNavigationViewController *navigationControllerDevices;
 	MyNavigationViewController *navigationControllerApplications;
-	PortLookup *porttable;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -29,6 +28,6 @@
 @property (nonatomic, retain) IBOutlet MyNavigationViewController *navigationControllerApplications;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) PollingThread *pollingThread;
-@property (nonatomic, retain) PortLookup *porttable;
+
 @end
 

@@ -8,7 +8,6 @@
 	NSString *name;
 	NSString *identifier;
 	UILabel *namelabel;
-	//OCProgress* bandwidthbar;
 	PDColoredProgressView *bandwidthbar;
 	int index;
 	UIViewController<TouchResponse>* touchDelegate;
@@ -28,5 +27,5 @@
 -(id) initWithValues:(NSString *) identifier name:(NSString *)name position:(int)position bandwidth:(float) bandwidth frame:(CGRect) frame image:(NSString*)i  imageindent:(float) i ;
 -(void) update:(int) index bandwidth:(float) bandwidth;
 -(void) updateImage:(NSString *)image;
--(void) updateImage:(NSString *)name;
+-(void) updateName:(NSString *)name;
 @end

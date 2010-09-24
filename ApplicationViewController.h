@@ -15,6 +15,7 @@
 #import "CustomImagePicker.h"
 #import "DeviceNameAlert.h"
 #import "UserEventLogger.h"
+#import "ImageList.h"
 
 @interface ApplicationViewController : UIViewController {
 	NSMutableArray *sorteddata;

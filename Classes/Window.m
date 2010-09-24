@@ -7,7 +7,9 @@
 //
 
 #import "Window.h"
-
+@interface Window (PrivateMethods)
+-(void) emptyOldSlots:(int) pc;
+@end
 
 @implementation Window
 

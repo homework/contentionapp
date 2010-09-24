@@ -18,5 +18,5 @@
 
 +(void)	initialize;
 +(void) update:(NSString *) image forNode:(NSString *) app;
-
++(NSString *) getImage:(NSString *) program;
 @end

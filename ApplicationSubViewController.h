@@ -12,7 +12,7 @@
 #import "ViewManager.h"
 #import "DeviceImageLookup.h"
 
-@interface ApplicationSubViewController : UIViewController {
+@interface ApplicationSubViewController : UIViewController <TouchResponse> {
 	NSMutableArray *sorteddata;
 	ViewManager *vm;
 	NSString *node;	

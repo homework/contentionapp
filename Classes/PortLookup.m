@@ -12,7 +12,6 @@
 @implementation PortLookup
 
 
-static int  number = 1;
 static NSString* udplookup[50000];
 static NSString* tcplookup[50000];
 static BOOL init = FALSE;
@@ -22,8 +21,6 @@ static BOOL init = FALSE;
 	if (init)
 		return;
 	
-	
-	NSLog(@"_______________INITING PORTS__________________________");
 	init = TRUE;
 	
 	for (int i = 0; i < 50000; i++){
@@ -66,7 +63,7 @@ static BOOL init = FALSE;
 
 +(NSString *)lookup:(unsigned short) port protocol:(unsigned short) proto {
 	//NSLog(@"looking up port %hu protocol %d", port, proto);
-	if (port > -1 && port < 50000){
+	if (port < 50000){
 		if (proto == 6) // TCP
 		{
 			return tcplookup[port];

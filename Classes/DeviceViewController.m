@@ -103,27 +103,9 @@
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			 _thumbs = [[NSArray arrayWithObjects: @"mac.png", 
-															@"phone.png", 
-															@"router.png",
-															@"laptop.png", 
-															@"iphone.png", 
-															@"sound.png",
-															@"blackberry.png",
-															@"game.png",
-															@"wii.png",
-															@"ipad.png",
-															@"printer.png",
-															@"printserver.png",
-															@"psp.png",
-															@"macmini.png",
-															@"unknown.png",
-															nil] retain];
+			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:[ImageList getList:@"devices"] parent:self];			
 			
-			
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:_thumbs parent:self];			
-			
-			picker.title = @"select an image";
+			picker.title = [NSString stringWithFormat:@"%@ image", [NameResolver friendlynamefrommac:identifier]];
 			
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			
@@ -171,7 +153,7 @@
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
 	
-	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
+	//NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
 	
 	/*
 	NodeTuple* node;

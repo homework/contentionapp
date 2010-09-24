@@ -128,11 +128,13 @@ static tstamp_t lastlease;
 	
 	if (lastflow) {
 		char *s = timestamp_to_string(lastflow);
-		NSLog(@"flow query is SQL:select * from Flows [ range %d seconds] where timestamp > %s",
+		/*NSLog(@"flow query is SQL:select * from Flows [ range %d seconds] where timestamp > %s",
 			  TIME_DELTA+1, s);
 		sprintf(query,
 				"SQL:select * from Flows [ range %d seconds] where timestamp > %s\n",
-				TIME_DELTA+1, s);
+				TIME_DELTA+1, s);*/
+		NSLog(@"flow query is SQL:select * from Flows [ since %s ]", s);
+		sprintf(query, "SQL:select * from Flows [ since %s ]\n",s);
 		free(s);
 	} else{
 		NSLog(@"flow query is SQL:select * from Flows [ range %d seconds]",
@@ -159,11 +161,14 @@ static tstamp_t lastlease;
 	
 	if (lastlease) {
 		char *s = timestamp_to_string(lastlease);
-		NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
+		/*NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
 			  TIME_DELTA*2, s);
 		sprintf(query,
 				"SQL:select * from Leases [ range %d seconds] where timestamp > %s",
-				TIME_DELTA*2, s);
+				TIME_DELTA*2, s);*/
+		NSLog(@"query is SQL:select * from Leases [ since %s ]",s);
+		sprintf(query,
+				"SQL:select * from Leases [since %s]\n", s);
 		free(s);
 	} else{
 		NSLog(@"query is SQL:select * from Leases\n");
@@ -225,8 +230,7 @@ static tstamp_t lastlease;
 
 void dhcp_free(DhcpResults *p) {
 	unsigned int i;
-	
-	
+
     if (p) {
         for (i = 0; i < p->nleases && p->data[i]; i++)
             free(p->data[i]);
@@ -454,7 +458,7 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 			[lobj release];
 			[autoreleasepool release];	
 			
-			//NSLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
+			NSLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
 			free(s);
 			free(a);
 		}

@@ -57,7 +57,6 @@
 		A38B878212229401009A7085 /* ApplicationImageLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = A38B878112229401009A7085 /* ApplicationImageLookup.m */; };
 		A38B87BB1222A4AF009A7085 /* DeviceImageLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = A38B87BA1222A4AF009A7085 /* DeviceImageLookup.m */; };
 		A39B8E3011FEF04400A7DAA6 /* DeviceSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B8E2E11FEF04400A7DAA6 /* DeviceSubViewController.m */; };
-		A39B8E3111FEF04400A7DAA6 /* DeviceSubView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39B8E2F11FEF04400A7DAA6 /* DeviceSubView.xib */; };
 		A39B8E4C11FEF70800A7DAA6 /* ApplicationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B8E4B11FEF70800A7DAA6 /* ApplicationView.m */; };
 		A39B8E5911FEF92800A7DAA6 /* ApplicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B8E5711FEF92800A7DAA6 /* ApplicationViewController.m */; };
 		A3A902B5123E821600070C67 /* blackberry.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902AA123E821600070C67 /* blackberry.png */; };
@@ -77,6 +76,7 @@
 		A3B18CAE1209A2590021242B /* hwdb.png in Resources */ = {isa = PBXBuildFile; fileRef = A3B18CAD1209A2590021242B /* hwdb.png */; };
 		A3B18CC71209A9690021242B /* email.png in Resources */ = {isa = PBXBuildFile; fileRef = A3B18CC61209A9690021242B /* email.png */; };
 		A3B18CCB1209ABB70021242B /* websecure.png in Resources */ = {isa = PBXBuildFile; fileRef = A3B18CCA1209ABB70021242B /* websecure.png */; };
+		A3C490DC124CBA7400ED66A5 /* ImageList.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C490DB124CBA7400ED66A5 /* ImageList.m */; };
 		A3C9A62512142FA6002734C1 /* FlowAnalyser.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C9A62412142FA6002734C1 /* FlowAnalyser.m */; };
 		A3C9A66A12143FA1002734C1 /* FlowRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C9A66912143FA1002734C1 /* FlowRecord.m */; };
 		A3CD3F4B12156C6600890E30 /* LinkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD3F4A12156C6600890E30 /* LinkObject.m */; };
@@ -180,7 +180,6 @@
 		A39B8E0611FEEBA000A7DAA6 /* TouchResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchResponse.h; sourceTree = "<group>"; };
 		A39B8E2D11FEF04400A7DAA6 /* DeviceSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceSubViewController.h; sourceTree = "<group>"; };
 		A39B8E2E11FEF04400A7DAA6 /* DeviceSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceSubViewController.m; sourceTree = "<group>"; };
-		A39B8E2F11FEF04400A7DAA6 /* DeviceSubView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceSubView.xib; sourceTree = "<group>"; };
 		A39B8E4A11FEF70800A7DAA6 /* ApplicationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationView.h; sourceTree = "<group>"; };
 		A39B8E4B11FEF70800A7DAA6 /* ApplicationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationView.m; sourceTree = "<group>"; };
 		A39B8E5611FEF92800A7DAA6 /* ApplicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationViewController.h; sourceTree = "<group>"; };
@@ -203,6 +202,8 @@
 		A3B18CAD1209A2590021242B /* hwdb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hwdb.png; sourceTree = "<group>"; };
 		A3B18CC61209A9690021242B /* email.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email.png; sourceTree = "<group>"; };
 		A3B18CCA1209ABB70021242B /* websecure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = websecure.png; sourceTree = "<group>"; };
+		A3C490DA124CBA7400ED66A5 /* ImageList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageList.h; sourceTree = "<group>"; };
+		A3C490DB124CBA7400ED66A5 /* ImageList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageList.m; sourceTree = "<group>"; };
 		A3C9A62312142FA6002734C1 /* FlowAnalyser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowAnalyser.h; sourceTree = "<group>"; };
 		A3C9A62412142FA6002734C1 /* FlowAnalyser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlowAnalyser.m; sourceTree = "<group>"; };
 		A3C9A66812143FA1002734C1 /* FlowRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowRecord.h; sourceTree = "<group>"; };
@@ -301,7 +302,6 @@
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				A32B732F121E952B008097BF /* DeviceInputView.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
-				A39B8E2F11FEF04400A7DAA6 /* DeviceSubView.xib */,
 				8D1107310486CEB800E47090 /* ContentionApp-Info.plist */,
 			);
 			name = Resources;
@@ -370,6 +370,8 @@
 				A37C775C121BFB1D005CD178 /* LeaseRecord.m */,
 				A31F8646122D0572005712BC /* LongTuple.h */,
 				A31F8647122D0572005712BC /* LongTuple.m */,
+				A3C490DA124CBA7400ED66A5 /* ImageList.h */,
+				A3C490DB124CBA7400ED66A5 /* ImageList.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -568,7 +570,6 @@
 				A382F7C611FDA0C7006AC7D3 /* laptop.png in Resources */,
 				A382F7F211FDA85B006AC7D3 /* pc.png in Resources */,
 				A382F7F411FDA865006AC7D3 /* iphone.png in Resources */,
-				A39B8E3111FEF04400A7DAA6 /* DeviceSubView.xib in Resources */,
 				A33F2EDD1206D69000B78F50 /* skype.png in Resources */,
 				A33F2EDE1206D69000B78F50 /* telnet.png in Resources */,
 				A33F2EDF1206D69000B78F50 /* unknown.png in Resources */,
@@ -653,6 +654,7 @@
 				A31F872B122D5AB2005712BC /* ApplicationSubViewController.m in Sources */,
 				A3D11083124758FB0099DED8 /* RPCSend.m in Sources */,
 				A30943E51248C9AE00028791 /* UserEventLogger.m in Sources */,
+				A3C490DC124CBA7400ED66A5 /* ImageList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

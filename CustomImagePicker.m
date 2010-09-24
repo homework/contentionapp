@@ -100,7 +100,7 @@ static  NSArray* _thumbs;
 
 
 - (void)dealloc {
-	[_thumbs release];
+	//[_thumbs release];
     [super dealloc];
 }
 

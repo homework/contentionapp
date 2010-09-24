@@ -1,0 +1,2 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../DeviceSubViewController.m: In function '-[DeviceSubViewController newNetworkData:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../DeviceSubViewController.m:65: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type

@@ -8,6 +8,9 @@
 
 #import "FlowAnalyser.h"
 
+@interface FlowAnalyser (PrivateMethods)
++(NSString*) getKey:(int) sport dport:(int)dp protocol:(int) proto;
+@end
 
 @implementation FlowAnalyser
 

@@ -12,7 +12,6 @@
 + (void)updateApplicationData:(FlowObject *) fobj;
 + (void)updateNodeData:(FlowObject *) fobj;
 + (void)pollComplete: (NSNotification *) n;
-+ (void)newPollToStart: (NSNotification *) n;
 + (void)newFlow: (NSNotification *) f;
 
 @end

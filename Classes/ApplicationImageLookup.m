@@ -8,8 +8,12 @@
 
 #import "ApplicationImageLookup.h"
 
+@interface ApplicationImageLookup (PrivateMethods)
++(void) writelookuptable;
+@end
 
 @implementation ApplicationImageLookup
+
 
 
 static NSMutableDictionary *lookuptable;

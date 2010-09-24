@@ -17,6 +17,7 @@
 #import "DeviceNameAlert.h"
 #import "NameResolver.h"
 #import "UserEventLogger.h"
+#import "ImageList.h";
 
 @interface DeviceViewController : UIViewController <TouchResponse, UIAlertViewDelegate>{
 	NSMutableArray *sorteddata;

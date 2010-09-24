@@ -8,6 +8,11 @@
 
 #import "DeviceImageLookup.h"
 
+@interface DeviceImageLookup (PrivateMethods)
++(void) writelookuptable;
++(NSString *) getDefault:(NSString *) program;
+@end
+
 
 @implementation DeviceImageLookup
 

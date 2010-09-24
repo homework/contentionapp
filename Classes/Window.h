@@ -22,6 +22,5 @@
 -(void) addBytes:(int) value pollcount:(int) pc;
 -(int) totalBytes:(int) pollcount;
 -(void) print:(NSString*)application;
--(void) merge:(Window *) w;
 
 @end

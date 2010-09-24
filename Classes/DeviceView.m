@@ -19,9 +19,7 @@ float imageindent;
 
 -(id) initWithValues:(NSString*) identity name:(NSString *) nodename position:(int) pos bandwidth: (float) b frame:(CGRect) frame image:(NSString*) img imageindent:(float) i {
 	UIImage *image = [UIImage imageNamed:img];
-	//self.bigframe = frame;
 	imageindent = i;
-	//[image drawInRect:CGRectMake(0.0, i, image.size.width, image.size.height)];
 	if (self = [self initWithFrame:frame]){
 		
 		deviceImage = image;
@@ -39,7 +37,6 @@ float imageindent;
 		[self update:pos bandwidth:b];
 		[self addSubview:namelabel];
 		[self addSubview:bandwidthbar];
-		// Load the display strings
 	}
 	return self;
 	
@@ -47,9 +44,7 @@ float imageindent;
 
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	
-	
-	
+		
 	if (index < 3){
 		
 		UITouch *touch = [touches anyObject];
@@ -65,8 +60,6 @@ float imageindent;
 		}
 	}else{
 		[self.touchDelegate touched:IMAGE viewname:identifier position:index];
-		//	NSLog(@"INDEX + %d", index);
-	//	[super touchesBegan:touches withEvent:event];
 	}
 }
 
@@ -88,8 +81,6 @@ float imageindent;
 	
 	
 	if (p < 3){
-		//self.backgroundColor = [UIColor clearColor];
-		//self.bounds = CGRectMake(0.0, 0.0, 320, 85);	
 		bandwidth = MAX(bandwidth, 0.1); //so that we see something for low bandwidths
 		[self.bandwidthbar setProgress:bandwidth];
 		if (bandwidth > 0.8){
@@ -105,10 +96,8 @@ float imageindent;
 		self.bandwidthbar.layer.opacity = 1.0f;
 		namelabel.layer.opacity  = 1.0f;
 	}else{
-		
 		namelabel.layer.opacity  = 0.0f;
 		self.bandwidthbar.layer.opacity = 0.0f;
-		//self.backgroundColor = [UIColor greenColor];
 	}
 	[self setNeedsDisplay];
 }
@@ -128,17 +117,6 @@ float imageindent;
 		[deviceImage drawAtPoint:(CGPointMake(imageindent -200, 0.0))];
 	}
 	imagebounds = CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height);
-	
-		
-	/*
-	 if (index < 3){
-	 CGContextRef context = UIGraphicsGetCurrentContext();
-	 CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-	 CGContextSetLineWidth(context, 1.0);
-	 CGContextMoveToPoint(context, 15.0, deviceImage.size.height/2);
-	 CGContextAddLineToPoint(context, 220.0, deviceImage.size.height/2);
-	 CGContextStrokePath(context);
-	 }*/
 }
 
 @end

@@ -22,7 +22,6 @@
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
 		[self setNode:n];
 		self.sorteddata = (NSMutableArray*)[[NetworkData getLatestApplicationDataForNode:node] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-		ApplicationImageLookup *lookup = [[ApplicationImageLookup alloc] retain];
 		ViewManager *tmpvm = [[[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self ] retain];
 		
 		[self setVm:tmpvm];

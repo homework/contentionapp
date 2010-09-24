@@ -27,7 +27,6 @@
 
 @interface PollingThread : NSObject {
 	DeviceViewController *delegate;
-	//RpcSocket rps;
 	char query[SOCK_RECV_BUF_LEN];
 	char resp[SOCK_RECV_BUF_LEN];
 	int qlen;

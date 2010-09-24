@@ -23,9 +23,6 @@
 
 @synthesize delegate;
 @synthesize nodes;
-//@synthesize layers;
-
-
 
 - (id)initWithFrame:(CGRect)frame nodes:(NSMutableArray *) n{
     if ((self = [super initWithFrame:frame])) {
@@ -54,7 +51,6 @@
 }
 
 -(float) getScale:(int) value{
-	//return 0.7f;
 	return MIN(1.0f, MAX (0.4f, ((float) value) / 50000)); 
 }
 
@@ -99,11 +95,7 @@
 		
 		if (position >= DEVICES)
 			break;
-		
-		//if (node == NULL)
-		//	break;
-		
-		
+			
 		int index = [self findLayerIndex:[node name]];
 		
 		
@@ -115,7 +107,7 @@
 		
 		mylayers[index].position	  =  mytitlelayers[index].position = [self getCoordinates:position];
 		
-		CGFloat factor = 1.0f;//[self getScale:[node value]];// 0.4f + ((random()/(CGFloat)RAND_MAX) * 0.6f);
+		CGFloat factor = 1.0f;
 		
 		if (position < 3){
 			CATransform3D transform = CATransform3DMakeScale(factor, factor, 1.0f);
@@ -241,9 +233,6 @@
 	imageLayer.contents = (id)image.CGImage;
 	imageLayer.frame = startFrame;
 	imageLayer.position = CGPointMake(0,0);
-	//imageLayer.name = [node name];
-	//float scale = [self getScale:[node value]];
-	//imageLayer.transform = CATransform3DMakeScale( scale, scale, 1.0 );
 	[appLayer addSublayer:imageLayer];
 	
 	appLayer.name =[node name];
