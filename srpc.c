@@ -80,8 +80,6 @@ static char my_name[16];
 static unsigned short my_port;
 static const struct timespec one_tick = {0, 20000000}; /* one tick is 20 ms */
 
-
-
 #ifdef LOG
 static void dumpsockNpacket(struct sockaddr_in *s, DataPayload *p, char *lstr) {
     unsigned long subport = ntohl(p->hdr.subport);
@@ -150,7 +148,7 @@ static void *reader(void *args) {
     int n;
 
     debugf("reader thread started\n");
-    for(;;){
+    for(;;) {
         unsigned short cmd;
         unsigned long sb;
         unsigned long seqno;
@@ -465,8 +463,7 @@ static void *timer(void *args) {
 
     debugf("timer thread started\n");
     for (;;) {
-   
-	if (nanosleep(&one_tick, NULL) != 0)
+        if (nanosleep(&one_tick, NULL) != 0)
             break;
 	ctable_lock();
 	if ((++counter % 500) == 0) {
@@ -476,16 +473,12 @@ static void *timer(void *args) {
 	    ctable_dump("LOGV> ");
 #endif /* VLOG */
 	}
-		
-	ctable_scan(&retry, &timed, &ping, &purge);
-	
+        ctable_scan(&retry, &timed, &ping, &purge);
 	while (purge != NULL) {
-	
 	    cr = purge->link;
 	    ctable_remove(purge);
 	    crecord_destroy(purge);
 	    purge = cr;
-		
 	}
 	while (timed != NULL) {
 	    cr = timed->link;
@@ -525,16 +518,11 @@ static int common_init(unsigned short port) {
     memset(&my_addr, 0, len);
     my_addr.sin_family = AF_INET;
     my_addr.sin_port = htons(port);
-	
-	my_sock = socket(AF_INET, SOCK_DGRAM, 0);
-	int result = bind(my_sock, (struct sockaddr *)&my_addr, sizeof(my_addr));
-	
-	if (my_sock < 0 || result < 0)
+    if ((my_sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ||
+        bind(my_sock, (struct sockaddr *)&my_addr, sizeof(my_addr)) < 0)
         return 0;
-	
     getsockname(my_sock, (struct sockaddr *)&my_addr, &len);
     my_port = ntohs(my_addr.sin_port);
-	
     if (pthread_create(&th, NULL, reader, NULL))
         return 0;
     if (pthread_create(&th, NULL, timer, NULL))
@@ -614,8 +602,6 @@ void rpc_details(char *ipaddr, unsigned short *port) {
 
 static RpcEndpoint *rpc_socket(char *host, unsigned short port,
 		            unsigned long subport) {
-	
-
     RpcEndpoint *s;
     struct hostent *hp = gethostbyname(host);
 
@@ -625,11 +611,12 @@ static RpcEndpoint *rpc_socket(char *host, unsigned short port,
         s = (RpcEndpoint *)mem_alloc(sizeof(RpcEndpoint));
     if (s) {
 	memset(&s->addr, 0, sizeof(struct sockaddr_in));
-	memcpy(&(s->addr).sin_addr, hp->h_addr_list[0], hp->h_length);
-	(s->addr).sin_family = AF_INET;
-	(s->addr).sin_port = htons(port);
+        memcpy(&(s->addr).sin_addr, hp->h_addr_list[0], hp->h_length);
+        (s->addr).sin_family = AF_INET;
+        (s->addr).sin_port = htons(port);
+//#ifdef HAVE_SOCKADDR_LEN
 	(s->addr).sin_len = sizeof(struct sockaddr_in);
-
+//#endif /* HAVE_SOCKADDR_LEN */
         s->subport = subport;
     }
     return s;
@@ -647,11 +634,9 @@ RpcConnection rpc_connect(char *host, unsigned short port,
     ctable_lock();
     subport = ctable_newSubport();
     nep = rpc_socket(host, port, subport);
-	
     len += strlen(svcName);			/* room for svcName */
-	
     buf = (ConnectPayload *)mem_alloc(len);
-	cp_complete((ControlPayload *)buf, nep->subport, CONNECT, seqno, 1, 1);
+    cp_complete((ControlPayload *)buf, nep->subport, CONNECT, seqno, 1, 1);
     strcpy(buf->sname, svcName);
     cr = crecord_create(nep, seqno);
     crecord_setPayload(cr, buf, len, ATTEMPTS, TICKS);
@@ -662,6 +647,9 @@ RpcConnection rpc_connect(char *host, unsigned short port,
     crecord_setState(cr, ST_CONNECT_SENT);
     ctable_insert(cr);
     if (crecord_waitForState(cr, states, 2) == ST_TIMEDOUT) {
+		/* edited by alex: delete the new connection from ctable anyway */
+		ctable_remove(cr);
+		/* */
         mem_free(nep);
         nep = NULL;
     }
@@ -689,7 +677,6 @@ int rpc_call(RpcConnection rpc, void *query, unsigned qlen,
     ctable_lock();
     if (! (cr = ctable_lookup(ep))) {
 	ctable_unlock();
-		printf("Cannot get endpoint...\n");
 	return result;
     }
     if (cr->state == ST_IDLE) {
@@ -758,7 +745,6 @@ int rpc_call(RpcConnection rpc, void *query, unsigned qlen,
 /* disconnect from target
  */
 void rpc_disconnect(RpcConnection rpc) {
-	
     RpcEndpoint *ep = (RpcEndpoint *)rpc;
     CRecord *cr;
     ControlPayload *cp;

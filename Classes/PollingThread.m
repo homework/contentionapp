@@ -63,64 +63,46 @@ static tstamp_t lastlease;
 }
 
 -(void) poll{
-
-		
+	
+	
 	for(;;){	
-		//NSLog(@"Connecting....\n");
-		//[RPCSend initrpc];
-
-		//[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
 		
-		//if ([RPCSend isConnected]){
+		gettimeofday(&expected, NULL);
+		expected.tv_usec = 0;
+		
+		for (;;){
 			
-		//	[PollingThread performSelectorOnMainThread:@selector(connected:) withObject:nil waitUntilDone:NO];
+			[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
 			
-			
-			gettimeofday(&expected, NULL);
-			expected.tv_usec = 0;
-			
-			for (;;){
-				
-				[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
-				
-				if (![self pollleasetable]){
-					break;
-				}
-				
-				if (![self pollflowtable]){
-					break;
-				}
-				
-				expected.tv_sec += TIME_DELTA;
-				gettimeofday(&current, NULL);
-				
-				if (current.tv_usec > 0) {
-					time_delay.tv_nsec = 1000 * (1000000 - current.tv_usec);
-					time_delay.tv_sec = expected.tv_sec - current.tv_sec - 1;
-				} else {
-					time_delay.tv_nsec = 0;
-					time_delay.tv_sec = expected.tv_sec - current.tv_sec;
-				}
-				
-				[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
-				
-				nanosleep(&time_delay, NULL);
+			if (![self pollleasetable]){
+				break;
 			}
 			
-		//}
-		
-		/*if (rpc){
-			rpc_disconnect(rpc);
+			if (![self pollflowtable]){
+				break;
+			}
+			
+			expected.tv_sec += TIME_DELTA;
+			gettimeofday(&current, NULL);
+			
+			if (current.tv_usec > 0) {
+				time_delay.tv_nsec = 1000 * (1000000 - current.tv_usec);
+				time_delay.tv_sec = expected.tv_sec - current.tv_sec - 1;
+			} else {
+				time_delay.tv_nsec = 0;
+				time_delay.tv_sec = expected.tv_sec - current.tv_sec;
+			}
+			
+			[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
+			
+			nanosleep(&time_delay, NULL);
 		}
-		rpc_reinit(0);*/
 		
-		//[PollingThread performSelectorOnMainThread:@selector(disconnected:) withObject:nil waitUntilDone:NO];
 		time_delay.tv_sec += TIME_DELTA;
 		time_delay.tv_nsec = 0;
 		nanosleep(&time_delay, NULL);
 		
 	}
-	//rpc_disconnect(rpc);
 	exit(0);
 }
 
@@ -128,11 +110,6 @@ static tstamp_t lastlease;
 	
 	if (lastflow) {
 		char *s = timestamp_to_string(lastflow);
-		/*NSLog(@"flow query is SQL:select * from Flows [ range %d seconds] where timestamp > %s",
-			  TIME_DELTA+1, s);
-		sprintf(query,
-				"SQL:select * from Flows [ range %d seconds] where timestamp > %s\n",
-				TIME_DELTA+1, s);*/
 		NSLog(@"flow query is SQL:select * from Flows [ since %s ]", s);
 		sprintf(query, "SQL:select * from Flows [ since %s ]\n",s);
 		free(s);
@@ -161,11 +138,6 @@ static tstamp_t lastlease;
 	
 	if (lastlease) {
 		char *s = timestamp_to_string(lastlease);
-		/*NSLog(@"query is SQL:select * from Leases [ range %d seconds] where timestamp > %s",
-			  TIME_DELTA*2, s);
-		sprintf(query,
-				"SQL:select * from Leases [ range %d seconds] where timestamp > %s",
-				TIME_DELTA*2, s);*/
 		NSLog(@"query is SQL:select * from Leases [ since %s ]",s);
 		sprintf(query,
 				"SQL:select * from Leases [since %s]\n", s);
@@ -214,9 +186,10 @@ static tstamp_t lastlease;
 
 
 -(int) polldatabase:(tstamp_t *) last{
+	
 	qlen = strlen(query) + 1;
 	
-	//if (! rpc_call(rpc, query, qlen, resp, sizeof(resp), &len)) {
+	
 	if (![RPCSend send: query qlen:qlen resp:resp rsize:sizeof(resp) len:&len]) {	
 		fprintf(stderr, "rpc_call() failed\n");
 		NSLog(@"----------------------------------------flows -- rpc call failed");
@@ -230,7 +203,7 @@ static tstamp_t lastlease;
 
 void dhcp_free(DhcpResults *p) {
 	unsigned int i;
-
+	
     if (p) {
         for (i = 0; i < p->nleases && p->data[i]; i++)
             free(p->data[i]);
@@ -360,7 +333,7 @@ BinResults *mon_convert(Rtab *results) {
 	}
     ans->nflows = results->nrows;
     ans->data = (FlowData **)calloc(ans->nflows, sizeof(FlowData *));
-   
+	
 	if (! ans->data) {
         free(ans);
 		return NULL;

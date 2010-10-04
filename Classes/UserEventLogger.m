@@ -12,12 +12,21 @@
 @implementation UserEventLogger
 
 
+
 +(void) log:(NSString *)type logdata:(NSString *)logdata{
+
+	
 	
 	NSString* query = [NSString stringWithFormat:@"SQL:insert into UserEvents values (\"%@\", \"%@\", \"%@\")\n",
 						@"ContentionApp", type, logdata];
 	
+	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
+}
+
++(void) sendquery:(NSString *) query{
+	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 	[RPCSend sendquery:query];
+	[autoreleasepool release];
 }
 
 /*

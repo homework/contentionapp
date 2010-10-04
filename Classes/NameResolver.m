@@ -19,12 +19,51 @@ NSMutableDictionary *maclookuptable;
 
 NSString* netmask  = @"192.168.9";
 static BOOL init = FALSE;
+static char result[16];
 
 @implementation NameResolver
+
+char* IPAddressToString(unsigned int ip)
+{
+	sprintf(result, "%d.%d.%d.%d",
+			(ip >> 24) & 0xFF,
+			(ip >> 16) & 0xFF,
+			(ip >>  8) & 0xFF,
+			(ip      ) & 0xFF);
+	return result;
+}
+
+unsigned int IPToInt(unsigned int c1, unsigned int c2, unsigned int c3, unsigned int c4){
+	scanf("%d.%d.%d.%d",&c1,&c2,&c3,&c4);
+	unsigned int ip = (unsigned int)c4+c3*256+c2*256*256+c1*256*256*256;
+	return ip;
+}
+
+unsigned int getNetmask(unsigned int suffix){
+	//int mask = 0xffffffff ^ 0xffffffff >> suffix;
+	return ~(0xffffffff >> suffix);
+}
 
 +(void) initialize{
 	if (init)
 		return;
+	/*test netmask code*/
+	unsigned int local = IPToInt(192, 168, 9, 0);
+	unsigned int myip2 = IPToInt(192,168, 9,255);
+	
+	unsigned int mask = getNetmask(24);
+	
+	
+	NSLog(@"lcoal = %u, myip2 = %u, mask = %u", local, myip2, mask);
+		  
+	NSLog(@"MASK IS %s", IPAddressToString(mask));
+	
+	if ((mask&local) == (mask&myip2)){
+		NSLog(@"a match on network addresses %s %s", IPAddressToString(mask&local), IPAddressToString(mask&myip2));
+	}else{
+		NSLog(@"no match %s %s",  IPAddressToString(mask&local), IPAddressToString(mask&myip2));
+	}
+	/*end test*/
 	
 	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
@@ -40,7 +79,6 @@ static BOOL init = FALSE;
 	
 	iplookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
 	init = TRUE;
 	
 }
@@ -127,10 +165,6 @@ static BOOL init = FALSE;
 		NSLog(@"%@    %@", key, name);
 	}
 }
-+(void) pollComplete:(NSNotification *) n{
-	//[self printmactable];
-	//[self printiptable];
-}
 
 +(void) newLease:(NSNotification *) n{
 	
@@ -141,7 +175,6 @@ static BOOL init = FALSE;
 	
 	if (humanname == NULL){
 		humanname = [[lobj name] isEqualToString:@" "] ? [lobj ipaddr] : [lobj name]; 
-		//NSLog(@"new lease, setting MAC table %@ %@", [lobj macaddr], humanname);
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
 	}

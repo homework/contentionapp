@@ -17,6 +17,7 @@
 -(void) addNewView:(NodeTuple *) node position:(int) pos;
 -(void) printTables;
 -(void) newNetworkData:(NSNotification *) n;
+-(void) removeOldViews:(NSMutableArray *) data;
 @end
 
 
@@ -39,8 +40,6 @@ const static float	VIEWHEIGHT  = 85;
 	
 	return self;
 }
-
-
 
 -(BOOL) containsView:(NSString*) name data:(NSMutableArray*)data{
 	NSEnumerator *enumerator = [data objectEnumerator];
@@ -70,19 +69,8 @@ const static float	VIEWHEIGHT  = 85;
 	
 	//remove old views here..
 	
-	for (int i = 0; i < DEVICES; i++){
-		if (myviews[i] != NULL){
-			DeviceView *current = (DeviceView*) myviews[i]; 
-			
-			if (![self containsView:current.identifier data:data]){
-				//UIView *container = current;//[current superview];
-				//[current removeFromSuperview];
-				[current removeFromSuperview];
-				myviews[i] = NULL;
-			}
-		}
-	}
-	
+	[self removeOldViews:data];
+		
 	int position = 0;
 	
 	[UIView beginAnimations:nil context:NULL];
@@ -96,20 +84,12 @@ const static float	VIEWHEIGHT  = 85;
 		int index = [self findViewIndex:[node identifier]];
 		
 		if (index == -1){
-			
 			[self addNewView:node position:position];
 			index = [self findViewIndex:[node identifier]];
 		}
 		
-	    if (index == -1){
-			NSLog(@"INDEX IS -1");
-		}
-		
 		CGPoint newPosition = [self getCoordinates:position];
-		
-		
-		myviews[index].center = newPosition;//superview.center = newPosition;
-	
+		myviews[index].center = newPosition;
 		[myviews[index] update:position bandwidth:[viewController getBandwidthProportion:[node identifier]]];
 		
 		CGRect bounds;
@@ -125,7 +105,7 @@ const static float	VIEWHEIGHT  = 85;
 			bounds= CGRectMake(0.0, 0.0, 100, 85);
 		}
 				
-		myviews[index].bounds = bounds; //squashes before transforms - doesn't look nice.
+		myviews[index].bounds = bounds; 
 		myviews[index].transform = transform;
 		
 		position++;
@@ -134,6 +114,18 @@ const static float	VIEWHEIGHT  = 85;
 	[UIView commitAnimations];
 }
 
+
+-(void) removeOldViews:(NSMutableArray *) data{
+	for (int i = 0; i < DEVICES; i++){
+		if (myviews[i] != NULL){
+			DeviceView *current = (DeviceView*) myviews[i]; 
+			if (![self containsView:current.identifier data:data]){
+				[current removeFromSuperview];
+				myviews[i] = NULL;
+			}
+		}
+	}	
+}
 
 -(DeviceView*) viewForName:(NSString *) identifier{
 	int index = [self findViewIndex:identifier];
@@ -145,14 +137,11 @@ const static float	VIEWHEIGHT  = 85;
 
 -(int) findViewIndex:(NSString *) identifier{
 	for (int i = 0; i < DEVICES; i++){
-		
-		
 		DeviceView *current = (DeviceView *) myviews[i]; 
 		if (current != NULL){
 			if (current.identifier != nil){
 				if ([current.identifier isEqualToString:identifier])
 					return i;
-				
 			}
 		}
 	}
@@ -178,51 +167,35 @@ const static float	VIEWHEIGHT  = 85;
 		frame = CGRectMake(0.0, 0.0, self.view.bounds.size.width, VIEWHEIGHT);
 	else
 		frame = CGRectMake(0.0, self.view.bounds.size.height, 100, 85);
-	//ContainerView *container = [[[ContainerView alloc] initWithFrame:frame] retain];
+	
 	float bandwidth = [viewController getBandwidthProportion:[node identifier]];
 	DeviceView *pview = [[[DeviceView alloc] initWithValues:[node identifier] name:[node name] position:pos bandwidth:bandwidth frame:frame image:myImage imageindent:IMAGEINDENT] retain];
 	
 	[pview setBackgroundColor:[UIColor clearColor]];
 	[pview setTouchDelegate:[self viewController]];
-	//[container setBackgroundColor:[UIColor clearColor]];
 	pview.center = [self getCoordinates:pos];
-	//[container addSubview:pview];
 	
 	if (pos >=3){
-		
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationDuration:0.5];
 		[UIView setAnimationDelegate:self];
 		CGAffineTransform transform = CGAffineTransformMakeScale(0.5, 0.5);
 		pview.transform = transform;
-		
 		pview.bounds= CGRectMake(0.0, 0.0, 100, 85);
 		[UIView commitAnimations];
-		
-
 	}
 	
-	[self.view addSubview:pview];//container];
-	
-	BOOL space = false;
+	[self.view addSubview:pview];
 	
 	for (int i = 0; i < DEVICES; i++){
 		if (myviews[i] == NULL){
 			myviews[i] = pview;
-			space = true;
 			break;
 		}
 	}
-	if (!space){
-		NSLog(@"run out of space!!");
-	}
-	
 }
 
-
-
 -(void) createViews:(NSMutableArray*)data{
-	
 	
 	NSEnumerator *enumerator = [data objectEnumerator];
     NodeTuple* node;
@@ -234,23 +207,6 @@ const static float	VIEWHEIGHT  = 85;
 		[self addNewView:node position: count];
 		count +=1;
 	}
-	
 }
-
-/*
--(void) printTable{
-	
-	NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	
-	NodeTuple* node;
-	
-	while ( (node = [enumerator nextObject])) {
-		//Window *w = [self.bytehistory objectForKey:[node name]];
-		[node print];
-		//: w.lastpoll currentpoll:POLLNUMBER];
-		//[w print:[node name]];
-	}
-}
-*/
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import "RPCSend.h"
-
+@interface RPCSend (PrivateMethods)
++(void) notifydisconnected;
++(void) notifyconnected;
+@end
 
 @implementation RPCSend
 
@@ -15,18 +18,22 @@ static RpcConnection rpc;
 static char *host;
 static unsigned short port;
 static BOOL connected;
-
-
+static char hwdbaddr[16];
 static char response[SOCK_RECV_BUF_LEN];
 static char sendquery[SOCK_RECV_BUF_LEN];
 static unsigned querylen;
 static unsigned length;
 
 +(void) initrpc{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];  
+	port = [userDefaults integerForKey:@"HWDBP"];
+	NSString *rip = [userDefaults stringForKey:@"RouterIP"];
+	sprintf(hwdbaddr, [rip UTF8String]);
 	
-	host = HWDB_SERVER_ADDR;
+	host = hwdbaddr;
 	port = HWDB_SERVER_PORT;
-	
+	NSLog(@"port is %d addr is %@", port, rip);
+
 	connected = FALSE;
 	NSLog(@"initing rpc");
 	if (!rpc_init(0)) {
@@ -41,9 +48,11 @@ static unsigned length;
 	rpc = rpc_connect(host, port, "HWDB", 1l);
 	if (rpc){
 		connected = TRUE;
+		[self notifyconnected];
 		NSLog(@"successfully connected");
 		return TRUE;
 	}
+	[self notifydisconnected];
 	return FALSE;
 }
 
@@ -56,17 +65,32 @@ static unsigned length;
 +(BOOL) send: (void *) query qlen:(unsigned) qlen resp: (void*) resp rsize:(unsigned) rs len:(unsigned *) len{
 	
 	if (!connected)
-		if (![self connect])
+		if (![self connect]){
+			connected = FALSE;
+			[self notifydisconnected];
 			return FALSE;
+		}
 	
 	if (rpc){
 		@synchronized(rpc){
 			if (rpc_call(rpc, query, qlen, resp, rs, len)){
 				return TRUE;
-			} 
+			}else{
+				rpc_disconnect(rpc);
+				connected = FALSE;
+				[self notifydisconnected];
+			}
 		}
 	}
 	return FALSE;
+}
+
++(void) notifydisconnected{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"disconnected" object:nil];
+}
+
++(void) notifyconnected{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"connected" object:nil];
 }
 
 @end

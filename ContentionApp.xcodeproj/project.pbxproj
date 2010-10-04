@@ -15,6 +15,8 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* DeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* DeviceViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		A300E7D81259DF5D00323E07 /* srpc.c in Sources */ = {isa = PBXBuildFile; fileRef = A300E7D71259DF5D00323E07 /* srpc.c */; };
+		A300E859125A047700323E07 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A300E858125A047700323E07 /* Settings.bundle */; };
 		A3032C261223C30900B6FC3F /* PDColoredProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3032C251223C30900B6FC3F /* PDColoredProgressView.m */; };
 		A3032C281223C31900B6FC3F /* drawing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3032C271223C31900B6FC3F /* drawing.m */; };
 		A3032E07122422F200B6FC3F /* NetworkData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3032E06122422F200B6FC3F /* NetworkData.m */; };
@@ -41,7 +43,6 @@
 		A34E399611D4B489005819E1 /* ctable.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E398411D4B489005819E1 /* ctable.c */; };
 		A34E399711D4B489005819E1 /* endpoint.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E398611D4B489005819E1 /* endpoint.c */; };
 		A34E399811D4B489005819E1 /* rtab.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E398811D4B489005819E1 /* rtab.c */; };
-		A34E399911D4B489005819E1 /* srpc.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E398A11D4B489005819E1 /* srpc.c */; };
 		A34E399A11D4B489005819E1 /* stable.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E398D11D4B489005819E1 /* stable.c */; };
 		A34E399B11D4B489005819E1 /* timestamp.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E398E11D4B489005819E1 /* timestamp.c */; };
 		A34E399C11D4B489005819E1 /* tslist.c in Sources */ = {isa = PBXBuildFile; fileRef = A34E399111D4B489005819E1 /* tslist.c */; };
@@ -107,6 +108,8 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* ContentionApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ContentionApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A300E7D71259DF5D00323E07 /* srpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = srpc.c; sourceTree = "<group>"; };
+		A300E858125A047700323E07 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A3032C241223C2FD00B6FC3F /* PDColoredProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDColoredProgressView.h; sourceTree = "<group>"; };
 		A3032C251223C30900B6FC3F /* PDColoredProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDColoredProgressView.m; sourceTree = "<group>"; };
 		A3032C271223C31900B6FC3F /* drawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = drawing.m; sourceTree = "<group>"; };
@@ -150,7 +153,6 @@
 		A34E398711D4B489005819E1 /* endpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = endpoint.h; sourceTree = "<group>"; };
 		A34E398811D4B489005819E1 /* rtab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rtab.c; sourceTree = "<group>"; };
 		A34E398911D4B489005819E1 /* rtab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rtab.h; sourceTree = "<group>"; };
-		A34E398A11D4B489005819E1 /* srpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = srpc.c; sourceTree = "<group>"; };
 		A34E398B11D4B489005819E1 /* srpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srpc.h; sourceTree = "<group>"; };
 		A34E398C11D4B489005819E1 /* stable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stable.h; sourceTree = "<group>"; };
 		A34E398D11D4B489005819E1 /* stable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stable.c; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A300E858125A047700323E07 /* Settings.bundle */,
 				A3D10FCA123FC6540099DED8 /* applications */,
 				A39B8EAC120039BD00A7DAA6 /* devices */,
 				A3B18B54120869D00021242B /* udp_port.txt */,
@@ -316,6 +319,25 @@
 				A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A300E79C1259D59F00323E07 /* Lookup */ = {
+			isa = PBXGroup;
+			children = (
+				A37C7706121BDFD2005CD178 /* NameResolver.h */,
+				A37C7707121BDFD2005CD178 /* NameResolver.m */,
+				A3C490DA124CBA7400ED66A5 /* ImageList.h */,
+				A3C490DB124CBA7400ED66A5 /* ImageList.m */,
+				A38B87B91222A4AF009A7085 /* DeviceImageLookup.h */,
+				A38B87BA1222A4AF009A7085 /* DeviceImageLookup.m */,
+				A38B878012229401009A7085 /* ApplicationImageLookup.h */,
+				A38B878112229401009A7085 /* ApplicationImageLookup.m */,
+				A3B18B3A1208643C0021242B /* PortLookup.h */,
+				A3B18B3B1208643C0021242B /* PortLookup.m */,
+				A3C9A62312142FA6002734C1 /* FlowAnalyser.h */,
+				A3C9A62412142FA6002734C1 /* FlowAnalyser.m */,
+			);
+			name = Lookup;
 			sourceTree = "<group>";
 		};
 		A30943E01248C99900028791 /* Loggers */ = {
@@ -352,10 +374,12 @@
 		A33F2C9712017A8700B78F50 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				A38B878012229401009A7085 /* ApplicationImageLookup.h */,
-				A38B878112229401009A7085 /* ApplicationImageLookup.m */,
-				A38B87B91222A4AF009A7085 /* DeviceImageLookup.h */,
-				A38B87BA1222A4AF009A7085 /* DeviceImageLookup.m */,
+				A34E39E811D4B58F005819E1 /* FlowObject.h */,
+				A34E39E911D4B58F005819E1 /* FlowObject.m */,
+				A3CD3F4912156C6600890E30 /* LinkObject.h */,
+				A3CD3F4A12156C6600890E30 /* LinkObject.m */,
+				A3CD404E12194DCC00890E30 /* LeaseObject.h */,
+				A3CD404F12194DCC00890E30 /* LeaseObject.m */,
 				A33F2C9F12017AEC00B78F50 /* NodeTuple.h */,
 				A33F2CA012017AEC00B78F50 /* NodeTuple.m */,
 				A303FF1C1212EC8C0055D7D8 /* Window.h */,
@@ -364,14 +388,10 @@
 				A3C9A66912143FA1002734C1 /* FlowRecord.m */,
 				A3032E05122422F200B6FC3F /* NetworkData.h */,
 				A3032E06122422F200B6FC3F /* NetworkData.m */,
-				A3CD4FE91226AE2E001420F0 /* NetworkTable.h */,
-				A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */,
 				A37C775B121BFB1D005CD178 /* LeaseRecord.h */,
 				A37C775C121BFB1D005CD178 /* LeaseRecord.m */,
 				A31F8646122D0572005712BC /* LongTuple.h */,
 				A31F8647122D0572005712BC /* LongTuple.m */,
-				A3C490DA124CBA7400ED66A5 /* ImageList.h */,
-				A3C490DB124CBA7400ED66A5 /* ImageList.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -393,7 +413,7 @@
 				A34E398611D4B489005819E1 /* endpoint.c */,
 				A34E398811D4B489005819E1 /* rtab.c */,
 				A34E398911D4B489005819E1 /* rtab.h */,
-				A34E398A11D4B489005819E1 /* srpc.c */,
+				A300E7D71259DF5D00323E07 /* srpc.c */,
 				A34E398B11D4B489005819E1 /* srpc.h */,
 				A34E398C11D4B489005819E1 /* stable.h */,
 				A34E398D11D4B489005819E1 /* stable.c */,
@@ -444,16 +464,10 @@
 		A34E39A311D4B539005819E1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A3B18B3A1208643C0021242B /* PortLookup.h */,
-				A3B18B3B1208643C0021242B /* PortLookup.m */,
-				A3C9A62312142FA6002734C1 /* FlowAnalyser.h */,
-				A3C9A62412142FA6002734C1 /* FlowAnalyser.m */,
 				A34E39E211D4B55A005819E1 /* PollingThread.h */,
 				A34E39E311D4B55A005819E1 /* PollingThread.m */,
 				A3D11081124758FB0099DED8 /* RPCSend.h */,
 				A3D11082124758FB0099DED8 /* RPCSend.m */,
-				A37C7706121BDFD2005CD178 /* NameResolver.h */,
-				A37C7707121BDFD2005CD178 /* NameResolver.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -461,12 +475,9 @@
 		A34E39E711D4B57B005819E1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A34E39E811D4B58F005819E1 /* FlowObject.h */,
-				A34E39E911D4B58F005819E1 /* FlowObject.m */,
-				A3CD3F4912156C6600890E30 /* LinkObject.h */,
-				A3CD3F4A12156C6600890E30 /* LinkObject.m */,
-				A3CD404E12194DCC00890E30 /* LeaseObject.h */,
-				A3CD404F12194DCC00890E30 /* LeaseObject.m */,
+				A3CD4FE91226AE2E001420F0 /* NetworkTable.h */,
+				A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */,
+				A300E79C1259D59F00323E07 /* Lookup */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -601,6 +612,7 @@
 				A3A902BD123E821600070C67 /* psp.png in Resources */,
 				A3A902BE123E821600070C67 /* wii.png in Resources */,
 				A3A902BF123E821600070C67 /* wireless.png in Resources */,
+				A300E859125A047700323E07 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,7 +631,6 @@
 				A34E399611D4B489005819E1 /* ctable.c in Sources */,
 				A34E399711D4B489005819E1 /* endpoint.c in Sources */,
 				A34E399811D4B489005819E1 /* rtab.c in Sources */,
-				A34E399911D4B489005819E1 /* srpc.c in Sources */,
 				A34E399A11D4B489005819E1 /* stable.c in Sources */,
 				A34E399B11D4B489005819E1 /* timestamp.c in Sources */,
 				A34E399C11D4B489005819E1 /* tslist.c in Sources */,
@@ -655,6 +666,7 @@
 				A3D11083124758FB0099DED8 /* RPCSend.m in Sources */,
 				A30943E51248C9AE00028791 /* UserEventLogger.m in Sources */,
 				A3C490DC124CBA7400ED66A5 /* ImageList.m in Sources */,
+				A300E7D81259DF5D00323E07 /* srpc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
