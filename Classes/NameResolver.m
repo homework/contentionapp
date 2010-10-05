@@ -11,15 +11,18 @@
 @interface NameResolver (PrivateMethods)
 +(void) newLease:(NSNotification *) n;
 +(void) writeMacTable;
++(unsigned int) intFromIP:(NSString *)ipaddr;
 @end
 
 int count;
 NSMutableDictionary *iplookuptable;
 NSMutableDictionary *maclookuptable;
 
-NSString* netmask  = @"192.168.9";
+//NSString* netmask  = @"192.168.9";
 static BOOL init = FALSE;
 static char result[16];
+static unsigned int localnetaddr;
+static unsigned int netmask;
 
 @implementation NameResolver
 
@@ -40,30 +43,26 @@ unsigned int IPToInt(unsigned int c1, unsigned int c2, unsigned int c3, unsigned
 }
 
 unsigned int getNetmask(unsigned int suffix){
-	//int mask = 0xffffffff ^ 0xffffffff >> suffix;
 	return ~(0xffffffff >> suffix);
 }
 
 +(void) initialize{
 	if (init)
 		return;
+	
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults]; 
 	/*test netmask code*/
-	unsigned int local = IPToInt(192, 168, 9, 0);
-	unsigned int myip2 = IPToInt(192,168, 9,255);
+	NSString *CIDRaddr = [userDefaults stringForKey:@"SUBNET"];
 	
-	unsigned int mask = getNetmask(24);
+	if (CIDRaddr == NULL)
+		CIDRaddr = @"192.168.9.0/24";
 	
-	
-	NSLog(@"lcoal = %u, myip2 = %u, mask = %u", local, myip2, mask);
-		  
-	NSLog(@"MASK IS %s", IPAddressToString(mask));
-	
-	if ((mask&local) == (mask&myip2)){
-		NSLog(@"a match on network addresses %s %s", IPAddressToString(mask&local), IPAddressToString(mask&myip2));
-	}else{
-		NSLog(@"no match %s %s",  IPAddressToString(mask&local), IPAddressToString(mask&myip2));
-	}
-	/*end test*/
+	NSLog(@"netmask is %@", CIDRaddr);
+	NSArray *split = [CIDRaddr componentsSeparatedByString: @"/"];
+	localnetaddr = [self intFromIP:[split objectAtIndex:0]];
+	unsigned int mask = [[split objectAtIndex:1] intValue];
+	//localnetaddr = IPToInt(192, 168, 9, 0);
+	netmask = getNetmask(mask);
 	
 	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
@@ -83,14 +82,22 @@ unsigned int getNetmask(unsigned int suffix){
 	
 }
 
-
-
++(unsigned int) intFromIP:(NSString *)ipaddr{
+	NSArray *chunks = [ipaddr componentsSeparatedByString: @"."];
+	
+	unsigned int tmpip = IPToInt( [[chunks objectAtIndex:0] intValue],
+								 [[chunks objectAtIndex:1] intValue],
+								 [[chunks objectAtIndex:2] intValue],
+								 [[chunks objectAtIndex:3] intValue]
+								 );
+	return tmpip;
+}
 
 +(BOOL) isInternal:(NSString *) ipaddr{
-	if([ipaddr length] <= 9){
-		return  FALSE;
-	}
-	return  ([[ipaddr substringToIndex:9] isEqualToString:netmask]);
+	
+	unsigned int tmpip = [self intFromIP: ipaddr];
+		
+	return (netmask&localnetaddr) == (netmask&tmpip);
 }
 
 /*
@@ -108,9 +115,10 @@ unsigned int getNetmask(unsigned int suffix){
 	
 	if([ip_addr length] <= 9)
 		return NULL;
-	
-	if (![self isInternal:ip_addr])
+
+	if (![self isInternal:ip_addr]){
 		return NULL;
+	}
 	
 	return [iplookuptable objectForKey:ip_addr];
 }

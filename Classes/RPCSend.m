@@ -28,6 +28,9 @@ static unsigned length;
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];  
 	port = [userDefaults integerForKey:@"HWDBP"];
 	NSString *rip = [userDefaults stringForKey:@"RouterIP"];
+	if (rip == NULL){
+		rip = @"192.168.9.1";
+	}
 	sprintf(hwdbaddr, [rip UTF8String]);
 	
 	host = hwdbaddr;

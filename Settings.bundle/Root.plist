@@ -12,9 +12,9 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Key</key>
-			<string>Network Address</string>
+			<string>SUBNET</string>
 			<key>DefaultValue</key>
-			<string>192.168.9.0/16</string>
+			<string>192.168.9.0/24</string>
 		</dict>
 		<dict>
 			<key>Title</key>
