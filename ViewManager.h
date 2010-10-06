@@ -31,7 +31,6 @@ static const int DEVICE = 1;
 -(id) initWithView:(UIView *) view data:(NSMutableArray*)data viewcontroller:(UIViewController<TouchResponse> *)vc ;
 -(void) update:(NSMutableArray *)data;
 -(DeviceView*) viewForName:(NSString *) name;
--(void) connected;
--(void) disconnected;
+
 
 @end

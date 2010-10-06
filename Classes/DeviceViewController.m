@@ -26,10 +26,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	NSLog(@"device view loaded");
-
-	[DeviceImageLookup initialize];
 	
+	[DeviceImageLookup initialize];
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
 	[self setVm:tmpvm];
@@ -38,13 +36,7 @@
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connected:) name:@"connected" object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(disconnected:) name:@"disconnected" object:nil];
 	
-	/*
-	 * Timer For testing
-	 */
-	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -72,8 +64,7 @@
 
 -(void) touched: (int) tag viewname:(NSString *) identifier position: (int) index{
 	
-	
-	
+
 	if (tag == LABEL){
 		if (self.editing){
 			DeviceView *deviceview = [self.vm viewForName:identifier];
@@ -134,7 +125,6 @@
 		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
 		[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"device"];
 	}
-	//[NameResolver printmactable];
 }
 
 
@@ -152,20 +142,7 @@
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
-	
-	//NSEnumerator *enumerator = [self.sorteddata objectEnumerator];
-	
-	/*
-	NodeTuple* node;
-	
-	while ( (node = [enumerator nextObject])) {
-		//Window *w = [self.bytehistory objectForKey:[node name]];
-		//[node print];
-		//: w.lastpoll currentpoll:POLLNUMBER];
-		//[w print:[node name]];
-	}*/
-	
-	}
+}
 
 
 /*

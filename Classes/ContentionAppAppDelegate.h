@@ -17,6 +17,8 @@
 @interface ContentionAppAppDelegate : NSObject <UIApplicationDelegate> {
     
     UIWindow *window;
+	BOOL alerted;
+	UIAlertView *alert;
 	UITabBarController *tabBarController;
 	PollingThread *pollingThread;
     MyNavigationViewController *navigationControllerDevices;
@@ -28,6 +30,7 @@
 @property (nonatomic, retain) IBOutlet MyNavigationViewController *navigationControllerApplications;
 @property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
 @property (nonatomic, retain) PollingThread *pollingThread;
-
+@property (nonatomic, retain) UIAlertView* alert;
+@property (nonatomic, assign) BOOL alerted;
 @end
 

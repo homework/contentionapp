@@ -1,0 +1,3 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ViewManager.m:204: warning: incomplete implementation of class 'ViewManager'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ViewManager.m:204: warning: method definition for '-disconnected' not found
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ViewManager.m:204: warning: method definition for '-connected' not found

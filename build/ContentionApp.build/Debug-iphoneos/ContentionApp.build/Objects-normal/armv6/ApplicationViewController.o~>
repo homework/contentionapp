@@ -1,2 +1,13 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController viewDidLoad]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:35: warning: class 'ApplicationViewController' does not implement the 'TouchResponse' protocol
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController touched:viewname:position:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:80: warning: 'DeviceNameAlert' may not respond to '-addTextFieldWithValue:label:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:80: warning: (Messages without a matching method signature
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:80: warning: will be assumed to return 'id' and accept
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:80: warning: '...' as arguments.)
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:83: warning: 'DeviceNameAlert' may not respond to '-textFieldAtIndex:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController alertView:didDismissWithButtonIndex:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:132: warning: 'UIAlertView' may not respond to '-textFieldAtIndex:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:134: warning: 'UIAlertView' may not respond to '-textFieldAtIndex:'
 /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m: In function '-[ApplicationViewController newNetworkData:]':
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:65: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../ApplicationViewController.m:142: warning: incompatible Objective-C types 'struct NSArray *', expected 'struct NSMutableArray *' when passing argument 1 of 'setSorteddata:' from distinct Objective-C type

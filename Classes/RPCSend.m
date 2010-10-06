@@ -8,8 +8,6 @@
 
 #import "RPCSend.h"
 @interface RPCSend (PrivateMethods)
-+(void) notifydisconnected;
-+(void) notifyconnected;
 @end
 
 @implementation RPCSend
@@ -51,11 +49,11 @@ static unsigned length;
 	rpc = rpc_connect(host, port, "HWDB", 1l);
 	if (rpc){
 		connected = TRUE;
-		[self notifyconnected];
+		[RPCSend performSelectorOnMainThread:@selector(notifyconnected:) withObject:nil waitUntilDone:NO];
 		NSLog(@"successfully connected");
 		return TRUE;
 	}
-	[self notifydisconnected];
+	[RPCSend performSelectorOnMainThread:@selector(notifydisconnected:) withObject:nil waitUntilDone:NO];
 	return FALSE;
 }
 
@@ -70,7 +68,7 @@ static unsigned length;
 	if (!connected)
 		if (![self connect]){
 			connected = FALSE;
-			[self notifydisconnected];
+			[RPCSend performSelectorOnMainThread:@selector(notifydisconnected:) withObject:nil waitUntilDone:NO];
 			return FALSE;
 		}
 	
@@ -81,18 +79,18 @@ static unsigned length;
 			}else{
 				rpc_disconnect(rpc);
 				connected = FALSE;
-				[self notifydisconnected];
+				[RPCSend performSelectorOnMainThread:@selector(notifydisconnected:) withObject:nil waitUntilDone:NO];
 			}
 		}
 	}
 	return FALSE;
 }
 
-+(void) notifydisconnected{
++(void) notifydisconnected:(NSObject *) o{
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"disconnected" object:nil];
 }
 
-+(void) notifyconnected{
++(void) notifyconnected:(NSObject *) o{
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"connected" object:nil];
 }
 

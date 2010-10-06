@@ -54,14 +54,6 @@ const static float	VIEWHEIGHT  = 85;
 	return NO;
 }
 
--(void) connected{
-	[self.view setBackgroundColor:[UIColor clearColor]];
-}
-
--(void) disconnected{
-	[self.view setBackgroundColor:[UIColor darkGrayColor]];
-}
-
 -(void) update:(NSMutableArray *) data{
 	
 	NSEnumerator *enumerator = [data objectEnumerator];

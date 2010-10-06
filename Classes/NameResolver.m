@@ -12,19 +12,24 @@
 +(void) newLease:(NSNotification *) n;
 +(void) writeMacTable;
 +(unsigned int) intFromIP:(NSString *)ipaddr;
++(void) createMacLookupTable;
++(void) createIPLookupTable;
++(void) addObservers;
++(void) createLocalNetmask;
 @end
 
-int count;
 NSMutableDictionary *iplookuptable;
 NSMutableDictionary *maclookuptable;
 
-//NSString* netmask  = @"192.168.9";
 static BOOL init = FALSE;
 static char result[16];
 static unsigned int localnetaddr;
 static unsigned int netmask;
 
+static NSString* DEFAULTCIDR = @"192.168.9.0/24";
+
 @implementation NameResolver
+
 
 char* IPAddressToString(unsigned int ip)
 {
@@ -46,24 +51,35 @@ unsigned int getNetmask(unsigned int suffix){
 	return ~(0xffffffff >> suffix);
 }
 
+
 +(void) initialize{
 	if (init)
 		return;
-	
+	[self createLocalNetmask];
+	[self createMacLookupTable];
+	[self createIPLookupTable];
+	[self addObservers];
+	init = TRUE;
+}
+
++(void) createLocalNetmask{
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults]; 
-	/*test netmask code*/
+	
 	NSString *CIDRaddr = [userDefaults stringForKey:@"SUBNET"];
 	
-	if (CIDRaddr == NULL)
-		CIDRaddr = @"192.168.9.0/24";
+	if (CIDRaddr == NULL){
+		NSLog(@"defaulting to addr %@", DEFAULTCIDR);
+		CIDRaddr = DEFAULTCIDR;
+	}
 	
-	NSLog(@"netmask is %@", CIDRaddr);
 	NSArray *split = [CIDRaddr componentsSeparatedByString: @"/"];
 	localnetaddr = [self intFromIP:[split objectAtIndex:0]];
 	unsigned int mask = [[split objectAtIndex:1] intValue];
-	//localnetaddr = IPToInt(192, 168, 9, 0);
 	netmask = getNetmask(mask);
-	
+}
+
+
++(void) createMacLookupTable{
 	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -73,13 +89,15 @@ unsigned int getNetmask(unsigned int suffix){
 	}else{
 		maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	}
-	
-	[fileManager release];
-	
+	[fileManager release];	
+}
+
++(void) addObservers{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];	
+}
+
++(void) createIPLookupTable{
 	iplookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];
-	init = TRUE;
-	
 }
 
 +(unsigned int) intFromIP:(NSString *)ipaddr{
@@ -94,9 +112,7 @@ unsigned int getNetmask(unsigned int suffix){
 }
 
 +(BOOL) isInternal:(NSString *) ipaddr{
-	
 	unsigned int tmpip = [self intFromIP: ipaddr];
-		
 	return (netmask&localnetaddr) == (netmask&tmpip);
 }
 
@@ -135,6 +151,7 @@ unsigned int getNetmask(unsigned int suffix){
 	
 	return (resolvedname == NULL) ? macaddr:resolvedname;
 }
+
 
 +(NSString *) friendlynamefromip:(NSString *) ip_addr{
 	
@@ -182,7 +199,7 @@ unsigned int getNetmask(unsigned int suffix){
 	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
 	if (humanname == NULL){
-		humanname = [[lobj name] isEqualToString:@" "] ? [lobj ipaddr] : [lobj name]; 
+		humanname = [[lobj name] isEqualToString:@"NULL"] ? [lobj ipaddr] : [lobj name]; 
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
 	}
@@ -193,6 +210,7 @@ unsigned int getNetmask(unsigned int suffix){
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
 	[maclookuptable writeToFile:path atomically:YES];
 }
+
 
 -(void) dealloc{
 	[maclookuptable release];
