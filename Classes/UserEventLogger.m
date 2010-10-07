@@ -23,6 +23,14 @@
 	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
 }
 
++(void) updateLeases:(NSString*)macaddr newname:(NSString*)name{
+	NSString* query = [NSString stringWithFormat:@"SQL:INSERT into Leases values (\"%@\", \"%@\", \"%@\", \"%@\")\n",
+					   @"UPD", macaddr, @"192.168.9.10", name];
+	
+	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
+	
+}
+
 +(void) sendquery:(NSString *) query{
 	NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 	[RPCSend sendquery:query];
@@ -41,9 +49,15 @@
  * Creates a userEvent entry of the form AppName, nameupdate, Screen;NodeId;NewName
  */
 
-+(void) lognamechange:(NSString*)identifier newname:(NSString*)name screen:(NSString*)screen{
-	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, identifier,name];
++(void) lognamechange:(NSString*)macaddr newname:(NSString*)name screen:(NSString*)screen{
+	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, macaddr,name];
 	[self log:@"nameupdate" logdata:logdata];
+	/*
+	 * Also want to update the leases table!
+	 */
+	
+	[self updateLeases:macaddr newname:name];
+	
 }
 
 /*

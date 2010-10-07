@@ -40,10 +40,6 @@
 	self.navigationItem.title = @"Applications";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
 	
-	/*
-	 * Timer For testing
-	 */
-	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
 }
 
 
@@ -133,6 +129,8 @@
 		[NameResolver update:[deviceView identifier] newname:newname];
 		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
 		[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"application"];
+	}else{
+		NSLog(@"device name is nullllll......");
 	}
 	//[NameResolver printmactable];
 	

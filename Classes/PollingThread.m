@@ -490,7 +490,8 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
     tstamp_t last = 0LL;
 	
     results = rtab_unpack(buf, len);
-    if (results && ! rtab_status(buf, stsmsg)) {
+    NSLog(@"processing flow results");
+	if (results && ! rtab_status(buf, stsmsg)) {
         p = mon_convert(results);
 		// do something with the data pointed to by p 
 		NSLog(@"Retrieved %ld flow records from database", p->nflows);

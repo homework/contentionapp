@@ -27,6 +27,7 @@
 		A327F5DB11E49B8D00FC8A35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */; };
 		A32B7331121E952B008097BF /* DeviceInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A32B732F121E952B008097BF /* DeviceInputView.xib */; };
 		A32B7490121EDEAB008097BF /* ContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A32B748F121EDEAB008097BF /* ContainerView.m */; };
+		A3340B71125E0F6F00EBBEAE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3340B70125E0F6F00EBBEAE /* Icon.png */; };
 		A33F2CA112017AEC00B78F50 /* NodeTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = A33F2CA012017AEC00B78F50 /* NodeTuple.m */; };
 		A33F2EDD1206D69000B78F50 /* skype.png in Resources */ = {isa = PBXBuildFile; fileRef = A33F2ED81206D69000B78F50 /* skype.png */; };
 		A33F2EDE1206D69000B78F50 /* telnet.png in Resources */ = {isa = PBXBuildFile; fileRef = A33F2ED91206D69000B78F50 /* telnet.png */; };
@@ -127,6 +128,7 @@
 		A32B732F121E952B008097BF /* DeviceInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInputView.xib; sourceTree = "<group>"; };
 		A32B748E121EDEAB008097BF /* ContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerView.h; sourceTree = "<group>"; };
 		A32B748F121EDEAB008097BF /* ContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerView.m; sourceTree = "<group>"; };
+		A3340B70125E0F6F00EBBEAE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		A33F2C9F12017AEC00B78F50 /* NodeTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTuple.h; sourceTree = "<group>"; };
 		A33F2CA012017AEC00B78F50 /* NodeTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTuple.m; sourceTree = "<group>"; };
 		A33F2ECC1206D67F00B78F50 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				A32B732F121E952B008097BF /* DeviceInputView.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* ContentionApp-Info.plist */,
+				A3340B70125E0F6F00EBBEAE /* Icon.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				A3A902BE123E821600070C67 /* wii.png in Resources */,
 				A3A902BF123E821600070C67 /* wireless.png in Resources */,
 				A300E859125A047700323E07 /* Settings.bundle in Resources */,
+				A3340B71125E0F6F00EBBEAE /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
