@@ -25,7 +25,7 @@ float imageindent;
 		deviceImage = image;
 		self.name = nodename;
 		self.identifier = identity;
-		labelbounds = CGRectMake(15.0, 0.0, 200.0, 20);
+		labelbounds = CGRectMake(15.0, 0.0, 200.0, 30);
 		namelabel = [[UILabel alloc ] initWithFrame:labelbounds];
 		namelabel.textAlignment =  UITextAlignmentLeft;
 		namelabel.textColor = [UIColor blackColor];
@@ -44,7 +44,7 @@ float imageindent;
 
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-		
+	NSLog(@"screen touched");
 	if (index < 3){
 		
 		UITouch *touch = [touches anyObject];
@@ -52,6 +52,7 @@ float imageindent;
 		CGPoint thePoint = [touch locationInView:self];
 		
 		if (CGRectContainsPoint (labelbounds,thePoint)){
+			NSLog(@"label touched");
 			[self.touchDelegate touched:LABEL viewname:identifier position:index];
 		}else if (CGRectContainsPoint (CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height),thePoint)){	
 			[self.touchDelegate touched:IMAGE viewname:identifier position:index];

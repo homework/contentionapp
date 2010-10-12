@@ -28,6 +28,7 @@
     [super viewDidLoad];
 	
 	[DeviceImageLookup initialize];
+	//ok, not aha
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
 	[self setVm:tmpvm];
@@ -121,9 +122,14 @@
 	
 	if (deviceView != NULL){
 		NSString* newname = [[alertView textFieldAtIndex:0] text];
-		[NameResolver update:[deviceView identifier] newname:newname];
-		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
-		[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"device"];
+		if (![[newname stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]){
+			if (![newname isEqualToString:[NameResolver friendlynamefrommac:[deviceView identifier]]]){
+				[NameResolver update:[deviceView identifier] newname:newname];
+				[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
+				[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"device"];
+				[UserEventLogger updateLeases:[deviceView identifier]  ipaddr:[NameResolver getIP:[deviceView identifier]] newname:newname];
+			}
+		}
 	}
 }
 
@@ -142,6 +148,9 @@
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
+	for (NodeTuple* tp in sorteddata){
+		NSLog(@"%@   %d", [tp name], [tp value]); 
+	}
 }
 
 

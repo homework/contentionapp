@@ -35,7 +35,6 @@
     [window makeKeyAndVisible];
 	
 	[PortLookup initPorts];
-	[FlowAnalyser initTables];
 	[NameResolver initialize];
 	[NetworkData initialize];
 	

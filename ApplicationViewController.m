@@ -18,8 +18,6 @@
 @synthesize sorteddata;
 @synthesize vm;
 
-
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -30,7 +28,7 @@
     [super viewDidLoad];
 	
 	[DeviceImageLookup initialize];
-	
+	//aha!
 	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestApplicationData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
 	[self setVm:tmpvm];
@@ -98,6 +96,7 @@
 		}else{
 			ApplicationSubViewController *detail = [[ApplicationSubViewController alloc] initWithNibName:nil bundle:nil nodename:identifier];
 			//detail.title = [NSString stringWithFormat:@"%@", identifier];
+			detail.title = [NameResolver friendlynamefrommac: identifier];
 			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 			[delegate.navigationControllerApplications pushViewController:detail animated: YES];
 			[detail release];
@@ -126,14 +125,12 @@
 	
 	if (deviceView != NULL){
 		NSString* newname = [[alertView textFieldAtIndex:0] text];
-		[NameResolver update:[deviceView identifier] newname:newname];
-		[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
-		[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"application"];
-	}else{
-		NSLog(@"device name is nullllll......");
+		if (![[newname stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]){
+			[NameResolver update:[deviceView identifier] newname:newname];
+			[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
+			[UserEventLogger lognamechange:[deviceView identifier] newname:newname screen:@"application"];
+		}
 	}
-	//[NameResolver printmactable];
-	
 }
 	
 -(void) newNetworkData:(NSNotification *) n{

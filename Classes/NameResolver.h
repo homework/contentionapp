@@ -17,6 +17,7 @@
 +(void)			initialize;
 +(NSString *)   friendlynamefrommac:(NSString *) macaddr;
 +(NSString *)	friendlynamefromip:(NSString *) ip_addr;
++(NSString *)	lookupip:(NSString*) macaddr;
 +(NSString *)	getidentifier:(NSString *) ip_addr;
 +(BOOL) isInternal:(NSString *) ipaddr;
 +(void) update:(NSString *)oldname newname:(NSString*) newname;

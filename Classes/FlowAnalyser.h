@@ -14,7 +14,6 @@
 	
 }
 
-
 +(void)			initTables;
 +(void)			addFlow:(unsigned short) sport dport:(unsigned short)dp protocol:(int) proto packets:(int) p bytes:(int) b pollcount:(int) pc;
 +(NSString*)	guessApplication:(unsigned short) sport dport:(unsigned short)dp protocol:(int) proto;

@@ -501,6 +501,7 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			char *s = timestamp_to_string(f->tstamp);
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[FlowObject alloc] initWithFlow:f];
+			//NSLog(@"%@ %@ %d %d %d", [fobj ip_src], [fobj ip_dst], [fobj sport], [fobj dport],[fobj bytes]);
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:NO];
 			[fobj release];
 			[autoreleasepool release];		

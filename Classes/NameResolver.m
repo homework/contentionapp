@@ -139,6 +139,22 @@ unsigned int getNetmask(unsigned int suffix){
 	return [iplookuptable objectForKey:ip_addr];
 }
 
+
++(NSString *) getIP:(NSString*)identifier{
+	if (identifier == NULL)
+		return NULL;
+	NSLog(@"searching for ip addr for %@", identifier);
+	for (NSString *key in iplookuptable){
+		if ([[iplookuptable objectForKey:key] isEqualToString:identifier]){
+			NSLog(@"found %@", key);
+			return key;
+			
+		}
+	}
+	return NULL;
+}
+
+
 +(NSString *) friendlynamefrommac:(NSString *) macaddr{
 	
 	NSString * resolvedname = NULL;
@@ -198,11 +214,11 @@ unsigned int getNetmask(unsigned int suffix){
 	[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
 	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
-	if (humanname == NULL){
+	//if (humanname == NULL){
 		humanname = [[lobj name] isEqualToString:@"NULL"] ? [lobj ipaddr] : [lobj name]; 
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
-	}
+	//}
 }
 
 +(void) writeMacTable{

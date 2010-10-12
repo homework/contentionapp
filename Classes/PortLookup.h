@@ -11,11 +11,13 @@
 
 @interface PortLookup : NSObject {
 	
-	
+		
 }
 
 +(NSString *)lookup:(unsigned short) port protocol:(unsigned short) proto;
 + (void)initPorts;
+
+
 /*
 +(NSString*) lookup:(int)port proto:(int)proto;
 +(void) loadPortNumbers:(NSString *) name array:(NSString *[]) array;*/

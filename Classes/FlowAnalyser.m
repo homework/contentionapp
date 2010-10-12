@@ -14,32 +14,10 @@
 
 @implementation FlowAnalyser
 
-static NSMutableDictionary *meanvalues;
-
-
-+(void) initTables{
-	meanvalues = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-}
-
 +(void) addFlow:(unsigned short)sport dport:(unsigned short)dp protocol:(int)proto packets:(int)p bytes:(int)b pollcount:(int)pc{
-	
-	
-	NSString* key = [self getKey:sport dport:dp protocol:proto];	
-	if (key != NULL){
-		float meanpacket;
-		LongTuple* t = [meanvalues objectForKey:key];
-		if (t==NULL){
-			t = [[LongTuple alloc] retain];
-			t.first = p;
-			t.second = b;
-			[meanvalues setObject:t forKey:key];
-		}else{
-			t.first += p;
-			t.second += b;
-		}
-		meanpacket = (float) t.second / t.first;
-	}
-	
+	/*
+	 * Entry point for packet analysis...
+	 */
 }
 
 +(NSString*) getKey:(int) sport dport:(int)dp protocol:(int) proto{
@@ -50,7 +28,7 @@ static NSMutableDictionary *meanvalues;
 
 +(NSString*) guessApplication:(unsigned short)sport dport:(unsigned short)dp protocol:(int) proto{
 	
-	//filter out 0/0
+	//filter out 0/0  - should we???
 	if (dp <= 0 && sport <=0)
 		return NULL;
 	
@@ -83,7 +61,6 @@ static NSMutableDictionary *meanvalues;
 	return application;
 }
 -(void) dealloc{
-	[meanvalues release];
 	[super dealloc];
 }
 @end

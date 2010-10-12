@@ -22,7 +22,6 @@
 		A3032E07122422F200B6FC3F /* NetworkData.m in Sources */ = {isa = PBXBuildFile; fileRef = A3032E06122422F200B6FC3F /* NetworkData.m */; };
 		A303FF1E1212EC8C0055D7D8 /* Window.m in Sources */ = {isa = PBXBuildFile; fileRef = A303FF1D1212EC8C0055D7D8 /* Window.m */; };
 		A30943E51248C9AE00028791 /* UserEventLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = A30943E41248C9AE00028791 /* UserEventLogger.m */; };
-		A31F8648122D0572005712BC /* LongTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = A31F8647122D0572005712BC /* LongTuple.m */; };
 		A31F872B122D5AB2005712BC /* ApplicationSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A31F872A122D5AB2005712BC /* ApplicationSubViewController.m */; };
 		A327F5DB11E49B8D00FC8A35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */; };
 		A32B7331121E952B008097BF /* DeviceInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A32B732F121E952B008097BF /* DeviceInputView.xib */; };
@@ -120,8 +119,6 @@
 		A303FF1D1212EC8C0055D7D8 /* Window.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Window.m; sourceTree = "<group>"; };
 		A30943E31248C9AE00028791 /* UserEventLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEventLogger.h; sourceTree = "<group>"; };
 		A30943E41248C9AE00028791 /* UserEventLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserEventLogger.m; sourceTree = "<group>"; };
-		A31F8646122D0572005712BC /* LongTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongTuple.h; sourceTree = "<group>"; };
-		A31F8647122D0572005712BC /* LongTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongTuple.m; sourceTree = "<group>"; };
 		A31F8729122D5AB2005712BC /* ApplicationSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSubViewController.h; sourceTree = "<group>"; };
 		A31F872A122D5AB2005712BC /* ApplicationSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSubViewController.m; sourceTree = "<group>"; };
 		A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -393,8 +390,6 @@
 				A3032E06122422F200B6FC3F /* NetworkData.m */,
 				A37C775B121BFB1D005CD178 /* LeaseRecord.h */,
 				A37C775C121BFB1D005CD178 /* LeaseRecord.m */,
-				A31F8646122D0572005712BC /* LongTuple.h */,
-				A31F8647122D0572005712BC /* LongTuple.m */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -665,7 +660,6 @@
 				A3CD4FEB1226AE2E001420F0 /* NetworkTable.m in Sources */,
 				A3CD505F1226CB93001420F0 /* CustomImagePicker.m in Sources */,
 				A3CD51271227BD69001420F0 /* DeviceNameAlert.m in Sources */,
-				A31F8648122D0572005712BC /* LongTuple.m in Sources */,
 				A31F872B122D5AB2005712BC /* ApplicationSubViewController.m in Sources */,
 				A3D11083124758FB0099DED8 /* RPCSend.m in Sources */,
 				A30943E51248C9AE00028791 /* UserEventLogger.m in Sources */,

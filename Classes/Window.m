@@ -83,14 +83,12 @@
 	return total;
 }
 
--(void) emptyOldSlots:(int) pc{
-	
+-(void) emptyOldSlots:(int) pc{	
 	if ((pc - lastpoll) > 1){
 		for (int i = (lastpoll + 1) ; i < pc; i++){
 			[window replaceObjectAtIndex:i%CAPACITY withObject:[NSNumber numberWithInt:0]];
 		}
 	}	
-	
 }
 
 -(void) dealloc{

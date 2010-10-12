@@ -10,11 +10,7 @@
 
 
 @interface NetworkTable()
-
-
-
 -(void) recalculateMaxBandwidth:(NSString*)node;
-
 @end
 
 @implementation NetworkTable
@@ -45,8 +41,9 @@ int SHISTORY = 5;
 	}
 }
 
+
 -(NSMutableArray *) getAllData{
-	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithCapacity:10];// retain];
+	NSMutableDictionary *results = [NSMutableDictionary dictionaryWithCapacity:10];
 	
 	for (id key1 in data) {
 		NSDictionary *dictionary = [data objectForKey:key1];
@@ -66,6 +63,7 @@ int SHISTORY = 5;
 	}
 	return  [results allValues];
 }
+
 
 -(NSMutableArray *) getLatestDataForNode:(NSString *)node{
 	NSMutableArray *array = [NSMutableArray array];// retain];
