@@ -30,7 +30,7 @@
 	
 	//filter out 0/0  - should we???
 	if (dp <= 0 && sport <=0)
-		return NULL;
+		return @"0/0";
 	
 	NSString *first    = [PortLookup lookup:MIN(sport,dp) protocol:proto];
 	NSString *second	= [PortLookup lookup:MAX(sport, dp) protocol:proto];

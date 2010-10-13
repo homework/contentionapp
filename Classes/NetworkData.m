@@ -13,7 +13,6 @@
 + (void)updateNodeData:(FlowObject *) fobj;
 + (void)pollComplete: (NSNotification *) n;
 + (void)newFlow: (NSNotification *) f;
-
 @end
 
 @implementation NetworkData
@@ -35,8 +34,8 @@ static NetworkTable *apptable;
 +(void) initialize{
 	if (!init){
 		POLLNUMBER		= 0;
-		devicetable = [[[NetworkTable alloc] init] retain];// retain??
-		apptable = [[[NetworkTable alloc] init] retain];//retain??//
+		devicetable = [[[NetworkTable alloc] init] retain];
+		apptable = [[[NetworkTable alloc] init] retain];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newFlow:) name:@"newFlowDataReceived" object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollComplete:) name:@"pollComplete" object:nil];
 		init = TRUE;
@@ -87,13 +86,12 @@ static NetworkTable *apptable;
 	[apptable removeZeroByteData];
 	[devicetable removeZeroByteData];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
-	//[devicetable print:];
+	[devicetable print:@"001ff3bcb257"];
+	
 }
 
 +(void) newFlow: (NSNotification *) f{
 	FlowObject  *fobj = (FlowObject *) [f object];
-	//if ([[fobj ip_src] isEqualToString:@"192.168.9.82"] || [[fobj ip_dst] isEqualToString:@"192.168.9.82"])
-	//	NSLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst], [fobj bytes]);
 	[FlowAnalyser addFlow:[fobj sport] dport:[fobj dport] protocol:[fobj proto] packets:[fobj packets] bytes:[fobj bytes] pollcount:POLLNUMBER];
 	[self updateApplicationData:fobj];
 	[self updateNodeData:fobj];
@@ -118,7 +116,6 @@ static NetworkTable *apptable;
 	
 	if (deviceid != NULL){
 		[apptable updateData:application subnode:deviceid bytes:[fobj bytes]];
-		//[apptable print:application];
 	}
 }
 
@@ -129,22 +126,13 @@ static NetworkTable *apptable;
 	
 	
 	if (application == NULL){
-		/*if ([[fobj ip_src] isEqualToString:@"192.168.9.82"] || [[fobj ip_dst] isEqualToString:@"192.168.9.82"]){
-		
-			NSLog(@"-----------------> NULL APP %@ %@ %d %d %d", [fobj ip_src], [fobj ip_dst], [fobj sport], [fobj dport], [fobj bytes]);
-		}*/
 		return;
-
 	}
 	
-	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]];// destination:[fobj ip_dst]]; 
-	BOOL updated = false;
+	NSString *deviceid  = [NameResolver getidentifier:[fobj ip_src]];
 	
 	if (deviceid != NULL){
-		updated = true;
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
-		//if ([[fobj ip_src] isEqualToString:@"192.168.9.82"])
-			//NSLog(@"updating data %@ %d",   deviceid, [fobj bytes]);
 	}
 	
 	
@@ -152,16 +140,9 @@ static NetworkTable *apptable;
 	
 	if (deviceid != NULL){
 		[devicetable updateData:deviceid subnode:application bytes:[fobj bytes]];
-		updated = true;
-		//if ([[fobj ip_dst] isEqualToString:@"192.168.9.82"])
-		//	NSLog(@"updating data %@ %d",   deviceid, [fobj bytes]);
-		//[devicetable print:deviceid];
 	}
-	
-	
+		
 }
-
-
 
 
 +(void) dealloc{

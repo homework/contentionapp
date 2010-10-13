@@ -37,7 +37,9 @@ unsigned int action2index(char *action) {
 			if (strcmp(action, "old") == 0)
 				return 2;
 			else
-				return 3;
+				if (strcmp(action, "upd") == 0)
+					return 3;
+	return 4;
 }
 
 char *index2action(unsigned int index) {
@@ -50,7 +52,10 @@ char *index2action(unsigned int index) {
 			if (index == 2)
 				return "old";
 			else
-				return "unknown";
+				if (index == 3)
+					return "upd";
+			
+	return "unknown";
 }
 
 -(void) print{

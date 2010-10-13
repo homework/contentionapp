@@ -18,8 +18,6 @@
 
 +(void) log:(NSString *)type logdata:(NSString *)logdata{
 
-	
-	
 	NSString* query = [NSString stringWithFormat:@"SQL:insert into UserEvents values (\"%@\", \"%@\", \"%@\")\n",
 						@"ContentionApp", type, logdata];
 	
@@ -29,12 +27,8 @@
 
 +(void) updateLeases:(NSString*)macaddr ipaddr: (NSString*) ipaddr newname:(NSString*)name{
 
-	
 	NSString* macfmt = [self macfromstr:macaddr];
 	
-	NSLog([NSString stringWithFormat:@"SQL:INSERT into Leases values (\"%@\", \"%@\", \"%@\", \"%@\")\n",
-		   @"upd", macfmt, ipaddr, name]);
-		  
 	NSString* query = [NSString stringWithFormat:@"SQL:INSERT into Leases values (\"%@\", \"%@\", \"%@\", \"%@\")\n",
 					   @"upd", macfmt, ipaddr, name];
 	
@@ -75,9 +69,6 @@
 +(void) lognamechange:(NSString*)macaddr newname:(NSString*)name screen:(NSString*)screen{
 	NSString* logdata = [NSString stringWithFormat:@"%@;%@;%@",screen, macaddr,name];
 	[self log:@"nameupdate" logdata:logdata];
-	/*
-	 * Also want to update the leases table!
-	 */
 }
 
 

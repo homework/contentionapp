@@ -38,6 +38,9 @@ static tstamp_t lastflow;
 static tstamp_t lastlink;
 static tstamp_t lastlease;
 
+
+static int flowcounttest;
+
 @implementation PollingThread
 @synthesize delegate;
 
@@ -47,6 +50,8 @@ static tstamp_t lastlease;
 		lastflow = 0LL;
 		lastlink = 0LL;
 		lastlease = 0LL;
+		flowcounttest = 0;
+		
 	}
 	return self;
 }
@@ -94,7 +99,8 @@ static tstamp_t lastlease;
 			}
 			
 			[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
-			
+			NSLog(@"TOTAL bytes for mac air = %d", flowcounttest);
+			flowcounttest = 0;
 			nanosleep(&time_delay, NULL);
 		}
 		
@@ -427,7 +433,7 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 			
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			LeaseObject *lobj = [[LeaseObject alloc] initWithLease:l]; 
-			[PollingThread performSelectorOnMainThread:@selector(postLeaseObject:) withObject:lobj waitUntilDone:NO];
+			[PollingThread performSelectorOnMainThread:@selector(postLeaseObject:) withObject:lobj waitUntilDone:YES];
 			[lobj release];
 			[autoreleasepool release];	
 			
@@ -487,10 +493,9 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
     char stsmsg[RTAB_MSG_MAX_LENGTH];
     BinResults *p;
     unsigned long i;
-    tstamp_t last = 0LL;
-	
+    tstamp_t last = 0LL;	
     results = rtab_unpack(buf, len);
-    NSLog(@"processing flow results");
+
 	if (results && ! rtab_status(buf, stsmsg)) {
         p = mon_convert(results);
 		// do something with the data pointed to by p 
@@ -501,8 +506,14 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			char *s = timestamp_to_string(f->tstamp);
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[FlowObject alloc] initWithFlow:f];
-			//NSLog(@"%@ %@ %d %d %d", [fobj ip_src], [fobj ip_dst], [fobj sport], [fobj dport],[fobj bytes]);
-			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:NO];
+			
+			if ([[NameResolver getidentifier:[fobj ip_src]] isEqualToString:@"001ff3bcb257"] ||
+				[[NameResolver getidentifier:[fobj ip_dst]] isEqualToString:@"001ff3bcb257"]){
+				NSLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst],[fobj bytes]);
+				flowcounttest += [fobj bytes];
+			}
+			
+			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:YES];
 			[fobj release];
 			[autoreleasepool release];		
 			

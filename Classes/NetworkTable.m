@@ -18,7 +18,7 @@
 @synthesize POLLNUMBER;
 @synthesize data;
 
-int MAXBYTES = 1000;
+int MAXBYTES = 0;
 int SHISTORY = 5;
 
 -(id) init{
@@ -66,13 +66,13 @@ int SHISTORY = 5;
 
 
 -(NSMutableArray *) getLatestDataForNode:(NSString *)node{
-	NSMutableArray *array = [NSMutableArray array];// retain];
+	NSMutableArray *array = [NSMutableArray array];
 	NSDictionary *dictionary = [data objectForKey:node];
 	Window * w;
 	if (dictionary != NULL){
 		for (id key in dictionary) {
 			w = [dictionary objectForKey:key];
-			NodeTuple* n = [[NodeTuple alloc] initWithValues:key name:[NameResolver friendlynamefrommac:key] value:[w totalBytes:POLLNUMBER]];// retain];
+			NodeTuple* n = [[NodeTuple alloc] initWithValues:key name:[NameResolver friendlynamefrommac:key] value:[w totalBytes:POLLNUMBER]];
 			[array addObject:n];
 			[n release];
 		}
@@ -115,7 +115,7 @@ int SHISTORY = 5;
 	NSMutableDictionary *dictionary = [data objectForKey:topnode];
 	
 	if (dictionary == NULL){
-		dictionary = [NSMutableDictionary dictionaryWithCapacity:10];// retain];
+		dictionary = [NSMutableDictionary dictionaryWithCapacity:10];
 		[data setObject:dictionary forKey:topnode];
 		
 	}
@@ -174,13 +174,6 @@ int SHISTORY = 5;
 			}
 		}
 	}
-	/*
-	 NSMutableArray *keysToRemove = [NSMutableArray array];
-	 for (id theKey in aDictionary) {
-	 [keysToRemove addObject:theKey];
-	 }
-	 [aDictionary removeObjectsForKeys:keysToRemove];
-	 */
 	
 	for (id key1 in todelete){
 		NSString* key2 = [todelete objectForKey:key1];

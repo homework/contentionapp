@@ -101,14 +101,19 @@ unsigned int getNetmask(unsigned int suffix){
 }
 
 +(unsigned int) intFromIP:(NSString *)ipaddr{
+	
 	NSArray *chunks = [ipaddr componentsSeparatedByString: @"."];
 	
-	unsigned int tmpip = IPToInt( [[chunks objectAtIndex:0] intValue],
+	if ([chunks count] >=4){
+		unsigned int tmpip = IPToInt( [[chunks objectAtIndex:0] intValue],
 								 [[chunks objectAtIndex:1] intValue],
 								 [[chunks objectAtIndex:2] intValue],
 								 [[chunks objectAtIndex:3] intValue]
 								 );
-	return tmpip;
+		return tmpip;
+	}
+	
+	return 0;
 }
 
 +(BOOL) isInternal:(NSString *) ipaddr{
@@ -143,10 +148,8 @@ unsigned int getNetmask(unsigned int suffix){
 +(NSString *) getIP:(NSString*)identifier{
 	if (identifier == NULL)
 		return NULL;
-	NSLog(@"searching for ip addr for %@", identifier);
 	for (NSString *key in iplookuptable){
 		if ([[iplookuptable objectForKey:key] isEqualToString:identifier]){
-			NSLog(@"found %@", key);
 			return key;
 			
 		}
@@ -211,14 +214,20 @@ unsigned int getNetmask(unsigned int suffix){
 	
 	LeaseObject  *lobj = (LeaseObject *) [n object];
 	
-	[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
+	if (![[lobj action] isEqualToString:@"upd"]){
+		[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
+	}else{
+		[maclookuptable setObject:[lobj name] forKey:[lobj macaddr]];
+	}
+		
 	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
-	//if (humanname == NULL){
+	
+	if (humanname == NULL){
 		humanname = [[lobj name] isEqualToString:@"NULL"] ? [lobj ipaddr] : [lobj name]; 
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
-	//}
+	}
 }
 
 +(void) writeMacTable{
