@@ -68,7 +68,7 @@ unsigned int getNetmask(unsigned int suffix){
 	NSString *CIDRaddr = [userDefaults stringForKey:@"SUBNET"];
 	
 	if (CIDRaddr == NULL){
-		NSLog(@"defaulting to addr %@", DEFAULTCIDR);
+		DLog(@"defaulting to addr %@", DEFAULTCIDR);
 		CIDRaddr = DEFAULTCIDR;
 	}
 	
@@ -80,7 +80,11 @@ unsigned int getNetmask(unsigned int suffix){
 
 
 +(void) createMacLookupTable{
-	NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	/*
+	 * No longer read on cahced copy from file.  Assume that router will give us what we need.
+	 */
+  /*
+    NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
 	
@@ -90,6 +94,9 @@ unsigned int getNetmask(unsigned int suffix){
 		maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	}
 	[fileManager release];	
+	*/
+	
+	maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 }
 
 +(void) addObservers{
@@ -162,8 +169,6 @@ unsigned int getNetmask(unsigned int suffix){
 	
 	NSString * resolvedname = NULL;
 	
-	resolvedname = NULL;
-	
 	if (macaddr != NULL){
 		resolvedname = [maclookuptable objectForKey:macaddr];
 	}
@@ -195,18 +200,18 @@ unsigned int getNetmask(unsigned int suffix){
 }
 
 +(void)printmactable{
-	NSLog(@"MAC TABLE AS FOLLOWS");
+	DLog(@"MAC TABLE AS FOLLOWS");
 	for (id key in maclookuptable){
 		NSString *name = [maclookuptable objectForKey:key];
-		NSLog(@"%@    %@", key, name);
+		DLog(@"%@    %@", key, name);
 	}
 }
 
 +(void)printiptable{
-	NSLog(@"IP TABLE AS FOLLOWS");
+	DLog(@"IP TABLE AS FOLLOWS");
 	for (id key in iplookuptable){
 		NSString *name = [iplookuptable objectForKey:key];
-		NSLog(@"%@    %@", key, name);
+		DLog(@"%@    %@", key, name);
 	}
 }
 
@@ -217,6 +222,7 @@ unsigned int getNetmask(unsigned int suffix){
 	if (![[lobj action] isEqualToString:@"upd"]){
 		[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
 	}else{
+		DLog(@"AN UPDATE RECORD ----> updating mac/name %@/%@", [lobj name], [lobj macaddr]);
 		[maclookuptable setObject:[lobj name] forKey:[lobj macaddr]];
 	}
 		

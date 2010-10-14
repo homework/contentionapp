@@ -43,12 +43,6 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
-	
-		/*
-	 * Timer For testing
-	 */
-	//[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(update) userInfo:nil repeats:YES]; 
-	
 }
 
 

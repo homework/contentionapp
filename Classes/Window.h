@@ -21,6 +21,6 @@
 -(id) initWithSize:(int)size pollcount:(int) pc;
 -(void) addBytes:(int) value pollcount:(int) pc;
 -(int) totalBytes:(int) pollcount;
--(void) print:(NSString*)application;
+-(void) print:(NSString*)application pc:(int) pc;
 
 @end

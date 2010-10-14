@@ -25,12 +25,12 @@
 }
 
 
-+(void) updateLeases:(NSString*)macaddr ipaddr: (NSString*) ipaddr newname:(NSString*)name{
++(void) updateLeases:(NSString*)macaddr newname:(NSString*)name{
 
 	NSString* macfmt = [self macfromstr:macaddr];
 	
 	NSString* query = [NSString stringWithFormat:@"SQL:INSERT into Leases values (\"%@\", \"%@\", \"%@\", \"%@\")\n",
-					   @"upd", macfmt, ipaddr, name];
+					   @"upd", macfmt, @"0.0.0.0", name];
 	
 	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
 	
@@ -38,7 +38,8 @@
 
 
 +(NSString *) macfromstr:(NSString*) macaddr{
-	return [NSString stringWithFormat:@"%@:%@:%@:%@:%@:%@",
+	if ([macaddr length] == 12){ 
+		return [NSString stringWithFormat:@"%@:%@:%@:%@:%@:%@",
 						[macaddr substringWithRange:NSMakeRange(0, 2)],
 						[macaddr substringWithRange:NSMakeRange(2, 2)],
 						[macaddr substringWithRange:NSMakeRange(4, 2)],
@@ -46,6 +47,8 @@
 						[macaddr substringWithRange:NSMakeRange(8, 2)],
 						[macaddr substringWithRange:NSMakeRange(10, 2)]
 						];
+	}
+	return macaddr;
 }
 
 +(void) sendquery:(NSString *) query{

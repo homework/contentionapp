@@ -38,20 +38,14 @@ static tstamp_t lastflow;
 static tstamp_t lastlink;
 static tstamp_t lastlease;
 
-
-static int flowcounttest;
-
 @implementation PollingThread
 @synthesize delegate;
 
 -(id) init{
 	if (self = [super init]) {
-		
 		lastflow = 0LL;
 		lastlink = 0LL;
 		lastlease = 0LL;
-		flowcounttest = 0;
-		
 	}
 	return self;
 }
@@ -77,7 +71,7 @@ static int flowcounttest;
 		
 		for (;;){
 			
-			[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:NO];
+			[PollingThread performSelectorOnMainThread:@selector(newPoll:) withObject:nil waitUntilDone:YES];
 			
 			if (![self pollleasetable]){
 				break;
@@ -98,9 +92,7 @@ static int flowcounttest;
 				time_delay.tv_sec = expected.tv_sec - current.tv_sec;
 			}
 			
-			[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:NO];
-			NSLog(@"TOTAL bytes for mac air = %d", flowcounttest);
-			flowcounttest = 0;
+			[PollingThread performSelectorOnMainThread:@selector(pollComplete:) withObject:nil waitUntilDone:YES];
 			nanosleep(&time_delay, NULL);
 		}
 		
@@ -116,11 +108,11 @@ static int flowcounttest;
 	
 	if (lastflow) {
 		char *s = timestamp_to_string(lastflow);
-		NSLog(@"flow query is SQL:select * from Flows [ since %s ]", s);
+		DLog(@"SQL:select * from Flows [ since %s ]", s);
 		sprintf(query, "SQL:select * from Flows [ since %s ]\n",s);
 		free(s);
 	} else{
-		NSLog(@"flow query is SQL:select * from Flows [ range %d seconds]",
+		DLog(@"flow query is SQL:select * from Flows [ range %d seconds]",
 			  TIME_DELTA);
 		
 		sprintf(query,
@@ -144,12 +136,12 @@ static int flowcounttest;
 	
 	if (lastlease) {
 		char *s = timestamp_to_string(lastlease);
-		NSLog(@"query is SQL:select * from Leases [ since %s ]",s);
+		DLog(@"SQL:select * from Leases [ since %s ]",s);
 		sprintf(query,
 				"SQL:select * from Leases [since %s]\n", s);
 		free(s);
 	} else{
-		NSLog(@"query is SQL:select * from Leases\n");
+		DLog(@"SQL:select * from Leases\n");
 		
 		sprintf(query,
 				"SQL:select * from Leases\n");
@@ -198,7 +190,7 @@ static int flowcounttest;
 	
 	if (![RPCSend send: query qlen:qlen resp:resp rsize:sizeof(resp) len:&len]) {	
 		fprintf(stderr, "rpc_call() failed\n");
-		NSLog(@"----------------------------------------flows -- rpc call failed");
+		DLog(@"----------------------------------------flows -- rpc call failed");
 		*last = 0LL;
 		return 0;
 	}
@@ -425,7 +417,7 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 		// rtab_print(results);
 		p = dhcp_convert(results);
 		// do something with the data pointed to by p 
-		NSLog(@"Retrieved %ld lease records from database\n", p->nleases);
+		DLog(@"Retrieved %ld lease records from database\n", p->nleases);
 		for (i = 0; i < p->nleases; i++) {
 			DhcpData *l = p->data[i];
 			char *s = timestamp_to_string(l->tstamp);
@@ -437,7 +429,7 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 			[lobj release];
 			[autoreleasepool release];	
 			
-			NSLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
+			DLog(@"[LEASERECORD] %s %s;%012llx;%s;%s\n", s, index2action(l->action), l->mac_addr, a, l->hostname);
 			free(s);
 			free(a);
 		}
@@ -467,12 +459,12 @@ static tstamp_t processlinkresults(char *buf, unsigned int len) {
 		// rtab_print(results);
 		p = link_mon_convert(results);
 		// do something with the data pointed to by p 
-		NSLog(@"Retrieved %ld link records from database\n", p->nlinks);
+		DLog(@"Retrieved %ld link records from database\n", p->nlinks);
 		for (i = 0; i < p->nlinks; i++) {
 			LinkData *f = p->data[i];
 			char *s = timestamp_to_string(f->tstamp);
 			
-			NSLog(@"%s %012llx;%7.2f;%lu;%lu;%lu\n", s,
+			DLog(@"%s %012llx;%7.2f;%lu;%lu;%lu\n", s,
 				  f->mac, f->rss, f->retries, f->packets, f->bytes);
 			free(s);
 		}
@@ -499,7 +491,7 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 	if (results && ! rtab_status(buf, stsmsg)) {
         p = mon_convert(results);
 		// do something with the data pointed to by p 
-		NSLog(@"Retrieved %ld flow records from database", p->nflows);
+		DLog(@"Retrieved %ld flow records from database", p->nflows);
 		
 		for (i = 0; i < p->nflows; i++) {
 			FlowData *f = p->data[i];
@@ -507,10 +499,11 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[FlowObject alloc] initWithFlow:f];
 			
+			
 			if ([[NameResolver getidentifier:[fobj ip_src]] isEqualToString:@"001ff3bcb257"] ||
 				[[NameResolver getidentifier:[fobj ip_dst]] isEqualToString:@"001ff3bcb257"]){
-				NSLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst],[fobj bytes]);
-				flowcounttest += [fobj bytes];
+				DLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst],[fobj bytes]);
+				
 			}
 			
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:YES];

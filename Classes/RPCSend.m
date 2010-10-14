@@ -33,24 +33,24 @@ static unsigned length;
 	
 	host = hwdbaddr;
 	port = HWDB_SERVER_PORT;
-	NSLog(@"port is %d addr is %@", port, rip);
+	DLog(@"port is %d addr is %@", port, rip);
 
 	connected = FALSE;
-	NSLog(@"initing rpc");
+	DLog(@"initing rpc");
 	if (!rpc_init(0)) {
 		fprintf(stderr, "Failure to initialize rpc system\n");
 		exit(1);
 	}
-	NSLog(@"done initing rpc");
+	DLog(@"initialised rpc");
 }
 
 +(BOOL) connect{
-	NSLog(@"connecting to router %s, %d", host, port);
+	DLog(@"connecting to router %s, %d", host, port);
 	rpc = rpc_connect(host, port, "HWDB", 1l);
 	if (rpc){
 		connected = TRUE;
 		[RPCSend performSelectorOnMainThread:@selector(notifyconnected:) withObject:nil waitUntilDone:NO];
-		NSLog(@"successfully connected");
+		DLog(@"successfully connected");
 		return TRUE;
 	}
 	[RPCSend performSelectorOnMainThread:@selector(notifydisconnected:) withObject:nil waitUntilDone:NO];

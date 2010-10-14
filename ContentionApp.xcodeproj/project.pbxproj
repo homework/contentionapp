@@ -25,7 +25,6 @@
 		A31F872B122D5AB2005712BC /* ApplicationSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A31F872A122D5AB2005712BC /* ApplicationSubViewController.m */; };
 		A327F5DB11E49B8D00FC8A35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */; };
 		A32B7331121E952B008097BF /* DeviceInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A32B732F121E952B008097BF /* DeviceInputView.xib */; };
-		A32B7490121EDEAB008097BF /* ContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A32B748F121EDEAB008097BF /* ContainerView.m */; };
 		A3340B71125E0F6F00EBBEAE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3340B70125E0F6F00EBBEAE /* Icon.png */; };
 		A33F2CA112017AEC00B78F50 /* NodeTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = A33F2CA012017AEC00B78F50 /* NodeTuple.m */; };
 		A33F2EDD1206D69000B78F50 /* skype.png in Resources */ = {isa = PBXBuildFile; fileRef = A33F2ED81206D69000B78F50 /* skype.png */; };
@@ -55,6 +54,8 @@
 		A382F7C611FDA0C7006AC7D3 /* laptop.png in Resources */ = {isa = PBXBuildFile; fileRef = A382F7C511FDA0C7006AC7D3 /* laptop.png */; };
 		A382F7F211FDA85B006AC7D3 /* pc.png in Resources */ = {isa = PBXBuildFile; fileRef = A382F7F111FDA85B006AC7D3 /* pc.png */; };
 		A382F7F411FDA865006AC7D3 /* iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = A382F7F311FDA865006AC7D3 /* iphone.png */; };
+		A38AB374126706A5001C35B3 /* NameAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A38AB373126706A5001C35B3 /* NameAlert.m */; };
+		A38AB37F1267089C001C35B3 /* HoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = A38AB37E1267089C001C35B3 /* HoverView.m */; };
 		A38B878212229401009A7085 /* ApplicationImageLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = A38B878112229401009A7085 /* ApplicationImageLookup.m */; };
 		A38B87BB1222A4AF009A7085 /* DeviceImageLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = A38B87BA1222A4AF009A7085 /* DeviceImageLookup.m */; };
 		A39B8E3011FEF04400A7DAA6 /* DeviceSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B8E2E11FEF04400A7DAA6 /* DeviceSubViewController.m */; };
@@ -85,7 +86,6 @@
 		A3CD4E08122565EC001420F0 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD4E07122565EC001420F0 /* ViewManager.m */; };
 		A3CD4FEB1226AE2E001420F0 /* NetworkTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */; };
 		A3CD505F1226CB93001420F0 /* CustomImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD505E1226CB93001420F0 /* CustomImagePicker.m */; };
-		A3CD51271227BD69001420F0 /* DeviceNameAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CD51261227BD69001420F0 /* DeviceNameAlert.m */; };
 		A3CD517A1227D6C8001420F0 /* mac.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CD51771227D6C8001420F0 /* mac.png */; };
 		A3CD517B1227D6C8001420F0 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CD51781227D6C8001420F0 /* phone.png */; };
 		A3CD517C1227D6C8001420F0 /* router.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CD51791227D6C8001420F0 /* router.png */; };
@@ -123,8 +123,6 @@
 		A31F872A122D5AB2005712BC /* ApplicationSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSubViewController.m; sourceTree = "<group>"; };
 		A327F5DA11E49B8D00FC8A35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A32B732F121E952B008097BF /* DeviceInputView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceInputView.xib; sourceTree = "<group>"; };
-		A32B748E121EDEAB008097BF /* ContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerView.h; sourceTree = "<group>"; };
-		A32B748F121EDEAB008097BF /* ContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerView.m; sourceTree = "<group>"; };
 		A3340B70125E0F6F00EBBEAE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		A33F2C9F12017AEC00B78F50 /* NodeTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeTuple.h; sourceTree = "<group>"; };
 		A33F2CA012017AEC00B78F50 /* NodeTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeTuple.m; sourceTree = "<group>"; };
@@ -174,6 +172,10 @@
 		A382F7C511FDA0C7006AC7D3 /* laptop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laptop.png; sourceTree = "<group>"; };
 		A382F7F111FDA85B006AC7D3 /* pc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pc.png; sourceTree = "<group>"; };
 		A382F7F311FDA865006AC7D3 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
+		A38AB372126706A5001C35B3 /* NameAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAlert.h; sourceTree = "<group>"; };
+		A38AB373126706A5001C35B3 /* NameAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAlert.m; sourceTree = "<group>"; };
+		A38AB37D1267089C001C35B3 /* HoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HoverView.h; sourceTree = "<group>"; };
+		A38AB37E1267089C001C35B3 /* HoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HoverView.m; sourceTree = "<group>"; };
 		A38B878012229401009A7085 /* ApplicationImageLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationImageLookup.h; sourceTree = "<group>"; };
 		A38B878112229401009A7085 /* ApplicationImageLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationImageLookup.m; sourceTree = "<group>"; };
 		A38B87B91222A4AF009A7085 /* DeviceImageLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceImageLookup.h; sourceTree = "<group>"; };
@@ -219,8 +221,6 @@
 		A3CD4FEA1226AE2E001420F0 /* NetworkTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTable.m; sourceTree = "<group>"; };
 		A3CD505D1226CB93001420F0 /* CustomImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImagePicker.h; sourceTree = "<group>"; };
 		A3CD505E1226CB93001420F0 /* CustomImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImagePicker.m; sourceTree = "<group>"; };
-		A3CD51251227BD69001420F0 /* DeviceNameAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceNameAlert.h; sourceTree = "<group>"; };
-		A3CD51261227BD69001420F0 /* DeviceNameAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceNameAlert.m; sourceTree = "<group>"; };
 		A3CD51771227D6C8001420F0 /* mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mac.png; sourceTree = "<group>"; };
 		A3CD51781227D6C8001420F0 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		A3CD51791227D6C8001420F0 /* router.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = router.png; sourceTree = "<group>"; };
@@ -374,6 +374,8 @@
 		A33F2C9712017A8700B78F50 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A38AB372126706A5001C35B3 /* NameAlert.h */,
+				A38AB373126706A5001C35B3 /* NameAlert.m */,
 				A34E39E811D4B58F005819E1 /* FlowObject.h */,
 				A34E39E911D4B58F005819E1 /* FlowObject.m */,
 				A3CD3F4912156C6600890E30 /* LinkObject.h */,
@@ -447,14 +449,12 @@
 				A3032C241223C2FD00B6FC3F /* PDColoredProgressView.h */,
 				A3032C251223C30900B6FC3F /* PDColoredProgressView.m */,
 				A3032C271223C31900B6FC3F /* drawing.m */,
-				A3CD51251227BD69001420F0 /* DeviceNameAlert.h */,
-				A3CD51261227BD69001420F0 /* DeviceNameAlert.m */,
 				A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */,
 				A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */,
 				A39B8E4A11FEF70800A7DAA6 /* ApplicationView.h */,
 				A39B8E4B11FEF70800A7DAA6 /* ApplicationView.m */,
-				A32B748E121EDEAB008097BF /* ContainerView.h */,
-				A32B748F121EDEAB008097BF /* ContainerView.m */,
+				A38AB37D1267089C001C35B3 /* HoverView.h */,
+				A38AB37E1267089C001C35B3 /* HoverView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -650,7 +650,6 @@
 				A37C7708121BDFD2005CD178 /* NameResolver.m in Sources */,
 				A37C775D121BFB1D005CD178 /* LeaseRecord.m in Sources */,
 				A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */,
-				A32B7490121EDEAB008097BF /* ContainerView.m in Sources */,
 				A38B878212229401009A7085 /* ApplicationImageLookup.m in Sources */,
 				A38B87BB1222A4AF009A7085 /* DeviceImageLookup.m in Sources */,
 				A3032C261223C30900B6FC3F /* PDColoredProgressView.m in Sources */,
@@ -659,12 +658,13 @@
 				A3CD4E08122565EC001420F0 /* ViewManager.m in Sources */,
 				A3CD4FEB1226AE2E001420F0 /* NetworkTable.m in Sources */,
 				A3CD505F1226CB93001420F0 /* CustomImagePicker.m in Sources */,
-				A3CD51271227BD69001420F0 /* DeviceNameAlert.m in Sources */,
 				A31F872B122D5AB2005712BC /* ApplicationSubViewController.m in Sources */,
 				A3D11083124758FB0099DED8 /* RPCSend.m in Sources */,
 				A30943E51248C9AE00028791 /* UserEventLogger.m in Sources */,
 				A3C490DC124CBA7400ED66A5 /* ImageList.m in Sources */,
 				A300E7D81259DF5D00323E07 /* srpc.c in Sources */,
+				A38AB374126706A5001C35B3 /* NameAlert.m in Sources */,
+				A38AB37F1267089C001C35B3 /* HoverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

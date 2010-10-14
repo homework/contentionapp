@@ -27,6 +27,9 @@
 -(float) getBandwidthProportion:(NSString *) node;
 -(void) updateData: (NSString*) topnode subnode:(NSString*) subnode bytes:(int) bytes;
 -(void) removeZeroByteData;
+
+-(int) getLastTotalBytesForNode:(NSString *) node pc:(int)pc;
+
 -(NSMutableArray *) getAllData;
 
 @end

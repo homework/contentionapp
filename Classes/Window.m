@@ -26,21 +26,21 @@
 		[tmp release];
 		 
 		for (int i = 0; i < CAPACITY; i++){
-			[window addObject: [NSNumber numberWithInt:0]];	
+			[window addObject: [NSNumber numberWithUnsignedInt:0]];	
 		}
 	}
 	
 	return self;	
 }
 
--(void) addBytes:(int)value pollcount:(int)pc{
+-(void) addBytes:(unsigned int)value pollcount:(int)pc{
 	
 	if (pc != lastpoll)
-		[window replaceObjectAtIndex:pc%CAPACITY withObject:[NSNumber numberWithInt:value]];
+		[window replaceObjectAtIndex:pc%CAPACITY withObject:[NSNumber numberWithUnsignedInt:value]];
 	else{
-		int bytes = [((NSNumber*)[window objectAtIndex:pc%CAPACITY]) intValue];
+		unsigned int bytes = [((NSNumber*)[window objectAtIndex:pc%CAPACITY]) unsignedIntValue];
 		bytes += value;
-		[window replaceObjectAtIndex:pc%CAPACITY withObject:[NSNumber numberWithInt:bytes]];
+		[window replaceObjectAtIndex:pc%CAPACITY withObject:[NSNumber numberWithUnsignedInt:bytes]];
 	}
 	/*
 	 * Set slots to 0 for any missed polls
@@ -49,19 +49,27 @@
 	lastpoll = pc;
 }
 
--(void) print:(NSString*) application{
+-(void) print:(NSString*) application pc:(int)pc{
 	NSEnumerator *enumerator = [window objectEnumerator];
     NSNumber* n;
 	int count = 0;
 	NSLog(@"%@",application);
 	while ( (n = [enumerator nextObject])) {
-		NSLog(@"slot %d = %d %@",count, [n intValue], (count == lastpoll%CAPACITY) ? @"*" : @"");
+		NSLog(@"slot %d = %u %@",count, [n unsignedIntValue], (count == lastpoll%CAPACITY) ? @"*" : @"");
 		count++;
 	}
+	NSLog(@"LAST ADDED = %u", [self lastBytes:pc]);
 }
 
--(int) totalBytes:(int)pc{
+-(unsigned int) lastBytes:(int) pc{
+	if (pc != lastpoll){  //nothing retrieved in last poll
+		return 0;
+	}
 	
+	return [[window objectAtIndex:pc%CAPACITY] unsignedIntValue]; 
+}
+
+-(unsigned int) totalBytes:(int)pc{
 	
 	/*
 	 * Set slots to 0 for any missed polls
@@ -72,13 +80,13 @@
 		return 0;
 	}
 	
-	int total = 0;
+	unsigned int total = 0;
 	
 	NSEnumerator *enumerator = [window objectEnumerator];
     NSNumber* n;
 	
 	while ( (n = [enumerator nextObject])) {
-		total += [n intValue];
+		total += [n unsignedIntValue];
 	}
 	return total;
 }
@@ -86,7 +94,7 @@
 -(void) emptyOldSlots:(int) pc{	
 	if ((pc - lastpoll) > 1){
 		for (int i = (lastpoll + 1) ; i < pc; i++){
-			[window replaceObjectAtIndex:i%CAPACITY withObject:[NSNumber numberWithInt:0]];
+			[window replaceObjectAtIndex:i%CAPACITY withObject:[NSNumber numberWithUnsignedInt:0]];
 		}
 	}	
 }

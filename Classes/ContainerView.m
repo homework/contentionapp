@@ -21,12 +21,8 @@
 }
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	NSLog(@"am container touched");
-		UITouch *touch = [touches anyObject];
+	UITouch *touch = [touches anyObject];
 	CGPoint thePoint = [touch locationInView:self];
-
-
-	NSLog(@"postion %f, %f", thePoint.x, thePoint.y);
 }
 /*
 // Only override drawRect: if you perform custom drawing.

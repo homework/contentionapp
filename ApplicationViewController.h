@@ -13,13 +13,15 @@
 #import "ApplicationSubViewController.h"
 #import "ApplicationImageLookup.h"
 #import "CustomImagePicker.h"
-#import "DeviceNameAlert.h"
+#import "NameAlert.h"
 #import "UserEventLogger.h"
 #import "ImageList.h"
 
-@interface ApplicationViewController : UIViewController {
+
+@interface ApplicationViewController : UIViewController <TouchResponse> {
 	NSMutableArray *sorteddata;
 	ViewManager *vm;
+
 }
 
 @property(nonatomic,retain) NSMutableArray* sorteddata;

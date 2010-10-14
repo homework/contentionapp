@@ -15,8 +15,6 @@
 #define DEVICES  7
 
 @interface ApplicationView : UIView {
-	
-
 	UIViewController <TouchResponse> *delegate;
 	NSMutableArray *nodes;
 	CALayer * mylayers[DEVICES+1];

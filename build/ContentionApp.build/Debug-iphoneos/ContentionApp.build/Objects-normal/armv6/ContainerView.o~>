@@ -1,0 +1,2 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContainerView.m: In function '-[ContainerView touchesBegan:withEvent:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/ContainerView.m:25: warning: unused variable 'thePoint'

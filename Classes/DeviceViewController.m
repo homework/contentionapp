@@ -11,14 +11,22 @@
 
 @interface DeviceViewController (private)
 -(void) newNetworkData:(NSNotification *) n;
+-(void) showDetail:(NSString *) identifier position: (int) index;
+-(void) editImage:(NSString *) identifier;
+-(void) setUpHoverView;
+-(void) addObservers;
+-(void) setUpViewManager;
+-(void) editName:(NSString *) identifier;
+-(void) showHoverView:(BOOL)show identifier:(NSString *) identifier;
 @end
+
+NSString *Show_HoverView = @"SHOW";
 
 @implementation DeviceViewController
 
 @synthesize sorteddata;
 @synthesize vm;
-
-
+@synthesize hoverView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -26,32 +34,18 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
 	[DeviceImageLookup initialize];
-	//ok, not aha
-	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
-	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
-	[self setVm:tmpvm];
-	[tmpvm release];
-	
+	[self setUpHoverView];
+	[self setUpViewManager];
+	[self addObservers];
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
-	
 }
+
 
 - (void)viewDidAppear:(BOOL)animated{
 	[super viewDidAppear:animated];
 	[UserEventLogger logscreenchange:@"devices"];
-}
-
-
--(void) connected:(NSNotification *) n{
-	[self.vm connected];
-}
-
--(void) disconnected:(NSNotification *) n{
-	[self.vm disconnected];
 }
 
 -(NSString *) getImage:(NSString *) s{
@@ -65,60 +59,28 @@
 
 -(void) touched: (int) tag viewname:(NSString *) identifier position: (int) index{
 	
-
 	if (tag == LABEL){
 		if (self.editing){
-			DeviceView *deviceview = [self.vm viewForName:identifier];
-			
-			
-			
-			DeviceNameAlert *alert = [[DeviceNameAlert alloc] 
-								  initWithTitle: @"Device Name" 
-								  message:@"Specify the  Device Name"
-								  delegate:self
-								  cancelButtonTitle:@"Cancel"
-								  otherButtonTitles:@"OK", nil];
-			[alert addTextFieldWithValue:[deviceview name] label:@"Device Name"];
-			[alert setDeviceView:deviceview];
-			
-			// Name field
-			UITextField *tf = [alert textFieldAtIndex:0];
-			tf.clearButtonMode = UITextFieldViewModeWhileEditing;
-			tf.keyboardType = UIKeyboardTypeAlphabet;
-			tf.keyboardAppearance = UIKeyboardAppearanceAlert;
-			tf.autocapitalizationType = UITextAutocapitalizationTypeWords;
-			tf.autocorrectionType = UITextAutocorrectionTypeNo;
-			[alert show];
-			
+			[self editName: identifier];
+		}else{
+			[self showHoverView:YES identifier:identifier];
 		}
 	}
 	
 	if (tag == IMAGE){
 		if (self.editing){
-			CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:[ImageList getList:@"devices"] parent:self];			
-			
-			picker.title = [NSString stringWithFormat:@"%@ image", [NameResolver friendlynamefrommac:identifier]];
-			
-			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-			
-			[delegate.navigationControllerDevices pushViewController:picker animated: YES];
-			[picker release];
+			[self editImage:identifier];
 			
 		}else{
-			DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:identifier];
-			detail.title = [NSString stringWithFormat:@"%@", [NameResolver friendlynamefrommac:identifier]];
-			ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-			[delegate.navigationControllerDevices pushViewController:detail animated: YES];
-			[detail release];
-			[UserEventLogger logdrilldown:identifier position:index screen:@"device"];
-			
+			[self showDetail:identifier position:index];
 		}
 	}
-	
 }
 
+
+
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-	DeviceView *deviceView = ((DeviceNameAlert *) alertView).deviceView;
+	DeviceView *deviceView = ((NameAlert *) alertView).deviceView;
 	
 	if (deviceView != NULL){
 		NSString* newname = [[alertView textFieldAtIndex:0] text];
@@ -127,13 +89,11 @@
 				[NameResolver update:[deviceView identifier] newname:newname];
 				[deviceView updateName:[[alertView textFieldAtIndex:0] text]];
 				[UserEventLogger lognamechange:[deviceView identifier]  newname:newname screen:@"device"];
-				[UserEventLogger updateLeases:[deviceView identifier]  ipaddr:[NameResolver getIP:[deviceView identifier]] newname:newname];
+				[UserEventLogger updateLeases:[deviceView identifier] newname:newname];
 			}
 		}
 	}
 }
-
-
 
 
 -(void) updateImage:(NSString*) image forNode:(NSString*)identifier{
@@ -145,22 +105,128 @@
 }
 
 
+#pragma mark -
+#pragma mark Private Methods
+
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
+	
 	for (NodeTuple* tp in sorteddata){
-		NSLog(@"%@   %d", [tp name], [tp value]); 
+		DLog(@"%@   %d", [tp name], [tp value]); 
 	}
 }
 
-
-/*
- // Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	// Return YES for supported orientations.
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
+-(void) addObservers{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
 }
- */
+
+-(void) setUpViewManager{
+	self.sorteddata = (NSMutableArray*)[[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
+	ViewManager *tmpvm = [[ViewManager alloc] initWithView:self.view data:self.sorteddata viewcontroller:self];
+	[self setVm:tmpvm];
+	[tmpvm release];
+}
+
+-(void) setUpHoverView{
+	CGRect frame = CGRectMake(round((self.view.frame.size.width - 160) / 2.0),  self.view.frame.size.height - 150, self.view.frame.size.width / 2.0, self.view.frame.size.height / 8.0);
+	HoverView *hv = [[HoverView alloc] initWithFrame:frame];
+	hv.alpha = 0.0;
+	hv.backgroundColor = [UIColor clearColor];
+	[self setHoverView:hv];
+	[self.view addSubview:hoverView];
+	[hv release];
+}
+
+
+-(void) showDetail:(NSString *) identifier position: (int) index{
+	DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:identifier];
+	detail.title = [NSString stringWithFormat:@"%@", [NameResolver friendlynamefrommac:identifier]];
+	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	[delegate.navigationControllerDevices pushViewController:detail animated: YES];
+	[detail release];
+	[UserEventLogger logdrilldown:identifier position:index screen:@"device"];
+}
+
+-(void) editImage:(NSString *) identifier{
+	CustomImagePicker *picker = [[CustomImagePicker alloc] initWithNibName:nil bundle:nil view:[self.vm viewForName:identifier] imagelist:[ImageList getList:@"devices"] parent:self];			
+	
+	picker.title = [NSString stringWithFormat:@"%@ image", [NameResolver friendlynamefrommac:identifier]];
+	
+	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+	
+	[delegate.navigationControllerDevices pushViewController:picker animated: YES];
+	[picker release];
+}
+
+-(void) editName:(NSString *) identifier{
+	DeviceView *deviceview = [self.vm viewForName:identifier];
+	
+	NameAlert *alert = [[NameAlert alloc] 
+						initWithTitle: @"Device Name" 
+						message:@"Specify the  Device Name"
+						delegate:self
+						cancelButtonTitle:@"Cancel"
+						otherButtonTitles:@"OK", nil];
+	[alert addTextFieldWithValue:[deviceview name] label:@"Device Name"];
+	[alert setDeviceView:deviceview];
+	
+	// Name field
+	UITextField *tf = [alert textFieldAtIndex:0];
+	tf.clearButtonMode = UITextFieldViewModeWhileEditing;
+	tf.keyboardType = UIKeyboardTypeAlphabet;
+	tf.keyboardAppearance = UIKeyboardAppearanceAlert;
+	tf.autocapitalizationType = UITextAutocapitalizationTypeWords;
+	tf.autocorrectionType = UITextAutocorrectionTypeNo;
+	[alert show];
+}
+
+- (void)showHoverView:(BOOL)show identifier:(NSString*) identifier
+{
+	// reset the timer
+	[myTimer invalidate];
+	[myTimer release];
+	myTimer = nil;
+	
+	if (identifier != nil){
+		float bw = [NetworkData getCurrentBandwidth:identifier];
+		NSString* bwidth;
+		
+		if (bw >= 1024){
+			bwidth = [NSString stringWithFormat:@"%.2f Mbps", bw/1024 ];
+		}else{
+			bwidth = [NSString stringWithFormat:@"%.2f Kbps", bw];
+		}
+		 
+		hoverView.bandwidthLabel.text= bwidth;
+	}else{
+		hoverView.bandwidthLabel.text = @"";	
+	}
+	
+	// fade animate the view out of view by affecting its alpha
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.40];
+	
+	if (show)
+	{
+		// as we start the fade effect, start the timeout timer for automatically hiding HoverView
+		hoverView.alpha = 1.0;
+		myTimer = [[NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO] retain];
+		[[NSRunLoop currentRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
+	}
+	else
+	{
+		hoverView.alpha = 0.0;
+	}
+	
+	[UIView commitAnimations];
+}
+
+- (void)timerFired:(NSTimer *)timer
+{
+	// time has passed, hide the HoverView
+	[self showHoverView: NO identifier:nil];
+}
 
 
 #pragma mark -

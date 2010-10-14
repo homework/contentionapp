@@ -1,0 +1,2 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/UserEventLogger.m:111: warning: incomplete implementation of class 'UserEventLogger'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/UserEventLogger.m:111: warning: method definition for '+updateLeases:ipaddr:newname:' not found

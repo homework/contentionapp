@@ -18,7 +18,7 @@
 @synthesize POLLNUMBER;
 @synthesize data;
 
-int MAXBYTES = 0;
+unsigned int MAXBYTES = 0;
 int SHISTORY = 5;
 
 -(id) init{
@@ -31,13 +31,13 @@ int SHISTORY = 5;
 }
 
 
--(void) print:(NSString *) node{
-	NSLog(@"windows for device %@", node);
+-(void) print:(NSString *) node pc:(int) pc{
+	DLog(@"windows for device %@", node);
 	NSDictionary *dictionary = [data objectForKey:node];
 	Window* w;
 	for (id key in dictionary){
 		w = [dictionary objectForKey:key];
-		[w print:key];
+		[w print:key pc:pc];
 	}
 }
 
@@ -64,6 +64,24 @@ int SHISTORY = 5;
 	return  [results allValues];
 }
 
+-(unsigned int) getLastTotalBytesForNode:(NSString *) node pc:(int)pc{
+	
+	unsigned int total = 0;
+	NSDictionary *dictionary = [data objectForKey:node];
+	
+	Window * w;
+	
+	if (dictionary != NULL){
+		for (id key in dictionary) {
+			w = [dictionary objectForKey:key];
+			unsigned int value = [w lastBytes:pc];
+			total += value;
+		}
+	}
+
+	return total;
+	
+}
 
 -(NSMutableArray *) getLatestDataForNode:(NSString *)node{
 	NSMutableArray *array = [NSMutableArray array];
@@ -111,7 +129,7 @@ int SHISTORY = 5;
 }
 
 
--(void) updateData: (NSString*) topnode subnode:(NSString*) subnode bytes:(int) bytes{
+-(void) updateData: (NSString*) topnode subnode:(NSString*) subnode bytes:(unsigned int) bytes{
 	NSMutableDictionary *dictionary = [data objectForKey:topnode];
 	
 	if (dictionary == NULL){
@@ -137,7 +155,7 @@ int SHISTORY = 5;
 
 -(void) recalculateMaxBandwidth:(NSString*)node{
 	NSMutableDictionary *dictionary = [data objectForKey:node];
-	int bandwidth = 0;
+	unsigned int bandwidth = 0;
 	
 	for (id key in dictionary){
 		Window *w = [dictionary objectForKey:key];
@@ -152,7 +170,7 @@ int SHISTORY = 5;
 	NSMutableDictionary *todelete = [NSMutableDictionary dictionaryWithCapacity:10];
 	NSMutableDictionary *dictionary;
 	Window *w;
-	int totalbytes;
+	unsigned int totalbytes;
 	
 	/*
 	 *search out all entries that have windows of size 0;

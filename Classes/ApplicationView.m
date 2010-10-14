@@ -41,7 +41,7 @@
 	NSEnumerator *enumerator = [n objectEnumerator];
 	NodeTuple* node;
 	int count = 0;
-	while ( node = [enumerator nextObject]  /*&& (count++ < DEVICES) */) {
+	while ( node = [enumerator nextObject]) {
 		if (count++ >= DEVICES)
 			break;
 		if ([name isEqualToString:[node name]])

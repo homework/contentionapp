@@ -44,15 +44,11 @@ float imageindent;
 
 
 -(void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-	NSLog(@"screen touched");
+	
 	if (index < 3){
-		
 		UITouch *touch = [touches anyObject];
-		
 		CGPoint thePoint = [touch locationInView:self];
-		
 		if (CGRectContainsPoint (labelbounds,thePoint)){
-			NSLog(@"label touched");
 			[self.touchDelegate touched:LABEL viewname:identifier position:index];
 		}else if (CGRectContainsPoint (CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height),thePoint)){	
 			[self.touchDelegate touched:IMAGE viewname:identifier position:index];
@@ -103,11 +99,6 @@ float imageindent;
 	[self setNeedsDisplay];
 }
 
-- (void)dealloc {
-	[deviceImage release];
-	[name release];
-	[super dealloc];
-}
 
 - (void)drawRect:(CGRect)rect {
 	
@@ -119,5 +110,12 @@ float imageindent;
 	}
 	imagebounds = CGRectMake(imageindent, 0.0, deviceImage.size.width, deviceImage.size.height);
 }
+
+- (void)dealloc {
+	[deviceImage release];
+	[name release];
+	[super dealloc];
+}
+
 
 @end

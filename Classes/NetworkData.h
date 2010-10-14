@@ -33,4 +33,7 @@
 
 +(float) getApplicationBandwidthProportion:(NSString *) app;
 +(float) getAppDeviceBandwidthProportion:(NSString *) application  device:(NSString *) n;
+
++(float) getCurrentBandwidth:(NSString *) node;
+
 @end

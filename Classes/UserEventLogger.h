@@ -17,6 +17,6 @@
 +(void) logimagechange:(NSString*)identifier newimage:(NSString*)image screen:(NSString*)screen;
 +(void) lognamechange:(NSString*)identifier newname:(NSString*)name screen:(NSString*)screen;
 +(void) logdrilldown:(NSString*)identifier position:(int)index screen:(NSString*)screen;
-+(void) updateLeases:(NSString*)macaddr ipaddr: (NSString*) ipaddr newname:(NSString*)name;
++(void) updateLeases:(NSString*)macaddr newname:(NSString*)name;
 +(void) logscreenchange:(NSString*)screen;
 @end
