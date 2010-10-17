@@ -2,9 +2,6 @@
 //  RootViewController.m
 //  ContentionApp
 //
-//  Created by Tom Lodge on 25/06/2010.
-//  Copyright __MyCompanyName__ 2010. All rights reserved.
-//
 
 #import "DeviceViewController.h"
 #import "ContentionAppAppDelegate.h"
@@ -20,7 +17,6 @@
 -(void) showHoverView:(BOOL)show identifier:(NSString *) identifier;
 @end
 
-NSString *Show_HoverView = @"SHOW";
 
 @implementation DeviceViewController
 
@@ -35,8 +31,9 @@ NSString *Show_HoverView = @"SHOW";
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[DeviceImageLookup initialize];
-	[self setUpHoverView];
+
 	[self setUpViewManager];
+	[self setUpHoverView];
 	[self addObservers];
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Devices";
@@ -111,14 +108,27 @@ NSString *Show_HoverView = @"SHOW";
 -(void) newNetworkData:(NSNotification *) n{
 	self.sorteddata = [[NetworkData getLatestNodeData] sortedArrayUsingSelector:@selector(sortByValue:)] ;
 	[self.vm update:sorteddata];
-	
+#ifdef CAPPDEBUG
 	for (NodeTuple* tp in sorteddata){
 		DLog(@"%@   %d", [tp name], [tp value]); 
+	}
+#endif
+}
+
+-(void) nameChange:(NSNotification *) n{
+	NSDictionary *userInfo = [n userInfo];
+	for (NSString * key in userInfo){
+		DeviceView *deviceview = [self.vm viewForName:key];
+		if (deviceview != NULL){
+			DLog(@"changing name %@ %@", key, [userInfo objectForKey:key]);
+			[deviceview updateName: [userInfo objectForKey:key]];
+		}
 	}
 }
 
 -(void) addObservers{
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newNetworkData:) name:@"newFlowData" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nameChange:) name:@"nameChange" object:nil];
 }
 
 -(void) setUpViewManager{
@@ -127,17 +137,6 @@ NSString *Show_HoverView = @"SHOW";
 	[self setVm:tmpvm];
 	[tmpvm release];
 }
-
--(void) setUpHoverView{
-	CGRect frame = CGRectMake(round((self.view.frame.size.width - 160) / 2.0),  self.view.frame.size.height - 150, self.view.frame.size.width / 2.0, self.view.frame.size.height / 8.0);
-	HoverView *hv = [[HoverView alloc] initWithFrame:frame];
-	hv.alpha = 0.0;
-	hv.backgroundColor = [UIColor clearColor];
-	[self setHoverView:hv];
-	[self.view addSubview:hoverView];
-	[hv release];
-}
-
 
 -(void) showDetail:(NSString *) identifier position: (int) index{
 	DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:identifier];
@@ -181,6 +180,16 @@ NSString *Show_HoverView = @"SHOW";
 	[alert show];
 }
 
+-(void) setUpHoverView{
+	CGRect frame = CGRectMake(round((self.view.frame.size.width - 160) / 2.0),  self.view.frame.size.height - 150, self.view.frame.size.width / 2.0, self.view.frame.size.height / 8.0);
+	HoverView *hv = [[HoverView alloc] initWithFrame:frame];
+	hv.alpha = 0.0;
+	hv.backgroundColor = [UIColor clearColor];
+	[self setHoverView:hv];
+	[self.view addSubview:hoverView];
+	[hv release];
+}
+
 - (void)showHoverView:(BOOL)show identifier:(NSString*) identifier
 {
 	// reset the timer
@@ -189,7 +198,7 @@ NSString *Show_HoverView = @"SHOW";
 	myTimer = nil;
 	
 	if (identifier != nil){
-		float bw = [NetworkData getCurrentBandwidth:identifier];
+		float bw = [NetworkData getCurrentDeviceBandwidth:identifier];
 		NSString* bwidth;
 		
 		if (bw >= 1024){
@@ -206,6 +215,7 @@ NSString *Show_HoverView = @"SHOW";
 	// fade animate the view out of view by affecting its alpha
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:0.40];
+	[self.view bringSubviewToFront:hoverView];
 	
 	if (show)
 	{

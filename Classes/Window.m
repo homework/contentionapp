@@ -53,12 +53,12 @@
 	NSEnumerator *enumerator = [window objectEnumerator];
     NSNumber* n;
 	int count = 0;
-	NSLog(@"%@",application);
+	DLog(@"%@",application);
 	while ( (n = [enumerator nextObject])) {
 		NSLog(@"slot %d = %u %@",count, [n unsignedIntValue], (count == lastpoll%CAPACITY) ? @"*" : @"");
 		count++;
 	}
-	NSLog(@"LAST ADDED = %u", [self lastBytes:pc]);
+	DLog(@"LAST ADDED = %u", [self lastBytes:pc]);
 }
 
 -(unsigned int) lastBytes:(int) pc{

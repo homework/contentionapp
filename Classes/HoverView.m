@@ -68,7 +68,7 @@
     float radius = 5.0f;
     
     CGContextBeginPath(context);
-	CGContextSetGrayFillColor(context, 0.8, 0.5);
+	CGContextSetGrayFillColor(context, 0.8, 1.0);
 	CGContextMoveToPoint(context, CGRectGetMinX(rect) + radius, CGRectGetMinY(rect));
     CGContextAddArc(context, CGRectGetMaxX(rect) - radius, CGRectGetMinY(rect) + radius, radius, 3 * M_PI / 2, 0, 0);
     CGContextAddArc(context, CGRectGetMaxX(rect) - radius, CGRectGetMaxY(rect) - radius, radius, 0, M_PI / 2, 0);

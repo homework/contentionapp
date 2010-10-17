@@ -16,16 +16,18 @@
 #import "NameAlert.h"
 #import "UserEventLogger.h"
 #import "ImageList.h"
-
+#import "HoverView.h"
 
 @interface ApplicationViewController : UIViewController <TouchResponse> {
 	NSMutableArray *sorteddata;
 	ViewManager *vm;
-
+	HoverView *hoverView;
+	NSTimer* myTimer;
 }
 
 @property(nonatomic,retain) NSMutableArray* sorteddata;
 @property(nonatomic,retain) ViewManager* vm;
+@property(nonatomic,retain) HoverView *hoverView;
 
 
 @end

@@ -1,7 +1,11 @@
 /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window addBytes:pollcount:]':
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: 'Window' may not respond to '-emptyOldSlots:'
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: (Messages without a matching method signature
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: will be assumed to return 'id' and accept
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:44: warning: '...' as arguments.)
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:36: warning: conflicting types for '-(void)addBytes:(unsigned int)value pollcount:(int)pc'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.h:22: warning: previous declaration of '-(void)addBytes:(int)value pollcount:(int)pc'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window print:pc:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:61: warning: 'Window' may not respond to '-lastBytes:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:61: warning: (Messages without a matching method signature
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:61: warning: will be assumed to return 'id' and accept
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:61: warning: '...' as arguments.)
 /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m: In function '-[Window totalBytes:]':
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:70: warning: 'Window' may not respond to '-emptyOldSlots:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.m:72: warning: conflicting types for '-(unsigned int)totalBytes:(int)pc'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/Window.h:23: warning: previous declaration of '-(int)totalBytes:(int)pollcount'

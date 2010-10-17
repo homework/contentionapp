@@ -77,8 +77,13 @@ static NetworkTable *apptable;
 	return [devicetable getBandwidthProportion:node];
 }
 		
-+(float) getCurrentBandwidth:(NSString *) node{
++(float) getCurrentDeviceBandwidth:(NSString *) node{
 	int total = [devicetable getLastTotalBytesForNode:node pc:POLLNUMBER-1];
+	return (float)((total * 8) / 1024) / 5;
+}
+
++(float) getCurrentApplicationBandwidth:(NSString *) node{
+	int total = [apptable getLastTotalBytesForNode:node pc:POLLNUMBER-1];
 	return (float)((total * 8) / 1024) / 5;
 }
 
@@ -89,17 +94,6 @@ static NetworkTable *apptable;
 	[apptable removeZeroByteData];
 	[devicetable removeZeroByteData];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowData" object:nil];
-	
-	/*
-	[devicetable print:@"001ff3bcb257" pc:POLLNUMBER-1];
-	
-	int total = [devicetable getLastTotalBytesForNode:@"001ff3bcb257" pc:POLLNUMBER-1];
-	
-	NSLog(@"LAST TOTAL BYTES %d", total);
-	
-	if (total > 0){
-		NSLog(@"BANDWIDTH = %f Kbps", (float)((total * 8) / 1024) / 5); 
-	}*/
 }
 
 +(void) newFlow: (NSNotification *) f{

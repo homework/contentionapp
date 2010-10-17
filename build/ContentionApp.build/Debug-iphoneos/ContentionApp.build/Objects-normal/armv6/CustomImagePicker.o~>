@@ -1,8 +1,5 @@
 /Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m: In function '-[CustomImagePicker buttonClicked:]':
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:78: warning: 'UIViewController' may not respond to '-updateImage:forNode:'
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:78: warning: (Messages without a matching method signature
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:78: warning: will be assumed to return 'id' and accept
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:78: warning: '...' as arguments.)
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m: At top level:
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:108: warning: incomplete implementation of class 'CustomImagePicker'
-/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:108: warning: method definition for '-initWithNibName:bundle:name:' not found
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:77: warning: 'UIViewController' may not respond to '-updateImage:forNode:'
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:77: warning: (Messages without a matching method signature
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:77: warning: will be assumed to return 'id' and accept
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/../CustomImagePicker.m:77: warning: '...' as arguments.)

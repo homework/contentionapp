@@ -19,7 +19,7 @@
 
 @synthesize sorteddata;
 @synthesize vm;
-
+@synthesize hoverView;
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -28,6 +28,7 @@
     [super viewDidLoad];
 	[DeviceImageLookup initialize];
 	[self setUpViewManager];
+	[self setUpHoverView];
 	[self addObservers];
 	self.navigationItem.rightBarButtonItem = self.editButtonItem;
 	self.navigationItem.title = @"Applications";
@@ -45,6 +46,8 @@
 	if (tag == LABEL){
 		if (self.editing){
 			[self editName:identifier];
+		}else{
+			[self showHoverView:YES identifier:identifier];
 		}
 	}
 	
@@ -149,6 +152,62 @@
 }
 
 
+-(void) setUpHoverView{
+	CGRect frame = CGRectMake(round((self.view.frame.size.width - 160) / 2.0),  self.view.frame.size.height - 150, self.view.frame.size.width / 2.0, self.view.frame.size.height / 8.0);
+	HoverView *hv = [[HoverView alloc] initWithFrame:frame];
+	hv.alpha = 0.0;
+	hv.backgroundColor = [UIColor clearColor];
+	[self setHoverView:hv];
+	[self.view addSubview:hoverView];
+	[hv release];
+}
+
+- (void)showHoverView:(BOOL)show identifier:(NSString*) identifier
+{
+	// reset the timer
+	[myTimer invalidate];
+	[myTimer release];
+	myTimer = nil;
+	
+	if (identifier != nil){
+		float bw = [NetworkData getCurrentApplicationBandwidth:identifier];
+		NSString* bwidth;
+		
+		if (bw >= 1024){
+			bwidth = [NSString stringWithFormat:@"%.2f Mbps", bw/1024 ];
+		}else{
+			bwidth = [NSString stringWithFormat:@"%.2f Kbps", bw];
+		}
+		
+		hoverView.bandwidthLabel.text= bwidth;
+	}else{
+		hoverView.bandwidthLabel.text = @"";	
+	}
+	[self.view bringSubviewToFront:hoverView];
+	// fade animate the view out of view by affecting its alpha
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:0.40];
+	
+	if (show)
+	{
+		// as we start the fade effect, start the timeout timer for automatically hiding HoverView
+		hoverView.alpha = 1.0;
+		myTimer = [[NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(timerFired:) userInfo:nil repeats:NO] retain];
+		[[NSRunLoop currentRunLoop] addTimer:myTimer forMode:NSDefaultRunLoopMode];
+	}
+	else
+	{
+		hoverView.alpha = 0.0;
+	}
+	
+	[UIView commitAnimations];
+}
+
+- (void)timerFired:(NSTimer *)timer
+{
+	// time has passed, hide the HoverView
+	[self showHoverView: NO identifier:nil];
+}
 
 
 

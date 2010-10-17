@@ -222,8 +222,10 @@ unsigned int getNetmask(unsigned int suffix){
 	if (![[lobj action] isEqualToString:@"upd"]){
 		[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
 	}else{
-		DLog(@"AN UPDATE RECORD ----> updating mac/name %@/%@", [lobj name], [lobj macaddr]);
+		DLog(@"UPDATE RECORD ----> updating mac/name %@/%@", [lobj name], [lobj macaddr]);
 		[maclookuptable setObject:[lobj name] forKey:[lobj macaddr]];
+		NSDictionary* dict = [NSDictionary dictionaryWithObject:[lobj name] forKey:[lobj macaddr]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"nameChange" object:nil userInfo:dict];
 	}
 		
 	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];

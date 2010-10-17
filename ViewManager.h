@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "DeviceView.h"
-//#import "ContainerView.h"
 #import "NodeTuple.h"
-//#import "ContainerView.h"
 
 #define DEVICES  7
 

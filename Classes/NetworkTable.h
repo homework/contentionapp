@@ -25,10 +25,10 @@
 -(NSMutableArray *) getLatestDataForNode:(NSString *)node;
 -(float) getNodeBandwidthProportion:(NSString *) fornode  subnode:(NSString *) subnode;
 -(float) getBandwidthProportion:(NSString *) node;
--(void) updateData: (NSString*) topnode subnode:(NSString*) subnode bytes:(int) bytes;
+-(void) updateData: (NSString*) topnode subnode:(NSString*) subnode bytes:(unsigned int) bytes;
 -(void) removeZeroByteData;
 
--(int) getLastTotalBytesForNode:(NSString *) node pc:(int)pc;
+-(unsigned int) getLastTotalBytesForNode:(NSString *) node pc:(int)pc;
 
 -(NSMutableArray *) getAllData;
 

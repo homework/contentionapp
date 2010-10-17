@@ -46,10 +46,6 @@
 	{
 		ip_src = [[NSString alloc] initWithString: [NSString stringWithFormat:@"%@", from]];
 		ip_dst = [[NSString alloc] initWithString: [NSString stringWithFormat:@"%@", to]];
-	    //create a fake ip_src address;
-		//inet_aton("128.34.234.56", &ip_src);
-		//inet_aton("128.234.234.5", &ip_dst);
-		
 		proto = protos[arc4random() % 2];
 		if (proto == 6){
 			sport = dport = tcpports[arc4random() % 6];
@@ -57,12 +53,8 @@
 			sport = dport = udpports[arc4random() % 6];
 
 		}
-		//sport = arc4random() % 5000;
-		//dport =arc4random() % 5000;
 		packets =  arc4random() % 1000;
-		bytes  = arc4random() % 200000;
-		//gettimeofday(&tstamp, NULL);
-		
+		bytes  = arc4random() % 200000;		
 	}
 	return self;
 }

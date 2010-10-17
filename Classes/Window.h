@@ -19,8 +19,8 @@
 @property(nonatomic, readonly) int lastpoll;
 
 -(id) initWithSize:(int)size pollcount:(int) pc;
--(void) addBytes:(int) value pollcount:(int) pc;
--(int) totalBytes:(int) pollcount;
+-(void) addBytes:(unsigned int) value pollcount:(int) pc;
+-(unsigned int) totalBytes:(int) pollcount;
 -(void) print:(NSString*)application pc:(int) pc;
-
+-(unsigned int) lastBytes:(int) pc;
 @end

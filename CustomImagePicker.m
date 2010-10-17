@@ -2,10 +2,9 @@
 //  CustomImagePicker.m
 //  ContentionApp
 //
-//  Created by Tom Lodge on 26/08/2010.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  code taken from:
+//  http://www.raywenderlich.com/130/how-to-write-a-custom-image-picker-like-uiimagepicker/
 //
-
 #import "CustomImagePicker.h"
 #import "ContentionAppAppDelegate.h"
 

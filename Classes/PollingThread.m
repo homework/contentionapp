@@ -190,7 +190,7 @@ static tstamp_t lastlease;
 	
 	if (![RPCSend send: query qlen:qlen resp:resp rsize:sizeof(resp) len:&len]) {	
 		fprintf(stderr, "rpc_call() failed\n");
-		DLog(@"----------------------------------------flows -- rpc call failed");
+		DLog(@"rpc call failed");
 		*last = 0LL;
 		return 0;
 	}
@@ -499,12 +499,13 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[FlowObject alloc] initWithFlow:f];
 			
-			
+#ifdef CAPPDEBUG
 			if ([[NameResolver getidentifier:[fobj ip_src]] isEqualToString:@"001ff3bcb257"] ||
 				[[NameResolver getidentifier:[fobj ip_dst]] isEqualToString:@"001ff3bcb257"]){
 				DLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst],[fobj bytes]);
 				
 			}
+#endif
 			
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:YES];
 			[fobj release];
