@@ -13,7 +13,7 @@ typedef struct dhcp_data {
 	unsigned int action; // 0:add 1:del 2:old
 	uint64_t mac_addr;
 	in_addr_t ip_addr;
-	char hostname[80];
+	char hostname[70];
 	tstamp_t tstamp;
 } DhcpData;
 

@@ -243,7 +243,7 @@ DhcpResults *dhcp_convert(Rtab *results) {
 		p->action = action2index(columns[1]);
 		p->mac_addr = string_to_mac(columns[2]);
 		inet_aton(columns[3], (struct in_addr *)&p->ip_addr);	
-		strcpy(p->hostname, columns[4]);
+		strncpy(p->hostname, columns[4], 70);
 	}
 	return ans;
 }
@@ -420,6 +420,8 @@ static tstamp_t processleaseresults(char *buf, unsigned int len) {
 		DLog(@"Retrieved %ld lease records from database\n", p->nleases);
 		for (i = 0; i < p->nleases; i++) {
 			DhcpData *l = p->data[i];
+			DLog(@"the size is %d", strlen(l->hostname));
+			
 			char *s = timestamp_to_string(l->tstamp);
 			char *a = strdup(inet_ntoa(*(struct in_addr *)&l->ip_addr));
 			

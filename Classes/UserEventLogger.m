@@ -32,6 +32,7 @@
 	NSString* query = [NSString stringWithFormat:@"SQL:INSERT into Leases values (\"%@\", \"%@\", \"%@\", \"%@\")\n",
 					   @"upd", macfmt, @"0.0.0.0", name];
 	
+	DLog(@"%@",query);
 	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
 	
 }
