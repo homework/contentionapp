@@ -231,11 +231,11 @@ unsigned int getNetmask(unsigned int suffix){
 	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
 	
-	if (humanname == NULL){
+	//if (humanname == NULL){
 		humanname = [[lobj name] isEqualToString:@"NULL"] ? [lobj ipaddr] : [lobj name]; 
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
-	}
+	//}
 }
 
 +(void) writeMacTable{

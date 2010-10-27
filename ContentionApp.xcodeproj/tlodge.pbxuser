@@ -1916,9 +1916,9 @@
 	};
 	A3B18B3B1208643C0021242B /* PortLookup.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {779, 1235}}";
+			sepNavIntBoundsRect = "{{0, 0}, {779, 1066}}";
 			sepNavSelRange = "{207, 0}";
-			sepNavVisRange = "{0, 730}";
+			sepNavVisRange = "{462, 1202}";
 			sepNavWindowFrame = "{{52, 25}, {1184, 753}}";
 		};
 	};
