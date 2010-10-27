@@ -90,6 +90,7 @@
 		A3CD517B1227D6C8001420F0 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CD51781227D6C8001420F0 /* phone.png */; };
 		A3CD517C1227D6C8001420F0 /* router.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CD51791227D6C8001420F0 /* router.png */; };
 		A3CD51801227D7E9001420F0 /* sound.png in Resources */ = {isa = PBXBuildFile; fileRef = A3CD517F1227D7E9001420F0 /* sound.png */; };
+		A3CD5B7C12783FAF009EBA97 /* protocol.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3CD5B7B12783FAF009EBA97 /* protocol.txt */; };
 		A3D11083124758FB0099DED8 /* RPCSend.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D11082124758FB0099DED8 /* RPCSend.m */; };
 		A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */; };
 /* End PBXBuildFile section */
@@ -169,6 +170,7 @@
 		A37C7707121BDFD2005CD178 /* NameResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameResolver.m; sourceTree = "<group>"; };
 		A37C775B121BFB1D005CD178 /* LeaseRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaseRecord.h; sourceTree = "<group>"; };
 		A37C775C121BFB1D005CD178 /* LeaseRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaseRecord.m; sourceTree = "<group>"; };
+		A3813F0C12718C72002714C6 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		A382F7C511FDA0C7006AC7D3 /* laptop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laptop.png; sourceTree = "<group>"; };
 		A382F7F111FDA85B006AC7D3 /* pc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pc.png; sourceTree = "<group>"; };
 		A382F7F311FDA865006AC7D3 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 		A3CD51781227D6C8001420F0 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		A3CD51791227D6C8001420F0 /* router.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = router.png; sourceTree = "<group>"; };
 		A3CD517F1227D7E9001420F0 /* sound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sound.png; sourceTree = "<group>"; };
+		A3CD5B7B12783FAF009EBA97 /* protocol.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = protocol.txt; sourceTree = "<group>"; };
 		A3D11081124758FB0099DED8 /* RPCSend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPCSend.h; sourceTree = "<group>"; };
 		A3D11082124758FB0099DED8 /* RPCSend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPCSend.m; sourceTree = "<group>"; };
 		A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceView.h; sourceTree = "<group>"; };
@@ -278,6 +281,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				A3813F0C12718C72002714C6 /* Entitlements.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -300,6 +304,7 @@
 				A39B8EAC120039BD00A7DAA6 /* devices */,
 				A3B18B54120869D00021242B /* udp_port.txt */,
 				A3B18B55120869D00021242B /* tcp_port.txt */,
+				A3CD5B7B12783FAF009EBA97 /* protocol.txt */,
 				A33F2EDA1206D69000B78F50 /* unknown.png */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				A32B732F121E952B008097BF /* DeviceInputView.xib */,
@@ -612,6 +617,7 @@
 				A3A902BF123E821600070C67 /* wireless.png in Resources */,
 				A300E859125A047700323E07 /* Settings.bundle in Resources */,
 				A3340B71125E0F6F00EBBEAE /* Icon.png in Resources */,
+				A3CD5B7C12783FAF009EBA97 /* protocol.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +681,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -689,6 +696,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
@@ -697,6 +705,37 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		A3813F1112718CCE002714C6 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				PROVISIONING_PROFILE = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
+				SDKROOT = iphoneos4.1;
+			};
+			name = "Ad Hoc";
+		};
+		A3813F1212718CCE002714C6 /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
+				INFOPLIST_FILE = "ContentionApp-Info.plist";
+				PRODUCT_NAME = ContentionApp;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad Hoc";
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -739,6 +778,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				A3813F1212718CCE002714C6 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -748,6 +788,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				A3813F1112718CCE002714C6 /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

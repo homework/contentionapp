@@ -1,0 +1,2 @@
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PortLookup.m: In function '+[PortLookup createTable:path:ftype:]':
+/Users/tlodge/iphone/ContentionApp/ContentionApp/Classes/PortLookup.m:48: warning: 'stringWithContentsOfFile:' is deprecated (declared at /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSString.h:383)

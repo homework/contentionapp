@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<string>ContentionApp</string>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>Subnet</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Key</key>
+			<string>SUBNET</string>
+			<key>DefaultValue</key>
+			<string>192.168.9.0/24</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>HWDB Port</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Key</key>
+			<string>HWDBP</string>
+			<key>DefaultValue</key>
+			<integer>987</integer>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Router IP</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Key</key>
+			<string>RouterIP</string>
+			<key>DefaultValue</key>
+			<string>192.168.9.1</string>
+		</dict>
+	</array>
+</dict>
+</plist>
