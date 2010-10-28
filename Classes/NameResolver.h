@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LeaseRecord.h"
 #import "LeaseObject.h"
-
+#include <netinet/ip.h>	
 @interface NameResolver : NSObject {
 
 }

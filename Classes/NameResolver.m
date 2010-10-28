@@ -16,6 +16,7 @@
 +(void) createIPLookupTable;
 +(void) addObservers;
 +(void) createLocalNetmask;
++(BOOL) isIP:(NSString *) string;
 @end
 
 NSMutableDictionary *iplookuptable;
@@ -81,9 +82,9 @@ unsigned int getNetmask(unsigned int suffix){
 
 +(void) createMacLookupTable{
 	/*
-	 * No longer read on cahced copy from file.  Assume that router will give us what we need.
+	 * needed for remembering application names!
 	 */
-  /*
+  
     NSString *docsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 	NSString *path = [docsDirectory stringByAppendingPathComponent:@"mactable.txt"];
 	NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -94,9 +95,9 @@ unsigned int getNetmask(unsigned int suffix){
 		maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 	}
 	[fileManager release];	
-	*/
 	
-	maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	
+	//maclookuptable = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
 }
 
 +(void) addObservers{
@@ -219,6 +220,9 @@ unsigned int getNetmask(unsigned int suffix){
 	
 	LeaseObject  *lobj = (LeaseObject *) [n object];
 	
+	if ([[lobj action] isEqualToString:@"del"]){
+		return;
+	}
 	if (![[lobj action] isEqualToString:@"upd"]){
 		[iplookuptable setObject:[lobj macaddr] forKey:[lobj ipaddr]];
 	}else{
@@ -230,12 +234,22 @@ unsigned int getNetmask(unsigned int suffix){
 		
 	NSString* humanname = [maclookuptable objectForKey:[lobj macaddr]];
 	
-	
-	//if (humanname == NULL){
+	/*
+	 * Only give the name of the machine as an IP address if our current name is an IP
+	 * or if we don't yet have a name (i.e hwdb returns NULL for name)
+	 */
+	if (humanname == NULL || [self isIP:humanname]){
 		humanname = [[lobj name] isEqualToString:@"NULL"] ? [lobj ipaddr] : [lobj name]; 
 		[maclookuptable setObject:humanname forKey:[lobj macaddr]];
 		[self writeMacTable];
-	//}
+	}
+}
+
++(BOOL) isIP:(NSString *) string{
+	struct in_addr pin;
+	int success = inet_aton([string UTF8String], &pin);
+	if (success == 1) return TRUE;
+	return FALSE;
 }
 
 +(void) writeMacTable{

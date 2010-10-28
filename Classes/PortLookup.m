@@ -83,6 +83,10 @@ static BOOL init = FALSE;
 		if (tcplookup[i] != NULL)
 			[tcplookup[i] release];
 	}
+	for (int i =0; i < 143; i++){
+		if (protolookup[i] != NULL)
+			[protolookup[i] release];	
+	}
 	[super dealloc];
 	
 }
