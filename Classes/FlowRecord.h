@@ -19,5 +19,5 @@
 @property(nonatomic, assign) long		packets;
 @property(nonatomic, assign) long		bytes;
 @property(nonatomic, assign) int		parallel;
-@property(nonatomic, retain) NSString*	application;
+@property(nonatomic, copy) NSString*	application;
 @end

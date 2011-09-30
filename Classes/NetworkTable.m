@@ -61,7 +61,7 @@ int SHISTORY = 5;
 			
 		}
 	}
-	return  [results allValues];
+	return  (NSMutableArray*) [results allValues];
 }
 
 -(unsigned int) getLastTotalBytesForNode:(NSString *) node pc:(int)pc{

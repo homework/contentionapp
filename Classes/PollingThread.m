@@ -15,6 +15,8 @@ static struct timespec time_delay = {TIME_DELTA, 0};
 static tstamp_t processflowresults(char *buf, unsigned int len);
 static tstamp_t processlinkresults(char *buf, unsigned int len);
 static tstamp_t processleaseresults(char *buf, unsigned int len);
+static tstamp_t processdevicenameresults(char *buf, unsigned int len);
+
 static uint64_t string_to_mac(char *s);
 
 
@@ -28,6 +30,8 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 -(int) polllinktable;
 -(int) pollleasetable;
 -(int) pollflowtable;
+-(int) polldevicetable;
+
 -(int) polldatabase:(tstamp_t*)last;
 +(void) postNotification:(FlowObject *)f;
 
@@ -37,6 +41,7 @@ static tstamp_t (*callback) (char *buf, unsigned int len);
 static tstamp_t lastflow;
 static tstamp_t lastlink;
 static tstamp_t lastlease;
+static tstamp_t lastdevice;
 
 @implementation PollingThread
 @synthesize delegate;
@@ -46,6 +51,7 @@ static tstamp_t lastlease;
 		lastflow = 0LL;
 		lastlink = 0LL;
 		lastlease = 0LL;
+        lastdevice = 0LL;
 	}
 	return self;
 }
@@ -80,6 +86,10 @@ static tstamp_t lastlease;
 			if (![self pollflowtable]){
 				break;
 			}
+            
+            if (![self polldevicenametable]){
+				break;
+			}
 			
 			expected.tv_sec += TIME_DELTA;
 			gettimeofday(&current, NULL);
@@ -104,19 +114,48 @@ static tstamp_t lastlease;
 	exit(0);
 }
 
+
+-(int) polldevicenametable{
+    if (lastdevice){
+        char *s = timestamp_to_string(lastdevice);
+		DLog(@"SQL:select * from DeviceNames [ since %s ]", s);
+		sprintf(query, "SQL:select * from DeviceNames [ since %s ]\n",s);
+		free(s);
+    }else{
+        DLog(@"device names query is SQL:select * from DeviceNames",
+             TIME_DELTA);
+		
+		sprintf(query,
+				"SQL:select * from DeviceNames\n",
+				TIME_DELTA);
+        
+    }   
+    
+    callback = &processdevicenameresults;
+	
+	int success = [self polldatabase:&lastdevice];
+	
+	if (success && lastdevice){
+		return 1;
+	}
+	
+	return success;
+}
+
+
 -(int) pollflowtable{
 	
 	if (lastflow) {
 		char *s = timestamp_to_string(lastflow);
-		DLog(@"SQL:select * from Flows [ since %s ]", s);
-		sprintf(query, "SQL:select * from Flows [ since %s ]\n",s);
+		DLog(@"SQL:select * from KFlows [ since %s ]", s);
+		sprintf(query, "SQL:select * from KFlows [ since %s ]\n",s);
 		free(s);
 	} else{
-		DLog(@"flow query is SQL:select * from Flows [ range %d seconds]",
+		DLog(@"flow query is SQL:select * from KFlows [ range %d seconds]",
 			  TIME_DELTA);
 		
 		sprintf(query,
-				"SQL:select * from Flows [ range %d seconds]\n",
+				"SQL:select * from KFlows [ range %d seconds]\n",
 				TIME_DELTA);
 	}
 	
@@ -240,10 +279,10 @@ DhcpResults *dhcp_convert(Rtab *results) {
 		columns = rtab_getrow(results, i);
 		/* populate record */
 		p->tstamp = string_to_timestamp(columns[0]);
-		p->action = action2index(columns[1]);
-		p->mac_addr = string_to_mac(columns[2]);
-		inet_aton(columns[3], (struct in_addr *)&p->ip_addr);	
-		strncpy(p->hostname, columns[4], 70);
+        p->mac_addr = string_to_mac(columns[1]);
+        inet_aton(columns[2], (struct in_addr *)&p->ip_addr);
+        strncpy(p->hostname, columns[3], 70);
+		p->action = action2index(columns[4]);
 	}
 	return ans;
 }
@@ -308,7 +347,54 @@ void link_mon_free(LinkResults *p) {
 
 
 
+DeviceNameResults *devicename_mon_convert(Rtab *results){
+    DeviceNameResults *ans;
+    unsigned int i;
+	
+    if (! results || results->mtype != 0){
+		return NULL;
+	}
+    if (!(ans = (DeviceNameResults *)malloc(sizeof(DeviceNameResults)))){
+		return NULL;
+	}
+    ans->ndevices = results->nrows;
+    ans->data = (DeviceNameData **)calloc(ans->ndevices, sizeof(DeviceNameData *));
+	
+	if (! ans->data) {
+        free(ans);
+		return NULL;
+    }
+    for (i = 0; i < ans->ndevices; i++) {
+        char **columns;
+        DeviceNameData *p = (DeviceNameData *)malloc(sizeof(DeviceNameData));
+		if (!p) {
+            devicename_mon_free(ans);
+			return NULL;
+		}
+		ans->data[i] = p;
+		columns = rtab_getrow(results, i);
+        /* hwdb's timestamp */
+		p->tstamp = string_to_timestamp(columns[0]);
+        /* logger's timestamp */
+		inet_aton(columns[1], (struct in_addr *)&p->ip_addr);
+        strncpy(p->name, columns[2], 256);
+	}
+	
+    return ans;
+}
 
+
+void devicename_mon_free(DeviceNameResults *p){
+    unsigned int i;
+	
+    if (p) {
+        for (i = 0; i < p->ndevices && p->data[i]; i++)
+            free(p->data[i]);
+		free(p->data);
+        free(p);
+    }
+
+}
 /*
  * converts the returned Flows tuples into a dynamically-allocated array
  * of FlowData structures.  after the user is finished with the array,
@@ -345,22 +431,20 @@ BinResults *mon_convert(Rtab *results) {
 		}
 		ans->data[i] = p;
 		columns = rtab_getrow(results, i);
+        /* hwdb's timestamp */
 		p->tstamp = string_to_timestamp(columns[0]);
-		p->proto = atoi(columns[1]) & 0xff;
-		
-		inet_aton(columns[2], &p->ip_src);
-		
-		
-		p->sport = atoi(columns[3]) & 0xffff;
-		inet_aton(columns[4], &p->ip_dst);
-		
-		
-		p->dport = atoi(columns[5]) & 0xffff;
-		p->packets = atol(columns[6]);
-		p->bytes = atol(columns[7]);
-		//NSLog(@" %u  %s[%d]->%s:[%d]    %lu:%lu\n",  p->proto,
-		// columns[2], p->sport, columns[4],p->dport, p->packets,
-		// p->bytes);	
+        /* logger's timestamp */
+		p->t = string_to_timestamp(columns[1]);
+        /* flow's key */
+        p->proto = atoi(columns[2]) & 0xff;
+		inet_aton(columns[3], (struct in_addr *)&p->ip_src);
+		p->sport = atoi(columns[4]) & 0xffff;
+		inet_aton(columns[5], (struct in_addr *)&p->ip_dst);
+		p->dport = atoi(columns[6]) & 0xffff;
+		/* flow's stats */
+		p->packets = atol(columns[7]);
+		p->bytes = atol(columns[8]);
+		p->flags = atoi(columns[9]) & 0xff;
 	}
 	
     return ans;
@@ -383,6 +467,10 @@ void mon_free(BinResults *p) {
 
 +(void) postFlowObject:(FlowObject *)f{
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"newFlowDataReceived" object:f];
+}
+
++(void) postDeviceNameObject:(DeviceNameObject *)d{
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"newDeviceDataReceived" object:d];
 }
 
 +(void) newPoll:(NSObject *) o{
@@ -481,6 +569,46 @@ static tstamp_t processlinkresults(char *buf, unsigned int len) {
     return (last);
 }
 
+
+static tstamp_t processdevicenameresults(char *buf, unsigned int len) {
+    Rtab *results;
+    char stsmsg[RTAB_MSG_MAX_LENGTH];
+    DeviceNameResults *p;
+    unsigned long i;
+    tstamp_t last = lastdevice;	
+    results = rtab_unpack(buf, len);
+    
+    if (results && ! rtab_status(buf, stsmsg)) {
+        p = devicename_mon_convert(results);
+		// do something with the data pointed to by p 
+		DLog(@"Retrieved %ld device name records from database", p->ndevices);
+		
+		for (i = 0; i < p->ndevices; i++) {
+			DeviceNameData *dnd = p->data[i];
+			char *s = timestamp_to_string(dnd->tstamp);
+            char *a = strdup(inet_ntoa(*(struct in_addr *)&dnd->ip_addr));
+			
+			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
+			DeviceNameObject *dnobj = [[DeviceNameObject alloc] initWithDeviceNameData:dnd];
+			
+            DLog(@"[DEVICE NAME RECORD] %s %s %s \n", s, a, dnd->name);
+			
+			[PollingThread performSelectorOnMainThread:@selector(postDeviceNameObject:) withObject:dnobj waitUntilDone:YES];
+			[dnobj release];
+			[autoreleasepool release];		
+			
+			free(s);
+		}
+		if (i > 0) {
+			i--;
+			last = p->data[i]->tstamp;
+		}
+		devicename_mon_free(p);
+    }
+    rtab_free(results);
+    return (last);
+}
+
 static tstamp_t processflowresults(char *buf, unsigned int len) {
 	
     Rtab *results;
@@ -501,13 +629,13 @@ static tstamp_t processflowresults(char *buf, unsigned int len) {
 			NSAutoreleasePool *autoreleasepool = [[NSAutoreleasePool alloc] init];
 			FlowObject *fobj = [[FlowObject alloc] initWithFlow:f];
 			
-#ifdef CAPPDEBUG
-			if ([[NameResolver getidentifier:[fobj ip_src]] isEqualToString:@"001ff3bcb257"] ||
-				[[NameResolver getidentifier:[fobj ip_dst]] isEqualToString:@"001ff3bcb257"]){
-				DLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst],[fobj bytes]);
+//#ifdef CAPPDEBUG
+//			if ([[NameResolver getidentifier:[fobj ip_src]] isEqualToString:@"001ff3bcb257"] ||
+//				[[NameResolver getidentifier:[fobj ip_dst]] isEqualToString:@"001ff3bcb257"]){
+			//	DLog(@"%@ %@ %d", [fobj ip_src], [fobj ip_dst],[fobj bytes]);
 				
-			}
-#endif
+//			}
+//#endif
 			
 			[PollingThread performSelectorOnMainThread:@selector(postFlowObject:) withObject:fobj waitUntilDone:YES];
 			[fobj release];

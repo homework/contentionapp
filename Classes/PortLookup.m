@@ -49,7 +49,7 @@ static BOOL init = FALSE;
     
     NSEnumerator *nse = [lines objectEnumerator];
    	
-    while(tmp = [nse nextObject]) {
+    while(tmp = (NSString*)[nse nextObject]) {
 		NSString *portnumber = nil;
 		NSString *protocol = nil;
         NSScanner *scanner = [NSScanner scannerWithString:tmp];

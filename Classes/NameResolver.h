@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "LeaseRecord.h"
 #import "LeaseObject.h"
+#import "DeviceNameObject.h"
+
 #include <netinet/ip.h>	
 @interface NameResolver : NSObject {
 
@@ -19,6 +21,8 @@
 +(NSString *)	friendlynamefromip:(NSString *) ip_addr;
 +(NSString *)	getidentifier:(NSString *) ip_addr;
 +(BOOL) isInternal:(NSString *) ipaddr;
++(NSString *) getIP:(NSString*)identifier;
+
 +(void) update:(NSString *)oldname newname:(NSString*) newname;
 +(void) printmactable;
 +(void) printiptable;

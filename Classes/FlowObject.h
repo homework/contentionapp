@@ -14,6 +14,7 @@
 
 
 typedef struct flow_data {
+    tstamp_t t;
     unsigned char proto;
     struct in_addr ip_src;
     struct in_addr ip_dst;
@@ -21,10 +22,12 @@ typedef struct flow_data {
     unsigned short dport;
     unsigned long packets;
     unsigned long bytes;
+    unsigned char flags;
     tstamp_t tstamp;
 } FlowData;
 
 @interface FlowObject : NSObject {
+    tstamp_t t;
 	unsigned char proto;
 	NSString *ip_src;
 	NSString *ip_dst;
@@ -32,6 +35,7 @@ typedef struct flow_data {
 	unsigned short dport;
 	unsigned long packets;
 	unsigned long bytes;
+    unsigned char flags;
 	tstamp_t tstamp;
 	
 }

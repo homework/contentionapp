@@ -139,7 +139,7 @@
 }
 
 -(void) showDetail:(NSString *) identifier position: (int) index{
-	DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:@"DeviceSubView" bundle:nil nodename:identifier];
+	DeviceSubViewController *detail = [[DeviceSubViewController alloc] initWithNibName:nil bundle:nil nodename:identifier];
 	detail.title = [NSString stringWithFormat:@"%@", [NameResolver friendlynamefrommac:identifier]];
 	ContentionAppAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
 	[delegate.navigationControllerDevices pushViewController:detail animated: YES];

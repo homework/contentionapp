@@ -22,6 +22,7 @@
 #include "FlowObject.h"
 #include "LinkObject.h"
 #include "LeaseObject.h"
+#include "DeviceNameObject.h"
 #include "DeviceViewController.h"
 #include "RPCSend.h"
 
@@ -52,6 +53,13 @@ typedef struct lease_results {
     unsigned long nleases;
     DhcpData **data;
 } DhcpResults;
+
+typedef struct device_name_results {
+    unsigned long ndevices;
+    DeviceNameData **data;
+} DeviceNameResults;
+
+
 /*
  * convert Rtab results into LinkResults
  */
@@ -61,6 +69,15 @@ LinkResults *link_mon_convert(Rtab *results);
  * free heap storage associated with LinkResults
  */
 void link_mon_free(LinkResults *p);
+
+
+/*
+ *convert Rtab results into DeviceNameResults 
+ */
+
+DeviceNameResults *devicename_mon_convert(Rtab *results);
+
+void devicename_mon_free(DeviceNameResults *p);
 
 /*
  * convert Rtab results into BinResults

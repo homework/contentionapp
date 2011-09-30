@@ -102,6 +102,8 @@ unsigned int getNetmask(unsigned int suffix){
 
 +(void) addObservers{
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLease:) name:@"newLeaseDataReceived" object:nil];	
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newDeviceData:) name:@"newDeviceDataReceived" object:nil];	
 }
 
 +(void) createIPLookupTable{
@@ -126,6 +128,15 @@ unsigned int getNetmask(unsigned int suffix){
 
 +(BOOL) isInternal:(NSString *) ipaddr{
 	unsigned int tmpip = [self intFromIP: ipaddr];
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults]; 
+
+	NSString *CIDRaddr = [userDefaults stringForKey:@"SUBNET"];
+   
+	NSArray *split = [CIDRaddr componentsSeparatedByString: @"/"];
+	localnetaddr = [self intFromIP:[split objectAtIndex:0]];
+
+	//DLog(@"checking %@ = %u against %@ = %u", [split objectAtIndex:0], localnetaddr, ipaddr, tmpip);
+		  
 	return (netmask&localnetaddr) == (netmask&tmpip);
 }
 
@@ -142,7 +153,7 @@ unsigned int getNetmask(unsigned int suffix){
 	if (ip_addr == NULL)
 		return NULL;
 	
-	if([ip_addr length] <= 9)
+	if([ip_addr length] <= 7)
 		return NULL;
 
 	if (![self isInternal:ip_addr]){
@@ -215,6 +226,25 @@ unsigned int getNetmask(unsigned int suffix){
 		DLog(@"%@    %@", key, name);
 	}
 }
+
+
++(void) newDeviceData:(NSNotification *) n{
+    
+    DeviceNameObject  *dobj = (DeviceNameObject *) [n object];
+   
+    NSString *mac = [self getidentifier:dobj.ipaddr];
+
+    if (mac == nil){
+        NSLog(@"--------------> Hmmm no mac for addr %@", dobj.ipaddr);
+    }else{
+        NSLog(@"NAME RESOLVER::::--------- %@ %@ %@", dobj.ipaddr,  dobj.name, mac);
+        [maclookuptable setObject:[dobj name] forKey:mac];
+        NSDictionary* dict = [NSDictionary dictionaryWithObject:[dobj name] forKey:mac];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"nameChange" object:nil userInfo:dict];
+    }
+
+}
+
 
 +(void) newLease:(NSNotification *) n{
 	

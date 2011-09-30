@@ -7,6 +7,7 @@
 //
 
 #import "UserEventLogger.h"
+#import "NameResolver.h"
 
 @interface UserEventLogger()
 +(NSString *) macfromstr:(NSString*) macaddr;
@@ -21,17 +22,25 @@
 	NSString* query = [NSString stringWithFormat:@"SQL:insert into UserEvents values (\"%@\", \"%@\", \"%@\")\n",
 						@"ContentionApp", type, logdata];
 	
-	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
+	//[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
 }
 
 
 +(void) updateLeases:(NSString*)macaddr newname:(NSString*)name{
 
-	NSString* macfmt = [self macfromstr:macaddr];
-	
-	NSString* query = [NSString stringWithFormat:@"SQL:INSERT into Leases values (\"%@\", \"%@\", \"%@\", \"%@\")\n",
-					   @"upd", macfmt, @"0.0.0.0", name];
-	
+	//NSString* macfmt = [self macfromstr:macaddr];
+    
+    [NameResolver printiptable];
+    [NameResolver printmactable];
+    
+    NSString* ipaddr = [NameResolver getIP:macaddr];
+    
+    
+    NSLog(@"updating ipaddr %@ with name %@", ipaddr, name);
+    
+    NSString *query = [NSString stringWithFormat:@"SQL:INSERT into DeviceNames values (\"%@\", \"%@\")\n",
+                       				   ipaddr, name];
+
 	DLog(@"%@",query);
 	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
 	

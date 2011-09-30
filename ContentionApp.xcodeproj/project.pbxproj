@@ -72,6 +72,7 @@
 		A3A902BD123E821600070C67 /* psp.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B2123E821600070C67 /* psp.png */; };
 		A3A902BE123E821600070C67 /* wii.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B3123E821600070C67 /* wii.png */; };
 		A3A902BF123E821600070C67 /* wireless.png in Resources */ = {isa = PBXBuildFile; fileRef = A3A902B4123E821600070C67 /* wireless.png */; };
+		A3B0A8A914360ADD00B6808F /* DeviceNameObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B0A8A814360ADC00B6808F /* DeviceNameObject.m */; };
 		A3B18B3C1208643C0021242B /* PortLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B18B3B1208643C0021242B /* PortLookup.m */; };
 		A3B18B56120869D00021242B /* udp_port.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3B18B54120869D00021242B /* udp_port.txt */; };
 		A3B18B57120869D00021242B /* tcp_port.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3B18B55120869D00021242B /* tcp_port.txt */; };
@@ -200,6 +201,8 @@
 		A3A902B2123E821600070C67 /* psp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = psp.png; sourceTree = "<group>"; };
 		A3A902B3123E821600070C67 /* wii.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wii.png; sourceTree = "<group>"; };
 		A3A902B4123E821600070C67 /* wireless.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wireless.png; sourceTree = "<group>"; };
+		A3B0A8A714360ADC00B6808F /* DeviceNameObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceNameObject.h; sourceTree = "<group>"; };
+		A3B0A8A814360ADC00B6808F /* DeviceNameObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceNameObject.m; sourceTree = "<group>"; };
 		A3B18B3A1208643C0021242B /* PortLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PortLookup.h; sourceTree = "<group>"; };
 		A3B18B3B1208643C0021242B /* PortLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PortLookup.m; sourceTree = "<group>"; };
 		A3B18B54120869D00021242B /* udp_port.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = udp_port.txt; sourceTree = "<group>"; };
@@ -387,6 +390,8 @@
 				A3CD3F4A12156C6600890E30 /* LinkObject.m */,
 				A3CD404E12194DCC00890E30 /* LeaseObject.h */,
 				A3CD404F12194DCC00890E30 /* LeaseObject.m */,
+				A3B0A8A714360ADC00B6808F /* DeviceNameObject.h */,
+				A3B0A8A814360ADC00B6808F /* DeviceNameObject.m */,
 				A33F2C9F12017AEC00B78F50 /* NodeTuple.h */,
 				A33F2CA012017AEC00B78F50 /* NodeTuple.m */,
 				A303FF1C1212EC8C0055D7D8 /* Window.h */,
@@ -671,6 +676,7 @@
 				A300E7D81259DF5D00323E07 /* srpc.c in Sources */,
 				A38AB374126706A5001C35B3 /* NameAlert.m in Sources */,
 				A38AB37F1267089C001C35B3 /* HoverView.m in Sources */,
+				A3B0A8A914360ADD00B6808F /* DeviceNameObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +688,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -689,6 +697,10 @@
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
 				INFOPLIST_FILE = "ContentionApp-Info.plist";
 				PRODUCT_NAME = ContentionApp;
+				PROVISIONING_PROFILE = "D713BCF6-D43A-4262-A788-423643CD8897";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D713BCF6-D43A-4262-A788-423643CD8897";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -697,12 +709,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
 				INFOPLIST_FILE = "ContentionApp-Info.plist";
 				PRODUCT_NAME = ContentionApp;
-				VALIDATE_PRODUCT = YES;
+				PROVISIONING_PROFILE = "D713BCF6-D43A-4262-A788-423643CD8897";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D713BCF6-D43A-4262-A788-423643CD8897";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -710,16 +727,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tom Lodge";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tom Lodge";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
-				SDKROOT = iphoneos4.1;
+				PROVISIONING_PROFILE = "D003C011-2215-4E90-B8DD-EF195072D572";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D003C011-2215-4E90-B8DD-EF195072D572";
+				SDKROOT = iphoneos;
 			};
 			name = "Ad Hoc";
 		};
@@ -728,12 +746,17 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
 				INFOPLIST_FILE = "ContentionApp-Info.plist";
 				PRODUCT_NAME = ContentionApp;
-				VALIDATE_PRODUCT = YES;
+				PROVISIONING_PROFILE = "D713BCF6-D43A-4262-A788-423643CD8897";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D713BCF6-D43A-4262-A788-423643CD8897";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = "Ad Hoc";
 		};
@@ -746,10 +769,11 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -762,11 +786,12 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
 				PROVISIONING_PROFILE = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

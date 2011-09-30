@@ -5,7 +5,7 @@
 	<key>application-identifier</key>
 	<string>JVQZE89L7S.com.yourcompany.ContentionApp</string>
 	<key>get-task-allow</key>
-	<true/>
+	<false/>
 	<key>keychain-access-groups</key>
 	<array>
 		<string>JVQZE89L7S.com.yourcompany.ContentionApp</string>
