@@ -31,11 +31,11 @@ static unsigned length;
 	
     port = [userDefaults integerForKey:@"HWDBP"];
 	
-    NSString *rip = [userDefaults stringForKey:@"RouterIP"];
+   // NSString *rip = [userDefaults stringForKey:@"RouterIP"];
 	
-    if (rip == NULL){
-		rip = @"10.2.0.6";
-	}
+    //if (rip == NULL){
+//		rip = @"10.2.0.6";
+	//}
     
     NSString *gwaddr =  [self getGatewayAddress];
     NSLog(@"WIFI IP ADDR IS %@",gwaddr);

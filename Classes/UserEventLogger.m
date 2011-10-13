@@ -38,9 +38,10 @@
     
     NSLog(@"updating ipaddr %@ with name %@", ipaddr, name);
     
-    NSString *query = [NSString stringWithFormat:@"SQL:INSERT into DeviceNames values (\"%@\", \"%@\")\n",
-                       				   ipaddr, name];
+    NSString *query = [NSString stringWithFormat:@"SQL:INSERT into DeviceNames values (\"%@\", \"%@\") on duplicate key update\n",
+                       ipaddr, name];
 
+       
 	DLog(@"%@",query);
 	[NSThread detachNewThreadSelector:@selector(sendquery:) toTarget:self withObject:query];
 	

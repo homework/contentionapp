@@ -27,7 +27,8 @@ static char result[16];
 static unsigned int localnetaddr;
 static unsigned int netmask;
 
-static NSString* DEFAULTCIDR = @"192.168.9.0/24";
+static NSString* DEFAULTCIDR = @"10.2.0.0/24";
+
 
 @implementation NameResolver
 
@@ -131,11 +132,14 @@ unsigned int getNetmask(unsigned int suffix){
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults]; 
 
 	NSString *CIDRaddr = [userDefaults stringForKey:@"SUBNET"];
-   
-	NSArray *split = [CIDRaddr componentsSeparatedByString: @"/"];
+    
+    if (CIDRaddr == nil)
+        CIDRaddr = DEFAULTCIDR;
+	
+    NSArray *split = [CIDRaddr componentsSeparatedByString: @"/"];
 	localnetaddr = [self intFromIP:[split objectAtIndex:0]];
 
-	//DLog(@"checking %@ = %u against %@ = %u", [split objectAtIndex:0], localnetaddr, ipaddr, tmpip);
+	NSLog(@"checking %@ = %u against %@ = %u", [split objectAtIndex:0], localnetaddr, ipaddr, tmpip);
 		  
 	return (netmask&localnetaddr) == (netmask&tmpip);
 }

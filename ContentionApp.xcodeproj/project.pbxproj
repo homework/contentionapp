@@ -94,6 +94,7 @@
 		A3CD5B7C12783FAF009EBA97 /* protocol.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3CD5B7B12783FAF009EBA97 /* protocol.txt */; };
 		A3D11083124758FB0099DED8 /* RPCSend.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D11082124758FB0099DED8 /* RPCSend.m */; };
 		A3E8FAE9121D28ED00E8AFBD /* DeviceView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */; };
+		A3FF780F144723100045C8D0 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3FF780E144723100045C8D0 /* Entitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -171,7 +172,6 @@
 		A37C7707121BDFD2005CD178 /* NameResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameResolver.m; sourceTree = "<group>"; };
 		A37C775B121BFB1D005CD178 /* LeaseRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaseRecord.h; sourceTree = "<group>"; };
 		A37C775C121BFB1D005CD178 /* LeaseRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaseRecord.m; sourceTree = "<group>"; };
-		A3813F0C12718C72002714C6 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		A382F7C511FDA0C7006AC7D3 /* laptop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = laptop.png; sourceTree = "<group>"; };
 		A382F7F111FDA85B006AC7D3 /* pc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pc.png; sourceTree = "<group>"; };
 		A382F7F311FDA865006AC7D3 /* iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone.png; sourceTree = "<group>"; };
@@ -235,6 +235,7 @@
 		A3D11082124758FB0099DED8 /* RPCSend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPCSend.m; sourceTree = "<group>"; };
 		A3E8FAE7121D28ED00E8AFBD /* DeviceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceView.h; sourceTree = "<group>"; };
 		A3E8FAE8121D28ED00E8AFBD /* DeviceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceView.m; sourceTree = "<group>"; };
+		A3FF780E144723100045C8D0 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,12 +280,12 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A3FF780E144723100045C8D0 /* Entitlements.plist */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				A3813F0C12718C72002714C6 /* Entitlements.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -623,6 +624,7 @@
 				A300E859125A047700323E07 /* Settings.bundle in Resources */,
 				A3340B71125E0F6F00EBBEAE /* Icon.png in Resources */,
 				A3CD5B7C12783FAF009EBA97 /* protocol.txt in Resources */,
+				A3FF780F144723100045C8D0 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,9 +689,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -697,9 +699,9 @@
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
 				INFOPLIST_FILE = "ContentionApp-Info.plist";
 				PRODUCT_NAME = ContentionApp;
-				PROVISIONING_PROFILE = "D713BCF6-D43A-4262-A788-423643CD8897";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D713BCF6-D43A-4262-A788-423643CD8897";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
@@ -708,17 +710,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
 				INFOPLIST_FILE = "ContentionApp-Info.plist";
 				PRODUCT_NAME = ContentionApp;
-				PROVISIONING_PROFILE = "D713BCF6-D43A-4262-A788-423643CD8897";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D713BCF6-D43A-4262-A788-423643CD8897";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
@@ -727,17 +729,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Tom Lodge";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tom Lodge";
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "D003C011-2215-4E90-B8DD-EF195072D572";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D003C011-2215-4E90-B8DD-EF195072D572";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = "Ad Hoc";
 		};
@@ -745,17 +749,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = "~/iphone/ContentionApp/ContentionApp/Entitlements.plist";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ContentionApp_Prefix.pch;
 				INFOPLIST_FILE = "ContentionApp-Info.plist";
 				PRODUCT_NAME = ContentionApp;
-				PROVISIONING_PROFILE = "D713BCF6-D43A-4262-A788-423643CD8897";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D713BCF6-D43A-4262-A788-423643CD8897";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos4.3;
 				VALIDATE_PRODUCT = NO;
 			};
 			name = "Ad Hoc";
@@ -764,16 +768,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -781,17 +787,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tom Lodge (C4DACQ32K3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				PROVISIONING_PROFILE = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CEC7A256-E3DD-4187-8FB3-67227BF74A17";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
